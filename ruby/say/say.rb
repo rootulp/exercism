@@ -1,12 +1,9 @@
-# Influenced heavily by:
-# https://github.com/xavier/exercism-assignments/blob/master/ruby/say/say.rb
-
 class Say
 
   UNITS = {
-    3 => "billion",
+    1 => "thousand",
     2 => "million",
-    1 => "thousand"
+    3 => "billion"
   }
 
   TENS = {
@@ -41,8 +38,7 @@ class Say
     4 => "four",
     3 => "three",
     2 => "two",
-    1 => "one",
-    0 => "zero"
+    1 => "one"
   }
 
   ACCEPTED_RANGE = 0...1000000000000
@@ -59,25 +55,15 @@ class Say
   private
 
   def number_to_words(number)
-    return DIGITS[number]  if number < 10
-    return TEENS[number] if number < 20
-    return number_to_words_100(number) if number < 100
-    return number_to_words_1000(number) if number < 1000
-    return general_case(number)
-  end
-
-  def number_to_words_100(number)
-    tens_digit, ones_digit = number.divmod(10)
-    tens = TENS[tens_digit * 10]
-    ones = DIGITS[ones_digit]
-    ones_digit == 0 ? "#{tens}" : "#{tens}-#{ones}"
-  end
-
-  def number_to_words_1000(number)
-    hundreds_digit, leftover_digits = number.divmod(100)
-    hundreds = DIGITS[hundreds_digit]
-    leftovers = number_to_words_100(leftover_digits)
-    leftover_digits == 0 ? "#{hundreds} hundred" : "#{hundreds} hundred #{leftovers}"
+    return "zero" if number == 0
+    result = ""
+    chunks = chunkify(number)
+    chunks.each_with_index do |chunk, index|
+      val = chunk_for(chunk)
+      units = UNITS[index]
+      result.prepend("#{val} #{units} ") if val
+    end
+    result.strip
   end
 
   def chunkify(number)
@@ -89,30 +75,26 @@ class Say
     chunks
   end
 
-  def general_case(number)
-    result = ""
-    chunks = chunkify(number)
-    chunks.each_with_index do |chunk, index|
-      val = chunk_for(chunk)
-      units = units_for(index)
-      if val != ""
-        result.prepend("#{val} #{units} ")
-      end
-    end
-    result.strip
-  end
-
   def chunk_for(number)
-    return "" if number == 0
     return DIGITS[number]  if number < 10
     return TEENS[number] if number < 20
-    return number_to_words_100(number) if number < 100
-    return number_to_words_1000(number) if number < 1000
+    general_case(number)
   end
 
-  def units_for(number)
-    return "" if number == 0
-    return UNITS[number]
+  def general_case(number)
+    hundreds_digit, leftover_digits = number.divmod(100)
+    tens_digit, ones_digit = leftover_digits.divmod(10)
+    hundreds = DIGITS[hundreds_digit] || nil
+    tens = TENS[tens_digit * 10] || nil
+    ones = DIGITS[ones_digit] || nil
+    format(hundreds, tens, ones)
   end
 
+  def format(hundreds, tens, ones)
+    result = ""
+    result += "#{hundreds} hundred " if hundreds
+    result += "#{tens}" if tens
+    result += "-#{ones}" if ones
+    result.strip
+  end
 end
