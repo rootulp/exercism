@@ -23,11 +23,13 @@ class Meetup
   end
 
   def day(weekday, schedule)
+    if schedule == :last
+      return find_last(weekday, schedule)
+    end
     which = 1
     curr = Date.new(year, month)
     while curr.month == month
       if curr.wday == WEEKDAYS[weekday]
-        p curr
         if which == SCHEDULE[schedule]
           return curr
         else
@@ -37,10 +39,15 @@ class Meetup
       end
       curr = curr.next
     end
+  end
 
-    if schedule == :last
-      return last
+  def find_last(weekday, schedule)
+    curr = Date.new(year, month).next_month.prev_day
+    while curr.month == month
+      if curr.wday == WEEKDAYS[weekday]
+        return curr
+      end
+      curr = curr.prev_day
     end
-
   end
 end
