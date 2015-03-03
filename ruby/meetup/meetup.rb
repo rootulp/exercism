@@ -2,7 +2,7 @@ require 'date'
 
 class Meetup
   attr_accessor :month, :year
-  WEEKDAYS = {
+  DAYS = {
     :sunday => 0,
     :monday => 1,
     :tuesday => 2,
@@ -11,7 +11,8 @@ class Meetup
     :friday => 5,
     :saturday => 6
   }
-  SCHEDULE = {
+
+  SCHED = {
     :first => 1,
     :second => 2,
     :third => 3,
@@ -23,31 +24,44 @@ class Meetup
   end
 
   def day(weekday, schedule)
-    if schedule == :last
+    case schedule
+    when :last
       return find_last(weekday, schedule)
-    end
-    which = 1
-    curr = Date.new(year, month)
-    while curr.month == month
-      if curr.wday == WEEKDAYS[weekday]
-        if which == SCHEDULE[schedule]
-          return curr
-        else
-          last = curr
-        end
-        which += 1
-      end
-      curr = curr.next
+    when :teenth
+      return find_teenth(weekday, schedule)
+    else
+      return find_regular(weekday, schedule)
     end
   end
+
+  private
 
   def find_last(weekday, schedule)
     curr = Date.new(year, month).next_month.prev_day
     while curr.month == month
-      if curr.wday == WEEKDAYS[weekday]
+      if curr.wday == DAYS[weekday]
         return curr
       end
       curr = curr.prev_day
+    end
+  end
+
+  def find_teenth(weekday, schedule)
+    #TO-DO
+  end
+
+  def find_regular(weekday, schedule)
+    ordinal = 1
+    curr = Date.new(year, month)
+    while curr.month == month
+      if curr.wday == DAYS[weekday]
+        if ordinal == SCHED[schedule]
+          return curr
+        else
+          ordinal += 1
+        end
+      end
+      curr = curr.next
     end
   end
 end
