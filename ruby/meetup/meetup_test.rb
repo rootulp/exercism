@@ -9,121 +9,101 @@ require_relative 'meetup'
 # rubocop:disable Style/AlignParameters
 class MeetupTest < MiniTest::Unit::TestCase
   def test_monteenth_of_may_2013
-    skip
     assert_equal Date.new(2013, 8, 19),
       Meetup.new(8, 2013).day(:monday, :teenth)
   end
 
   def test_monteenth_of_september_2013
-    skip
     assert_equal Date.new(2013, 9, 16),
       Meetup.new(9, 2013).day(:monday, :teenth)
   end
 
   def test_tuesteenth_of_march_2013
-    skip
     assert_equal Date.new(2013, 3, 19),
       Meetup.new(3, 2013).day(:tuesday, :teenth)
   end
 
   def test_tuesteenth_of_april_2013
-    skip
     assert_equal Date.new(2013, 4, 16),
       Meetup.new(4, 2013).day(:tuesday, :teenth)
   end
 
   def test_tuesteenth_of_august_2013
-    skip
     assert_equal Date.new(2013, 8, 13),
       Meetup.new(8, 2013).day(:tuesday, :teenth)
   end
 
   def test_wednesteenth_of_january_2013
-    skip
     assert_equal Date.new(2013, 1, 16),
       Meetup.new(1, 2013).day(:wednesday, :teenth)
   end
 
   def test_wednesteenth_of_february_2013
-    skip
     assert_equal Date.new(2013, 2, 13),
       Meetup.new(2, 2013).day(:wednesday, :teenth)
   end
 
   def test_wednesteenth_of_june_2013
-    skip
     assert_equal Date.new(2013, 6, 19),
       Meetup.new(6, 2013).day(:wednesday, :teenth)
   end
 
   def test_thursteenth_of_may_2013
-    skip
     assert_equal Date.new(2013, 5, 16),
       Meetup.new(5, 2013).day(:thursday, :teenth)
   end
 
   def test_thursteenth_of_june_2013
-    skip
     assert_equal Date.new(2013, 6, 13),
       Meetup.new(6, 2013).day(:thursday, :teenth)
   end
 
   def test_thursteenth_of_september_2013
-    skip
     assert_equal Date.new(2013, 9, 19),
       Meetup.new(9, 2013).day(:thursday, :teenth)
   end
 
   def test_friteenth_of_april_2013
-    skip
     assert_equal Date.new(2013, 4, 19),
       Meetup.new(4, 2013).day(:friday, :teenth)
   end
 
   def test_friteenth_of_august_2013
-    skip
     assert_equal Date.new(2013, 8, 16),
       Meetup.new(8, 2013).day(:friday, :teenth)
   end
 
   def test_friteenth_of_september_2013
-    skip
     assert_equal Date.new(2013, 9, 13),
       Meetup.new(9, 2013).day(:friday, :teenth)
   end
 
   def test_saturteenth_of_february_2013
-    skip
     assert_equal Date.new(2013, 2, 16),
       Meetup.new(2, 2013).day(:saturday, :teenth)
   end
 
   def test_saturteenth_of_april_2013
-    skip
     assert_equal Date.new(2013, 4, 13),
       Meetup.new(4, 2013).day(:saturday, :teenth)
   end
 
   def test_saturteenth_of_october_2013
-    skip
     assert_equal Date.new(2013, 10, 19),
       Meetup.new(10, 2013).day(:saturday, :teenth)
   end
 
   def test_sunteenth_of_map_2013
-    skip
     assert_equal Date.new(2013, 5, 19),
       Meetup.new(5, 2013).day(:sunday, :teenth)
   end
 
   def test_sunteenth_of_june_2013
-    skip
     assert_equal Date.new(2013, 6, 16),
       Meetup.new(6, 2013).day(:sunday, :teenth)
   end
 
   def test_sunteenth_of_october_2013
-    skip
     assert_equal Date.new(2013, 10, 13),
       Meetup.new(10, 2013).day(:sunday, :teenth)
   end

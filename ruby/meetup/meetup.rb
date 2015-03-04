@@ -47,7 +47,21 @@ class Meetup
   end
 
   def find_teenth(weekday, schedule)
-    #TO-DO
+    curr = Date.new(year, month)
+    while curr.month == month
+      if curr.wday == DAYS[weekday] && is_teen?(curr)
+        return curr
+      end
+      curr = curr.next_day
+    end
+  end
+
+  def is_teen?(date)
+    if date.day > 12 && date.day < 20
+      return true
+    else
+      return false
+    end
   end
 
   def find_regular(weekday, schedule)
