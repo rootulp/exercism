@@ -17,11 +17,27 @@ class Queens
     same_row? || same_col? || same_diag?
   end
 
+  def to_s
+    output = ""
+    board.each do |row|
+      row.each do |e|
+        if e.nil?
+          output << "_ "
+        else
+          output << e + " "
+        end
+      end
+      output.strip!
+      output << "\n"
+    end
+    output.strip!
+  end
+
   private
 
   def set_queens
-    board[white[0], white[1]] = "W"
-    board[black[0], black[1]] = "B"
+    board[white[0]][white[1]] = "W"
+    board[black[0]][black[1]] = "B"
   end
 
   def same_row?
