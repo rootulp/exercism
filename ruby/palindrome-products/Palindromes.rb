@@ -1,9 +1,9 @@
 require 'set'
 
 class Palindromes
-  attr_accessor :min, :max, :factors
-
   DEFAULT_MIN = 1
+
+  attr_accessor :min, :max, :factors
   def initialize(args)
     @min = args[:min_factor] || DEFAULT_MIN
     @max = args[:max_factor]
@@ -24,17 +24,19 @@ class Palindromes
     end
   end
 
-  def factors?(x, y)
-    result = (x * y).to_s
-    result == result.reverse
-  end
-
   def largest
     build_subset(find_largest)
   end
 
   def smallest
     build_subset(find_smallest)
+  end
+
+  private
+
+  def factors?(x, y)
+    result = (x * y).to_s
+    result == result.reverse
   end
 
   def find_largest
@@ -47,18 +49,13 @@ class Palindromes
     factor.reduce(:*)
   end
 
+  def find_subset_factors(val)
+    factors.select {|x| x.reduce(:*) == val}
+  end
+
   def build_subset(val)
     Subset.new(val, find_subset_factors(val))
   end
-
-  def find_subset_factors(val)
-    subset_factors = []
-    factors.each do |factor|
-      subset_factors << factor if factor[0] * factor[1] == val
-    end
-    subset_factors
-  end
-
 end
 
 class Subset
