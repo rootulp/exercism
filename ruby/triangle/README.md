@@ -1,0 +1,22 @@
+# Triangle
+
+Write a program that can tell you if a triangle is equilateral, isosceles, or scalene.
+
+The program should raise an error if the triangle cannot exist.
+
+Tests are provided, delete one `skip` at a time.
+
+## Hint
+
+The sum of the lengths of any two sides of a triangle always exceeds the
+length of the third side, a principle known as the _triangle
+inequality_.
+
+You will need the Minitest gem. To install it, open a
+terminal window and run:
+
+    gem install minitest
+
+## Source
+
+The Ruby Koans triangle project, parts 1 & 2 [view source](http://rubykoans.com)
