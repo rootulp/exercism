@@ -1,5 +1,4 @@
 class Triangle
-
   attr_accessor :side_a, :side_b, :side_c
   def initialize(a, b, c)
     @side_a = a
@@ -8,19 +7,23 @@ class Triangle
   end
 
   def kind
+    raise TriangleError if error?
     return :equilateral if equilateral?
     return :isosceles   if isosceles?
     return :scalene
   end
 
-=begin
+  private
+
   def error?
-    return true if side_a + side_b <= side_c
-    return true if side_b + side_c <= side_a
-    return true if side_a + side_c <= side_b
-    false
+    triangle_inequality?(side_a, side_b, side_c) ||
+    triangle_inequality?(side_b, side_c, side_a) ||
+    triangle_inequality?(side_a, side_c, side_b)
   end
-=end
+
+  def triangle_inequality?(x, y, z)
+    x + y <= z
+  end
 
   def equilateral?
     side_a == side_b && side_b === side_c
@@ -29,5 +32,7 @@ class Triangle
   def isosceles?
     side_a == side_b || side_b == side_c || side_a == side_c
   end
+end
 
+class TriangleError < StandardError
 end
