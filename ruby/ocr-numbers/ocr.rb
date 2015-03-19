@@ -7,19 +7,29 @@ class OCR
 
     RAW_NUMS
 
-    NUMS_ARY = RAW_NUMS.split("\n")
-                       .map {|x| x.scan(/.{1,3}/)}
-                       .map {|x| x.map {|y| y.rstrip}}
-                       .transpose
-    NUMS = NUMS_ARY.map {|x| x.join("\n") << "\n"}
-
-  attr_reader :text
-  def initialize(text)
-    @text = text
+  attr_reader :input, :nums
+  def initialize(input)
+    @input = input
+    @nums = split_blocks(RAW_NUMS)
   end
 
   def convert
-    NUMS.index(text).to_s
+    result = ""
+    split_blocks(input).each do |block|
+      if nums.include?(block)
+        result << nums.index(block).to_s
+      else
+        result << "?"
+      end
+    end
+    result
   end
 
+  def split_blocks(text)
+    text.split("\n")
+        .map {|x| x.scan(/.{1,3}/)}
+        .map {|x| x.map {|y| y.rstrip}}
+        .transpose
+        .map {|x| x.join("\n") << "\n"}
+  end
 end
