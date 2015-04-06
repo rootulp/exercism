@@ -1,49 +1,31 @@
 class CustomSet
 
-  attr_accessor :arr
+  attr_reader :arr
   def initialize(vals = [])
-    @arr = populate_arr(vals.to_a)
+    @arr = []
+    put_all(vals.to_a)
   end
 
-  def populate_arr(vals)
-    arr = []
-    vals.uniq.sort.each do |val|
-      arr << Node.new(val)
-    end
-    arr
-  end
-
-  def ==(other_set)
-    arr.zip(other_set.arr).each do |node1, node2|
-      return false if node1.val != node2.val
-    end
-    true
+  def put(val)
+    new_node = Node.new(val)
+    arr << new_node unless arr.include?(new_node)
+    arr.sort!
+    self
   end
 
   def delete(val)
     other_node = Node.new(val)
-    arr.delete_if do |node|
-      node == other_node
-    end
+    arr.delete_if { |node| node == other_node }
     self
   end
 
   def difference(other_set)
-    other_set.arr.each do |other_node|
-      delete(other_node.val)
-    end
+    other_set.arr.each { |other_node| delete(other_node.val) }
     self
   end
 
-  def disjoint?(other_set)
-    arr.each do |node|
-      return false if other_set.arr.include?(node)
-    end
-    true
-  end
-
-  def empty
-    arr.clear
+  def union(other_set)
+    other_set.arr.each { |other_node| put(other_node.val) }
     self
   end
 
@@ -55,23 +37,9 @@ class CustomSet
     CustomSet.new(shared)
   end
 
-  def member?(val)
-    new_node = Node.new(val)
-    arr.each do |node|
-      return true if node == new_node
-    end
-    false
-  end
-
-  def put(val)
-    new_node = Node.new(val)
-    arr << new_node unless arr.include?(new_node)
-    arr.sort!
-    self
-  end
-
-  def size
-    arr.size
+  def disjoint?(other_set)
+    arr.each { |node| return false if other_set.arr.include?(node) }
+    true
   end
 
   def subset?(other_set)
@@ -81,15 +49,30 @@ class CustomSet
     true
   end
 
+  def member?(val)
+    new_node = Node.new(val)
+    arr.member?(new_node)
+  end
+
+  def put_all(vals)
+    vals.each { |val| put(val) }
+  end
+
   def to_a
     arr.map { |node| node.val }
   end
 
-  def union(other_set)
-    other_set.arr.each do |node|
-      put(node.val)
-    end
+  def ==(other_set)
+    arr == other_set.arr
+  end
+
+  def empty
+    arr.clear
     self
+  end
+
+  def size
+    arr.size
   end
 
 end
