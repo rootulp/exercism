@@ -1,11 +1,7 @@
-//
-// This is only a SKELETON file for the "Bob" exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
+function Bob() {
+  'use strict';
 
-var Bob = function() {};
-
-Bob.prototype.hey = function(input) {
+  this.hey = function(input) {
     if (!input.trim()) {
         return "Fine. Be that way!";
     } else if (input === input.toUpperCase() && input !== input.toLowerCase()){
@@ -15,6 +11,7 @@ Bob.prototype.hey = function(input) {
     } else {
         return 'Whatever.';
     }
+  }
 };
 
 module.exports = Bob;
