@@ -9,20 +9,21 @@ function anagram(subject) {
     return words.filter(isAnagram)
   }
 
-  function sortWord(word) {
-    return word.toLowerCase().split('').sort().join('');
+  function isAnagram(word) {
+    return (differentWord(subject, word) && sameSorted(subject, word))
   }
 
-  function isAnagram(word) {
+  function differentWord(subject, word) {
+    return subject.toLowerCase() !== word.toLowerCase()
+  }
+
+  function sameSorted(subject, word) {
     var sortedWord = sortWord(word)
+    return sortedSubject === sortedWord
+  }
 
-    if (subject.toLowerCase() !== word.toLowerCase()) {
-      if (sortedSubject === sortedWord) {
-        return true
-      }
-    }
-    return false
-
+  function sortWord(word) {
+    return word.toLowerCase().split('').sort().join('')
   }
 
   return {
