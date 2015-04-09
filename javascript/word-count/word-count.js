@@ -1,12 +1,17 @@
-var words = function(phrase) {
+function words(phrase) {
+  'use strict';
+
   var counts = {};
-  phrase.split(/\s/).forEach(function(word) {
+  var words = phrase.split(/\s/);
+
+  words.forEach(function(word) {
     if (counts[word]) {
-      counts[word]++;
+      counts[word] += 1;
     } else {
       counts[word] = 1;
     }
   });
+
   return counts;
 };
 
