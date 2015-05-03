@@ -1,7 +1,7 @@
 class BinarySearch
-  
+
   attr_reader :list
-  def initialize(list)
+  def initialize(params)
     raise ArgumentError if list != list.sort
     @list = list
   end
@@ -17,7 +17,7 @@ class BinarySearch
   private
 
   def search(val, left, right)
-    raise RuntimeError if left >= right 
+    raise RuntimeError if left >= right
     middle = (right + left) / 2
 
     if val < list[middle]
