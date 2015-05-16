@@ -11,5 +11,5 @@ def pairing_for(nucleobase):
                      "C" : "G",
                      "A" : "U",
                      "T" : "A"}
-                     
+
   return pairings[nucleobase]

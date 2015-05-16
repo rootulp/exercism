@@ -1,6 +1,3 @@
-#
-# Skeleton file for the Python "Bob" exercise.
-#
 def hey(phrase):
   phrase = phrase.strip()
 
@@ -9,6 +6,6 @@ def hey(phrase):
   elif phrase.isupper():
     return "Whoa, chill out!"
   elif phrase.endswith("?"):
-    return "Sure." 
+    return "Sure."
   else:
     return 'Whatever.'
