@@ -8,32 +8,30 @@ public class Anagram {
   private final String sorted;
 
   public Anagram(String word) {
-    char[] chars = word.toLowerCase().toCharArray();
-    Arrays.sort(chars);
-
-    this.word = word.toLowerCase();
-    this.sorted = new String(chars);
+    this.word = word;
+    this.sorted = sort(word);
   }
 
-  public List<String> match(List<String> potentialWords) {
+  public List<String> match(List<String> potentialAnagrams) {
 
     List<String> anagrams = new ArrayList<String>();
 
-    for (String word2 : potentialWords) {
-      char[] chars = word2.toLowerCase().toCharArray();
-      Arrays.sort(chars);
-      String sorted2 = new String(chars);
+    for (String potentialAnagram : potentialAnagrams) {
+      String sortedPotentialAnagram = sort(potentialAnagram);
 
-      System.out.println("word = " + word);
-      System.out.println("word2 = " + word2);
-      System.out.println("sorted = " + sorted);
-      System.out.println("sorted2 = " + sorted2);
-      System.out.println("sorted equality = " + sorted2.equals( sorted));
-      System.out.println("word equality = " + word2 != word);
-      if (sorted2.toLowerCase().equals(sorted) && !word2.toLowerCase().equals(word)) { anagrams.add(word2); }
+      if (sorted.equals(sortedPotentialAnagram) &&
+          !word.equals(potentialAnagram.toLowerCase())) {
+        anagrams.add(potentialAnagram);
+      }
     }
 
     return anagrams;
   }
 
+  private String sort(String word) {
+    char[] chars = word.toLowerCase().toCharArray();
+    Arrays.sort(chars);
+
+    return new String(chars);
+  }
 }
