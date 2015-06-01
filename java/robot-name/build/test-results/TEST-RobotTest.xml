@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="RobotTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2015-06-01T04:11:42" hostname="Rootuls-MacBook-Pro.local" time="0.012">
-  <properties/>
-  <testcase name="resetName" classname="RobotTest" time="0.003"/>
-  <testcase name="hasName" classname="RobotTest" time="0.003"/>
-  <testcase name="differentRobotsHaveDifferentNames" classname="RobotTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
