@@ -11,7 +11,7 @@ class Hamming
     end
 
     return count
-    
+
   end
 
 end
