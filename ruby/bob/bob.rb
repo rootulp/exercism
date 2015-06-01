@@ -6,7 +6,7 @@ class Bob
     elsif phrase == phrase.upcase and phrase != phrase.downcase
       return "Whoa, chill out!"
     elsif phrase.end_with?("?")
-      return "Sure." 
+      return "Sure."
     else
       return 'Whatever.'
     end
