@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PhoneNumberTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2015-06-02T20:18:40" hostname="Rootuls-MacBook-Pro.local" time="0.013">
+  <properties/>
+  <testcase name="cleansNumber" classname="PhoneNumberTest" time="0.003"/>
+  <testcase name="prettyPrint" classname="PhoneNumberTest" time="0.001"/>
+  <testcase name="prettyPrintWithFullUSPhoneNumber" classname="PhoneNumberTest" time="0.0"/>
+  <testcase name="cleansNumberWithDots" classname="PhoneNumberTest" time="0.0"/>
+  <testcase name="validWhen11DigitsAndFirstIs1" classname="PhoneNumberTest" time="0.0"/>
+  <testcase name="invalidWhenOnly11Digits" classname="PhoneNumberTest" time="0.0"/>
+  <testcase name="invalidWhen9Digits" classname="PhoneNumberTest" time="0.0"/>
+  <testcase name="areaCode" classname="PhoneNumberTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
