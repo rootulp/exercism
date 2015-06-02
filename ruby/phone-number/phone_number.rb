@@ -31,8 +31,7 @@ class PhoneNumber
   end
 
   def contains_letters?(input)
-    return true if input.match(/[a-zA-Z]/)
-    false
+    input.match(/[a-zA-Z]/)
   end
-    
+
 end
