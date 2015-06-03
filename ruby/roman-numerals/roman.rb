@@ -14,7 +14,7 @@ class Fixnum # I don't like monkey patching
       400 => "CD",
       500 => "D",
       900 => "CM",
-      1000 => "M" 
+      1000 => "M"
     }
 
     result = ""
@@ -22,8 +22,8 @@ class Fixnum # I don't like monkey patching
 
     numerals.keys.reverse.each do |num|
       while target >= num
-          target -= num
-          result += numerals[num]
+        target -= num
+        result += numerals[num]
       end
     end
     result
