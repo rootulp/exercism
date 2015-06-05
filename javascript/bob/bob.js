@@ -3,7 +3,7 @@ function Bob() {
 
   this.hey = function(input) {
     if (!input.trim()) {
-        return "Fine. Be that way!";
+        return 'Fine. Besthat way!';
     } else if (input === input.toUpperCase() && input !== input.toLowerCase()){
         return 'Whoa, chill out!';
     } else if (input.slice(-1) === '?'){
