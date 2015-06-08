@@ -12,7 +12,7 @@ end
 
 class Crypto
 
-  attr_reader :unnormalized, :normalized
+  attr_reader :unnormalized
   def initialize(unnormalized)
     @unnormalized = unnormalized
   end
