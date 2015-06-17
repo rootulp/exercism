@@ -1,6 +1,6 @@
 # Solution from https://github.com/Azdaroth/exercism.io/blob/master/ruby/accumulate/array.rb
 class Array
-  
+
   def accumulate
     accumulated = []
 
@@ -8,7 +8,7 @@ class Array
       accumulated << (yield element)
     end
 
-    accumulated 
+    accumulated
   end
 
 end
