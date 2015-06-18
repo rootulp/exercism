@@ -8,8 +8,8 @@ def to_rna(strand):
 
 def pairing_for(nucleobase):
   pairings = { "G" : "C",
-                     "C" : "G",
-                     "A" : "U",
-                     "T" : "A"}
+               "C" : "G",
+               "A" : "U",
+               "T" : "A"}
 
   return pairings[nucleobase]
