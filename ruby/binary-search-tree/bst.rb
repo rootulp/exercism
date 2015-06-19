@@ -34,7 +34,7 @@ class Bst
   def insert_value(node, val)
     if node.nil?
       node = Node.new(val)
-    elsif val > node.data  
+    elsif val > node.data
       node.right = insert_value(node.right, val)
     else
       node.left = insert_value(node.left, val)
