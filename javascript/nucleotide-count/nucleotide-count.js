@@ -2,7 +2,7 @@ function dna(strand) {
   'use strict';
 
   strand = strand || ""
-  var valid_strand = /[^ATGC]/;
+  var invalid_strand = /[^ATGC]/;
   var nucleotides = strand.split("");
   var counts = {
     A: 0,
@@ -11,7 +11,7 @@ function dna(strand) {
     C: 0
   }
 
-  if (valid_strand.test(strand)) {
+  if (invalid_strand.test(strand)) {
     throw "Invalid strand"
   }
 
