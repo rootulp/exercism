@@ -9,8 +9,7 @@ function score(word) {
   }
 
   var calcScore = function(word) {
-    word = word || ""
-    word = word.toUpperCase();
+    word = word ? word.toUpperCase() : ""
 
     var total = 0;
     for(var i = 0; i < word.length; i++) {
