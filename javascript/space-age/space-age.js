@@ -49,7 +49,6 @@ function SpaceAge(seconds) {
     return chompFloat(onEarth() / earthTo['Uranus']);
   }
 
-
   this.onNeptune = function() {
     return chompFloat(onEarth() / earthTo['Neptune']);
   }

@@ -30,6 +30,7 @@ function Triangle(sideA, sideB, sideC) {
   this.inequality = function(x, y, z) {
     return x + y <= z
   }
+
 }
 
 module.exports = Triangle
