@@ -13,6 +13,7 @@ function CircularBuffer(maxSize) {
   }
 
   function write(data) {
+    if (!data) { return; }
     buffer[writeIndex] = data;
     writeIndex = increment(writeIndex);
   }
@@ -23,8 +24,8 @@ function CircularBuffer(maxSize) {
     buffer = new Array(maxSize);
   }
 
-  function increment(x) {
-    x = (x + 1) % maxSize;
+  function increment(index) {
+    index = (index + 1) % maxSize;
   }
 
   return {

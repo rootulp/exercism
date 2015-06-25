@@ -55,7 +55,7 @@ describe("CircularBuffer", function() {
     expect(buffer.read()).toBe('3');
   });
 
-  xit("writes of undefined or null don't occupy buffer", function() {
+  it("writes of undefined or null don't occupy buffer", function() {
     var buffer = circularBuffer(3);
     buffer.write(null);
     buffer.write(undefined);
