@@ -1,5 +1,3 @@
-
-# binary.chars.reverse.each_with_index.map { |x, i| x == "0" ? 0 : 2 ** i }.reduce(:+)
 module.exports = class Binary
   constructor: (@str) ->
     @invalid = (/^01/).test(@str)
