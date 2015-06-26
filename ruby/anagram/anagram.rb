@@ -1,23 +1,19 @@
 class Anagram
 
-  attr_reader :init_word, :chars
-
-  def initialize(init_word)
-    @init_word = init_word
-    @chars = init_word.downcase.split(//).sort!
+  attr_reader :detector_word, :detector_chars
+  def initialize(w)
+    @detector_word = w.downcase
+    @detector_chars = detector_word.chars.sort
   end
 
   def match(words)
-    anagrams = []
-    words.each do |word|
-      anagrams << word if is_anagram?(word)
-    end
-    anagrams
+    words.select { |word| is_anagram?(word.downcase) }
   end
 
+  private
+
   def is_anagram?(word)
-    return false if word.downcase == init_word
-    word.downcase.split(//).sort! == chars ? true : false
+    word != detector_word ? word.chars.sort == detector_chars : false
   end
 
 end
