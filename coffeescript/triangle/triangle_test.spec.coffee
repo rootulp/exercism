@@ -5,39 +5,39 @@ describe "Triangle", ->
     triangle = new Triangle(2,2,2)
     expect(triangle.kind()).toBe 'equilateral'
 
-  xit 'is equilateral for larger triangle', ->
+  it 'is equilateral for larger triangle', ->
     triangle = new Triangle(10,10,10)
     expect(triangle.kind()).toBe 'equilateral'
 
-  xit 'is isosceles when last two sides equal', ->
+  it 'is isosceles when last two sides equal', ->
     triangle = new Triangle(2,4,4)
     expect(triangle.kind()).toBe 'isosceles'
 
-  xit 'is isosceles when first and last equal', ->
+  it 'is isosceles when first and last equal', ->
     triangle = new Triangle(4,2,4)
     expect(triangle.kind()).toBe 'isosceles'
 
-  xit 'is isosceles when first two equal', ->
+  it 'is isosceles when first two equal', ->
     triangle = new Triangle(4,4,2)
     expect(triangle.kind()).toBe 'isosceles'
 
-  xit 'is isosceles with arbitrary sides', ->
+  it 'is isosceles with arbitrary sides', ->
     triangle = new Triangle(10,10,2)
     expect(triangle.kind()).toBe 'isosceles'
 
-  xit 'is scalene when no sides equal', ->
+  it 'is scalene when no sides equal', ->
     triangle = new Triangle(3,4,5)
     expect(triangle.kind()).toBe 'scalene'
 
-  xit 'is scalene when larger as well', ->
+  it 'is scalene when larger as well', ->
     triangle = new Triangle(10,11,12)
     expect(triangle.kind()).toBe 'scalene'
 
-  xit 'is scalene in decesending order', ->
+  it 'is scalene in decesending order', ->
     triangle = new Triangle(5,4,3)
     expect(triangle.kind()).toBe 'scalene'
 
-  xit 'is legal when very small', ->
+  it 'is legal when very small', ->
     triangle = new Triangle(.03,.06,.04)
     expect(triangle.kind()).toBe 'scalene'
 
