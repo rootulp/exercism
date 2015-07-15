@@ -1,15 +1,13 @@
 module.exports = class Triangle
   constructor: (@a, @b, @c) ->
     @sides = [@a, @b, @c]
+    @isNegative()
+    @isInequality()
 
   kind: ->
-    # @isInvalid()
     return 'equilateral' if @isEquilateral()
     return 'isosceles'   if @isIsosceles()
     'scalene'
-
-  isInvalid: ->
-    # if @sides.min < 0  then throw type: 'a', msg: 'negative sides are illegal'
 
   isIsosceles: ->
     @a == @b ||
@@ -21,3 +19,12 @@ module.exports = class Triangle
     @a == @c &&
     @b == @c
 
+  isNegative: ->
+    for side in @sides
+      throw 'negative sides are illegal' if side < 0
+
+  isInequality: ->
+    if @a + @b <= @c ||
+       @a + @c <= @b ||
+       @b + @c <= @a
+      throw 'violation of triangle inequality'
