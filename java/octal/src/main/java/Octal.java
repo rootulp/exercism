@@ -15,16 +15,14 @@ public final class Octal {
   }
 
   private int calculateDecimal() {
-    Integer decimal = 0;
+    int decimal = 0;
     if (!input.matches("[0-7]+")) { return decimal; }
 
-    for (int i = 0; i < input.length() - 1; i++) {
+    for (int i = 0; i < input.length(); i++) {
       int curr = Character.getNumericValue(input.charAt(i));
-      int bla =  curr * (int) Math.pow(8, input.length() - i - 1);
-      decimal += bla;
-      System.out.println("curr " + curr + " bla " + bla);
+      int mult =  (int) Math.pow(8, input.length() - 1 - i);
+      decimal += (curr * mult);
     }
-
     return decimal;
   }
 }
