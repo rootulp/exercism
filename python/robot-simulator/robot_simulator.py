@@ -1,42 +1,58 @@
 class NORTH:
     @staticmethod
-    def advance(self, x, y): return (x, y+1)
+    def advance(self, x, y):
+        return (x, y+1)
 
     @staticmethod
-    def turn_right(self): return EAST
+    def turn_right(self):
+        return EAST
 
     @staticmethod
-    def turn_left(self): return WEST
+    def turn_left(self):
+        return WEST
+
 
 class EAST:
     @staticmethod
-    def advance(self, x, y): return (x+1, y)
+    def advance(self, x, y):
+        return (x+1, y)
 
     @staticmethod
-    def turn_right(self): return SOUTH
+    def turn_right(self):
+        return SOUTH
 
     @staticmethod
-    def turn_left(self): return NORTH
+    def turn_left(self):
+        return NORTH
+
 
 class SOUTH:
     @staticmethod
-    def advance(self, x, y): return (x, y-1)
+    def advance(self, x, y):
+        return (x, y-1)
 
     @staticmethod
-    def turn_right(self): return WEST
+    def turn_right(self):
+        return WEST
 
     @staticmethod
-    def turn_left(self): return EAST
+    def turn_left(self):
+        return EAST
+
 
 class WEST:
     @staticmethod
-    def advance(self, x, y): return (x-1, y)
+    def advance(self, x, y):
+        return (x-1, y)
 
     @staticmethod
-    def turn_right(self): return NORTH
+    def turn_right(self):
+        return NORTH
 
     @staticmethod
-    def turn_left(self): return SOUTH
+    def turn_left(self):
+        return SOUTH
+
 
 class Robot:
 
@@ -45,7 +61,8 @@ class Robot:
         self.bearing = direction
 
     def advance(self):
-        self.coordinates = self.bearing.advance(self.bearing, self.x(), self.y())
+        self.coordinates = self.bearing.advance(self.bearing,
+                                                self.x(), self.y())
 
     def turn_right(self):
         self.bearing = self.bearing.turn_right(self.bearing)
