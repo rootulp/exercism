@@ -39,21 +39,15 @@ class Say:
 
     def wordify(self, num):
         self.check_valid(num)
-        result = ''
-        for i, chunk in enumerate(self.chunkify(num)):
-            units = self.get_units(len(self.chunkify(num)) - 1 - i)
-            val = self.wordify_chunk(chunk)
-            if val:
-                result += val + ' ' + units + ' '
-
-        return result.rstrip()
+        return ' '.join(map(lambda (i, chunk): self.wordify_chunk(chunk, i) ,
+            enumerate(self.chunkify(num)))).rstrip()
 
     def chunkify(self, num):
         rev = str(num)[::-1]
         rev_chunks = ([rev[i:i + 3] for i in range(0, len(rev), 3)])[::-1]
         return map(lambda x: int(x[::-1]), rev_chunks)
 
-    def wordify_chunk(self, chunk):
+    def wordify_chunk(self, chunk, i):
         hundreds_digit, left_over = divmod(chunk, 100)
         hundreds = self.get_val(hundreds_digit)
 
@@ -65,7 +59,9 @@ class Say:
             tens = self.get_val(tens_digit * 10)
             ones = self.get_val(ones_digit)
 
-        return self.frmt_chunk(hundreds, tens, ones)
+        word_chunk = self.frmt_chunk(hundreds, tens, ones)
+        units = self.get_units(len(self.chunkify(self.num)) - 1 - i)
+        return word_chunk + ' ' + units if word_chunk else ''
 
     def frmt_chunk(self, hundreds, tens, ones):
         chunk = ''
