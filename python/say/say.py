@@ -1,25 +1,17 @@
 class Say:
 
-    UNITS = {
-        3: 'billion',
-        2: 'million',
-        1: 'thousand',
-        0: ''
-    }
-
-    TENS = {
-        9: 'ninety',
-        8: 'eighty',
-        7: 'seventy',
-        6: 'sixty',
-        5: 'fifty',
-        4: 'forty',
-        3: 'thirty',
-        2: 'twenty',
-        0: ''
-    }
-
-    TEENS = {
+    VALS = {
+        1000000000: 'billion',
+        1000000: 'million',
+        1000: 'thousand',
+        90: 'ninety',
+        80: 'eighty',
+        70: 'seventy',
+        60: 'sixty',
+        50: 'fifty',
+        40: 'forty',
+        30: 'thirty',
+        20: 'twenty',
         19: 'nineteen',
         17: 'seventeen',
         16: 'sixteen',
@@ -28,10 +20,7 @@ class Say:
         13: 'thirteen',
         12: 'twelve',
         11: 'eleven',
-        10: 'ten'
-    }
-
-    DIGITS = {
+        10: 'ten',
         9: 'nine',
         8: 'eight',
         7: 'seven',
@@ -46,22 +35,18 @@ class Say:
 
     def __init__(self, num):
         self.num = num
-        self.words = self.wordify(num)
+        self.words = 'zero' if num == 0 else self.wordify(num)
 
     def wordify(self, num):
-        if num < 0 or num > 999999999999:
-            raise AttributeError
-        elif num == 0:
-            return 'zero'
-        else:
-            result = ''
-            for i, chunk in enumerate(self.chunkify(num)):
-                units = self.get_units(len(self.chunkify(num)) - 1 - i)
-                val = self.wordify_chunk(chunk)
-                if val:
-                    result += val + ' ' + units + ' '
+        self.check_valid(num)
+        result = ''
+        for i, chunk in enumerate(self.chunkify(num)):
+            units = self.get_units(len(self.chunkify(num)) - 1 - i)
+            val = self.wordify_chunk(chunk)
+            if val:
+                result += val + ' ' + units + ' '
 
-            return result.rstrip()
+        return result.rstrip()
 
     def chunkify(self, num):
         rev = str(num)[::-1]
@@ -69,45 +54,42 @@ class Say:
         return map(lambda x: int(x[::-1]), rev_chunks)
 
     def wordify_chunk(self, chunk):
-        hundreds_digit, left = divmod(chunk, 100)
-        hundreds = self.get_digit(hundreds_digit)
+        hundreds_digit, left_over = divmod(chunk, 100)
+        hundreds = self.get_val(hundreds_digit)
 
-        tens_digit, ones_digit = divmod(left, 10)
-        if left > 10 and left < 20:
-            tens = self.get_teen(left)
+        tens_digit, ones_digit = divmod(left_over, 10)
+        if left_over > 10 and left_over < 20:
+            tens = self.get_val(left_over)
             ones = None
         else:
-            tens = self.get_tens(tens_digit)
-            ones = self.get_digit(ones_digit)
+            tens = self.get_val(tens_digit * 10)
+            ones = self.get_val(ones_digit)
 
         return self.frmt_chunk(hundreds, tens, ones)
 
     def frmt_chunk(self, hundreds, tens, ones):
-        result = ''
+        chunk = ''
         if hundreds:
-            result += hundreds + ' hundred '
+            chunk += hundreds + ' hundred '
         if hundreds and tens:
-            result += 'and '
+            chunk += 'and '
         if tens:
-            result += tens
+            chunk += tens
         if tens and ones:
-            result += '-'
+            chunk += '-'
         if ones:
-            result += ones
-        return result
+            chunk += ones
+        return chunk
 
-    def get_digit(self, d):
-        return self.DIGITS[d]
-
-    def get_teen(self, d):
-        return self.TEENS[d]
-
-    def get_tens(self, d):
-        return self.TENS[d]
+    def check_valid(self, num):
+        if num < 0 or num > 999999999999:
+            raise AttributeError
 
     def get_units(self, d):
-        return self.UNITS[d]
+        return self.get_val(1000 ** d) if 1000 ** d > 1 else ''
 
+    def get_val(self, d):
+        return self.VALS[d]
 
 def say(num):
     return Say(int(num)).words
