@@ -39,8 +39,8 @@ class Say:
 
     def wordify(self, num):
         self.check_valid(num)
-        return ' '.join(map(lambda (i, chunk): self.wordify_chunk(chunk, i) ,
-            enumerate(self.chunkify(num)))).rstrip()
+        return ' '.join(map(lambda (i, chunk): self.wordify_chunk(chunk, i),
+                        enumerate(self.chunkify(num)))).rstrip()
 
     def chunkify(self, num):
         rev = str(num)[::-1]
@@ -86,6 +86,7 @@ class Say:
 
     def get_val(self, d):
         return self.VALS[d]
+
 
 def say(num):
     return Say(int(num)).words
