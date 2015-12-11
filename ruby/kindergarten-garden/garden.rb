@@ -21,7 +21,7 @@ class Garden
       instance_eval "def #{student.downcase}; #{plants_for(index)}; end"
     end
   end
-  
+
   def plants_for(index)
     symbols_for(index).map { |x| PLANTS[x] }
   end
