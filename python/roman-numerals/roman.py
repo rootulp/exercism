@@ -18,13 +18,17 @@ class Roman:
 
     @classmethod
     def numeral(cls, arabic):
-        target = arabic
-        output = ''
+        return ''.join(map(lambda key: cls.NUMERALS[key],
+                           cls.get_components(arabic)))
+
+    @classmethod
+    def get_components(cls, arabic):
+        components = []
         for key in reversed(sorted(cls.NUMERALS.keys())):
-            while target >= key:
-                target -= key
-                output += cls.NUMERALS[key]
-        return output
+            while arabic >= key:
+                arabic -= key
+                components.append(key)
+        return components
 
 
 def numeral(arabic):
