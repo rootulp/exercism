@@ -21,26 +21,9 @@ class SpaceAge:
     def on_planet(self, planet):
         return round(self.to_earth() / self.ORBITAL_PERIODS[planet], 2)
 
-    def on_mercury(self):
-        return self.on_planet('mercury')
 
-    def on_venus(self):
-        return self.on_planet('venus')
+def add_on_planet_fn(planet):
+    setattr(SpaceAge, 'on_' + planet, lambda self: self.on_planet(planet))
 
-    def on_earth(self):
-        return self.on_planet('earth')
-
-    def on_mars(self):
-        return self.on_planet('mars')
-
-    def on_jupiter(self):
-        return self.on_planet('jupiter')
-
-    def on_saturn(self):
-        return self.on_planet('saturn')
-
-    def on_uranus(self):
-        return self.on_planet('uranus')
-
-    def on_neptune(self):
-        return self.on_planet('neptune')
+for planet in SpaceAge.ORBITAL_PERIODS.keys():
+    add_on_planet_fn(planet)
