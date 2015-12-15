@@ -1,15 +1,14 @@
 class SpaceAge
 
-  SECONDS_IN_YEAR = 31557600.0
   ORBITAL_PERIODS = {
-    'mercury' => 0.2408467,
-    'venus' => 0.61519726,
-    'earth' => 1,
-    'mars' => 1.8808158,
-    'jupiter' => 11.862615,
-    'saturn' => 29.447498,
-    'uranus' => 84.016846,
-    'neptune' => 164.79132
+    'mercury' => 7600530.24,
+    'venus' =>   19413907.2,
+    'earth' =>   31558149.76,
+    'mars' =>    59354294.4,
+    'jupiter' => 374335776.0,
+    'saturn' =>  929596608.0,
+    'uranus' =>  2661041808.0,
+    'neptune' => 5200418592.0
   }
 
   attr_reader :seconds
@@ -17,12 +16,8 @@ class SpaceAge
     @seconds = seconds
   end
 
-  def to_earth
-    seconds / SECONDS_IN_YEAR
-  end
-
   def on_planet(planet)
-    (to_earth / ORBITAL_PERIODS[planet]).round(2)
+    (seconds / ORBITAL_PERIODS[planet]).round(2)
   end
 
   ORBITAL_PERIODS.keys.each do |planet|
