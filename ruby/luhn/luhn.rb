@@ -1,15 +1,18 @@
 class Luhn
 
-  attr_reader :num
   def initialize(num)
     @num = num
   end
 
   def addends
-    digits = num.to_s.chars.map(&:to_i)
-    digits.reverse
-          .map.with_index {|d, i| double_helper(d, i)}
-          .reverse
+    @num.to_s.chars.map(&:to_i) # digits
+        .reverse
+        .map.with_index { |digit, index| addend(digit, index) }
+        .reverse
+  end
+
+  def addend(digit, index)
+    subtract_nine(double(digit, index))
   end
 
   def checksum
@@ -22,17 +25,18 @@ class Luhn
 
   def self.create(num)
     (0..9).each do |i|
-      temp = Luhn.new("#{num}#{i}".to_i)
-      return temp.num if temp.valid?
+      return "#{num}#{i}".to_i if Luhn.new("#{num}#{i}".to_i).valid?
     end
   end
 
   private
 
-  def double_helper(digit, index)
-    digit *= 2 if index % 2 == 1
-    digit -= 9 if digit > 9
-    digit
+  def double(digit, index)
+    index % 2 == 1 ? digit * 2 : digit
+  end
+
+  def subtract_nine(digit)
+    digit > 9 ? digit - 9 : digit
   end
 
 end
