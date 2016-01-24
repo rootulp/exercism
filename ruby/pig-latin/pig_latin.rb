@@ -6,7 +6,7 @@ class PigLatin
   CONSONANTS = ALPHA - VOWELS
 
   def self.translate(phrase)
-    phrase.split.map {|word| self.translate_word(word)}.join(' ')
+    phrase.split.map { |word| self.translate_word(word) }.join(' ')
   end
 
   def self.translate_word(word)
