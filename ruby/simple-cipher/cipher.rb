@@ -4,7 +4,7 @@ class Cipher
 
   attr_reader :key
   def initialize(key = generate_key)
-    raise ArgumentError unless valid_key?(key)
+    raise ArgumentError if invalid_key?(key)
     @key = key
   end
 
@@ -36,11 +36,10 @@ class Cipher
     val
   end
 
-  def valid_key?(key)
-    return false if key.empty?
-    return false if key =~ /\d/
-    return false if key =~ /[A-Z]/
-    true
+  def invalid_key?(key)
+    key.empty? ||
+    key =~ /\d/ ||
+    key =~ /[A-Z]/
   end
 
 end
