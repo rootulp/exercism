@@ -2,32 +2,11 @@ import random
 import string
 
 
-class Caesar:
-    @classmethod
-    def encode(cls, phrase):
-        return ''.join([chr(cls.wrap(ord(c) + 3)) for c in cls.clean(phrase)])
-
-    @classmethod
-    def decode(cls, phrase):
-        return ''.join([chr(cls.wrap(ord(c) - 3)) for c in cls.clean(phrase)])
-
-    @classmethod
-    def wrap(cls, val):
-        if val > 122:
-            val -= 26
-        elif val < 97:
-            val += 26
-        return val
-
-    @classmethod
-    def clean(cls, phrase):
-        return filter(str.isalpha, phrase.lower())
-
-
 class Cipher:
 
+    random_key_length = 100
+
     def __init__(self, key=None):
-        self.random_key_length = 100
         self.key = key if key is not None else self.generate_random_key()
         if not self.valid_key():
             raise ValueError()
@@ -40,18 +19,8 @@ class Cipher:
         return ''.join([chr(self.wrap(ord(c) - self.offset(i))) for i, c in
                         enumerate(self.clean(phrase))])
 
-    def wrap(self, val):
-        while val > 122:
-            val -= 26
-        while val < 97:
-            val += 26
-        return val
-
     def clean(self, phrase):
         return filter(str.isalpha, phrase.lower())
-
-    def offset(self, index):
-        return self.wrap(ord(self.key[index % len(self.key)]) - 97)
 
     def generate_random_key(self):
         return ''.join(random.SystemRandom().choice(string.ascii_lowercase)
@@ -59,3 +28,26 @@ class Cipher:
 
     def valid_key(self):
         return self.key.isalpha() and self.key.islower()
+
+    def offset(self, index):
+        return self.wrap(ord(self.key[index % len(self.key)]) - 97)
+
+    def wrap(self, val):
+        while val > 122:
+            val -= 26
+        while val < 97:
+            val += 26
+        return val
+
+
+class Caesar:
+
+    cipher = Cipher('d')
+
+    @classmethod
+    def encode(cls, phrase):
+        return cls.cipher.encode(phrase)
+
+    @classmethod
+    def decode(cls, phrase):
+        return cls.cipher.decode(phrase)
