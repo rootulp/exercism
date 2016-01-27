@@ -1,19 +1,18 @@
+# Anagram analyzes a list of words for anagrams of a given word
 class Anagram
-
-  attr_reader :detector_word, :detector_chars
-  def initialize(w)
-    @detector_word = w.downcase
-    @detector_chars = detector_word.chars.sort
+  attr_reader :original_word, :original_sorted_chars
+  def initialize(word)
+    @original_word = word.downcase
+    @original_sorted_chars = original_word.chars.sort
   end
 
   def match(words)
-    words.select { |word| is_anagram?(word.downcase) }
+    words.select { |word| anagram?(word.downcase) }
   end
 
   private
 
-  def is_anagram?(word)
-    word != detector_word ? word.chars.sort == detector_chars : false
+  def anagram?(word)
+    word != original_word && word.chars.sort == original_sorted_chars
   end
-
 end
