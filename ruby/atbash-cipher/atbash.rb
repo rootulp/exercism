@@ -1,13 +1,12 @@
 class Atbash
-
-  ENCODING = Hash[('a'..'z').zip ('a'..'z').to_a.reverse]
+  ENCODING = Hash[('a'..'z').zip('a'..'z').to_a.reverse]
 
   def self.encode(str)
     split_5(encode!(format(str)))
   end
 
   def self.encode!(str)
-    str.chars.map {|char| is_numeric?(char) ? char : ENCODING[char]}.join('')
+    str.chars.map { |char| is_numeric?(char) ? char : ENCODING[char] }.join('')
   end
 
   def self.format(str)
@@ -22,5 +21,4 @@ class Atbash
   def self.is_numeric?(s)
     !!Float(s) rescue false
   end
-
 end
