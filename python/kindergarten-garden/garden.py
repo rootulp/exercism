@@ -8,7 +8,7 @@ class Garden:
               'R': 'Radishes',
               'V': 'Violets'}
 
-    def __init__(self, diagram, students = DEFAULT_STUDENTS):
+    def __init__(self, diagram, students=DEFAULT_STUDENTS):
         self.diagram = diagram
         self.rows = [list(row) for row in diagram.split()]
         self.plant_rows = [[self.PLANTS[c] for c in row] for row in self.rows]
