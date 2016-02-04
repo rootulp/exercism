@@ -1,8 +1,6 @@
 # Solution essentially taken from:
 # https://github.com/xavier/exercism-assignments/blob/master/ruby/allergies/allergies.rb
-
 class Allergies
-
   VALUES = {
     'eggs'         => 1,
     'peanuts'      => 2,
@@ -12,7 +10,7 @@ class Allergies
     'chocolate'    => 32,
     'pollen'       => 64,
     'cats'         => 128
-  }
+  }.freeze
 
   attr_reader :score
   def initialize(score)
@@ -26,5 +24,4 @@ class Allergies
   def list
     VALUES.keys.select { |item| allergic_to?(item) }
   end
-
 end

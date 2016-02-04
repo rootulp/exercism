@@ -1,3 +1,4 @@
+# Food Chain Song
 class FoodChainSong
 
   SONG = {
@@ -49,11 +50,10 @@ class FoodChainSong
   end
 
   def verses(from, to)
-    (from..to).map { |n| verse(n)  }.join("\n") + "\n"
+    (from..to).map { |n| verse(n) }.join("\n") + "\n"
   end
 
   def sing
     verses(1, SONG.size)
   end
-
 end

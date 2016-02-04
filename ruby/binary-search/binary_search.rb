@@ -1,32 +1,27 @@
+# Performs a Binary Search for a particular int in an array
 class BinarySearch
-
   attr_reader :list
-  def initialize(params)
-    raise ArgumentError if list != list.sort
+  def initialize(list)
     @list = list
+    fail ArgumentError if list != list.sort
   end
 
   def search_for(val)
     search(val, 0, list.size - 1)
   end
 
-  def middle
-    (list.size - 1) / 2
+  def middle(left = 0, right = list.size - 1)
+    (left + right) / 2
   end
 
   private
 
   def search(val, left, right)
-    raise RuntimeError if left >= right
-    middle = (right + left) / 2
+    fail RuntimeError if left >= right
 
-    if val < list[middle]
-      search(val, left, middle - 1)
-    elsif val > list[middle]
-      search(val, middle + 1, right)
-    else
-      middle
-    end
+    mid = middle(left, right)
+    return search(val, left, mid - 1) if val < list[mid]
+    return search(val, mid + 1, right) if val > list[mid]
+    mid
   end
-
 end

@@ -1,5 +1,5 @@
+# Custom Set
 class CustomSet
-
   attr_reader :arr
   def initialize(vals = [])
     @arr = []
@@ -59,11 +59,11 @@ class CustomSet
   end
 
   def to_a
-    arr.map { |node| node.val }
+    arr.map(&:val)
   end
 
-  def ==(other_set)
-    arr == other_set.arr
+  def ==(other)
+    arr == other.arr
   end
 
   def empty
@@ -74,9 +74,9 @@ class CustomSet
   def size
     arr.size
   end
-
 end
 
+# Node
 class Node
   include Comparable
 
@@ -85,11 +85,11 @@ class Node
     @val = val
   end
 
-  def ==(other_node)
-    val == other_node.val && val.class == other_node.val.class
+  def ==(other)
+    val == other.val && val.class == other.val.class
   end
 
-  def <=>(other_node)
-    val <=> other_node.val
+  def <=>(other)
+    val <=> other.val
   end
 end

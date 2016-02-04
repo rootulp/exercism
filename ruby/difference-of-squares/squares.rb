@@ -1,5 +1,5 @@
+# Squares
 class Squares
-
   attr_reader :num
   def initialize(num)
     @num = num
@@ -10,11 +10,10 @@ class Squares
   end
 
   def square_of_sums
-    (1..num).reduce(:+) ** 2
+    (1..num).reduce(:+)**2
   end
 
   def sum_of_squares
-    (1..num).map{ |x| x ** 2 }.reduce(:+)
+    (1..num).map { |x| x**2 }.reduce(:+)
   end
-
 end

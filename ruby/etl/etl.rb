@@ -1,5 +1,5 @@
+# ETL
 class ETL
-
   def self.transform(old)
     results = {}
     old.each do |point_val, letters|
@@ -9,5 +9,4 @@ class ETL
     end
     results
   end
-
 end

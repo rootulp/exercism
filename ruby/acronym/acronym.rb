@@ -1,5 +1,4 @@
 class Acronym
-
   def self.abbreviate(input)
     Acronym.new(input).abbreviate
   end
@@ -10,19 +9,18 @@ class Acronym
   end
 
   def abbreviate
-    return extract_acronym if is_acronym?
+    return extract_acronym if acronym?
     words = input.split(/(?=[A-Z])|\W+/)
     words.map { |word| word[0] }.join.upcase
   end
 
   private
 
-  def is_acronym?
+  def acronym?
     input.include?(':')
   end
 
   def extract_acronym
     input.partition(':').first
   end
-
 end

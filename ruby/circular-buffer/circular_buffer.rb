@@ -1,5 +1,5 @@
+# Circular Buffer
 class CircularBuffer
-
   class BufferEmptyException < StandardError
   end
 
@@ -13,7 +13,7 @@ class CircularBuffer
   end
 
   def clear
-    @buffer = Array.new(size, nil)
+    @buffer = Array.new(size)
     @head = 0
     @tail = 0
   end
@@ -24,22 +24,22 @@ class CircularBuffer
   end
 
   def write(val)
-    raise BufferFullException if head == tail && buffer[head] != nil
+    fail BufferFullException if head == tail && buffer[head]
     write_buffer(val)
   end
 
   def read
-    raise BufferEmptyException if buffer[tail] == nil
+    fail BufferEmptyException if buffer[tail].nil?
     result = buffer[tail]
     buffer[tail] = nil
     increment_tail
-    return result
+    result
   end
 
   private
 
   def write_buffer(val)
-    return if val == nil
+    return if val.nil?
     buffer[head] = val
     self.head = (head + 1) % size
   end
@@ -47,5 +47,4 @@ class CircularBuffer
   def increment_tail
     self.tail = (tail + 1) % size
   end
-
 end

@@ -1,24 +1,20 @@
+# School
 class School
-
+  attr_accessor :db
   def initialize
-    @db = {}
+    @db = Hash.new([])
   end
 
   def add(name, grade)
-    if @db.has_key?(grade)
-      @db[grade] << name
-      @db[grade].sort!
-    else
-      @db[grade] = [name]
-    end
+    db[grade] = [] unless db.key?(grade)
+    (db[grade] << name).sort!
   end
 
   def grade(grade)
-    @db.fetch(grade, [])
+    db[grade]
   end
 
   def to_hash
-    Hash[@db.sort]
+    Hash[db.sort]
   end
-
 end

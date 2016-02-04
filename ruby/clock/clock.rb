@@ -1,6 +1,6 @@
+# Clock
 class Clock
-
-  def self.at(hours, mins=0)
+  def self.at(hours, mins = 0)
     Clock.new(hours, mins)
   end
 
@@ -11,28 +11,27 @@ class Clock
   end
 
   def to_s
-    format(@hours) + ":" + format(@mins)
+    format(hours) + ':' + format(mins)
   end
 
-  def + (time_added)
-    @mins += time_added
+  def +(other)
+    @mins += other
     fixup
   end
 
-  def - (time_subtracted)
-    @mins -= time_subtracted
+  def -(other)
+    @mins -= other
     fixup
   end
 
-  def == (clock)
-    self.hours != clock.hours || self.mins != clock.mins ? false : true
+  def ==(other)
+    hours == other.hours && mins == other.mins
   end
 
   private
 
   def format(time)
-    time = time.to_s
-    time.length == 1 ? time.prepend("0") : time
+    time.to_s.length == 1 ? time.to_s.prepend('0') : time.to_s
   end
 
   def fixup
@@ -54,5 +53,4 @@ class Clock
       @hours -= 24
     end
   end
-
 end
