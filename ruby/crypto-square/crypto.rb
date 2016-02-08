@@ -1,16 +1,3 @@
-# Monkey Patch Array to add safe_transpose
-class Array
-  def safe_transpose
-    result = []
-    max_size = self.max { |a, b| a.size <=> b.size }.size
-    max_size.times do |i|
-      result[i] = Array.new(self.first.size)
-      self.each_with_index { |r, j| result[i][j] = r[i] }
-    end
-    result
-  end
-end
-
 # Square Code Crypto
 class Crypto
   attr_reader :unnormalized
@@ -23,7 +10,7 @@ class Crypto
   end
 
   def size
-    (normalize_plaintext.length**0.5).ceil
+    (normalize_plaintext.size**0.5).ceil
   end
 
   def plaintext_segments
@@ -31,14 +18,20 @@ class Crypto
   end
 
   def ciphertext
-    matrix.safe_transpose.join('')
-  end
-
-  def matrix
-    plaintext_segments.map { |arr| arr.split(//) }
+    safe_transpose(matrix).join('')
   end
 
   def normalize_ciphertext
-    ciphertext.scan(/.{1,#{matrix.length}}/).join(' ')
+    ciphertext.scan(/.{1,#{matrix.size}}/).join(' ')
+  end
+
+  private
+
+  def matrix
+    plaintext_segments.map { |segment| segment.split(//) }
+  end
+
+  def safe_transpose(matrix)
+    matrix.first.zip(*matrix.drop(1))
   end
 end
