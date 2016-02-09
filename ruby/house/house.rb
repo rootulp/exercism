@@ -1,22 +1,19 @@
 # Adapted from
 # https://github.com/alxndr/exercism/blob/master/ruby/house/house.rb
-
 class House
-
   VERSE_MAPPING = {
-    12=> {subject: 'horse and the hound and the horn', verb: 'belonged to' },
-    11=> {subject: 'farmer sowing his corn',           verb: 'kept' },
-    10=> {subject: 'rooster that crowed in the morn',  verb: 'woke' },
-    9 => {subject: 'priest all shaven and shorn',      verb: 'married' },
-    8 => {subject: 'man all tattered and torn',        verb: 'kissed' },
-    7 => {subject: 'maiden all forlorn',               verb: 'milked' },
-    6 => {subject: 'cow with the crumpled horn',       verb: 'tossed' },
-    5 => {subject: 'dog',                              verb: 'worried' },
-    4 => {subject: 'cat',                              verb: 'killed' },
-    3 => {subject: 'rat',                              verb: 'ate' },
-    2 => {subject: 'malt',                             verb: 'lay in the house'\
-                                                             ' that Jack built'}
-  }
+    12 => { subject: 'horse and the hound and the horn', verb: 'belonged to' },
+    11 => { subject: 'farmer sowing his corn', verb: 'kept' },
+    10 => { subject: 'rooster that crowed in the morn', verb: 'woke' },
+    9 => { subject: 'priest all shaven and shorn', verb: 'married' },
+    8 => { subject: 'man all tattered and torn', verb: 'kissed' },
+    7 => { subject: 'maiden all forlorn', verb: 'milked' },
+    6 => { subject: 'cow with the crumpled horn', verb: 'tossed' },
+    5 => { subject: 'dog', verb: 'worried' },
+    4 => { subject: 'cat', verb: 'killed' },
+    3 => { subject: 'rat', verb: 'ate' },
+    2 => { subject: 'malt', verb: 'lay in the house that Jack built' }
+  }.freeze
 
   def self.verse(num)
     return "This is the house that Jack built.\n" if num == 1
@@ -30,11 +27,10 @@ class House
   end
 
   def self.verses(from, to)
-    ( from.upto(to).map { |n| self.verse(n) }.join("\n"))
+    from.upto(to).map { |n| verse(n) }.join("\n")
   end
 
   def self.recite
-    verses(1,12)
+    verses(1, 12)
   end
-
 end
