@@ -1,17 +1,17 @@
+# Garden
 class Garden
-
   DEFAULT_STUDENTS = %w(Alice Bob Charlie David Eve Fred Ginny
-                        Harriet Ileana Joseph Kincaid Larry)
+                        Harriet Ileana Joseph Kincaid Larry).freeze
 
   PLANTS = { 'G' => :grass,
              'C' => :clover,
              'R' => :radishes,
-             'V' => :violets }
+             'V' => :violets }.freeze
 
   attr_reader :diagram, :diagram_clean, :students
   def initialize(diagram, students = DEFAULT_STUDENTS)
     @diagram = diagram
-    @diagram_clean = diagram.split("\n").map {|x| x.split(//)}
+    @diagram_clean = diagram.split("\n").map { |x| x.split(//) }
     @students = students.sort
     setup_student_methods
   end
@@ -28,7 +28,6 @@ class Garden
 
   def symbols_for(index)
     diagram_clean[0].values_at(index * 2, index * 2 + 1) +
-    diagram_clean[1].values_at(index * 2, index * 2 + 1)
+      diagram_clean[1].values_at(index * 2, index * 2 + 1)
   end
-
 end
