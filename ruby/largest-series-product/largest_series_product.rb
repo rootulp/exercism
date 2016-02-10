@@ -1,5 +1,5 @@
+# Series
 class Series
-
   attr_reader :digits
   def initialize(str)
     @digits = str.split(//).map(&:to_i)
@@ -10,9 +10,8 @@ class Series
   end
 
   def largest_product(size)
-    raise ArgumentError if size > digits.size
+    fail ArgumentError if size > digits.size
     return 1 if digits.empty?
     slices(size).map { |slice| slice.reduce(:*) }.max
   end
-
 end
