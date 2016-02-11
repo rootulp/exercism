@@ -1,81 +1,65 @@
 require 'date'
 
-class Meetup
-  attr_accessor :month, :year
-  DAYS = {
-    :sunday => 0,
-    :monday => 1,
-    :tuesday => 2,
-    :wednesday => 3,
-    :thursday => 4,
-    :friday => 5,
-    :saturday => 6
-  }
+# Not sure if monkey patching Date is a good practice here
+class Date
+  def first?
+    day >= 1 && day <= 7
+  end
 
-  SCHED = {
-    :first => 1,
-    :second => 2,
-    :third => 3,
-    :fourth => 4
-  }
+  def second?
+    day >= 8 && day <= 14
+  end
+
+  def third?
+    day >= 15 && day <= 21
+  end
+
+  def fourth?
+    day >= 22 && day <= 28
+  end
+
+  def teenth?
+    day >= 13 && day <= 19
+  end
+
+  def last?
+    day >= 23 && day <= 31
+  end
+end
+
+# Meetup
+class Meetup
+  attr_accessor :month, :year, :weekday, :schedule
   def initialize(month, year)
     @month = month
     @year = year
   end
 
   def day(weekday, schedule)
-    case schedule
-    when :last
-      return find_last(weekday, schedule)
-    when :teenth
-      return find_teenth(weekday, schedule)
-    else
-      return find_regular(weekday, schedule)
-    end
+    @weekday = weekday
+    @schedule = schedule
+    find_meetup_date
   end
 
   private
 
-  def find_last(weekday, schedule)
-    curr = Date.new(year, month).next_month.prev_day
-    while curr.month == month
-      if curr.wday == DAYS[weekday]
-        return curr
-      end
-      curr = curr.prev_day
+  # Start with last date in month for 'last' case
+  def find_meetup_date
+    Date.new(year, month).next_month.prev_day
+        .downto(Date.new(year, month)) do |date|
+      return date if correct_date?(date)
     end
   end
 
-  def find_teenth(weekday, schedule)
-    curr = Date.new(year, month)
-    while curr.month == month
-      if curr.wday == DAYS[weekday] && is_teen?(curr)
-        return curr
-      end
-      curr = curr.next_day
-    end
+  def correct_date?(date)
+    correct_weekday?(date) && correct_schedule?(date)
   end
 
-  def is_teen?(date)
-    if date.day > 12 && date.day < 20
-      return true
-    else
-      return false
-    end
+  def correct_weekday?(date)
+    date.send(weekday.to_s + '?')
   end
 
-  def find_regular(weekday, schedule)
-    ordinal = 1
-    curr = Date.new(year, month)
-    while curr.month == month
-      if curr.wday == DAYS[weekday]
-        if ordinal == SCHED[schedule]
-          return curr
-        else
-          ordinal += 1
-        end
-      end
-      curr = curr.next
-    end
+  def correct_schedule?(date)
+    date.send(schedule.to_s + '?')
   end
 end
