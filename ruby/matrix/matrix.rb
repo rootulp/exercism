@@ -1,5 +1,5 @@
+# Matrix
 class Matrix
-
   attr_reader :rows, :columns
   def initialize(string)
     @rows = build_rows(string)
@@ -10,7 +10,7 @@ class Matrix
 
   def build_rows(string)
     string.split("\n").map do |row|
-      row.split(" ").map(&:to_i)
+      row.split(' ').map(&:to_i)
     end
   end
 end
