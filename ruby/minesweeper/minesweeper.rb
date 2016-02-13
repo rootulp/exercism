@@ -1,19 +1,19 @@
+# Board
 class Board
-
-  def self.transform(inp)
-    Board.new(inp).transform
+  def self.transform(input)
+    Board.new(input).transform
   end
 
   attr_reader :grid
-  def initialize(inp)
-    @grid = inp.map { |row| row.split(//) }
-    raise ValueError if error?
+  def initialize(input)
+    @grid = input.map { |row| row.split(//) }
+    fail ValueError if error?
   end
 
   def transform
     grid.each_with_index.map do |r, row|
-      r.each_with_index.map do |val, col|
-        reserved?(val) ? val : mines_for(row, col)
+      r.each_with_index.map do |square, col|
+        occupied?(square) ? square : mines_for(row, col)
       end.join
     end
   end
@@ -21,67 +21,55 @@ class Board
   private
 
   def neighbors(row, col)
-    neighbors = []
-    (-1..1).each do |x|
-      (-1..1).each do |y|
-        next if x == 0 && y == 0
-        neighbors << grid[row + x][col + y]
-      end
-    end
-    neighbors
+    neighbor_positions.map { |dx, dy| grid[row + dx][col + dy] }
+  end
+
+  def neighbor_positions
+    (-1..1).to_a.product((-1..1).to_a).reject { |dx, dy| dx == 0 && dy == 0 }
   end
 
   def mines_for(row, col)
-    count = neighbors(row, col).count('*')
-    count == 0 ? " " : "#{count}"
+    return ' ' if neighbors(row, col).count { |square| mine?(square) } == 0
+    neighbors(row, col).count { |square| mine?(square) }.to_s
   end
 
-  def reserved?(val)
-    border?(val) || val == '*'
+  def occupied?(square)
+    border?(square) || mine?(square)
   end
 
-  def border?(val)
-    val == '|' || val == '-' || val == '+'
+  def border?(square)
+    square == '|' || square == '-' || square == '+'
   end
 
-  # Error Checking
+  def mine?(square)
+    square == '*'
+  end
 
   def error?
-    different_len? || faulty_border? || invalid_char?
+    invalid_row_length? || invalid_border? || invalid_square?
   end
 
-  def faulty_border?
+  def invalid_border?
     invalid_border_row?(grid.first) ||
-    invalid_border_row?(grid.last)  ||
-    invalid_border_edges?
+      invalid_border_row?(grid.last) ||
+      invalid_border_edges?
   end
 
   def invalid_border_row?(row)
-    row.each do |val|
-      return true unless border?(val)
-    end
-    false
+    row.any? { |square| !border?(square) }
   end
 
   def invalid_border_edges?
-    grid.each do |row|
-      return true unless border?(row.first) && border?(row.last)
-    end
-    false
+    grid.any? { |row| !border?(row.first) || !border?(row.last) }
   end
 
-  def different_len?
-    size = grid.first.length
-    grid.each do |row|
-      return true if row.length != size
-    end
-    false
+  def invalid_row_length?
+    grid.any? { |row| row.length != grid.first.length }
   end
 
-  def invalid_char?
+  def invalid_square?
     grid.join =~ /[^\s*|+-]/
   end
-
 end
 
 class ValueError < StandardError
