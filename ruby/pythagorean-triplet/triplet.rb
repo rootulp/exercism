@@ -1,11 +1,11 @@
+# Pythagorean Theorem
+# a**2 + b**2 = c**2
+
+# Euclid's Formula
+# (m**2 - n**2) + (2mn) = (m**2 + n**2)
+
+# Triplet
 class Triplet
-
-  # Pythagorean Theorem
-  # a**2 + b**2 = c**2
-
-  # Euclid's Formula
-  # (m**2 - n**2) + (2mn) = (m**2 + n**2)
-
   attr_reader :a, :b, :c
   def initialize(a, b, c)
     @a = a
@@ -26,7 +26,6 @@ class Triplet
   end
 
   class << self
-
     def where(constraints = {})
       max_factor = constraints.fetch(:max_factor)
       min_factor = constraints.fetch(:min_factor, 1)
@@ -52,7 +51,5 @@ class Triplet
         false
       end
     end
-
   end
-
 end
