@@ -1,30 +1,30 @@
+# Nucleotide
 class Nucleotide
-
   def self.from_dna(strand)
     Nucleotide.new(strand)
   end
 
-  attr_reader :histogram
+  attr_reader :strand, :histogram
   def initialize(strand)
     @strand = strand
     @histogram = { 'A' => 0, 'T' => 0, 'C' => 0, 'G' => 0 }
     build_histogram
   end
 
-  def count(letter)
-    @histogram[letter]
+  def count(nucleotide)
+    histogram[nucleotide]
   end
 
   private
 
   def build_histogram
-    @strand.each_char do |char|
-      raise ArgumentError unless is_nucleotide?(char)
-      @histogram[char] += 1
+    strand.each_char do |symbol|
+      fail ArgumentError unless nucleotide?(symbol)
+      histogram[symbol] += 1
     end
   end
 
-  def is_nucleotide?(char)
-    char == 'A' || char == 'T' || char == 'C' || char == 'G' ? true : false
+  def nucleotide?(symbol)
+    symbol == 'A' || symbol == 'T' || symbol == 'C' || symbol == 'G'
   end
 end
