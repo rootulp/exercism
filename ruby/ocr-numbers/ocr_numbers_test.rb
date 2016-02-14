@@ -14,7 +14,7 @@ class OCRTest < Minitest::Test
 
   def test_recognize_one
     text = <<-NUMBER.chomp
-   
+
   |
   |
 
@@ -44,7 +44,7 @@ class OCRTest < Minitest::Test
 
   def test_recognize_four
     text = <<-NUMBER.chomp
-   
+
 |_|
   |
 
@@ -104,7 +104,7 @@ class OCRTest < Minitest::Test
 
   def test_identify_garble
     text = <<-NUMBER.chomp
-   
+
 | |
 | |
 
