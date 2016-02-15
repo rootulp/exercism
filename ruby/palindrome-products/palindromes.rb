@@ -12,11 +12,9 @@ class Palindromes
   end
 
   def generate
-    (min..max).each do |x|
-      (min..max).each do |y|
-        next unless factors?(x, y)
-        factors << (x <= y ? [x, y] : [y, x])
-      end
+    (min..max).to_a.product((min..max).to_a).each do |x, y|
+      next unless factors?(x, y)
+      factors << (x <= y ? [x, y] : [y, x])
     end
   end
 
@@ -31,18 +29,15 @@ class Palindromes
   private
 
   def factors?(x, y)
-    result = (x * y).to_s
-    result == result.reverse
+    (x * y).to_s == (x * y).to_s.reverse
   end
 
   def find_largest
-    factor = factors.max_by { |x| x.reduce(:*) }
-    factor.reduce(:*)
+    factors.max_by { |x| x.reduce(:*) }.reduce(:*)
   end
 
   def find_smallest
-    factor = factors.min_by { |x| x.reduce(:*) }
-    factor.reduce(:*)
+    factors.min_by { |x| x.reduce(:*) }.reduce(:*)
   end
 
   def find_subset_factors(val)
