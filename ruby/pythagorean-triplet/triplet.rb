@@ -4,52 +4,56 @@
 # Euclid's Formula
 # (m**2 - n**2) + (2mn) = (m**2 + n**2)
 
+require 'set'
+
 # Triplet
 class Triplet
-  attr_reader :a, :b, :c
+  attr_reader :a, :b, :c, :sides
   def initialize(a, b, c)
     @a = a
     @b = b
     @c = c
+    @sides = Set.new [a, b, c]
   end
 
   def sum
-    a + b + c
+    sides.reduce(:+)
   end
 
   def product
-    a * b * c
+    sides.reduce(:*)
   end
 
   def pythagorean?
     a**2 + b**2 == c**2
   end
 
-  class << self
-    def where(constraints = {})
-      max_factor = constraints.fetch(:max_factor)
-      min_factor = constraints.fetch(:min_factor, 1)
-      sum        = constraints.fetch(:sum, false)
+  def self.where(constraints = {})
+    min_factor = constraints.fetch(:min_factor, 1)
+    max_factor = constraints.fetch(:max_factor)
+    sum = constraints.fetch(:sum, nil)
 
-      triplets = []
+    find_triplets(min_factor, max_factor, sum)
+  end
 
-      factors = min_factor..max_factor
-      factors.to_a.combination(3) do |a, b, c|
-        temp = Triplet.new(a, b, c)
-        triplets << temp if valid?(temp, sum)
-      end
-
-      triplets
+  def self.find_triplets(min_factor, max_factor, sum)
+    triplets = []
+    (min_factor..max_factor).to_a.combination(3).each do |a, b, c|
+      triplets << Triplet.new(a, b, c) if valid?(Triplet.new(a, b, c), sum)
     end
+    triplets
+  end
 
-    def valid?(triplet, sum)
-      if triplet.pythagorean? && sum
-        triplet.sum == sum
-      elsif triplet.pythagorean?
-        true
-      else
-        false
-      end
-    end
+  def self.valid?(triplet, sum)
+    valid_sum?(triplet, sum) && valid_pythagorean?(triplet)
+  end
+
+  def self.valid_sum?(triplet, sum)
+    return true if sum.nil?
+    sum == triplet.sum
+  end
+
+  def self.valid_pythagorean?(triplet)
+    triplet.pythagorean?
   end
 end
