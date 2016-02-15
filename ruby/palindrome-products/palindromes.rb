@@ -1,5 +1,6 @@
 require 'set'
 
+# Palindromes
 class Palindromes
   DEFAULT_MIN = 1
 
@@ -13,13 +14,8 @@ class Palindromes
   def generate
     (min..max).each do |x|
       (min..max).each do |y|
-        if factors?(x, y)
-          if x <= y
-            factors << [x, y]
-          else
-            factors << [y, x]
-          end
-        end
+        next unless factors?(x, y)
+        factors << (x <= y ? [x, y] : [y, x])
       end
     end
   end
@@ -40,17 +36,17 @@ class Palindromes
   end
 
   def find_largest
-    factor = factors.max_by {|x| x.reduce(:*)}
+    factor = factors.max_by { |x| x.reduce(:*) }
     factor.reduce(:*)
   end
 
   def find_smallest
-    factor = factors.min_by {|x| x.reduce(:*)}
+    factor = factors.min_by { |x| x.reduce(:*) }
     factor.reduce(:*)
   end
 
   def find_subset_factors(val)
-    factors.select {|x| x.reduce(:*) == val}
+    factors.select { |x| x.reduce(:*) == val }
   end
 
   def build_subset(val)
@@ -58,6 +54,7 @@ class Palindromes
   end
 end
 
+# Subset
 class Subset
   attr_reader :value, :factors
   def initialize(value, factors)
