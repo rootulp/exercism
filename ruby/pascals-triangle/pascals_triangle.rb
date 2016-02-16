@@ -1,12 +1,12 @@
+# Triangle
 class Triangle
-
   attr_reader :num_rows
   def initialize(num_rows)
     @num_rows = num_rows
   end
 
   def rows
-    (0..(num_rows-1)).map { |row_num| build_row(row_num) }
+    (0..(num_rows - 1)).map { |row_num| build_row(row_num) }
   end
 
   def build_row(row_num)
@@ -23,5 +23,4 @@ class Triangle
     return 1 if n == 0
     n.downto(1).reduce(:*)
   end
-
 end
