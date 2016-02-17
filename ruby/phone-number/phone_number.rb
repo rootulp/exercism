@@ -1,15 +1,20 @@
+# Phone Number
 class PhoneNumber
+  INVALID = ('0' * 10).freeze
 
-  attr_reader :number, :area_code
-  INVALID = '0' * 10
-
+  attr_reader :input
   def initialize(input)
-    if contains_letters?(input)
-      @number = INVALID
-    else
-      @number = clean_up(input)
-    end
-    @area_code = number[0..2]
+    @input = input
+  end
+
+  def number
+    return INVALID unless valid?
+    return stripped if valid_ten_digits?
+    stripped[1..-1] if valid_eleven_digits?
+  end
+
+  def area_code
+    number[0..2]
   end
 
   def to_s
@@ -18,20 +23,23 @@ class PhoneNumber
 
   private
 
-  def clean_up(input)
-    regex = /\D/
-    stripped = input.gsub(regex, '')
-    if stripped.length == 11 && stripped[0] == '1'
-      stripped[1..-1]
-    elsif stripped.length == 10
-      stripped
-    else
-      INVALID
-    end
+  def valid?
+    no_letters? && (valid_ten_digits? || valid_eleven_digits?)
   end
 
-  def contains_letters?(input)
-    input.match(/[a-zA-Z]/)
+  def valid_ten_digits?
+    stripped.size == 10
   end
 
+  def valid_eleven_digits?
+    stripped.size == 11 && stripped.chars.first == '1'
+  end
+
+  def stripped
+    input.gsub(/\D/, '')
+  end
+
+  def no_letters?
+    !input.match(/[a-zA-Z]/)
+  end
 end
