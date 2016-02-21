@@ -1,5 +1,5 @@
+# Translation
 class Translation
-
   MAPPINGS = {
     'AUG' => 'Methionine',
     'UUU' => 'Phenylalanine',
@@ -18,10 +18,10 @@ class Translation
     'UAA' => 'STOP',
     'UAG' => 'STOP',
     'UGA' => 'STOP'
-  }
+  }.freeze
 
   def self.of_codon(codon)
-    raise InvalidCodonError unless MAPPINGS.include?(codon)
+    fail InvalidCodonError unless MAPPINGS.include?(codon)
     MAPPINGS[codon]
   end
 
@@ -31,7 +31,6 @@ class Translation
       result << of_codon(codon.join)
     end
   end
-
 end
 
 class InvalidCodonError < StandardError; end
