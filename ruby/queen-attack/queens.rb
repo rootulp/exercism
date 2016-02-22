@@ -1,45 +1,34 @@
+# Queens
 class Queens
-  attr_accessor :board
+  DEFAULTS = { white: [0, 3], black: [7, 3] }.freeze
+
   attr_reader :white, :black
-
-  DEFAULTS = {white: [0, 3], black: [7, 3]}
-
-  def initialize(args=DEFAULTS)
-    raise ArgumentError if args[:white] == args[:black]
-
-    @board = Array.new(8) { Array.new(8) }
-    @white = [args[:white][0], args[:white][1]]
-    @black = [args[:black][0], args[:black][1]]
-    set_queens
+  attr_accessor :board
+  def initialize(positions = DEFAULTS)
+    fail ArgumentError if positions[:white] == positions[:black]
+    @board = Array.new(8) { Array.new(8, '_') }
+    @white = [*positions[:white]]
+    @black = [*positions[:black]]
+    set_queen('W', white.first, white.last)
+    set_queen('B', black.first, black.last)
   end
 
   def attack?
-    same_row? || same_col? || same_diag?
+    same_row? || same_col? || same_diagonal?
   end
 
   def to_s
-    output = ""
-    board.each do |row|
-      row.each do |e|
-        if e.nil?
-          output << "_ "
-        else
-          output << e + " "
-        end
-      end
-      output.strip!
-      output << "\n"
-    end
-    output.strip!
+    board.map { |row| row.join(' ') }.join("\n")
   end
+
 
   private
 
-  def set_queens
-    board[white[0]][white[1]] = "W"
-    board[black[0]][black[1]] = "B"
+  def set_queen(color, x, y)
+    board[x][y] = color
   end
 
+  # BUG hard-coded indices
   def same_row?
     white[0] == black[0]
   end
@@ -48,8 +37,7 @@ class Queens
     white[1] == black[1]
   end
 
-  def same_diag?
+  def same_diagonal?
     (white[1] - white[0]).abs == (black[1] - black[0]).abs
   end
-
 end
