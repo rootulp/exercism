@@ -1,75 +1,81 @@
+# Deque
 class Deque
-
+  attr_reader :head, :tail
   def initialize
-    @head = nil
-    @tail = nil
+    reset!
   end
 
-  def push(val)
-    new = Node.new(val)
+  def push(data)
+    new_element = Element.new(data)
+    return set_head_and_tail(new_element) if empty?
+    new_element.prev = tail
+    tail.next = new_element
+    set_tail(new_element)
+  end
 
-    if @head.nil? && @tail.nil?
-      @head = new
-      @tail = new
-    elsif @tail.nil?
-      @tail = new
-    else
-      new.prev = @tail
-      @tail.next = new
-      @tail = new
-    end
+  def unshift(data)
+    new_element = Element.new(data)
+    return set_head_and_tail(new_element) if empty?
+    new_element.next = head
+    head.prev = new_element
+    set_head(new_element)
   end
 
   def pop
-    if @tail == @head
-      res = @tail
-      @tail = nil
-      @head = nil
-      return res.val
+    prev_tail = tail
+    if size_is_one?
+      reset!
     else
-      res = @tail
-      @tail = res.prev
-      @tail.next = nil
-      return res.val
+      set_tail(prev_tail.prev)
+      prev_tail.next = false
     end
-  end
-
-  def unshift(val)
-    new = Node.new(val)
-
-    if @head.nil? && @tail.nil?
-      @head = new
-      @tail = new
-    elsif @head.nil?
-      @head = new
-    else
-      new.next = @head
-      @head.prev = new
-      @head = new
-    end
+    prev_tail.data
   end
 
   def shift
-    if @tail == @head
-      res = @head
-      @tail = nil
-      @head = nil
-      return res.val
+    prev_head = head
+    if size_is_one?
+      reset!
     else
-      res = @head
-      @head = res.next
-      @head.prev = nil
-      return res.val
+      set_head(prev_head.next)
+      prev_head.prev = false
     end
+    prev_head.data
+  end
+
+  private
+
+  def empty?
+    !head && !tail
+  end
+
+  def size_is_one?
+    head == tail
+  end
+
+  def reset!
+    set_head_and_tail(false)
+  end
+
+  def set_head_and_tail(element)
+    set_head(element)
+    set_tail(element)
+  end
+
+  def set_head(element)
+    @head = element
+  end
+
+  def set_tail(element)
+    @tail = element
   end
 end
 
-class Node
-  attr_reader :val
+# Element
+class Element
+  attr_reader :data
   attr_accessor :next, :prev
-  def initialize(val)
-    @val = val
-    @next = nil
-    @prev = nil
+  def initialize(data)
+    @data = data
   end
 end
