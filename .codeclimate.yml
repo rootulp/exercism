@@ -32,5 +32,5 @@ ratings:
   - "**.py"
   - "**.rb"
 exclude_paths:
-  - **/*test*
-  - **/*spec*
+  - "**/*test*"
+  - "**/*spec*"
