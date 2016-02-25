@@ -27,6 +27,7 @@ AllCops:
     - '**/Vagabondfile'
   Exclude:
     - 'vendor/**/*'
+    - '**/*_test.rb'
   # Default formatter will be used if no -f/--format option is given.
   DefaultFormatter: progress
   # Cop names are not displayed in offense messages by default. Change behavior
