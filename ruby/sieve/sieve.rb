@@ -1,23 +1,26 @@
+# Sieve
 class Sieve
-
+  DEFAULT_MIN = 2
+  attr_reader :min, :max, :range
   def initialize(max)
-    @range = 2..max
+    @min = DEFAULT_MIN
+    @max = max
+    @range = min..max
   end
 
   def primes
     primes = []
-    composites = []
+    unmarked = range.to_a
 
-    @range.each do |curr|
-      next if composites.include?(curr)
-      primes << curr
-      composites = composites | multiples(curr)
+    while unmarked.any?
+      prime = unmarked.shift
+      unmarked -= multiples(prime)
+      primes << prime
     end
     primes
   end
 
   def multiples(num)
-    @range.select { |multiple| multiple % num == 0 }
+    range.select { |multiple| multiple % num == 0 }
   end
-
 end
