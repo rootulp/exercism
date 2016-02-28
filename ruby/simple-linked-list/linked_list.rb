@@ -1,5 +1,5 @@
+# Element
 class Element
-
   attr_reader :datum, :next
   def initialize(datum, next_datum)
     @datum = datum
@@ -19,7 +19,6 @@ class Element
   end
 
   class << self
-
     def to_a(curr)
       result = []
       while curr.is_a?(Element)
@@ -31,15 +30,11 @@ class Element
 
     def from_a(input)
       arr = input.to_a
-      return nil if !arr.is_a?(Array) || arr.empty?
+      return nil if arr.empty? || !arr.is_a?(Array)
 
       result = Element.new(arr.pop, nil)
-      while arr.any?
-        result = Element.new(arr.pop, result)
-      end
+      result = Element.new(arr.pop, result) while arr.any?
       result
     end
-
   end
-
 end
