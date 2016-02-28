@@ -1,42 +1,22 @@
 # Probably a better way to do this then having
 # seperate class and instance methods
-
 class SumOfMultiples
+  MULTIPLES = [3, 5].freeze
+  attr_reader :multiples
 
-  @@multiples = [3,5]
-  
   def self.to(max)
-    sum = 0
-    (1..max-1).step() do |curr|
-      sum += curr if self.divisible?(curr)
-    end
-    sum
-  end
-
-  def self.divisible?(num)
-    @@multiples.each do |multiple|
-      return true if num % multiple == 0
-    end
-    false
+    SumOfMultiples.new.to(max)
   end
 
   def initialize(*multiples)
-    @multiples = multiples
+    @multiples = multiples.any? ? multiples : MULTIPLES
   end
 
   def to(max)
-    sum = 0
-    (1..max-1).step() do |curr|
-      sum += curr if self.divisible?(curr)
-    end
-    sum
+    (1...max).step.select { |num| divisible?(num) }.reduce(0, :+)
   end
 
   def divisible?(num)
-    @multiples.each do |multiple|
-      return true if num % multiple == 0
-    end
-    false
+    multiples.any? { |multiple| num % multiple == 0 }
   end
-
 end
