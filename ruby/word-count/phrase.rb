@@ -1,19 +1,17 @@
+# Phrase
 class Phrase
-  attr_reader :word_count
-
-  def initialize(sentence)
-    words = extract_words(sentence)
-    @word_count = count(words)
+  attr_reader :phrase
+  def initialize(phrase)
+    @phrase = phrase
   end
 
-  def extract_words(sentence)
-    sentence.downcase.gsub(/[^'a-z0-9\s]/i, " ").split(" ")
+  def word_count
+    words.each_with_object(Hash.new(0)) { |word, counts| counts[word] += 1 }
   end
 
-  def count(words)
-    occurences = Hash.new 0
-    words.each { |word| occurences[word] += 1 }
-    occurences
-  end
+  private
 
+  def words
+    phrase.downcase.gsub(/[^'a-z0-9\s]/i, ' ').split(' ')
+  end
 end
