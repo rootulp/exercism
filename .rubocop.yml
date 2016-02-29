@@ -367,6 +367,10 @@ Style/Copyright:
   Notice: '^Copyright (\(c\) )?2[0-9]{3} .+'
   AutocorrectNotice: ''
 
+# Disable documentation cop
+Style/Documentation:
+  Enabled: false
+
 # Multi-line method chaining should be done with leading dots.
 Style/DotPosition:
   EnforcedStyle: leading
