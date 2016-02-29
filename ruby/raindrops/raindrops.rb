@@ -1,48 +1,32 @@
 require 'Prime'
 
+# Raindrops
 class Raindrops
-
-  def self.convert(num)
-
-    factors = self.get_factors(num)
-
-    return num.to_s unless self.valid?(factors)
-    
-    self.translate(factors)
-  end
-
-  def self.get_factors(num)
-    factors = Prime.prime_division(num)
-    factors.flatten!
-    factors.uniq!
-    factors.sort!
-  end
-
-  def self.valid?(factors)
-    return true if factors.include?(3) || factors.include?(5) || factors.include?(7)
-    false
-  end
-
-  def self.translate(factors)
-    result = ""
-    factors.each do |factor|
-      result << self.translate_factor(factor)
+  class << self
+    WORDS = {
+      3 => 'Pling',
+      5 => 'Plang',
+      7 => 'Plong'
+    }.freeze
+    def convert(num)
+      return num.to_s unless valid?(factors(num))
+      translate(factors(num))
     end
 
-    result
-  end
+    def factors(num)
+      Prime.prime_division(num).flatten.uniq.sort
+    end
 
-  def self.translate_factor(factor)
-    case factor
-    when 3
-      return "Pling"
-    when 5
-      return "Plang"
-    when 7
-      return "Plong"
-    else
-      return ""
+    def valid?(factors)
+      factors.include?(3) || factors.include?(5) || factors.include?(7)
+    end
+
+    def translate(factors)
+      factors.map { |factor| translate_factor(factor) }.join
+    end
+
+    def translate_factor(factor)
+      WORDS.include?(factor) ? WORDS[factor] : ''
     end
   end
-
 end
