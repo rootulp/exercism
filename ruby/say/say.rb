@@ -1,62 +1,60 @@
+# Say
 class Say
-
   UNITS = {
-    1 => "thousand",
-    2 => "million",
-    3 => "billion"
-  }
-
+    1 => 'thousand',
+    2 => 'million',
+    3 => 'billion'
+  }.freeze
   TENS = {
-    90 => "ninety",
-    80 => "eighty",
-    70 => "seventy",
-    60 => "sixty",
-    50 => "fifty",
-    40 => "forty",
-    30 => "thirty",
-    20 => "twenty"
-  }
-
+    90 => 'ninety',
+    80 => 'eighty',
+    70 => 'seventy',
+    60 => 'sixty',
+    50 => 'fifty',
+    40 => 'forty',
+    30 => 'thirty',
+    20 => 'twenty'
+  }.freeze
   TEENS = {
-    19 => "nineteen",
-    17 => "seventeen",
-    16 => "sixteen",
-    15 => "fifteen",
-    14 => "fourteen",
-    13 => "thirteen",
-    12 => "twelve",
-    11 => "eleven",
-    10 => "ten"
-  }
-
+    19 => 'nineteen',
+    17 => 'seventeen',
+    16 => 'sixteen',
+    15 => 'fifteen',
+    14 => 'fourteen',
+    13 => 'thirteen',
+    12 => 'twelve',
+    11 => 'eleven',
+    10 => 'ten'
+  }.freeze
   DIGITS = {
-    9 => "nine",
-    8 => "eight",
-    7 => "seven",
-    6 => "six",
-    5 => "five",
-    4 => "four",
-    3 => "three",
-    2 => "two",
-    1 => "one"
-  }
+    9 => 'nine',
+    8 => 'eight',
+    7 => 'seven',
+    6 => 'six',
+    5 => 'five',
+    4 => 'four',
+    3 => 'three',
+    2 => 'two',
+    1 => 'one'
+  }.freeze
 
-  ACCEPTED_RANGE = 0...1000000000000
+  ACCEPTED_RANGE = 0...1_000_000_000_000
 
+  attr_reader :number
   def initialize(number)
     raise ArgumentError unless ACCEPTED_RANGE.include?(number)
     @number = number
   end
 
   def in_english
-    number_to_words(@number)
+    number_to_words(number)
   end
 
   private
 
   def number_to_words(number)
-    return "zero" if number == 0
-    result = ""
+    return 'zero' if number == 0
+    result = ''
     chunks = chunkify(number)
     chunks.each_with_index do |chunk, index|
       val = chunk_for(chunk)
@@ -76,7 +74,7 @@ class Say
   end
 
   def chunk_for(number)
-    return DIGITS[number]  if number < 10
+    return DIGITS[number] if number < 10
     return TEENS[number] if number < 20
     general_case(number)
   end
@@ -91,9 +89,9 @@ class Say
   end
 
   def format(hundreds, tens, ones)
-    result = ""
+    result = ''
     result += "#{hundreds} hundred " if hundreds
-    result += "#{tens}" if tens
+    result += tens.to_s if tens
     result += "-#{ones}" if ones
     result.strip
   end
