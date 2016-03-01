@@ -1,14 +1,21 @@
 # Nucleotide
 class Nucleotide
+  NUCLEOTIDES = %w(A T C G).freeze
+  attr_reader :strand
+
   def self.from_dna(strand)
     Nucleotide.new(strand)
   end
 
-  attr_reader :strand, :histogram
   def initialize(strand)
+    raise ArgumentError if strand =~ /[^ATCG]/
     @strand = strand
-    @histogram = { 'A' => 0, 'T' => 0, 'C' => 0, 'G' => 0 }
-    build_histogram
+  end
+
+  def histogram
+    strand.chars.each_with_object(empty_histogram) do |nucleotide, counts|
+      counts[nucleotide] += 1
+    end
   end
 
   def count(nucleotide)
@@ -17,14 +24,7 @@ class Nucleotide
 
   private
 
-  def build_histogram
-    strand.each_char do |symbol|
-      fail ArgumentError unless nucleotide?(symbol)
-      histogram[symbol] += 1
-    end
-  end
-
-  def nucleotide?(symbol)
-    symbol == 'A' || symbol == 'T' || symbol == 'C' || symbol == 'G'
+  def empty_histogram
+    Hash[NUCLEOTIDES.map { |nucleotide| [nucleotide, 0] }]
   end
 end
