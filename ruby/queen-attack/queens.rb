@@ -1,16 +1,14 @@
 # Queens
 class Queens
   DEFAULTS = { white: [0, 3], black: [7, 3] }.freeze
-
   attr_reader :white, :black
   attr_accessor :board
   def initialize(positions = DEFAULTS)
-    fail ArgumentError if positions[:white] == positions[:black]
+    raise ArgumentError if positions[:white] == positions[:black]
     @board = Array.new(8) { Array.new(8, '_') }
     @white = [*positions[:white]]
     @black = [*positions[:black]]
-    set_queen('W', white.first, white.last)
-    set_queen('B', black.first, black.last)
+    set_queens
   end
 
   def attack?
@@ -21,8 +19,12 @@ class Queens
     board.map { |row| row.join(' ') }.join("\n")
   end
 
-
   private
+
+  def set_queens
+    set_queen('W', white.first, white.last)
+    set_queen('B', black.first, black.last)
+  end
 
   def set_queen(color, x, y)
     board[x][y] = color
