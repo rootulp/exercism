@@ -1,5 +1,14 @@
 # Deque
 class Deque
+  # Element
+  class Element
+    attr_reader :data
+    attr_accessor :next, :prev
+    def initialize(data)
+      @data = data
+    end
+  end
+
   attr_reader :head, :tail
   def initialize
     reset!
@@ -68,14 +77,5 @@ class Deque
 
   def set_tail(element)
     @tail = element
-  end
-end
-
-# Element
-class Element
-  attr_reader :data
-  attr_accessor :next, :prev
-  def initialize(data)
-    @data = data
   end
 end
