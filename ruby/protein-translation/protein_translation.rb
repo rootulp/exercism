@@ -21,7 +21,7 @@ class Translation
   }.freeze
 
   def self.of_codon(codon)
-    fail InvalidCodonError unless MAPPINGS.include?(codon)
+    raise InvalidCodonError unless MAPPINGS.include?(codon)
     MAPPINGS[codon]
   end
 
@@ -33,4 +33,4 @@ class Translation
   end
 end
 
-class InvalidCodonError < StandardError; end
+InvalidCodonError = Class.new(StandardError)
