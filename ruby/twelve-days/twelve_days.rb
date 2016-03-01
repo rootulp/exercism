@@ -1,40 +1,57 @@
 class TwelveDaysSong
-  def sing
-    verses(1, 12)
-  end
+  CARDINALS = {
+    1 => 'first',
+    2 => 'second',
+    3 => 'third',
+    4 => 'fourth',
+    5 => 'fifth',
+    6 => 'sixth',
+    7 => 'seventh',
+    8 => 'eighth',
+    9 => 'ninth',
+    10 => 'tenth',
+    11 => 'eleventh',
+    12 => 'twelfth'
+  }.freeze
 
-  def verses(first, last)
-    first.upto(last).map do |number|
-      verse(number)
-    end.join("\n") + "\n"
-  end
+  MID_PARTIALS = {
+    2 => 'two Turtle Doves',
+    3 => 'three French Hens',
+    4 => 'four Calling Birds',
+    5 => 'five Gold Rings',
+    6 => 'six Geese-a-Laying',
+    7 => 'seven Swans-a-Swimming',
+    8 => 'eight Maids-a-Milking',
+    9 => 'nine Ladies Dancing',
+    10 => 'ten Lords-a-Leaping',
+    11 => 'eleven Pipers Piping',
+    12 => 'twelve Drummers Drumming'
+  }.freeze
 
-  def verse(number)
-    case number
-    when 1
-      "On the first day of Christmas my true love gave to me, a Partridge in a Pear Tree.\n"
-    when 2
-      "On the second day of Christmas my true love gave to me, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 3
-      "On the third day of Christmas my true love gave to me, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 4
-      "On the fourth day of Christmas my true love gave to me, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 5
-      "On the fifth day of Christmas my true love gave to me, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 6
-      "On the sixth day of Christmas my true love gave to me, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 7
-      "On the seventh day of Christmas my true love gave to me, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 8
-      "On the eighth day of Christmas my true love gave to me, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 9
-      "On the ninth day of Christmas my true love gave to me, nine Ladies Dancing, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 10
-      "On the tenth day of Christmas my true love gave to me, ten Lords-a-Leaping, nine Ladies Dancing, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 11
-      "On the eleventh day of Christmas my true love gave to me, eleven Pipers Piping, ten Lords-a-Leaping, nine Ladies Dancing, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
-    when 12
-      "On the twelfth day of Christmas my true love gave to me, twelve Drummers Drumming, eleven Pipers Piping, ten Lords-a-Leaping, nine Ladies Dancing, eight Maids-a-Milking, seven Swans-a-Swimming, six Geese-a-Laying, five Gold Rings, four Calling Birds, three French Hens, two Turtle Doves, and a Partridge in a Pear Tree.\n"
+  def verses(first = 1, last = 12)
+    first.upto(last).map { |verse_num| verse(verse_num) }.join("\n") + "\n"
+  end
+  alias sing verses
+
+  def verse(verse_num)
+    if verse_num == 1
+      "#{head(verse_num)}, #{tail(verse_num)}"
+    else
+      "#{head(verse_num)}, #{mid(verse_num)}, #{tail(verse_num)}"
     end
+  end
+
+  private
+
+  def head(verse_num)
+    "On the #{CARDINALS[verse_num]} day of Christmas my true love gave to me"
+  end
+
+  def mid(verse_num)
+    verse_num.downto(2).map { |num| MID_PARTIALS[num] }.join(', ')
+  end
+
+  def tail(verse_num)
+    "#{'and ' if verse_num > 1}a Partridge in a Pear Tree.\n"
   end
 end
