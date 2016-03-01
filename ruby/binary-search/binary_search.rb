@@ -3,7 +3,7 @@ class BinarySearch
   attr_reader :list
   def initialize(list)
     @list = list
-    fail ArgumentError if list != list.sort
+    raise ArgumentError if list != list.sort
   end
 
   def search_for(val)
@@ -17,11 +17,15 @@ class BinarySearch
   private
 
   def search(val, left, right)
-    fail RuntimeError if left >= right
+    raise RuntimeError if left >= right
 
     mid = middle(left, right)
-    return search(val, left, mid - 1) if val < list[mid]
-    return search(val, mid + 1, right) if val > list[mid]
-    mid
+    if val < list[mid]
+      search(val, left, mid - 1)
+    elsif val > list[mid]
+      search(val, mid + 1, right)
+    else
+      mid
+    end
   end
 end
