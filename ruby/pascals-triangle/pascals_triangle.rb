@@ -1,5 +1,5 @@
-# Triangle
-class Triangle
+# Pascals Triangle
+class PascalsTriangle
   attr_reader :num_rows
   def initialize(num_rows)
     @num_rows = num_rows
