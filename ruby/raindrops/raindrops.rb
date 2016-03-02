@@ -1,4 +1,4 @@
-require 'Prime'
+require 'prime'
 
 # Raindrops
 class Raindrops
