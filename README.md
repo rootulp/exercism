@@ -5,6 +5,10 @@
          height="150" width="150">
   </a>
   <br>
+  <a href= "https://travis-ci.org/rootulp/exercism">
+    <img src="http://img.shields.io/travis/rootulp/exercism.svg?style=flat-square"
+         alt="Build Status">
+  </a>
   <a href="https://codeclimate.com/github/rootulp/exercism">
     <img src="https://img.shields.io/codeclimate/github/rootulp/exercism.svg?style=flat-square"
          alt="Code Climate">
