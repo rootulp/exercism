@@ -6,8 +6,8 @@ class Board
 
   attr_reader :grid
   def initialize(input)
-    @grid = input.map { |row| row.split(//) }
-    fail ValueError if error?
+    @grid = input.map(&:chars)
+    raise ValueError if error?
   end
 
   def transform
@@ -29,8 +29,8 @@ class Board
   end
 
   def mines_for(row, col)
-    return ' ' if neighbors(row, col).count { |square| mine?(square) } == 0
-    neighbors(row, col).count { |square| mine?(square) }.to_s
+    mines = neighbors(row, col).count { |square| mine?(square) }
+    mines == 0 ? ' ' : mines.to_s
   end
 
   def occupied?(square)
