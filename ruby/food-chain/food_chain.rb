@@ -1,59 +1,61 @@
 # Food Chain Song
 class FoodChainSong
+  ANIMALS = {
+    1 => :fly,
+    2 => :spider,
+    3 => :bird,
+    4 => :cat,
+    5 => :dog,
+    6 => :goat,
+    7 => :cow,
+    8 => :horse
+  }.freeze
 
-  SONG = {
-    1 => "I know an old lady who swallowed a fly.\nI don't know why she swallowed the fly. Perhaps she'll die.\n",
-    2 => "I know an old lady who swallowed a spider.\nIt wriggled and jiggled and tickled inside her.\n" +
-         "She swallowed the spider to catch the fly.\n" +
-         "I don't know why she swallowed the fly. Perhaps she'll die.\n",
-    3 => "I know an old lady who swallowed a bird.\n" +
-         "How absurd to swallow a bird!\n" +
-         "She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.\n" +
-         "She swallowed the spider to catch the fly.\n" +
-         "I don't know why she swallowed the fly. Perhaps she'll die.\n",
-    4 => "I know an old lady who swallowed a cat.\n" +
-         "Imagine that, to swallow a cat!\n" +
-         "She swallowed the cat to catch the bird.\n" +
-         "She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.\n" +
-         "She swallowed the spider to catch the fly.\n" +
-         "I don't know why she swallowed the fly. Perhaps she'll die.\n",
-    5 => "I know an old lady who swallowed a dog.\n" +
-         "What a hog, to swallow a dog!\n" +
-         "She swallowed the dog to catch the cat.\n" +
-         "She swallowed the cat to catch the bird.\n" +
-         "She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.\n" +
-         "She swallowed the spider to catch the fly.\n" +
-         "I don't know why she swallowed the fly. Perhaps she'll die.\n",
-    6 => "I know an old lady who swallowed a goat.\n" +
-         "Just opened her throat and swallowed a goat!\n" +
-         "She swallowed the goat to catch the dog.\n" +
-         "She swallowed the dog to catch the cat.\n" +
-         "She swallowed the cat to catch the bird.\n" +
-         "She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.\n" +
-         "She swallowed the spider to catch the fly.\n" +
-         "I don't know why she swallowed the fly. Perhaps she'll die.\n",
-    7 => "I know an old lady who swallowed a cow.\n" +
-         "I don't know how she swallowed a cow!\n" +
-         "She swallowed the cow to catch the goat.\n" +
-         "She swallowed the goat to catch the dog.\n" +
-         "She swallowed the dog to catch the cat.\n" +
-         "She swallowed the cat to catch the bird.\n" +
-         "She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.\n" +
-         "She swallowed the spider to catch the fly.\n" +
-         "I don't know why she swallowed the fly. Perhaps she'll die.\n",
-    8 => "I know an old lady who swallowed a horse.\n" +
-         "She's dead, of course!\n"
-  }
+  SECOND_LINES = {
+    fly: '',
+    spider: "It wriggled and jiggled and tickled inside her.\n",
+    bird: "How absurd to swallow a bird!\n",
+    cat: "Imagine that, to swallow a cat!\n",
+    dog: "What a hog, to swallow a dog!\n",
+    goat: "Just opened her throat and swallowed a goat!\n",
+    cow: "I don't know how she swallowed a cow!\n",
+    horse: "She's dead, of course!\n"
+  }.freeze
 
-  def verse(n)
-    SONG[n]
+  def verses(start = 1, stop = 8)
+    (start..stop).map { |verse_num| verse(verse_num) }.join("\n") + "\n"
+  end
+  alias sing verses
+
+  def verse(verse_num)
+    animal = ANIMALS[verse_num]
+    return head(animal) if animal == :horse
+    head(animal) + middle_lines(verse_num) + tail
   end
 
-  def verses(from, to)
-    (from..to).map { |n| verse(n) }.join("\n") + "\n"
+  def head(animal)
+    ["I know an old lady who swallowed a #{animal}.",
+     SECOND_LINES[animal]].join("\n")
   end
 
-  def sing
-    verses(1, SONG.size)
+  def middle_lines(verse_num)
+    verse_num.downto(1).map do |curr|
+      next if curr == 1
+      animal1 = ANIMALS[curr]
+      animal2 = ANIMALS[curr - 1]
+      middle_line(animal1, animal2)
+    end.join("\n")
+  end
+
+  def middle_line(animal1, animal2)
+    "She swallowed the #{animal1} to catch the #{animal2}#{spider(animal2)}."
+  end
+
+  def spider(animal2)
+    ' that wriggled and jiggled and tickled inside her' if animal2 == :spider
+  end
+
+  def tail
+    "I don't know why she swallowed the fly. Perhaps she'll die.\n"
   end
 end
