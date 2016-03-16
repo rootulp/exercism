@@ -1,48 +1,42 @@
+# Beer Song
 class BeerSong
+  def verses(start = 99, stop = 0)
+    start.downto(stop).map do |verse_num|
+      verse(verse_num)
+    end.join("\n") + "\n"
+  end
+  alias sing verses
 
   def verse(num)
-    prefix(num) + suffix(num)
+    [prefix(num), suffix(num)].join("\n") + "\n"
   end
 
-  def verses(start, stop)
-    result = ""
-    start.downto(stop).each do |verse_num|
-      result += verse(verse_num) + "\n"
-    end
-    result
-  end
-
-  def sing
-    verses(99, 0)
-  end
+  private
 
   def prefix(num)
-    "#{num_or_No_more(num)} #{bottle_or_bottles(num)} of beer on the wall, "\
-    "#{num_or_no_more(num)} #{bottle_or_bottles(num)} of beer.\n"
+    "#{quantity(num).capitalize} #{container(num)} of beer on the wall, "\
+    "#{quantity(num)} #{container(num)} of beer."
   end
 
   def suffix(num)
-    if num == 0
-      "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
-    else
-      "Take #{one_or_it(num)} down and pass it around, #{num_or_no_more(num-1)} "\
-      "#{bottle_or_bottles(num-1)} of beer on the wall.\n"
-    end
+    return last_line if num == 0
+    "Take #{cardinality(num)} down and pass it around, #{quantity(num - 1)} "\
+      "#{container(num - 1)} of beer on the wall."
   end
 
-  def bottle_or_bottles(num)
-    num == 1 ? "bottle" : "bottles"
+  def last_line
+    'Go to the store and buy some more, 99 bottles of beer on the wall.'
   end
 
-  def one_or_it(num)
-    num != 1 ? "one" : "it"
+  def container(num)
+    num == 1 ? 'bottle' : 'bottles'
   end
 
-  def num_or_No_more(num)
-    num != 0 ? num : "No more"
+  def quantity(num)
+    num == 0 ? 'no more' : num.to_s
   end
 
-  def num_or_no_more(num)
-    num != 0 ? num : "no more"
+  def cardinality(num)
+    num == 1 ? 'it' : 'one'
   end
 end
