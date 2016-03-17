@@ -1,12 +1,7 @@
 # Deque
 class Deque
   # Element
-  class Element
-    attr_reader :data
-    attr_accessor :next, :prev
-    def initialize(data)
-      @data = data
-    end
+  Element = Struct.new(:data, :next, :prev) do
   end
 
   attr_reader :head, :tail
@@ -16,26 +11,26 @@ class Deque
 
   def push(data)
     new_element = Element.new(data)
-    return set_head_and_tail(new_element) if empty?
+    return @head = new_element && @tail = new_element if empty?
     new_element.prev = tail
     tail.next = new_element
-    set_tail(new_element)
+    @tail = new_element
   end
 
   def unshift(data)
     new_element = Element.new(data)
-    return set_head_and_tail(new_element) if empty?
+    return @head = new_element && @tail = new_element if empty?
     new_element.next = head
     head.prev = new_element
-    set_head(new_element)
+    @head = new_element
   end
 
   def pop
     prev_tail = tail
-    if size_is_one?
+    if one_element?
       reset!
     else
-      set_tail(prev_tail.prev)
+      @tail = prev_tail.prev
       prev_tail.next = false
     end
     prev_tail.data
@@ -43,10 +38,10 @@ class Deque
 
   def shift
     prev_head = head
-    if size_is_one?
+    if one_element?
       reset!
     else
-      set_head(prev_head.next)
+      @head = prev_head.next
       prev_head.prev = false
     end
     prev_head.data
@@ -54,28 +49,16 @@ class Deque
 
   private
 
-  def empty?
-    !head && !tail
+  def reset!
+    @head = false
+    @tail = false
   end
 
-  def size_is_one?
+  def one_element?
     head == tail
   end
 
-  def reset!
-    set_head_and_tail(false)
-  end
-
-  def set_head_and_tail(element)
-    set_head(element)
-    set_tail(element)
-  end
-
-  def set_head(element)
-    @head = element
-  end
-
-  def set_tail(element)
-    @tail = element
+  def empty?
+    !head && !tail
   end
 end
