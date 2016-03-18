@@ -12,50 +12,47 @@ class PigLatin
     end
 
     def translate_word(word)
-      return translate_edge_case(word) if edge_case?(word)
-      return translate_vowel(word) if starts_with_vowel?(word)
-      return translate_consonant(word) if starts_with_consonant?(word)
+      return vowel(word) if vowel_case?(word)
+      return edge_case(word) if edge_case?(word)
+      return consonant_sound(word) if consonant_sound_case?(word)
+      consonant(word)
     end
 
-    def translate_edge_case(word)
-      word[3..-1] + word[0..2] + 'ay'
-    end
-
-    def translate_vowel(word)
+    def vowel(word)
       word + 'ay'
     end
 
-    def translate_consonant(word)
-      if starts_with_consonant_sound?(word)
-        word[2..-1] + word[0..1] + 'ay'
-      else
-        word[1..-1] + word[0] + 'ay'
-      end
+    def edge_case(word)
+      word[3..-1] + word[0..2] + 'ay'
+    end
+
+    def consonant_sound(word)
+      word[2..-1] + word[0..1] + 'ay'
+    end
+
+    def consonant(word)
+      word[1..-1] + word[0] + 'ay'
+    end
+
+    def vowel_case?(word)
+      word.start_with?(*VOWELS, 'yt', 'xr')
     end
 
     def edge_case?(word)
       word.start_with?('squ', 'sch', 'thr')
     end
 
-    def starts_with_vowel?(word)
-      word.start_with?(*VOWELS, 'yt', 'xr')
-    end
-
-    def starts_with_consonant?(word)
-      word.start_with?(*CONSONANTS)
-    end
-
-    def starts_with_consonant_sound?(word)
+    def consonant_sound_case?(word)
       (CONSONANTS.include?(word[0]) && CONSONANTS.include?(word[1])) ||
         word.start_with?('qu')
     end
   end
 
-  private_class_method :translate_edge_case,
-                       :translate_vowel,
-                       :translate_consonant,
+  private_class_method :vowel,
+                       :edge_case,
+                       :consonant_sound,
+                       :consonant,
+                       :vowel_case?,
                        :edge_case?,
-                       :starts_with_vowel?,
-                       :starts_with_consonant?,
-                       :starts_with_consonant_sound?
+                       :consonant_sound_case?
 end
