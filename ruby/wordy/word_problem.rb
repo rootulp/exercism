@@ -59,6 +59,8 @@ class WordProblem
   end
 
   def number?(word)
-    Integer(word) rescue false # taken from StackOverflow
+    Integer(word)
+  rescue
+    false
   end
 end
