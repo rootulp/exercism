@@ -7,7 +7,7 @@ class Trinary
 
   def to_decimal
     return 0 unless valid?
-    trinary.chars.reverse.map.each_with_index do |multiplier, power|
+    trinary.chars.reverse.map.with_index do |multiplier, power|
       (3**power) * multiplier.to_i
     end.reduce(:+)
   end
@@ -15,6 +15,6 @@ class Trinary
   private
 
   def valid?
-    !trinary.match(/[^0123]/)
+    !trinary.match(/[^0-2]/)
   end
 end
