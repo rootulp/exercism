@@ -1,5 +1,5 @@
-# Matrix
-class Matrix
+# Saddle Points
+class SaddlePoints
   attr_reader :input
   def initialize(input)
     @input = input
