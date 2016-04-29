@@ -32,6 +32,3 @@ class AccumulateTest < Minitest::Test
     assert_equal [%w(a1 a2 a3), %w(b1 b2 b3), %w(c1 c2 c3)], result
   end
 end
-
-bar
-
