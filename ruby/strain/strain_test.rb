@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require_relative 'array'
 
-class ArrayTest < MiniTest::Unit::TestCase
+class StrainTest < MiniTest::Unit::TestCase
   def test_empty_keep
     assert_equal [], [].keep { |e| e < 10 }
   end
