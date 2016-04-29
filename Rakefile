@@ -1,11 +1,11 @@
 require 'rake/testtask'
-require 'minitest/autorun'
 require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
-Rake::TestTask.new do |t|
-  t.test_files = FileList['ruby/*/*test.rb']
+Rake::TestTask.new do |task|
+  task.libs << 'ruby'
+  task.pattern = 'ruby/*/*test.rb'
 end
-desc 'Run tests associated with ruby exercises'
+desc 'Run tests in test folder'
 
 task default: 'test'
