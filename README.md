@@ -13,6 +13,10 @@
     <img src="https://img.shields.io/codeclimate/github/rootulp/exercism.svg?style=flat-square"
          alt="Code Climate">
   </a>
+  <a href="https://codeclimate.com/github/rootulp/exercism/coverage">
+    <img src="https://img.shields.io/codeclimate/coverage/github/rootulp/exercism.svg?style=flat-square"
+         alt="Code Climate Test Coverage">
+  </a>
   <a href="http://rootulp.mit-license.org">
     <img src="http://img.shields.io/:license-mit-blue.svg?style=flat-square"
          alt="License">
