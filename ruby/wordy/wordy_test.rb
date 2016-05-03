@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require_relative '../../test/test_helper'
 require_relative 'word_problem'
 
 class WordProblemTest < Minitest::Test

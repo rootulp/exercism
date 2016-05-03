@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require_relative '../../test/test_helper'
 require_relative 'food_chain'
 
 # rubocop:disable Metrics/MethodLength, Metrics/LineLength

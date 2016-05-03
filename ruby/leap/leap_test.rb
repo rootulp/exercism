@@ -1,5 +1,5 @@
 require 'date'
-require 'minitest/autorun'
+require_relative '../../test/test_helper'
 require_relative 'year'
 
 class Date

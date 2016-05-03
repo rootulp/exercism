@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require_relative '../../test/test_helper'
 require_relative 'squares'
 
 class SquaresTest < Minitest::Test

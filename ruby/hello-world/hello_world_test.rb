@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 begin
   gem 'minitest', '>= 5.0.0'
-  require 'minitest/autorun'
+  require_relative '../../test/test_helper'
   require_relative 'hello_world'
 rescue Gem::LoadError => e
   puts "\nMissing Dependency:\n#{e.backtrace.first} #{e.message}"

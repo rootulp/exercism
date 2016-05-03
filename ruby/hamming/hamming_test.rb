@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require_relative '../../test/test_helper'
 begin
   require_relative 'hamming'
 rescue LoadError => e

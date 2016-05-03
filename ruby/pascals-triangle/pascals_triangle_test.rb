@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require_relative '../../test/test_helper'
 require_relative 'pascals_triangle'
 
 class PascalsTriangleTest < Minitest::Test

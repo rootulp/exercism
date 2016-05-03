@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require_relative '../../test/test_helper'
 require_relative 'triplet'
 
 class TripletTest < Minitest::Test

@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require_relative '../../test/test_helper'
 require_relative 'crypto'
 
 class CryptoTest < Minitest::Test

@@ -1,5 +1,4 @@
 require_relative '../../test/test_helper'
-require 'minitest/autorun'
 require_relative 'acronym'
 
 class AcronymTest < Minitest::Test
