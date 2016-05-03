@@ -1,6 +1,6 @@
+require_relative '../../test/test_helper'
 require 'minitest/autorun'
 require_relative 'array'
-require_relative '../../test/test_helper'
 
 class AccumulateTest < Minitest::Test
   def test_empty_accumulation
