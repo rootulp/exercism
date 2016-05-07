@@ -1,5 +1,6 @@
 # SecretHandshake
 class SecretHandshake
+  COMMANDS = ['wink', 'double blink', 'close your eyes', 'jump'].freeze
   attr_reader :decimal
   def initialize(decimal)
     @decimal = decimal
@@ -7,7 +8,7 @@ class SecretHandshake
 
   def commands
     return [] unless decimal.is_a?(Integer)
-    handshake
+    binary.reverse[4] == '1' ? handshake.reverse : handshake
   end
 
   def binary
@@ -17,12 +18,8 @@ class SecretHandshake
   private
 
   def handshake
-    results = []
-    results << 'wink'            if binary.reverse[0] == '1'
-    results << 'double blink'    if binary.reverse[1] == '1'
-    results << 'close your eyes' if binary.reverse[2] == '1'
-    results << 'jump'            if binary.reverse[3] == '1'
-    results.reverse!             if binary.reverse[4] == '1'
-    results
+    COMMANDS.select.with_index do |_, index|
+      binary.reverse[index] == '1'
+    end
   end
 end
