@@ -15,7 +15,7 @@ class Say
     30 => 'thirty',
     20 => 'twenty'
   }.freeze
-  TEENS = {
+  NUMS = {
     19 => 'nineteen',
     17 => 'seventeen',
     16 => 'sixteen',
@@ -24,9 +24,7 @@ class Say
     13 => 'thirteen',
     12 => 'twelve',
     11 => 'eleven',
-    10 => 'ten'
-  }.freeze
-  DIGITS = {
+    10 => 'ten',
     9 => 'nine',
     8 => 'eight',
     7 => 'seven',
@@ -55,8 +53,7 @@ class Say
   def number_to_words(number)
     return 'zero' if number == 0
     result = ''
-    chunks = chunkify(number)
-    chunks.each_with_index do |chunk, index|
+    chunkify(number).each_with_index do |chunk, index|
       val = chunk_for(chunk)
       units = UNITS[index]
       result.prepend("#{val} #{units} ") if val
@@ -74,17 +71,16 @@ class Say
   end
 
   def chunk_for(number)
-    return DIGITS[number] if number < 10
-    return TEENS[number] if number < 20
+    return NUMS[number] if number < 20
     general_case(number)
   end
 
   def general_case(number)
     hundreds_digit, leftover_digits = number.divmod(100)
     tens_digit, ones_digit = leftover_digits.divmod(10)
-    hundreds = DIGITS[hundreds_digit] || nil
-    tens = TENS[tens_digit * 10] || nil
-    ones = DIGITS[ones_digit] || nil
+    hundreds = NUMS[hundreds_digit] || false
+    tens = TENS[tens_digit * 10] || false
+    ones = NUMS[ones_digit] || false
     format(hundreds, tens, ones)
   end
 
