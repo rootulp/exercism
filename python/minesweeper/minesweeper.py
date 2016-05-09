@@ -17,14 +17,14 @@ class Minesweeper:
         inp = map(lambda row: list(row), inp)
         for y, row in enumerate(inp):
             for x, square in enumerate(row):
-                if cls.valid_space(square):
+                if cls.space(square):
                     inp[y][x] = str(cls.output_of_neighbor_mines(inp, y, x))
         return map(lambda row: "".join(row), inp)
 
     @classmethod
     def output_of_neighbor_mines(cls, inp, y, x):
-        mines = cls.num_of_neighbor_mines(inp, y, x)
-        return " " if mines == 0 else mines
+        num_mines = cls.num_of_neighbor_mines(inp, y, x)
+        return " " if num_mines == 0 else num_mines
 
     @classmethod
     def num_of_neighbor_mines(cls, inp, y, x):
@@ -43,7 +43,7 @@ class Minesweeper:
     @classmethod
     def valid_neighbor(cls, inp, neighbor):
         y, x = neighbor[0], neighbor[1]
-        return (x > 0 and x < len(inp[0]) and y > 0 and y < len(inp) and
+        return (0 < y < len(inp) and 0 < x < len(inp[0]) and
                 cls.valid_non_border(inp[y][x]))
 
     @classmethod
@@ -72,8 +72,8 @@ class Minesweeper:
 
     @classmethod
     def valid_middle_border(cls, row):
-        return (cls.valid_vertical_edge(row[0]) and
-                cls.valid_vertical_edge(row[-1]))
+        return (cls.vertical_edge(row[0]) and
+                cls.vertical_edge(row[-1]))
 
     @classmethod
     def valid_first_and_last_borders(cls, inp):
@@ -82,39 +82,44 @@ class Minesweeper:
 
     @classmethod
     def valid_first_or_last_border(cls, row):
-        return (cls.valid_corner(row[0]) and cls.valid_corner(row[-1]) and
-                all(cls.valid_horizontal_edge(square) for square in row[1:-1]))
+        return (cls.corner(row[0]) and cls.corner(row[-1]) and
+                all(cls.horizontal_edge(square) for square in row[1:-1]))
 
     @classmethod
     def valid_squares(cls, inp):
         return all(cls.valid_square(square) for row in inp for square in row)
 
     @classmethod
+    def valid_square(cls, square):
+        return (cls.mine(square) or
+                cls.space(square) or
+                cls.corner(square) or
+                cls.vertical_edge(square) or
+                cls.horizontal_edge(square))
+
+    @classmethod
     def valid_non_border(cls, square):
-        return square == cls.MINE or square == cls.SPACE
+        return cls.mine(square) or cls.space(square)
 
     @classmethod
-    def valid_corner(cls, square):
-        return square == cls.CORNER
+    def mine(cls, square):
+        return square == cls.MINE
 
     @classmethod
-    def valid_space(cls, square):
+    def space(cls, square):
         return square == cls.SPACE
 
     @classmethod
-    def valid_horizontal_edge(cls, square):
-        return square == cls.HORIZONTAL_EDGE
+    def corner(cls, square):
+        return square == cls.CORNER
 
     @classmethod
-    def valid_vertical_edge(cls, square):
+    def vertical_edge(cls, square):
         return square == cls.VERTICAL_EDGE
 
     @classmethod
-    def valid_square(cls, square):
-        return (cls.valid_corner(square) or
-                cls.valid_non_border(square) or
-                cls.valid_vertical_edge(square) or
-                cls.valid_horizontal_edge(square))
+    def horizontal_edge(cls, square):
+        return square == cls.HORIZONTAL_EDGE
 
 
 def board(inp):
