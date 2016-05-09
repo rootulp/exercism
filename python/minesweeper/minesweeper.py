@@ -10,16 +10,26 @@ class Minesweeper:
     def board(cls, inp):
         if not cls.valid(inp):
             raise ValueError
-        return cls.generate_board(inp)
+        return cls.solve(inp)
+
+    # Split rows (String -> List) and operate on board in place
+    @classmethod
+    def solve(cls, inp):
+        inp = map(lambda row: list(row), inp)
+        return map(lambda row: "".join(row), cls.generate_board(inp))
 
     @classmethod
     def generate_board(cls, inp):
-        inp = map(lambda row: list(row), inp)
-        for y, row in enumerate(inp):
-            for x, square in enumerate(row):
-                if cls.space(square):
-                    inp[y][x] = str(cls.output_of_neighbor_mines(inp, y, x))
-        return map(lambda row: "".join(row), inp)
+        return [[cls.convert_square(inp, y, x)
+                for x, square in enumerate(row)]
+                for y, row in enumerate(inp)]
+
+    # Only convert squares that are spaces
+    @classmethod
+    def convert_square(cls, inp, y, x):
+        if not cls.space(inp[y][x]):
+            return inp[y][x]
+        return str(cls.output_of_neighbor_mines(inp, y, x))
 
     @classmethod
     def output_of_neighbor_mines(cls, inp, y, x):
@@ -31,12 +41,15 @@ class Minesweeper:
         return len(filter(lambda neighbor: cls.is_neighbor_a_mine(inp,
                           neighbor), cls.all_neighbor_coords(inp, y, x)))
 
+    # Checks if coords are within bounds then checks for mine
     @classmethod
     def is_neighbor_a_mine(cls, inp, neighbor):
         y, x = neighbor[0], neighbor[1]
         return (0 < y < len(inp) and 0 < x < len(inp[0]) and
                 cls.mine(inp[y][x]))
 
+    # Generates list of tuples for all neighboring coords
+    # (excluding current coord)
     @classmethod
     def all_neighbor_coords(cls, inp, y, x):
         return [(y + dy, x + dx) for dy in range(-1, 2) for dx in range(-1, 2)
@@ -48,6 +61,7 @@ class Minesweeper:
                 cls.valid_border(inp) and
                 cls.valid_squares(inp))
 
+    # Tests if all rows are the same size
     @classmethod
     def valid_len(cls, inp):
         return all(len(row) == len(inp[0]) for row in inp)
