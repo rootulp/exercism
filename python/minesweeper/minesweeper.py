@@ -18,38 +18,38 @@ class Minesweeper:
         for y, row in enumerate(inp):
             for x, square in enumerate(row):
                 if cls.valid_space(square):
-                    inp[y][x] = str(cls.output_of_neighbor_mines(inp, x, y))
+                    inp[y][x] = str(cls.output_of_neighbor_mines(inp, y, x))
         return map(lambda row: "".join(row), inp)
 
     @classmethod
-    def output_of_neighbor_mines(cls, inp, x, y):
-        mines = cls.num_of_neighbor_mines(inp, x, y)
+    def output_of_neighbor_mines(cls, inp, y, x):
+        mines = cls.num_of_neighbor_mines(inp, y, x)
         return " " if mines == 0 else mines
 
     @classmethod
-    def num_of_neighbor_mines(cls, inp, x, y):
-        return cls.neighbors(inp, x, y).count(cls.MINE)
+    def num_of_neighbor_mines(cls, inp, y, x):
+        return cls.neighbors(inp, y, x).count(cls.MINE)
 
     @classmethod
-    def neighbors(cls, inp, x, y):
-        return map(lambda neighbor: inp[neighbor[1]][neighbor[0]],
-                   cls.neighbor_coords(inp, x, y))
+    def neighbors(cls, inp, y, x):
+        return map(lambda neighbor: inp[neighbor[0]][neighbor[1]],
+                   cls.neighbor_coords(inp, y, x))
 
     @classmethod
-    def neighbor_coords(cls, inp, x, y):
+    def neighbor_coords(cls, inp, y, x):
         return filter(lambda neighbor: cls.valid_neighbor(inp, neighbor),
-                      cls.all_neighbor_coords(inp, x, y))
+                      cls.all_neighbor_coords(inp, y, x))
 
     @classmethod
     def valid_neighbor(cls, inp, neighbor):
-        x, y = neighbor[0], neighbor[1]
+        y, x = neighbor[0], neighbor[1]
         return (x > 0 and x < len(inp[0]) and y > 0 and y < len(inp) and
                 cls.valid_non_border(inp[y][x]))
 
     @classmethod
-    def all_neighbor_coords(cls, inp, x, y):
-        return [(x + i, y + j) for i in range(-1, 2) for j in range(-1, 2) if
-                i != 0 or j != 0]
+    def all_neighbor_coords(cls, inp, y, x):
+        return [(y + dy, x + dx) for dy in range(-1, 2) for dx in range(-1, 2)
+                if dy != 0 or dx != 0]
 
     @classmethod
     def valid(cls, inp):
