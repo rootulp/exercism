@@ -28,23 +28,14 @@ class Minesweeper:
 
     @classmethod
     def num_of_neighbor_mines(cls, inp, y, x):
-        return cls.neighbors(inp, y, x).count(cls.MINE)
+        return len(filter(lambda neighbor: cls.is_neighbor_a_mine(inp,
+                          neighbor), cls.all_neighbor_coords(inp, y, x)))
 
     @classmethod
-    def neighbors(cls, inp, y, x):
-        return map(lambda neighbor: inp[neighbor[0]][neighbor[1]],
-                   cls.neighbor_coords(inp, y, x))
-
-    @classmethod
-    def neighbor_coords(cls, inp, y, x):
-        return filter(lambda neighbor: cls.valid_neighbor(inp, neighbor),
-                      cls.all_neighbor_coords(inp, y, x))
-
-    @classmethod
-    def valid_neighbor(cls, inp, neighbor):
+    def is_neighbor_a_mine(cls, inp, neighbor):
         y, x = neighbor[0], neighbor[1]
         return (0 < y < len(inp) and 0 < x < len(inp[0]) and
-                cls.valid_non_border(inp[y][x]))
+                cls.mine(inp[y][x]))
 
     @classmethod
     def all_neighbor_coords(cls, inp, y, x):
