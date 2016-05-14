@@ -25,12 +25,16 @@ class Calculator:
     @classmethod
     def consecutive_tokens(cls, inp):
         return any(i in cls.OPERATORS.values() and j in cls.OPERATORS.values()
-                   for i, j in zip(inp.split(" "), inp.split(" ")[1:]))
+                   for i, j in cls.slices_of_two(inp))
 
     @classmethod
     def consecutive_digits(cls, inp):
         return any(cls.digit(i) and cls.digit(j) for i, j in
-                   zip(inp.split(" "), inp.split(" ")[1:]))
+                   cls.slices_of_two(inp))
+
+    @classmethod
+    def slices_of_two(cls, inp):
+        return zip(inp.split(" "), inp.split(" ")[1:])
 
     @classmethod
     def valid_elements(cls, inp):
