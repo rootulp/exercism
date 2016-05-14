@@ -17,7 +17,23 @@ class Calculator:
     def calculate(self):
         if not self.valid():
             raise ValueError
-        return eval(self.tokenized)
+        operator_stack = self.operator_stack()
+        num_stack = self.num_stack()
+        while len(operator_stack) > 0:
+            operator = operator_stack.pop(0)
+            num1 = num_stack.pop(0)
+            num2 = num_stack.pop(0)
+            num_stack.insert(0, self.evaluate(operator, num1, num2))
+        return num_stack.pop(0)
+
+    def evaluate(self, operator, num1, num2):
+        return eval(str(num1) + operator + str(num2))
+
+    def num_stack(self):
+        return map(int, filter(self.digit, self.tokens))
+
+    def operator_stack(self):
+        return filter(self.operator, self.tokens)
 
     def valid(self):
         return (self.valid_elements() and
@@ -25,9 +41,8 @@ class Calculator:
                 not self.consecutive_digits())
 
     def consecutive_tokens(self):
-        return any(i in self.OPERATORS.values() and
-                   j in self.OPERATORS.values() for i, j
-                   in self.slices_of_two())
+        return any(self.operator(i) and self.operator(j) for i, j in
+                   self.slices_of_two())
 
     def consecutive_digits(self):
         return any(self.digit(i) and self.digit(j) for i, j in
@@ -52,6 +67,10 @@ class Calculator:
     @staticmethod
     def digit(element):
         return element.lstrip("-").isdigit()
+
+    @classmethod
+    def operator(cls, element):
+        return element in cls.OPERATORS.values()
 
 
 def calculate(inp):
