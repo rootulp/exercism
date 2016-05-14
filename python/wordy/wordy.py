@@ -9,36 +9,35 @@ class Calculator:
 
     VALID_TOKENS = set(OPERATORS.values())
 
-    @classmethod
-    def calculate(cls, inp):
-        inp = cls.tokenize(inp)
-        if not cls.valid(inp):
+    def __init__(self, inp):
+        self.inp = inp
+        self.tokenized = self.tokenize(inp)
+        self.tokens = self.tokenized.split(" ")
+
+    def calculate(self):
+        if not self.valid():
             raise ValueError
-        return eval(inp)
+        return eval(self.tokenized)
 
-    @classmethod
-    def valid(cls, inp):
-        return (cls.valid_elements(inp) and
-                not cls.consecutive_tokens(inp) and
-                not cls.consecutive_digits(inp))
+    def valid(self):
+        return (self.valid_elements() and
+                not self.consecutive_tokens() and
+                not self.consecutive_digits())
 
-    @classmethod
-    def consecutive_tokens(cls, inp):
-        return any(i in cls.OPERATORS.values() and j in cls.OPERATORS.values()
-                   for i, j in cls.slices_of_two(inp))
+    def consecutive_tokens(self):
+        return any(i in self.OPERATORS.values() and
+                   j in self.OPERATORS.values() for i, j
+                   in self.slices_of_two())
 
-    @classmethod
-    def consecutive_digits(cls, inp):
-        return any(cls.digit(i) and cls.digit(j) for i, j in
-                   cls.slices_of_two(inp))
+    def consecutive_digits(self):
+        return any(self.digit(i) and self.digit(j) for i, j in
+                   self.slices_of_two())
 
-    @classmethod
-    def slices_of_two(cls, inp):
-        return zip(inp.split(" "), inp.split(" ")[1:])
+    def slices_of_two(self):
+        return zip(self.tokens, self.tokens[1:])
 
-    @classmethod
-    def valid_elements(cls, inp):
-        return all(cls.valid_element(element) for element in inp.split(" "))
+    def valid_elements(self):
+        return all(self.valid_element(element) for element in self.tokens)
 
     @classmethod
     def valid_element(cls, element):
@@ -56,4 +55,4 @@ class Calculator:
 
 
 def calculate(inp):
-    return Calculator.calculate(inp)
+    return Calculator(inp).calculate()
