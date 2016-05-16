@@ -1,6 +1,6 @@
 # School
 class School
-  attr_accessor :db
+  attr_reader :db
   def initialize
     @db = Hash.new([])
   end
