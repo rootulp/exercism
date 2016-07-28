@@ -9,3 +9,17 @@ __pycache__/
 
 # Test Coverage
 coverage/
+
+# Intellij
+*.iml
+.idea/
+
+# Gradle files
+*.gradle
+gradle/
+gradlew
+gradlew.bat
+build/
+
+# Misc
+.keep

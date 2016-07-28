@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/exercism.iml" filepath="$PROJECT_DIR$/exercism.iml" />
+      <module fileurl="file://$PROJECT_DIR$/triangle/src/main/main.iml" filepath="$PROJECT_DIR$/triangle/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simple-cipher/src/main/main1.iml" filepath="$PROJECT_DIR$/simple-cipher/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rna-transcription/src/main/main10.iml" filepath="$PROJECT_DIR$/rna-transcription/src/main/main10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/roman-numerals/src/main/main11.iml" filepath="$PROJECT_DIR$/roman-numerals/src/main/main11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/binary/src/main/main12.iml" filepath="$PROJECT_DIR$/binary/src/main/main12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/phone-number/src/main/main13.iml" filepath="$PROJECT_DIR$/phone-number/src/main/main13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/word-count/src/main/main14.iml" filepath="$PROJECT_DIR$/word-count/src/main/main14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trinary/src/main/main15.iml" filepath="$PROJECT_DIR$/trinary/src/main/main15.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bob/src/main/main16.iml" filepath="$PROJECT_DIR$/bob/src/main/main16.iml" />
+      <module fileurl="file://$PROJECT_DIR$/anagram/src/main/main17.iml" filepath="$PROJECT_DIR$/anagram/src/main/main17.iml" />
+      <module fileurl="file://$PROJECT_DIR$/etl/src/main/main18.iml" filepath="$PROJECT_DIR$/etl/src/main/main18.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gigasecond/src/main/main19.iml" filepath="$PROJECT_DIR$/gigasecond/src/main/main19.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nucleotide-count/src/main/main2.iml" filepath="$PROJECT_DIR$/nucleotide-count/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/raindrops/src/main/main20.iml" filepath="$PROJECT_DIR$/raindrops/src/main/main20.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meetup/src/main/main21.iml" filepath="$PROJECT_DIR$/meetup/src/main/main21.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prime-factors/src/main/main22.iml" filepath="$PROJECT_DIR$/prime-factors/src/main/main22.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luhn/src/main/main23.iml" filepath="$PROJECT_DIR$/luhn/src/main/main23.iml" />
+      <module fileurl="file://$PROJECT_DIR$/grade-school/src/main/main24.iml" filepath="$PROJECT_DIR$/grade-school/src/main/main24.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scrabble-score/src/main/main25.iml" filepath="$PROJECT_DIR$/scrabble-score/src/main/main25.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allergies/src/main/main26.iml" filepath="$PROJECT_DIR$/allergies/src/main/main26.iml" />
+      <module fileurl="file://$PROJECT_DIR$/robot-name/src/main/main27.iml" filepath="$PROJECT_DIR$/robot-name/src/main/main27.iml" />
+      <module fileurl="file://$PROJECT_DIR$/octal/src/main/main28.iml" filepath="$PROJECT_DIR$/octal/src/main/main28.iml" />
+      <module fileurl="file://$PROJECT_DIR$/space-age/src/main/main3.iml" filepath="$PROJECT_DIR$/space-age/src/main/main3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/atbash-cipher/src/main/main4.iml" filepath="$PROJECT_DIR$/atbash-cipher/src/main/main4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamming/src/main/main5.iml" filepath="$PROJECT_DIR$/hamming/src/main/main5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/strain/src/main/main6.iml" filepath="$PROJECT_DIR$/strain/src/main/main6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sieve/src/main/main7.iml" filepath="$PROJECT_DIR$/sieve/src/main/main7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pig-latin/src/main/main8.iml" filepath="$PROJECT_DIR$/pig-latin/src/main/main8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/accumulate/src/main/main9.iml" filepath="$PROJECT_DIR$/accumulate/src/main/main9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/atbash-cipher/src/test/test.iml" filepath="$PROJECT_DIR$/atbash-cipher/src/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/raindrops/src/test/test1.iml" filepath="$PROJECT_DIR$/raindrops/src/test/test1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/grade-school/src/test/test10.iml" filepath="$PROJECT_DIR$/grade-school/src/test/test10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/binary/src/test/test11.iml" filepath="$PROJECT_DIR$/binary/src/test/test11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prime-factors/src/test/test12.iml" filepath="$PROJECT_DIR$/prime-factors/src/test/test12.iml" />
+      <module fileurl="file://$PROJECT_DIR$/strain/src/test/test13.iml" filepath="$PROJECT_DIR$/strain/src/test/test13.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pangram/src/test/test14.iml" filepath="$PROJECT_DIR$/pangram/src/test/test14.iml" />
+      <module fileurl="file://$PROJECT_DIR$/etl/src/test/test15.iml" filepath="$PROJECT_DIR$/etl/src/test/test15.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bob/src/test/test16.iml" filepath="$PROJECT_DIR$/bob/src/test/test16.iml" />
+      <module fileurl="file://$PROJECT_DIR$/space-age/src/test/test17.iml" filepath="$PROJECT_DIR$/space-age/src/test/test17.iml" />
+      <module fileurl="file://$PROJECT_DIR$/luhn/src/test/test18.iml" filepath="$PROJECT_DIR$/luhn/src/test/test18.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sieve/src/test/test19.iml" filepath="$PROJECT_DIR$/sieve/src/test/test19.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pig-latin/src/test/test2.iml" filepath="$PROJECT_DIR$/pig-latin/src/test/test2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gigasecond/src/test/test20.iml" filepath="$PROJECT_DIR$/gigasecond/src/test/test20.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hamming/src/test/test21.iml" filepath="$PROJECT_DIR$/hamming/src/test/test21.iml" />
+      <module fileurl="file://$PROJECT_DIR$/accumulate/src/test/test22.iml" filepath="$PROJECT_DIR$/accumulate/src/test/test22.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allergies/src/test/test23.iml" filepath="$PROJECT_DIR$/allergies/src/test/test23.iml" />
+      <module fileurl="file://$PROJECT_DIR$/octal/src/test/test24.iml" filepath="$PROJECT_DIR$/octal/src/test/test24.iml" />
+      <module fileurl="file://$PROJECT_DIR$/triangle/src/test/test25.iml" filepath="$PROJECT_DIR$/triangle/src/test/test25.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simple-cipher/src/test/test26.iml" filepath="$PROJECT_DIR$/simple-cipher/src/test/test26.iml" />
+      <module fileurl="file://$PROJECT_DIR$/scrabble-score/src/test/test27.iml" filepath="$PROJECT_DIR$/scrabble-score/src/test/test27.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nucleotide-count/src/test/test28.iml" filepath="$PROJECT_DIR$/nucleotide-count/src/test/test28.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rna-transcription/src/test/test29.iml" filepath="$PROJECT_DIR$/rna-transcription/src/test/test29.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meetup/src/test/test3.iml" filepath="$PROJECT_DIR$/meetup/src/test/test3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trinary/src/test/test4.iml" filepath="$PROJECT_DIR$/trinary/src/test/test4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/roman-numerals/src/test/test5.iml" filepath="$PROJECT_DIR$/roman-numerals/src/test/test5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/robot-name/src/test/test6.iml" filepath="$PROJECT_DIR$/robot-name/src/test/test6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/phone-number/src/test/test7.iml" filepath="$PROJECT_DIR$/phone-number/src/test/test7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/anagram/src/test/test8.iml" filepath="$PROJECT_DIR$/anagram/src/test/test8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/word-count/src/test/test9.iml" filepath="$PROJECT_DIR$/word-count/src/test/test9.iml" />
+    </modules>
+  </component>
+</project>
