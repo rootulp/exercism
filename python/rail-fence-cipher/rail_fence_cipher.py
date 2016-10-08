@@ -1,4 +1,4 @@
-class RailsFenceCipher:
+class Rails:
 
     def __init__(self, message, num_rails):
         self.message = message
@@ -7,12 +7,6 @@ class RailsFenceCipher:
         self.rails_index = 0
         self.rails_index_increasing = True
         self.build_rails()
-
-    def encode(self):
-        return ''.join([data for rail in self.rails for data in rail])
-
-    def decoded(self, output):
-        return False
 
     def build_rails(self):
         for data in self.message:
@@ -31,6 +25,18 @@ class RailsFenceCipher:
             self.rails_index_increasing = True
         elif self.rails_index == self.num_rails - 1:
             self.rails_index_increasing = False
+
+
+class RailsFenceCipher:
+
+    def __init__(self, message, num_rails):
+        self.rails = Rails(message, num_rails)
+
+    def encode(self):
+        return ''.join([data for rail in self.rails.rails for data in rail])
+
+    def decode(self):
+        return False
 
 
 def encode(message, num_rails):
