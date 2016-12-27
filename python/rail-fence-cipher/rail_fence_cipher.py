@@ -1,24 +1,31 @@
 class Rails:
 
-    def __init__(self, message, num_rails):
-        self.message = message
+    def __init__(self, num_rails):
         self.num_rails = num_rails
-        self.reset()
         self.rails = [[] for _ in range(self.num_rails)]
-        self.build_rails()
 
-    def output_rails(self):
+    def populate_rails_linear(self, message, rail_lengths):
+        message_list = list(message)
+        for index in xrange(len(self.rails)):
+            for rail_length in xrange(rail_lengths[index]):
+                self.rails[index].append(message_list.pop(0))
+
+    def populate_rails_zig_zag(self, message):
+        self.reset()
+        for data in message:
+            self.rails[self.rails_index].append(data)
+            self.increment_rails_index()
+
+    def to_string_linear(self):
+        return ''.join([data for rail in self.rails for data in rail])
+
+    def to_string_zig_zag(self, message):
         self.reset()
         output = []
-        for _ in range(len(self.message)):
+        for _ in range(len(message)):
             output.append(self.rails[self.rails_index].pop(0))
             self.increment_rails_index()
         return ''.join(output)
-
-    def build_rails(self):
-        for data in self.message:
-            self.rails[self.rails_index].append(data)
-            self.increment_rails_index()
 
     def increment_rails_index(self):
         self.rails_index_reverse_direction()
@@ -37,27 +44,24 @@ class Rails:
         self.rails_index = 0
         self.rails_index_increasing = True
 
-
 class RailsFenceCipher:
 
     def __init__(self, message, num_rails):
         self.message = message
         self.num_rails = num_rails
-        self.rails = Rails(message, num_rails)
+        self.rails = Rails(num_rails)
 
     def encode(self):
-        return ''.join([data for rail in self.rails.rails for data in rail])
+        self.rails.populate_rails_zig_zag(self.message)
+        return self.rails.to_string_linear()
 
     def decode(self):
-        output_message = list(self.message)
-        output_rails = [[] for _ in range(self.num_rails)]
-        rail_lengths = [len(rail) for rail in self.rails.rails]
-        for index in xrange(len(output_rails)):
-            for rail_length in xrange(rail_lengths[index]):
-                output_rails[index].append(output_message.pop(0))
-        temp_rails = Rails(self.message, self.num_rails)
-        temp_rails.rails = output_rails
-        return temp_rails.output_rails()
+        faulty_rails = Rails(self.num_rails)
+        faulty_rails.populate_rails_zig_zag(self.message)
+        rail_lengths = [len(rail) for rail in faulty_rails.rails]
+
+        self.rails.populate_rails_linear(self.message, rail_lengths)
+        return self.rails.to_string_zig_zag(self.message)
 
 
 def encode(message, num_rails):
