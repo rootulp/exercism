@@ -7,6 +7,14 @@ class Rails:
         self.rails = [[] for _ in range(self.num_rails)]
         self.build_rails()
 
+    def output_rails(self):
+        self.reset()
+        output = []
+        for _ in range(len(self.message)):
+            output.append(self.rails[self.rails_index].pop(0))
+            self.increment_rails_index()
+        return ''.join(output)
+
     def build_rails(self):
         for data in self.message:
             self.rails[self.rails_index].append(data)
@@ -47,9 +55,9 @@ class RailsFenceCipher:
         for index in xrange(len(output_rails)):
             for rail_length in xrange(rail_lengths[index]):
                 output_rails[index].append(output_message.pop(0))
-        original_message = ''.join([data for rail in output_rails for data in rail])
-        temp_rails = Rails(original_message, self.num_rails)
-        return ''.join([data for rail in temp_rails.rails for data in rail])
+        temp_rails = Rails(self.message, self.num_rails)
+        temp_rails.rails = output_rails
+        return temp_rails.output_rails()
 
 
 def encode(message, num_rails):
