@@ -18,7 +18,8 @@ class Rails:
         return ''.join([data for rail in self.rails for data in rail])
 
     def to_string_zig_zag(self, message):
-        return ''.join([rail.pop(0) for rail in self.zig_zag_iterator(message)])
+        return ''.join([rail.pop(0) for rail in
+                        self.zig_zag_iterator(message)])
 
     def linear_iterator(self, rail_lengths):
         for index in xrange(len(self.rails)):
