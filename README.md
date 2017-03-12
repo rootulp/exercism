@@ -5,7 +5,7 @@
 [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/rootulp/exercism.svg)](https://codeclimate.com/github/rootulp/exercism/coverage)
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://rootulp.mit-license.org)
 
-> My [exercism](http://exercism.io/rootulp) solutions 
+> [Exercism](http://exercism.io/rootulp) solutions 
 
 ## Contribute
 
