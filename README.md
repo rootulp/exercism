@@ -5,10 +5,15 @@
 [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/rootulp/exercism.svg)](https://codeclimate.com/github/rootulp/exercism/coverage)
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://rootulp.mit-license.org)
 
-## About
+> My [exercism](http://exercism.io/rootulp) solutions 
 
-Here are my [exercism](http://exercism.io/rootulp) solutions. I'd appreciate any feedback.
-If you are new to exercism, you can get started [here](http://exercism.io/how-it-works/newbie).
+## Contribute
+
+I'd appreciate any feedback via [issues](https://github.com/rootulp/exercism/issues/new).
+
+## Getting Started
+
+If you are new to exercism, you can get started with this [intro](http://exercism.io/how-it-works/newbie).
 
 ## License
 
