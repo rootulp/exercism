@@ -12,6 +12,7 @@ coverage/
 
 # Intellij
 *.iml
+*.iws
 .idea/
 
 # Gradle files
