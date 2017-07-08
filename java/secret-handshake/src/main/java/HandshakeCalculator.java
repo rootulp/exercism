@@ -19,10 +19,19 @@ final class HandshakeCalculator {
       }
     }
 
-    if ((decimal & 16) != 0) {
-      Collections.reverse(handshake);
+    if (shouldReverseHandshake(decimal)) {
+      handshake = reverseHandshake(handshake);
     }
 
+    return handshake;
+  }
+
+  private boolean shouldReverseHandshake(int decimal) {
+    return (decimal & 16) != 0;
+  }
+
+  private List<Signal> reverseHandshake(List<Signal> handshake) {
+    Collections.reverse(handshake);
     return handshake;
   }
 
