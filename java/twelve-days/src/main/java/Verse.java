@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 class Verse {
 
@@ -7,40 +9,36 @@ class Verse {
   private static final Map<Integer, String> NUMBER_TO_GIFT = numberToGift();
 
   static String toString(int verseIndex) {
-    return prefixForVerse(verseIndex) + giftsForVerse(verseIndex);
+    return prefix(verseIndex) + body(verseIndex) + suffix(verseIndex);
   }
 
-  private static String prefixForVerse(int verseIndex) {
+  private static String prefix(int verseIndex) {
     return String.format("On the %s day of Christmas my true love gave to me, ", ordinal(verseIndex));
   }
 
-  private static String giftsForVerse(int verseIndex) {
-    StringBuilder giftsForVerse = new StringBuilder();
-    for (int currentVerse = verseIndex; currentVerse > 0; currentVerse -= 1) {
-      if (verseIndex > 1 && currentVerse == 1) {
-        giftsForVerse.append("and ");
-      }
-      giftsForVerse.append(giftsForNumber(currentVerse));
-    }
-    giftsForVerse.append("\n");
-    return giftsForVerse.toString();
+  private static String body(int verseIndex) {
+    return revRangeClosed(1, verseIndex)
+            .mapToObj(Verse::gifts)
+            .collect(Collectors.joining(", "));
   }
 
+  private static String suffix(int verseIndex) {
+    if (verseIndex > 1) {
+      return ", and a Partridge in a Pear Tree.\n";
+    }
+    return "a Partridge in a Pear Tree.\n";
+  }
 
   private static String ordinal(int number) {
     return NUMBER_TO_ORDINAL.get(number);
   }
 
-  private static String giftsForNumber(int number) {
-    if (number > 1) {
-      return NUMBER_TO_GIFT.get(number) + ", ";
-    }
-    return NUMBER_TO_GIFT.get(number);
+  private static String gifts(int giftIndex) {
+    return NUMBER_TO_GIFT.get(giftIndex);
   }
 
   private static Map<Integer, String> numberToGift() {
     Map<Integer, String> numberToGift = new HashMap<>();
-    numberToGift.put(1, "a Partridge in a Pear Tree.");
     numberToGift.put(2, "two Turtle Doves");
     numberToGift.put(3, "three French Hens");
     numberToGift.put(4, "four Calling Birds");
@@ -70,6 +68,11 @@ class Verse {
     numberToOrdinal.put(11, "eleventh");
     numberToOrdinal.put(12, "twelfth");
     return numberToOrdinal;
+  }
+
+  private static IntStream revRangeClosed(int from, int to) {
+    return IntStream.range(from, to)
+            .map(i -> to - i + from);
   }
 
 }
