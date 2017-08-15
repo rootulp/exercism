@@ -7,8 +7,12 @@ class Transcriptor {
         ['A', 'U']
     ]);
 
-    toRna(strand: string) {
-        return Transcriptor.NUCLEOTIDE_COMPLEMENTS.get(strand)
+    public toRna(strand: string) {
+        return strand.split('').map(nucleotide => this.transcribeNucleotide(nucleotide)).join('')
+    }
+
+    private transcribeNucleotide(nucleotide: string) {
+        return Transcriptor.NUCLEOTIDE_COMPLEMENTS.get(nucleotide)
     }
 }
 
