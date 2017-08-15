@@ -43,10 +43,10 @@ class ComplementTest < Minitest::Test
   end
 
   def test_dna_raises_argument_error
-    assert_raises(ArgumentError){ Complement.of_dna('U') }
+    assert_raises(ArgumentError) { Complement.of_dna('U') }
   end
 
   def test_rna_raises_argument_error
-    assert_raises(ArgumentError){ Complement.of_rna('T') }
+    assert_raises(ArgumentError) { Complement.of_rna('T') }
   end
 end

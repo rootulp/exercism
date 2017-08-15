@@ -21,7 +21,7 @@ class BobTest < Minitest::Test
   end
 
   def test_shouting_gibberish
-    remark = ('A'..'Z').to_a.shuffle[0, 10].join
+    remark = ('A'..'Z').to_a.sample(10).join
     assert_equal 'Whoa, chill out!', bob.hey(remark), feedback(remark)
   end
 
@@ -36,7 +36,7 @@ class BobTest < Minitest::Test
   end
 
   def test_asking_gibberish
-    remark = ('a'..'z').to_a.shuffle[0, 10].join << '?'
+    remark = ('a'..'z').to_a.sample(10).join << '?'
     assert_equal 'Sure.', bob.hey(remark), feedback(remark)
   end
 

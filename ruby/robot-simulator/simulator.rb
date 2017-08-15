@@ -1,6 +1,6 @@
 # Robot
 class Robot
-  BEARINGS = [:north, :east, :south, :west].freeze
+  BEARINGS = %i[north east south west].freeze
   attr_reader :bearing, :x, :y
 
   def orient(bearing)

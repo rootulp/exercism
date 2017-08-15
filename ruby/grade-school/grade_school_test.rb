@@ -21,7 +21,7 @@ class SchoolTest < Minitest::Test
     school.add('Blair', 2)
     school.add('James', 2)
     school.add('Paul', 2)
-    assert_equal({ 2 => %w(Blair James Paul) }, school.to_hash)
+    assert_equal({ 2 => %w[Blair James Paul] }, school.to_hash)
   end
 
   def test_add_students_to_different_grades
@@ -34,14 +34,14 @@ class SchoolTest < Minitest::Test
     school.add('Bradley', 5)
     school.add('Franklin', 5)
     school.add('Jeff', 1)
-    assert_equal %w(Bradley Franklin), school.grade(5)
+    assert_equal %w[Bradley Franklin], school.grade(5)
   end
 
   def test_get_students_sorted_in_a_grade
     school.add('Franklin', 5)
     school.add('Bradley', 5)
     school.add('Jeff', 1)
-    assert_equal %w(Bradley Franklin), school.grade(5)
+    assert_equal %w[Bradley Franklin], school.grade(5)
   end
 
   def test_get_students_in_a_non_existant_grade
@@ -57,7 +57,7 @@ class SchoolTest < Minitest::Test
     end
     sorted = {
       3 => ['Kyle'],
-      4 => %w(Christopher Jennifer),
+      4 => %w[Christopher Jennifer],
       6 => ['Kareem']
     }
     assert_equal sorted, school.to_hash

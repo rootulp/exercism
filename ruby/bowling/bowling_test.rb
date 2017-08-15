@@ -132,17 +132,19 @@ class GameTest < Minitest::Test
   def test_should_not_allow_rolls_with_negative_pins
     assert_raises(
       RuntimeError,
-      'Pins must have a value from 0 to 10') do
-        @game.roll(-1)
-      end
+      'Pins must have a value from 0 to 10'
+    ) do
+      @game.roll(-1)
+    end
   end
 
   def test_should_not_allow_rolls_better_than_strike
     assert_raises(
       RuntimeError,
-      'Pins must have a value from 0 to 10') do
-        @game.roll(11)
-      end
+      'Pins must have a value from 0 to 10'
+    ) do
+      @game.roll(11)
+    end
   end
 
   def test_should_not_allow_two_normal_rolls_better_than_strike
@@ -167,7 +169,7 @@ class GameTest < Minitest::Test
     skip
     assert_raises(
       RuntimeError,
-      'Score cannot be taken until the end of the game',
+      'Score cannot be taken until the end of the game'
     ) do
       @game.score
     end
@@ -178,9 +180,10 @@ class GameTest < Minitest::Test
     roll_n_times(19, 5)
     assert_raises(
       RuntimeError,
-      'Score cannot be taken until the end of the game') do
-        @game.score
-      end
+      'Score cannot be taken until the end of the game'
+    ) do
+      @game.score
+    end
   end
 
   def test_should_not_allow_rolls_after_the_tenth_frame
@@ -188,7 +191,7 @@ class GameTest < Minitest::Test
     roll_n_times(20, 0)
     assert_raises(
       RuntimeError,
-      'Should not be able to roll after game is over',
+      'Should not be able to roll after game is over'
     ) do
       @game.roll(0)
     end

@@ -52,7 +52,7 @@ class BstTest < Minitest::Test
   end
 
   def test_iteratbing_one_element
-    assert_equal [4], record_all_data(Bst.new 4)
+    assert_equal [4], record_all_data(Bst.new(4))
   end
 
   def test_iterating_over_smaller_element

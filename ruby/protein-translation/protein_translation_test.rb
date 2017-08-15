@@ -13,25 +13,25 @@ class TranslationTest < Minitest::Test
   end
 
   def test_identifies_Leucine_codons
-    %w(UUA UUG).each do |codon|
+    %w[UUA UUG].each do |codon|
       assert_equal 'Leucine', Translation.of_codon(codon)
     end
   end
 
   def test_identifies_Serine_codons
-    %w(UCU UCC UCA UCG).each do |codon|
+    %w[UCU UCC UCA UCG].each do |codon|
       assert_equal 'Serine', Translation.of_codon(codon)
     end
   end
 
   def test_identifies_Tyrosine_codons
-    %w(UAU UAC).each do |codon|
+    %w[UAU UAC].each do |codon|
       assert_equal 'Tyrosine', Translation.of_codon(codon)
     end
   end
 
   def test_identifies_Cystine_codons
-    %w(UGU UGC).each do |codon|
+    %w[UGU UGC].each do |codon|
       assert_equal 'Cystine', Translation.of_codon(codon)
     end
   end
@@ -41,26 +41,26 @@ class TranslationTest < Minitest::Test
   end
 
   def test_identifies_stop_codons
-    %w(UAA UAG UGA).each do |codon|
+    %w[UAA UAG UGA].each do |codon|
       assert_equal 'STOP', Translation.of_codon(codon)
     end
   end
 
   def test_translates_rna_strand_into_correct_protein
     strand = 'AUGUUUUGG'
-    expected = %w(Methionine Phenylalanine Tryptophan)
+    expected = %w[Methionine Phenylalanine Tryptophan]
     assert_equal expected, Translation.of_rna(strand)
   end
 
   def test_stops_translation_if_stop_codon_present
     strand = 'AUGUUUUAA'
-    expected = %w(Methionine Phenylalanine)
+    expected = %w[Methionine Phenylalanine]
     assert_equal expected, Translation.of_rna(strand)
   end
 
   def test_stops_translation_of_longer_strand
     strand = 'UGGUGUUAUUAAUGGUUU'
-    expected = %w(Tryptophan Cystine Tyrosine)
+    expected = %w[Tryptophan Cystine Tyrosine]
     assert_equal expected, Translation.of_rna(strand)
   end
 

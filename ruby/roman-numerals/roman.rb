@@ -1,5 +1,5 @@
 # Fixnum
-class Fixnum # I don't like monkey patching
+class Integer # I don't like monkey patching
   NUMERALS = {
     1 => 'I',
     4 => 'IV',

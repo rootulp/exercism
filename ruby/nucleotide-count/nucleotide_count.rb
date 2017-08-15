@@ -1,6 +1,6 @@
 # Nucleotide
 class Nucleotide
-  NUCLEOTIDES = %w(A T C G).freeze
+  NUCLEOTIDES = %w[A T C G].freeze
   attr_reader :strand
 
   def self.from_dna(strand)
