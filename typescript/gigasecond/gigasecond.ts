@@ -1,4 +1,5 @@
 class Gigasecond {
+
   date_of_birth: Date
 
   constructor(date_of_birth: Date) {
