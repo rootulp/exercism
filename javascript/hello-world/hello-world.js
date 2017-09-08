@@ -7,10 +7,10 @@
 var HelloWorld = function() {};
 
 HelloWorld.prototype.hello = function(input) {
-  if (input !== '') {
-    return 'Hello, ' + input + '!';
+  if (input !== "") {
+    return "Hello, " + input + "!";
   } else {
-    return 'Hello, world!';
+    return "Hello, world!";
   }
 };
 

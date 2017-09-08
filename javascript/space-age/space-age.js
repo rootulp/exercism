@@ -1,5 +1,5 @@
 function SpaceAge(seconds) {
-  'use script';
+  "use script";
 
   var earthTo = {
     Mercury: 0.2408467,
@@ -9,7 +9,7 @@ function SpaceAge(seconds) {
     Saturn: 29.447498,
     Uranus: 84.016846,
     Neptune: 164.79132
-  }
+  };
 
   function chompFloat(val) {
     return parseFloat(val.toFixed(2));
@@ -23,36 +23,35 @@ function SpaceAge(seconds) {
 
   this.onEarth = function() {
     return chompFloat(onEarth());
-  }
+  };
 
   this.onMercury = function() {
-    return chompFloat(onEarth() / earthTo['Mercury']);
-  }
+    return chompFloat(onEarth() / earthTo["Mercury"]);
+  };
 
   this.onVenus = function() {
-    return chompFloat(onEarth() / earthTo['Venus']);
-  }
+    return chompFloat(onEarth() / earthTo["Venus"]);
+  };
 
   this.onMars = function() {
-    return chompFloat(onEarth() / earthTo['Mars']);
-  }
+    return chompFloat(onEarth() / earthTo["Mars"]);
+  };
 
   this.onJupiter = function() {
-    return chompFloat(onEarth() / earthTo['Jupiter']);
-  }
+    return chompFloat(onEarth() / earthTo["Jupiter"]);
+  };
 
   this.onSaturn = function() {
-    return chompFloat(onEarth() / earthTo['Saturn']);
-  }
+    return chompFloat(onEarth() / earthTo["Saturn"]);
+  };
 
   this.onUranus = function() {
-    return chompFloat(onEarth() / earthTo['Uranus']);
-  }
+    return chompFloat(onEarth() / earthTo["Uranus"]);
+  };
 
   this.onNeptune = function() {
-    return chompFloat(onEarth() / earthTo['Neptune']);
-  }
-
+    return chompFloat(onEarth() / earthTo["Neptune"]);
+  };
 }
 
-module.exports = SpaceAge
+module.exports = SpaceAge;

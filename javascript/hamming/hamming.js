@@ -1,8 +1,8 @@
 function compute_it(strand1, strand2) {
-  'use strict';
+  "use strict";
 
   if (strand1.length !== strand2.length) {
-    throw new Error('DNA strands must be of equal length.');
+    throw new Error("DNA strands must be of equal length.");
   }
 
   var differences = 0;
@@ -14,10 +14,10 @@ function compute_it(strand1, strand2) {
   }
 
   return differences;
-};
+}
 
 module.exports = {
   compute: function(strand1, strand2) {
-   return  compute_it(strand1, strand2)
+    return compute_it(strand1, strand2);
   }
 };

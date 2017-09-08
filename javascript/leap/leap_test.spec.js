@@ -1,4 +1,4 @@
-var isLeapYear = require('./leap');
+var isLeapYear = require("./leap");
 
 describe("Year", function() {
   it("a known leap year", function() {

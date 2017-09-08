@@ -1,7 +1,7 @@
 function dna(strand) {
-  'use strict';
+  "use strict";
 
-  strand = strand || ""
+  strand = strand || "";
   var invalid_strand = /[^ATGC]/;
   var nucleotides = strand.split("");
   var counts = {
@@ -9,29 +9,28 @@ function dna(strand) {
     T: 0,
     G: 0,
     C: 0
-  }
+  };
 
   if (invalid_strand.test(strand)) {
-    throw "Invalid strand"
+    throw "Invalid strand";
   }
 
   nucleotides.forEach(function(nucleotide) {
-    counts[nucleotide] += 1
+    counts[nucleotide] += 1;
   });
 
   function count(nucleotide) {
-    return counts[nucleotide] || 0
+    return counts[nucleotide] || 0;
   }
 
   function histogram() {
-    return counts
+    return counts;
   }
 
   return {
     count: count,
     histogram: histogram
-  }
-
-};
+  };
+}
 
 module.exports = dna;

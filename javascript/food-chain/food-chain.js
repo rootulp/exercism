@@ -2,28 +2,29 @@
 // https://github.com/breethomas/exercisms/blob/master/javascript/food-chain/food-chain.js
 
 var Song = function(lyrics) {
-  this.verseArray = lyrics.split('\n\n');
-}
+  this.verseArray = lyrics.split("\n\n");
+};
 
 Song.prototype.verse = function(start) {
-  return this.verseArray[start - 1] + '\n';
-}
+  return this.verseArray[start - 1] + "\n";
+};
 
 Song.prototype.verses = function(start, end) {
   var sliced = this.verseArray.slice(start - 1, end);
-  return sliced.join('\n\n') + '\n\n';
-}
+  return sliced.join("\n\n") + "\n\n";
+};
 
 Song.prototype.sing = function() {
   var end = this.verseArray.length;
   return this.verses(1, end);
-}
+};
 
 Song.oldLadyTune = function() {
   return new Song(oldLadyTune);
-}
+};
 
-var oldLadyTune = "\
+var oldLadyTune =
+  "\
 I know an old lady who swallowed a fly.\n\
 I don't know why she swallowed the fly. Perhaps she'll die.\n\
 \n\

@@ -1,4 +1,4 @@
-var Robot = require('./robot_name');
+var Robot = require("./robot_name");
 
 describe("Robot", function() {
   // NOTE: The 'beforeEach()' and 'afterEach()' act as setup/teardown for this
@@ -23,8 +23,8 @@ describe("Robot", function() {
 
   it("different robots have different names", function() {
     var i,
-        numRobots = 10000,
-        usedNames = {};
+      numRobots = 10000,
+      usedNames = {};
 
     for (i = 0; i < numRobots; i++) {
       var newRobot = new Robot();
@@ -44,8 +44,8 @@ describe("Robot", function() {
 
   it("should set a unique name after reset", function() {
     var i,
-        numResets = 10000,
-        usedNames = {};
+      numResets = 10000,
+      usedNames = {};
 
     usedNames[robot.name] = true;
 

@@ -1,14 +1,14 @@
 function PhoneNumber(raw_input) {
-  'use strict';
+  "use strict";
 
-  var invalid = '0000000000';
+  var invalid = "0000000000";
 
   function number() {
     number = strip_punctuation();
 
     if (number.length == 10) {
       return number;
-    } else if (number.length == 11 && number[0] === '1') {
+    } else if (number.length == 11 && number[0] === "1") {
       return number.slice(1);
     } else {
       return invalid;
@@ -27,15 +27,15 @@ function PhoneNumber(raw_input) {
   }
 
   function strip_punctuation() {
-    var re = /[\.\-\(\)\s]/g
-    return raw_input.replace(re, '')
+    var re = /[\.\-\(\)\s]/g;
+    return raw_input.replace(re, "");
   }
 
   return {
     number: number,
     areaCode: areaCode,
     toString: toString
-  }
+  };
 }
 
-module.exports = PhoneNumber
+module.exports = PhoneNumber;

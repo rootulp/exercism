@@ -1,17 +1,17 @@
 function Bob() {
-  'use strict';
+  "use strict";
 
   this.hey = function(input) {
     if (!input.trim()) {
-        return 'Fine. Besthat way!';
-    } else if (input === input.toUpperCase() && input !== input.toLowerCase()){
-        return 'Whoa, chill out!';
-    } else if (input.slice(-1) === '?'){
-        return 'Sure.';
+      return "Fine. Besthat way!";
+    } else if (input === input.toUpperCase() && input !== input.toLowerCase()) {
+      return "Whoa, chill out!";
+    } else if (input.slice(-1) === "?") {
+      return "Sure.";
     } else {
-        return 'Whatever.';
+      return "Whatever.";
     }
-  }
-};
+  };
+}
 
 module.exports = Bob;

@@ -1,4 +1,4 @@
-var Robot = require('./robot-name');
+var Robot = require("./robot-name");
 
 describe("Robot", function() {
   it("has a name", function() {

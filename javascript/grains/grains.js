@@ -1,9 +1,9 @@
 function Grains() {
-  'use strict';
+  "use strict";
 
   this.square = function(num) {
     return Math.pow(2, num - 1);
-  }
+  };
 
   this.total = function() {
     var result = 0;
@@ -11,8 +11,7 @@ function Grains() {
       result += this.square(i);
     }
     return result;
-  }
-
+  };
 }
 
-module.exports = Grains
+module.exports = Grains;

@@ -1,5 +1,5 @@
 function words(phrase) {
-  'use strict';
+  "use strict";
 
   var counts = {};
   var words = phrase.split(/\s/);
@@ -13,6 +13,6 @@ function words(phrase) {
   });
 
   return counts;
-};
+}
 
 module.exports = words;
