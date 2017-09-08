@@ -4,6 +4,7 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/rootulp/exercism.svg)](https://codeclimate.com/github/rootulp/exercism)
 [![Test Coverage](https://img.shields.io/codeclimate/coverage/github/rootulp/exercism.svg)](https://codeclimate.com/github/rootulp/exercism/coverage)
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://rootulp.mit-license.org)
+[![Code Style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 > [Exercism](http://exercism.io/rootulp) solutions 
 
