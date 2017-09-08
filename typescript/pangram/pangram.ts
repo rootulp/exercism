@@ -8,7 +8,7 @@ class Pangram {
   }
 
   isPangram(): boolean {
-    for (let character of this.sentence.toUpperCase()) {
+    for (const character of this.sentence.toUpperCase()) {
       this.alphabet.delete(character)
     }
     return this.alphabet.size === 0
