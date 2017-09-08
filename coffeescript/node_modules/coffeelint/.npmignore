@@ -1,0 +1,5 @@
+src/
+test/
+coffeelint.json
+.travis.yml
+.package.json
