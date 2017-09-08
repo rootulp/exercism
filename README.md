@@ -21,9 +21,9 @@ If you are new to exercism, you can get started with this [intro](http://exercis
 |--------------|--------------------------------------------------------------------------------------------------------------------|------------------------------------|
 | ruby         | [![Code Style](https://img.shields.io/badge/code_style-rubocop-red.svg)](https://github.com/bbatsov/rubocop)       | `rubocop .`                        |
 | python       | [![Code Style](https://img.shields.io/badge/code_style-pep8-blue.svg)](https://www.python.org/dev/peps/pep-0008/)  | `pep8 .`                           |
-| javascript   | [![Code Style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) | `./node_modules/.bin/eslint .`     |
+| javascript   | [![Code Style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) | `yarn lint`     |
 | typescript   | [![Linter](https://img.shields.io/badge/linter-tslint-lightgrey.svg)](https://github.com/palantir/tslint)          | `cd <exercise> && yarn lint`       |
-| coffeescript | [![Linter](https://img.shields.io/badge/linter-coffeelint-lightgrey.svg)](https://github.com/clutchski/coffeelint) | `./node_modules/.bin/coffeelint .` |
+| coffeescript | [![Linter](https://img.shields.io/badge/linter-coffeelint-lightgrey.svg)](https://github.com/clutchski/coffeelint) | `yarn lint` |
 
 ## License
 

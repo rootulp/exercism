@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "lint": "coffeelint ."
+  },
   "dependencies": {
     "coffeelint": "^1.16.0"
   }
