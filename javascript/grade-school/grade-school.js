@@ -1,5 +1,5 @@
 var School = function() {
-  'use strict';
+  "use strict";
 
   var roster = {};
 
@@ -28,7 +28,7 @@ var School = function() {
     roster: getRoster,
     add: setRoster,
     grade: grade
-  }
-}
+  };
+};
 
-module.exports = School
+module.exports = School;

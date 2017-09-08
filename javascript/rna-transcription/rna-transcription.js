@@ -1,19 +1,19 @@
 function toRna(strand) {
-  'use strict';
+  "use strict";
 
   var nucleotides = strand.split("");
   var pairs = {
-    A: 'U',
-    T: 'A',
-    G: 'C',
-    C: 'G'
-  }
+    A: "U",
+    T: "A",
+    G: "C",
+    C: "G"
+  };
 
   function pair_for(nucleotide) {
     return pairs[nucleotide];
   }
 
-  return nucleotides.map(pair_for).join('')
+  return nucleotides.map(pair_for).join("");
 }
 
-module.exports = toRna
+module.exports = toRna;
