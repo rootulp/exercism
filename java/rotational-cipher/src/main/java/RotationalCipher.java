@@ -12,7 +12,8 @@ public class RotationalCipher {
 
   public RotationalCipher(int shift) {
     this.shift = shift;
-    this.cipher = generateCipher();
+    this.cipher = new HashMap<>();
+    populateCipher();
   }
 
   public String rotate(String text) {
@@ -25,32 +26,19 @@ public class RotationalCipher {
     return encrypted.toString();
   }
 
-  private Map<Character, Character> generateCipher() {
-    char[] lowercaseRotatedAlphabet = rotateAlphabet(LOWERCASE_ALPHABET);
-    char[] uppercaseRotatedAlphabet = rotateAlphabet(UPPERCASE_ALPHABET);
-
-    Map<Character, Character> cipher = new HashMap<>();
-
-    for (int i = 0; i < ALPHABET_LENGTH; i++) {
-      cipher.put(lowercaseRotatedAlphabet[i], LOWERCASE_ALPHABET[i]);
-      cipher.put(uppercaseRotatedAlphabet[i], UPPERCASE_ALPHABET[i]);
-    }
-
-    return cipher;
-  }
-
-  private char[] rotateAlphabet(char[] alphabet) {
-    char[] rotated = new char[alphabet.length];
-
-    for (int i = 0; i < alphabet.length; i++) {
-      rotated[(i + shift) % alphabet.length] = alphabet[i];
-    }
-
-    return rotated;
-  }
-
   private Character encryptChar(Character c) {
     return cipher.containsKey(c) ? this.cipher.get(c) : c;
+  }
+
+  private void populateCipher() {
+    addAlphabetToCipher(LOWERCASE_ALPHABET);
+    addAlphabetToCipher(UPPERCASE_ALPHABET);
+  }
+
+  private void addAlphabetToCipher(char[] alphabet) {
+    for (int i = 0; i < alphabet.length; i++) {
+      cipher.put(alphabet[i], alphabet[(i + shift) % alphabet.length]);
+    }
   }
 
 }
