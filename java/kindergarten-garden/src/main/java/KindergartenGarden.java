@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -7,21 +6,17 @@ public class KindergartenGarden {
 
   private static String[] DEFAULT_STUDENTS = { "Alice", "Bob", "Charlie", "David", "Eve", "Fred", "Ginny", "Harriet", "Ileana", "Joseph", "Kincaid", "Larry"};
 
-  private List<Plant> plants;
-
-  private String diagram;
   private List<String> students;
-  private char[][] plantGrid;
+  private char[][] plants;
 
   public KindergartenGarden(String diagram) {
     this(diagram, DEFAULT_STUDENTS);
   }
 
   public KindergartenGarden(String diagram, String[] students) {
-    this.diagram = diagram;
+    this.plants = generatePlantGrid(diagram);
     this.students = Arrays.asList(students);
     Collections.sort(this.students);
-    generatePlantGrid();
   }
 
   public List<Plant> getPlantsOfStudent(String student) {
@@ -40,16 +35,18 @@ public class KindergartenGarden {
   }
 
   private Plant getPlantAt(int row, int col) {
-    return Plant.getPlant(plantGrid[row][col]);
+    return Plant.getPlant(plants[row][col]);
   }
 
-  private void generatePlantGrid() {
+  private char[][] generatePlantGrid(String diagram) {
     String[] rows = diagram.split("\n");
-    plantGrid = new char[2][rows[0].length()];
+    char[][] plants = new char[2][rows[0].length()];
 
     for (int i = 0; i < rows.length; i++) {
-      plantGrid[i] = rows[i].toCharArray();
+      plants[i] = rows[i].toCharArray();
     }
+
+    return plants;
   }
 
 }
