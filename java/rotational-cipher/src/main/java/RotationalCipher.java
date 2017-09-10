@@ -12,48 +12,45 @@ public class RotationalCipher {
 
   public RotationalCipher(int shift) {
     this.shift = shift;
-    this.cipher = generateCipher(shift);
-//    System.out.println(cipher);
+    this.cipher = generateCipher();
   }
 
-  private Map<Character, Character> generateCipher(int shift) {
-    char[] lowercase_encrypted_alphabet = encrypt_alphabet(LOWERCASE_ALPHABET);
-    char[] uppercase_encrypted_alphabet = encrypt_alphabet(UPPERCASE_ALPHABET);
+  public String rotate(String text) {
+    StringBuilder encrypted = new StringBuilder(text.length());
+
+    for(char c: text.toCharArray()) {
+      encrypted.append(encryptChar(c));
+    }
+
+    return encrypted.toString();
+  }
+
+  private Map<Character, Character> generateCipher() {
+    char[] lowercaseRotatedAlphabet = rotateAlphabet(LOWERCASE_ALPHABET);
+    char[] uppercaseRotatedAlphabet = rotateAlphabet(UPPERCASE_ALPHABET);
 
     Map<Character, Character> cipher = new HashMap<>();
 
     for (int i = 0; i < ALPHABET_LENGTH; i++) {
-      cipher.put(lowercase_encrypted_alphabet[i], LOWERCASE_ALPHABET[i]);
-      cipher.put(uppercase_encrypted_alphabet[i], UPPERCASE_ALPHABET[i]);
+      cipher.put(lowercaseRotatedAlphabet[i], LOWERCASE_ALPHABET[i]);
+      cipher.put(uppercaseRotatedAlphabet[i], UPPERCASE_ALPHABET[i]);
     }
 
     return cipher;
   }
 
-  private char[] encrypt_alphabet(char[] alphabet) {
-    char[] encrypted = new char[ALPHABET_LENGTH];
+  private char[] rotateAlphabet(char[] alphabet) {
+    char[] rotated = new char[alphabet.length];
 
     for (int i = 0; i < alphabet.length; i++) {
-      encrypted[(i + shift) % alphabet.length] = alphabet[i];
+      rotated[(i + shift) % alphabet.length] = alphabet[i];
     }
 
-    return encrypted;
+    return rotated;
   }
 
-  public String rotate(String text) {
-    StringBuilder encrypted = new StringBuilder(text.length());
-    for(char c: text.toCharArray()) {
-      encrypted.append(encrypteChar(c));
-    }
-    return encrypted.toString();
-  }
-
-  private Character encrypteChar(Character c) {
-    if (cipher.containsKey(c)) {
-      return this.cipher.get(c);
-    } else {
-      return c;
-    }
+  private Character encryptChar(Character c) {
+    return cipher.containsKey(c) ? this.cipher.get(c) : c;
   }
 
 }
