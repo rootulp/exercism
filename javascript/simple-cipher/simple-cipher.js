@@ -25,16 +25,10 @@ function Cipher(key = generateKey()) {
   }
 
   this.addCharCodes = function(charCode, encodeCharCode) {
-    // console.log("charCode: " + charCode);
-    // console.log("encodeCharCode: " + encodeCharCode);
-    // console.log("wrapAround: " + this.wrapAround(charCode + encodeCharCode));
     return String.fromCharCode(this.wrapAround(charCode + encodeCharCode));
   }
 
   this.subtractCharCodes = function(charCode, encodeCharCode) {
-    // console.log("charCode: " + charCode);
-    // console.log("encodeCharCode: " + encodeCharCode);
-    // console.log("wrapAround: " + this.wrapAround(charCode + encodeCharCode));
     return String.fromCharCode(this.wrapAround(charCode - encodeCharCode));
   }
 
@@ -48,7 +42,6 @@ function Cipher(key = generateKey()) {
       return charCode;
     }
   }
-
 }
 
 function generateKey() {
