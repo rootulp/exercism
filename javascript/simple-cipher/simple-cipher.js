@@ -1,4 +1,7 @@
 function Cipher(key = generateKey()) {
+  if (!key.match(/^[a-z]+$/)) {
+    throw new Error("Bad key");
+  }
   this.key = key;
 
   this.chars = function(str) {
@@ -37,8 +40,15 @@ function Cipher(key = generateKey()) {
 
   // ASCII 97 = "a", 122 = "z"
   this.wrapAround = function(charCode) {
-    return ((charCode - 97) % 26) + 97;
+    if (charCode > 122) {
+      return (charCode - 26);
+    } else if (charCode < 97) {
+      return (charCode + 26);
+    } else {
+      return charCode;
+    }
   }
+
 
 }
 
