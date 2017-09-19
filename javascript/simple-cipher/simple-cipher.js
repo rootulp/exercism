@@ -17,11 +17,11 @@ function Cipher(key = generateKey()) {
   }
 
   this.encodeChar = function(char, index) {
-    return this.addCharCodes(char.charCodeAt(0), this.key.charCodeAt(index) - 97);
+    return this.addCharCodes(char.charCodeAt(0), this.key.charCodeAt(index % this.key.length) - 97);
   }
 
   this.decodeChar = function(char, index) {
-    return this.subtractCharCodes(char.charCodeAt(0), this.key.charCodeAt(index) - 97);
+    return this.subtractCharCodes(char.charCodeAt(0), this.key.charCodeAt(index % this.key.length) - 97);
   }
 
   this.addCharCodes = function(charCode, encodeCharCode) {
@@ -48,7 +48,6 @@ function Cipher(key = generateKey()) {
       return charCode;
     }
   }
-
 
 }
 
