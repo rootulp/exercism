@@ -17,19 +17,23 @@ function Cipher(key = generateKey()) {
   }
 
   this.encodeChar = function(char, index) {
-    return this.addCharCodes(char.charCodeAt(0), this.key.charCodeAt(index % this.key.length) - 97);
+    return this.add(char.charCodeAt(0), this.shiftDistance(index));
   }
 
   this.decodeChar = function(char, index) {
-    return this.subtractCharCodes(char.charCodeAt(0), this.key.charCodeAt(index % this.key.length) - 97);
+    return this.subtract(char.charCodeAt(0), this.shiftDistance(index));
   }
 
-  this.addCharCodes = function(charCode, encodeCharCode) {
-    return String.fromCharCode(this.wrapAround(charCode + encodeCharCode));
+  this.add = function(charCode, shiftDistance) {
+    return String.fromCharCode(this.wrapAround(charCode + shiftDistance));
   }
 
-  this.subtractCharCodes = function(charCode, encodeCharCode) {
-    return String.fromCharCode(this.wrapAround(charCode - encodeCharCode));
+  this.subtract = function(charCode, shiftDistance) {
+    return String.fromCharCode(this.wrapAround(charCode - shiftDistance));
+  }
+
+  this.shiftDistance = function(index) {
+    return this.key.charCodeAt(index % this.key.length) - 97
   }
 
   // ASCII 97 = "a", 122 = "z"
