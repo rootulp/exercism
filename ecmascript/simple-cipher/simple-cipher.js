@@ -20,24 +20,32 @@ class Cipher {
   encodeChar(char, keyChar) {
     const charCode = char.charCodeAt(0)
     const keyCharCode = keyChar.charCodeAt(0)
-    return String.fromCharCode(charCode + (keyCharCode - 97));
+    return String.fromCharCode(this.wrap(charCode + (keyCharCode - 97)));
   }
 
   decodeChar(char, keyChar) {
     const charCode = char.charCodeAt(0)
     const keyCharCode = keyChar.charCodeAt(0)
-    return String.fromCharCode(charCode - (keyCharCode - 97));
+    return String.fromCharCode(this.wrap(charCode - (keyCharCode - 97)));
   }
 
   keyChar(index) {
     return this.key.charAt(index % this.key.length);
   }
 
+  wrap(charCode) {
+    if (charCode > 122) {
+      return (charCode - 26);
+    } else if (charCode < 97) {
+      return (charCode + 26);
+    } else {
+      return charCode;
+    }
+  }
+
   validKey(key) {
     return key.match(/^[a-z]+$/);
   }
-
-
 }
 
 export default Cipher;
