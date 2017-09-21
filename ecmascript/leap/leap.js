@@ -11,9 +11,8 @@ class Year {
       return false;
     } else if (this.year % 4 === 0) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 }
 
