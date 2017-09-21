@@ -1,7 +1,11 @@
+const DEFAULT_KEY = "aaaaaaaaaa"
 
 class Cipher {
 
-  constructor(key=this.defaultKey()) {
+  constructor(key=DEFAULT_KEY) {
+    if (!this.validKey(key)) {
+      throw new Error("Bad key");
+    }
     this.key = key
   }
 
@@ -29,9 +33,11 @@ class Cipher {
     return this.key.charAt(index % this.key.length);
   }
 
-  defaultKey() {
-    return "aaaaaaaaaa"
+  validKey(key) {
+    return key.match(/^[a-z]+$/);
   }
+
+
 }
 
 export default Cipher;

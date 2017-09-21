@@ -25,19 +25,19 @@ describe('Random key cipher', () => {
 });
 
 describe('Incorrect key cipher', () => {
-  xtest('throws an error with an all caps key', () => {
+  test('throws an error with an all caps key', () => {
     expect(() => {
       new Cipher('ABCDEF');
     }).toThrow(new Error('Bad key'));
   });
 
-  xtest('throws an error with a numeric key', () => {
+  test('throws an error with a numeric key', () => {
     expect(() => {
       new Cipher('12345');
     }).toThrow(new Error('Bad key'));
   });
 
-  xtest('throws an error with an empty key', () => {
+  test('throws an error with an empty key', () => {
     expect(() => {
       new Cipher('');
     }).toThrow(new Error('Bad key'));
