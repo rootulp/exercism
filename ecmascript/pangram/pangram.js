@@ -21,8 +21,6 @@ class Pangram {
     [...this.sentence].forEach(char => alphabet.delete(char));
     return alphabet.size === 0;
   }
-
-
 }
 
 export default Pangram;
