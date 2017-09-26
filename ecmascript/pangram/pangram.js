@@ -18,9 +18,7 @@ class Pangram {
 
   alphabetInSentence() {
     const alphabet = new Set(ALPHABET);
-    for (const char of this.sentence) {
-      alphabet.delete(char);
-    }
+    [...this.sentence].forEach(char => alphabet.delete(char));
     return alphabet.size === 0;
   }
 
