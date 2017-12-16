@@ -1,5 +1,4 @@
 export function keep<T>(collection: T[], predicate: (element: T)  => boolean ): T[] {
-    // no op
     const kept: T[] = []
     collection.forEach((element) => {
         if (predicate(element)) {
@@ -10,7 +9,6 @@ export function keep<T>(collection: T[], predicate: (element: T)  => boolean ): 
 }
 
 export function discard<T>(collection: T[], predicate: (element: T)  => boolean ): T[] {
-    // no op
     const discarded: T[] = []
     collection.forEach((element) => {
         if (!predicate(element)) {
@@ -18,5 +16,4 @@ export function discard<T>(collection: T[], predicate: (element: T)  => boolean 
         }
     })
     return discarded
-
 }
