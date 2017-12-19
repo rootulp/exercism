@@ -10,7 +10,7 @@ tests =
     describe "Raindrops"
         [ test "1" <|
             \() -> Expect.equal "1" (raindrops 1)
-        , skip <|
+        ,
             test "3" <|
                 \() -> Expect.equal "Pling" (raindrops 3)
         , skip <|
