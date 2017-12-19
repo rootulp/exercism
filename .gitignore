@@ -109,3 +109,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# Elm
+# elm-package generated files
+elm-stuff
+# elm-repl generated files
+repl-temp-*
