@@ -5,14 +5,14 @@ import Set exposing (..)
 
 isPangram: String -> Bool
 isPangram sentence =
-    Set.isEmpty
-        <| Set.diff alphabet
-        <| Set.fromList
-        <| String.toList
-        <| String.toUpper sentence
+    String.toUpper sentence
+        |> String.toList
+        |> Set.fromList
+        |> Set.diff alphabet
+        |> Set.isEmpty
 
 
 alphabet: Set Char
 alphabet =
-    Set.fromList
-        <| String.toList "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    String.toList "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        |> Set.fromList
