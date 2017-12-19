@@ -13,13 +13,13 @@ tests =
         ,
             test "3" <|
                 \() -> Expect.equal "Pling" (raindrops 3)
-        , skip <|
+        ,
             test "5" <|
                 \() -> Expect.equal "Plang" (raindrops 5)
-        , skip <|
+        ,
             test "7" <|
                 \() -> Expect.equal "Plong" (raindrops 7)
-        , skip <|
+        ,
             test "6" <|
                 \() -> Expect.equal "Pling" (raindrops 6)
         , skip <|
