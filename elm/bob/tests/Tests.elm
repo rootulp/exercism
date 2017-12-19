@@ -27,7 +27,7 @@ tests =
                     Expect.equal
                         "Whoa, chill out!"
                         (Bob.hey (uppercaseGibberish 10))
-        , skip <|
+        ,
             test "asking a question" <|
                 \() ->
                     Expect.equal
