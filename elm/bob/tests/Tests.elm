@@ -105,25 +105,25 @@ tests =
                     Expect.equal
                         "Sure."
                         (Bob.hey "Wait! Hang on. Are you going to be OK?")
-        , skip <|
+        ,
             test "silence" <|
                 \() ->
                     Expect.equal
                         "Fine. Be that way!"
                         (Bob.hey "")
-        , skip <|
+        ,
             test "prolonged silence" <|
                 \() ->
                     Expect.equal
                         "Fine. Be that way!"
                         (Bob.hey "       ")
-        , skip <|
+        ,
             test "alternate silences" <|
                 \() ->
                     Expect.equal
                         "Fine. Be that way!"
                         (Bob.hey "\t  \n  \t   ")
-        , skip <|
+        ,
             test "on multiple line questions" <|
                 \() ->
                     Expect.equal

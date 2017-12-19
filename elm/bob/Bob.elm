@@ -6,6 +6,8 @@ hey input =
         "Whoa, chill out!"
     else if question input then
          "Sure."
+    else if silence input then
+        "Fine. Be that way!"
     else
         "Whatever."
 
@@ -18,3 +20,7 @@ shouting input =
 question: String -> Bool
 question input =
     String.endsWith "?" input
+
+silence: String -> Bool
+silence input =
+    String.isEmpty (String.trim input)
