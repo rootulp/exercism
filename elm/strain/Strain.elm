@@ -2,11 +2,11 @@ module Strain exposing (..)
 
 type alias Predicate comparable = (comparable -> Bool)
 
-keep: Predicate comparable -> List a -> List a
+keep: Predicate comparable -> List comparable -> List comparable
 keep predicate collection =
-    collection
+    List.filter predicate collection
 
 
-discard: Predicate comparable -> List a -> List a
+discard: Predicate comparable -> List comparable -> List comparable
 discard predicate collection =
-    collection
+    List.filter predicate collection

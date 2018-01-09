@@ -33,32 +33,32 @@ tests =
             \() ->
                 Expect.equal []
                     (keep lessThanTen [])
-        , skip <|
+        ,
             test "keep everything" <|
                 \() ->
                     Expect.equal [ 1, 2, 3 ]
                         (keep lessThanTen [ 1, 2, 3 ])
-        , skip <|
+        ,
             test "keep first and last" <|
                 \() ->
                     Expect.equal [ 1, 3 ]
                         (keep odd [ 1, 2, 3 ])
-        , skip <|
+        ,
             test "keep nothing" <|
                 \() ->
                     Expect.equal []
                         (keep even [ 1, 3, 5, 7 ])
-        , skip <|
+        ,
             test "keep neither first nor last" <|
                 \() ->
                     Expect.equal [ 2 ]
                         (keep even [ 1, 2, 3 ])
-        , skip <|
+        ,
             test "keep strings" <|
                 \() ->
                     Expect.equal [ "zebra", "zombies", "zealot" ]
                         (keep (isFirstLetter "z") [ "apple", "zebra", "banana", "zombies", "cherimoya", "zealot" ])
-        , skip <|
+        ,
             test "empty discard" <|
                 \() ->
                     Expect.equal []
