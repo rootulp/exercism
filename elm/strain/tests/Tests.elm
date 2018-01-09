@@ -63,27 +63,27 @@ tests =
                 \() ->
                     Expect.equal []
                         (discard lessThanTen [])
-        , skip <|
+        ,
             test "discard everything" <|
                 \() ->
                     Expect.equal []
                         (discard lessThanTen [ 1, 2, 3 ])
-        , skip <|
+        ,
             test "discard first and last" <|
                 \() ->
                     Expect.equal [ 2 ]
                         (discard odd [ 1, 2, 3 ])
-        , skip <|
+        ,
             test "discard nothing" <|
                 \() ->
                     Expect.equal [ 1, 3, 5, 7 ]
                         (discard even [ 1, 3, 5, 7 ])
-        , skip <|
+        ,
             test "discard neither first nor last" <|
                 \() ->
                     Expect.equal [ 1, 3 ]
                         (discard even [ 1, 2, 3 ])
-        , skip <|
+        ,
             test "discard strings" <|
                 \() ->
                     Expect.equal [ "apple", "banana", "cherimoya" ]

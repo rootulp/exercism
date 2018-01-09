@@ -14,4 +14,10 @@ keep predicate collection =
 
 discard: Predicate comparable -> List comparable -> List comparable
 discard predicate collection =
-    List.filter predicate collection
+    case collection of
+        [] -> []
+        comparable::rest ->
+            if not (predicate comparable) then
+                comparable :: discard predicate rest
+            else
+                discard predicate rest
