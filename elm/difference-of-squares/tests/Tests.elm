@@ -33,13 +33,13 @@ tests =
             [
                 test "difference of squares 0" <|
                     \() -> Expect.equal 0 (difference 0)
-            , skip <|
+            ,
                 test "difference of squares 5" <|
                     \() -> Expect.equal 170 (difference 5)
-            , skip <|
+            ,
                 test "difference of squares 10" <|
                     \() -> Expect.equal 2640 (difference 10)
-            , skip <|
+            ,
                 test "difference of squares 100" <|
                     \() -> Expect.equal 25164150 (difference 100)
             ]
