@@ -2,11 +2,19 @@ module DifferenceOfSquares exposing (..)
 
 squareOfSum: Int -> Int
 squareOfSum n =
-    List.sum(List.range 0 n)^2
+    List.range 0 n
+        |> List.sum
+        |> square
 
-sumOfSquares: number -> number
+sumOfSquares: Int -> Int
 sumOfSquares n =
-    n
+    List.range 0 n
+        |> List.map square
+        |> List.sum
+
+square: number -> number
+square n =
+    n ^ 2
 
 difference: number -> number
 difference n =
