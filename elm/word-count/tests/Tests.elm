@@ -13,7 +13,7 @@ tests =
             \() ->
                 Expect.equal [ ( "word", 1 ) ]
                     (wordCount "word" |> Dict.toList)
-        , skip <|
+        ,
             test "count one of each word" <|
                 \() ->
                     Expect.equal [ ( "each", 1 ), ( "of", 1 ), ( "one", 1 ) ]
