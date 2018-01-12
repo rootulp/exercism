@@ -18,7 +18,7 @@ tests =
                 \() ->
                     Expect.equal [ ( "each", 1 ), ( "of", 1 ), ( "one", 1 ) ]
                         (wordCount "one of each" |> Dict.toList)
-        , skip <|
+        ,
             test "multiple occurrences of a word" <|
                 \() ->
                     Expect.equal [ ( "blue", 1 ), ( "fish", 4 ), ( "one", 1 ), ( "red", 1 ), ( "two", 1 ) ]
