@@ -10,11 +10,15 @@ sumOfMultiples numbers maxMultiple =
 
 multiplesOf: Int -> Int -> List Int -> List Int
 multiplesOf baseNumber maxMultiple multiplesSoFar =
-    let nextMultiple = Maybe.withDefault 0 (List.head multiplesSoFar) + baseNumber in
+    let nextMultiple = calculateNextMultiple baseNumber (List.head multiplesSoFar) in
     if nextMultiple < maxMultiple then
         multiplesOf baseNumber maxMultiple (nextMultiple :: multiplesSoFar)
     else
         multiplesSoFar
+
+calculateNextMultiple: Int -> Maybe Int -> Int
+calculateNextMultiple baseNumber previousMultiple =
+     baseNumber + Maybe.withDefault 0 previousMultiple
 
 removeDuplicates: List Int -> List Int
 removeDuplicates numbers =
