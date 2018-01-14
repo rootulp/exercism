@@ -43,10 +43,10 @@ tests =
         ,
             test "empty strands" <|
                 \() -> Expect.equal (Just 0) (distance "" "")
-        , skip <|
+        ,
             test "disallow first strand longer" <|
                 \() -> Expect.equal Nothing (distance "AATG" "AAA")
-        , skip <|
+        ,
             test "disallow second strand longer" <|
                 \() -> Expect.equal Nothing (distance "ATA" "AGTG")
         ]
