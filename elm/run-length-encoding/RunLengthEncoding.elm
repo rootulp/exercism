@@ -23,10 +23,11 @@ runLength run =
 
 splitRuns: (Char -> List String -> List String)
 splitRuns char runs =
-  if String.startsWith (String.fromChar char) (previousRun runs) then
-    String.cons char (previousRun runs) :: (restOfRuns runs)
-  else
-    String.fromChar char :: runs
+  let nextChar = String.fromChar char in
+    if String.startsWith nextChar (previousRun runs) then
+      String.cons char (previousRun runs) :: (restOfRuns runs)
+    else
+      nextChar :: runs
 
 previousRun: List String -> String
 previousRun runs =
