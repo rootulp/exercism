@@ -19,7 +19,9 @@ splitRuns char runs =
 
 lastRun: List String -> String
 lastRun runs =
-  Maybe.withDefault "" (List.head runs)
+  runs
+    |> List.head
+    |> Maybe.withDefault ""
 
 
 decode: String -> String
