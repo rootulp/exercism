@@ -9,6 +9,14 @@ encode data =
     |> List.map encodeRun
     |> String.join ""
 
+splitRuns: (Char -> List String -> List String)
+splitRuns char runs =
+  let nextChar = String.fromChar char in
+    if String.startsWith nextChar (previousRun runs) then
+      String.cons char (previousRun runs) :: (restOfRuns runs)
+    else
+      nextChar :: runs
+
 encodeRun: String -> String
 encodeRun run =
     run
@@ -17,17 +25,12 @@ encodeRun run =
 
 runLength: String -> String
 runLength run =
-  run
-    |> String.length
-    |> toString
-
-splitRuns: (Char -> List String -> List String)
-splitRuns char runs =
-  let nextChar = String.fromChar char in
-    if String.startsWith nextChar (previousRun runs) then
-      String.cons char (previousRun runs) :: (restOfRuns runs)
-    else
-      nextChar :: runs
+  if String.length run == 1 then
+    ""
+  else
+    run
+      |> String.length
+      |> toString
 
 previousRun: List String -> String
 previousRun runs =

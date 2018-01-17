@@ -15,7 +15,7 @@ tests =
         , skip <|
             test "decode simple" <|
                 \() -> Expect.equal "AABBBCCCC" (decode "2A3B4C")
-        , skip <|
+        ,
             test "encode with single values" <|
                 \() ->
                     Expect.equal "12WB12W3B24WB"
