@@ -11,8 +11,15 @@ encode data =
 
 encodeRun: String -> String
 encodeRun run =
-  String.append (toString (String.length run)) (String.left 1 run)
+    run
+      |> String.left 1
+      |> String.append (runLength run)
 
+runLength: String -> String
+runLength run =
+  run
+    |> String.length
+    |> toString
 
 splitRuns: (Char -> List String -> List String)
 splitRuns char runs =
