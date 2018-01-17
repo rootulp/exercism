@@ -5,18 +5,21 @@ encode: String -> String
 encode data =
   data
     |> String.toList
-    |> List.foldl splitIntoChunks []
+    |> List.foldl splitRuns []
     |> List.reverse
     |> List.map (\chunk -> String.append (toString (String.length chunk)) (String.left 1 chunk))
     |> String.join ""
-    -- |> String.fromList
 
-splitIntoChunks: (Char -> List String -> List String)
-splitIntoChunks char chunks =
-  if String.startsWith (String.fromChar char) (Maybe.withDefault "" (List.head chunks)) then
-    String.cons char (Maybe.withDefault "" (List.head chunks)) :: Maybe.withDefault [] (List.tail chunks)
+splitRuns: (Char -> List String -> List String)
+splitRuns char runs =
+  if String.startsWith (String.fromChar char) (lastRun runs) then
+    String.cons char (lastRun runs) :: Maybe.withDefault [] (List.tail runs)
   else
-    String.fromChar char :: chunks
+    String.fromChar char :: runs
+
+lastRun: List String -> String
+lastRun runs =
+  Maybe.withDefault "" (List.head runs)
 
 
 decode: String -> String
