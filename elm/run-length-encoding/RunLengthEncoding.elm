@@ -9,6 +9,13 @@ encode data =
     |> List.map encodeRun
     |> String.join ""
 
+decode: String -> String
+decode data =
+  data
+    |> String.toList
+    |> List.foldr splitRuns []
+    |> String.join "_"
+
 splitRuns: (Char -> List String -> List String)
 splitRuns char runs =
   let nextChar = String.fromChar char in
@@ -43,12 +50,6 @@ restOfRuns runs =
   runs
     |> List.tail
     |> Maybe.withDefault []
-
-
-decode: String -> String
-decode data =
-  data
-
 
 version : Int
 version =

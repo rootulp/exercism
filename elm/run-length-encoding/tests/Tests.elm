@@ -12,7 +12,7 @@ tests =
             \() -> Expect.equal 2 version
         , test "encode simple" <|
             \() -> Expect.equal "2A3B4C" (encode "AABBBCCCC")
-        , skip <|
+        ,
             test "decode simple" <|
                 \() -> Expect.equal "AABBBCCCC" (decode "2A3B4C")
         ,
