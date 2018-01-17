@@ -35,7 +35,7 @@ tests =
                 \() ->
                     Expect.equal "WWWWWWWWWW"
                         (decode "10W")
-        , skip <|
+        ,
             test "encode unicode" <|
                 \() -> Expect.equal "⏰3⚽2⭐⏰" (encode "⏰⚽⚽⚽⭐⭐⏰")
         , skip <|
