@@ -1,5 +1,6 @@
 module RunLengthEncoding exposing (..)
 import Maybe
+import Char
 
 encode: String -> String
 encode data =
@@ -13,8 +14,17 @@ decode: String -> String
 decode data =
   data
     |> String.toList
-    |> List.foldr splitRuns []
+    |> List.foldr splitEncodedRuns []
     |> String.join "_"
+
+splitEncodedRuns: (Char -> List String -> List String)
+splitEncodedRuns char runs =
+  let nextChar = String.fromChar char in
+    if Char.isUpper char then
+      nextChar :: runs
+    else
+      String.cons char (previousRun runs) :: (restOfRuns runs)
+
 
 splitRuns: (Char -> List String -> List String)
 splitRuns char runs =
