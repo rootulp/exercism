@@ -15,7 +15,18 @@ decode data =
   data
     |> String.toList
     |> List.foldr splitEncodedRuns []
+    |> List.map decodeRun
     |> String.join "_"
+
+decodeRun: String -> String
+decodeRun run =
+  run
+    |> String.toList
+    |> List.partition (Char.isDigit)
+    |> Tuple.mapFirst String.fromList
+    |> Tuple.mapFirst String.toInt
+    |> Tuple.mapSecond String.fromList
+    -- |> String.fromList
 
 splitEncodedRuns: (Char -> List String -> List String)
 splitEncodedRuns char runs =
