@@ -1,6 +1,7 @@
 module RunLengthEncoding exposing (..)
 import Maybe
 import Char
+import Tuple
 
 encode: String -> String
 encode data =
@@ -16,17 +17,31 @@ decode data =
     |> String.toList
     |> List.foldr splitEncodedRuns []
     |> List.map decodeRun
-    |> String.join "_"
+    |> String.join ""
 
 decodeRun: String -> String
 decodeRun run =
-  run
-    |> String.toList
-    |> List.partition (Char.isDigit)
-    |> Tuple.mapFirst String.fromList
-    |> Tuple.mapFirst String.toInt
-    |> Tuple.mapSecond String.fromList
-    -- |> String.fromList
+  let decodedLengthAndChar =
+    run
+      |> String.toList
+      |> List.partition (Char.isDigit)
+      |> Tuple.mapFirst convertRunLength
+      |> Tuple.mapSecond String.fromList
+  in
+    expandDecodedRun decodedLengthAndChar
+
+expandDecodedRun: (Int, String) -> String
+expandDecodedRun decodedRun =
+  String.repeat (Tuple.first decodedRun) (Tuple.second decodedRun)
+
+
+convertRunLength: List Char -> Int
+convertRunLength runLength =
+  runLength
+    |> String.fromList
+    |> String.toInt
+    |> Result.withDefault 1
+
 
 splitEncodedRuns: (Char -> List String -> List String)
 splitEncodedRuns char runs =
