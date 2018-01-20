@@ -20,31 +20,35 @@ decode data =
     |> String.join ""
 
 splitRuns: (Char -> List String -> List String)
-splitRuns char runs =
-    if Char.isDigit char || charInPreviousRun char runs then
-      existingRun char runs
-    else
-      newRun char runs
+splitRuns value runs =
+  if runBoundary value runs then
+    startNewRun value runs
+  else
+    addValueToExistingRun value runs
 
-newRun: Char -> List String -> List String
-newRun char runs =
-  String.fromChar char :: runs
+runBoundary: Char -> List String -> Bool
+runBoundary value runs =
+  not (Char.isDigit value || -- during decode
+  valueInPreviousRun value runs) -- during encode
 
-charInPreviousRun: Char -> List String -> Bool
-charInPreviousRun char runs =
-  String.startsWith (String.fromChar char) (previousRun runs)
+startNewRun: Char -> List String -> List String
+startNewRun value runs =
+  String.fromChar value :: runs
 
-existingRun: Char -> List String -> List String
-existingRun char runs =
-  runs
-    |> restOfRuns
-    |> (::) (appendCharToPreviousRun char runs)
+valueInPreviousRun: Char -> List String -> Bool
+valueInPreviousRun value runs =
+  previousRun runs
+   |> String.contains (String.fromChar value)
 
-appendCharToPreviousRun: Char -> List String -> String
-appendCharToPreviousRun char runs =
+addValueToExistingRun: Char -> List String -> List String
+addValueToExistingRun value runs =
+  appendValueToPreviousRun value runs :: restOfRuns runs
+
+appendValueToPreviousRun: Char -> List String -> String
+appendValueToPreviousRun value runs =
   runs
     |> previousRun
-    |> String.cons char
+    |> String.cons value
 
 encodeRun: String -> String
 encodeRun run =
@@ -55,20 +59,20 @@ encodeRun run =
 decodeRun: String -> String
 decodeRun run =
   run
-    |> decodeLengthAndChar
-    |> expandDecodedRun
+    |> splitIntoLengthAndValue
+    |> expand
 
-decodeLengthAndChar: String -> (Int, String)
-decodeLengthAndChar run =
+splitIntoLengthAndValue: String -> (Int, String)
+splitIntoLengthAndValue run =
   run
     |> String.toList
-    |> List.partition (Char.isDigit)
+    |> List.partition Char.isDigit
     |> Tuple.mapFirst convertRunLength
     |> Tuple.mapSecond String.fromList
 
-expandDecodedRun: (Int, String) -> String
-expandDecodedRun decodedRun =
-  String.repeat (Tuple.first decodedRun) (Tuple.second decodedRun)
+expand: (Int, String) -> String
+expand (length, value) =
+  String.repeat length value
 
 convertRunLength: List Char -> Int
 convertRunLength runLength =
