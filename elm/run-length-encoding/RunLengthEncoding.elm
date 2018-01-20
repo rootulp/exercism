@@ -46,10 +46,10 @@ convertRunLength runLength =
 splitEncodedRuns: (Char -> List String -> List String)
 splitEncodedRuns char runs =
   let nextChar = String.fromChar char in
-    if Char.isUpper char then
-      nextChar :: runs
-    else
+    if Char.isDigit char then
       String.cons char (previousRun runs) :: (restOfRuns runs)
+    else
+      nextChar :: runs
 
 
 splitRuns: (Char -> List String -> List String)

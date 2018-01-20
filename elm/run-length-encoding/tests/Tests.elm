@@ -25,7 +25,7 @@ tests =
                 \() ->
                     Expect.equal "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB"
                         (decode "12WB12W3B24WB")
-        , skip <|
+        ,
             test "(decode (encode (...)) combination" <|
                 \() ->
                     Expect.equal "zzz ZZ  zZ"
@@ -38,7 +38,7 @@ tests =
         ,
             test "encode unicode" <|
                 \() -> Expect.equal "⏰3⚽2⭐⏰" (encode "⏰⚽⚽⚽⭐⭐⏰")
-        , skip <|
+        ,
             test "decode unicode" <|
                 \() -> Expect.equal "⏰⚽⚽⚽⭐⭐⏰" (decode "⏰3⚽2⭐⏰")
         ]
