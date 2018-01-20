@@ -19,6 +19,33 @@ decode data =
     |> List.map decodeRun
     |> String.join ""
 
+splitRuns: (Char -> List String -> List String)
+splitRuns char runs =
+  let nextChar = String.fromChar char in
+    if String.startsWith nextChar (previousRun runs) then
+      appendCharToExistingRun char runs
+    else
+      nextChar :: runs
+
+splitEncodedRuns: (Char -> List String -> List String)
+splitEncodedRuns char runs =
+  let nextChar = String.fromChar char in
+    if Char.isDigit char then
+      appendCharToExistingRun char runs
+    else
+      nextChar :: runs
+
+appendCharToExistingRun: Char -> List String -> List String
+appendCharToExistingRun char runs =
+      String.cons char (previousRun runs) :: (restOfRuns runs)
+
+
+encodeRun: String -> String
+encodeRun run =
+    run
+      |> String.left 1
+      |> String.append (runLength run)
+
 decodeRun: String -> String
 decodeRun run =
   let decodedLengthAndChar =
@@ -34,37 +61,12 @@ expandDecodedRun: (Int, String) -> String
 expandDecodedRun decodedRun =
   String.repeat (Tuple.first decodedRun) (Tuple.second decodedRun)
 
-
 convertRunLength: List Char -> Int
 convertRunLength runLength =
   runLength
     |> String.fromList
     |> String.toInt
     |> Result.withDefault 1
-
-
-splitEncodedRuns: (Char -> List String -> List String)
-splitEncodedRuns char runs =
-  let nextChar = String.fromChar char in
-    if Char.isDigit char then
-      String.cons char (previousRun runs) :: (restOfRuns runs)
-    else
-      nextChar :: runs
-
-
-splitRuns: (Char -> List String -> List String)
-splitRuns char runs =
-  let nextChar = String.fromChar char in
-    if String.startsWith nextChar (previousRun runs) then
-      String.cons char (previousRun runs) :: (restOfRuns runs)
-    else
-      nextChar :: runs
-
-encodeRun: String -> String
-encodeRun run =
-    run
-      |> String.left 1
-      |> String.append (runLength run)
 
 runLength: String -> String
 runLength run =
