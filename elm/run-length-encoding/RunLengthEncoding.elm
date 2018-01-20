@@ -15,42 +15,33 @@ decode: String -> String
 decode data =
   data
     |> String.toList
-    |> List.foldr splitEncodedRuns []
+    |> List.foldr splitRuns []
     |> List.map decodeRun
     |> String.join ""
 
 splitRuns: (Char -> List String -> List String)
 splitRuns char runs =
-    if existingRun char runs then
-      handleExistingRun char runs
-    else
-      newRun char runs
-
-splitEncodedRuns: (Char -> List String -> List String)
-splitEncodedRuns char runs =
-  let nextChar = String.fromChar char in
-    if Char.isDigit char then
-      handleExistingRun char runs
+    if Char.isDigit char || charInPreviousRun char runs then
+      existingRun char runs
     else
       newRun char runs
 
 newRun: Char -> List String -> List String
 newRun char runs =
-  let nextChar = String.fromChar char in
-    nextChar :: runs
+  String.fromChar char :: runs
 
-existingRun: Char -> List String -> Bool
-existingRun char runs =
+charInPreviousRun: Char -> List String -> Bool
+charInPreviousRun char runs =
   String.startsWith (String.fromChar char) (previousRun runs)
 
-handleExistingRun: Char -> List String -> List String
-handleExistingRun char runs =
+existingRun: Char -> List String -> List String
+existingRun char runs =
   runs
     |> restOfRuns
-    |> (::) (appendCharToExistingRun char runs)
+    |> (::) (appendCharToPreviousRun char runs)
 
-appendCharToExistingRun: Char -> List String -> String
-appendCharToExistingRun char runs =
+appendCharToPreviousRun: Char -> List String -> String
+appendCharToPreviousRun char runs =
   runs
     |> previousRun
     |> String.cons char
