@@ -20,7 +20,7 @@ tests =
                 \() ->
                     Expect.equal "12WB12W3B24WB"
                         (encode "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB")
-        , skip <|
+        ,
             test "decode with single values" <|
                 \() ->
                     Expect.equal "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB"
@@ -30,7 +30,7 @@ tests =
                 \() ->
                     Expect.equal "zzz ZZ  zZ"
                         (decode (encode "zzz ZZ  zZ"))
-        , skip <|
+        ,
             test "decode with a x10 value" <|
                 \() ->
                     Expect.equal "WWWWWWWWWW"
