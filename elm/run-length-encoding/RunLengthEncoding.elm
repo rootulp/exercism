@@ -21,11 +21,10 @@ decode data =
 
 splitRuns: (Char -> List String -> List String)
 splitRuns char runs =
-  let nextChar = String.fromChar char in
-    if String.startsWith nextChar (previousRun runs) then
+    if existingRun char runs then
       handleExistingRun char runs
     else
-      newRun nextChar runs
+      newRun char runs
 
 splitEncodedRuns: (Char -> List String -> List String)
 splitEncodedRuns char runs =
@@ -33,11 +32,16 @@ splitEncodedRuns char runs =
     if Char.isDigit char then
       handleExistingRun char runs
     else
-      newRun nextChar runs
+      newRun char runs
 
-newRun: String -> List String -> List String
-newRun nextChar runs =
-  nextChar :: runs
+newRun: Char -> List String -> List String
+newRun char runs =
+  let nextChar = String.fromChar char in
+    nextChar :: runs
+
+existingRun: Char -> List String -> Bool
+existingRun char runs =
+  String.startsWith (String.fromChar char) (previousRun runs)
 
 handleExistingRun: Char -> List String -> List String
 handleExistingRun char runs =
@@ -55,7 +59,7 @@ encodeRun: String -> String
 encodeRun run =
     run
       |> String.left 1
-      |> String.append (runLength run)
+      |> String.append (calculateRunLength run)
 
 decodeRun: String -> String
 decodeRun run =
@@ -82,12 +86,10 @@ convertRunLength runLength =
     |> String.toInt
     |> Result.withDefault 1
 
-runLength: String -> String
-runLength run =
-  if String.length run == 1 then "" else
-    run
-      |> String.length
-      |> toString
+calculateRunLength: String -> String
+calculateRunLength run =
+  let runLength = String.length run in
+    if runLength == 1 then "" else toString runLength
 
 previousRun: List String -> String
 previousRun runs =
