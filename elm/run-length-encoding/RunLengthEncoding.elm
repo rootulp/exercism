@@ -23,22 +23,33 @@ splitRuns: (Char -> List String -> List String)
 splitRuns char runs =
   let nextChar = String.fromChar char in
     if String.startsWith nextChar (previousRun runs) then
-      appendCharToExistingRun char runs
+      handleExistingRun char runs
     else
-      nextChar :: runs
+      newRun nextChar runs
 
 splitEncodedRuns: (Char -> List String -> List String)
 splitEncodedRuns char runs =
   let nextChar = String.fromChar char in
     if Char.isDigit char then
-      appendCharToExistingRun char runs
+      handleExistingRun char runs
     else
-      nextChar :: runs
+      newRun nextChar runs
 
-appendCharToExistingRun: Char -> List String -> List String
+newRun: String -> List String -> List String
+newRun nextChar runs =
+  nextChar :: runs
+
+handleExistingRun: Char -> List String -> List String
+handleExistingRun char runs =
+  runs
+    |> restOfRuns
+    |> (::) (appendCharToExistingRun char runs)
+
+appendCharToExistingRun: Char -> List String -> String
 appendCharToExistingRun char runs =
-      String.cons char (previousRun runs) :: (restOfRuns runs)
-
+  runs
+    |> previousRun
+    |> String.cons char
 
 encodeRun: String -> String
 encodeRun run =
@@ -48,14 +59,17 @@ encodeRun run =
 
 decodeRun: String -> String
 decodeRun run =
-  let decodedLengthAndChar =
-    run
-      |> String.toList
-      |> List.partition (Char.isDigit)
-      |> Tuple.mapFirst convertRunLength
-      |> Tuple.mapSecond String.fromList
-  in
-    expandDecodedRun decodedLengthAndChar
+  run
+    |> decodeLengthAndChar
+    |> expandDecodedRun
+
+decodeLengthAndChar: String -> (Int, String)
+decodeLengthAndChar run =
+  run
+    |> String.toList
+    |> List.partition (Char.isDigit)
+    |> Tuple.mapFirst convertRunLength
+    |> Tuple.mapSecond String.fromList
 
 expandDecodedRun: (Int, String) -> String
 expandDecodedRun decodedRun =
@@ -70,9 +84,7 @@ convertRunLength runLength =
 
 runLength: String -> String
 runLength run =
-  if String.length run == 1 then
-    ""
-  else
+  if String.length run == 1 then "" else
     run
       |> String.length
       |> toString
