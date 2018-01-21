@@ -1,9 +1,9 @@
 module Tests exposing (..)
 
-import Test exposing (..)
 import Expect
-import Strain exposing (keep, discard)
+import Strain exposing (discard, keep)
 import String
+import Test exposing (..)
 
 
 even : Int -> Bool
@@ -18,7 +18,7 @@ odd number =
 
 isFirstLetter : String -> String -> Bool
 isFirstLetter letter word =
-    (String.left 1 word) == letter
+    String.left 1 word == letter
 
 
 lessThanTen : comparable -> Bool
@@ -33,59 +33,48 @@ tests =
             \() ->
                 Expect.equal []
                     (keep lessThanTen [])
-        ,
-            test "keep everything" <|
-                \() ->
-                    Expect.equal [ 1, 2, 3 ]
-                        (keep lessThanTen [ 1, 2, 3 ])
-        ,
-            test "keep first and last" <|
-                \() ->
-                    Expect.equal [ 1, 3 ]
-                        (keep odd [ 1, 2, 3 ])
-        ,
-            test "keep nothing" <|
-                \() ->
-                    Expect.equal []
-                        (keep even [ 1, 3, 5, 7 ])
-        ,
-            test "keep neither first nor last" <|
-                \() ->
-                    Expect.equal [ 2 ]
-                        (keep even [ 1, 2, 3 ])
-        ,
-            test "keep strings" <|
-                \() ->
-                    Expect.equal [ "zebra", "zombies", "zealot" ]
-                        (keep (isFirstLetter "z") [ "apple", "zebra", "banana", "zombies", "cherimoya", "zealot" ])
-        ,
-            test "empty discard" <|
-                \() ->
-                    Expect.equal []
-                        (discard lessThanTen [])
-        ,
-            test "discard everything" <|
-                \() ->
-                    Expect.equal []
-                        (discard lessThanTen [ 1, 2, 3 ])
-        ,
-            test "discard first and last" <|
-                \() ->
-                    Expect.equal [ 2 ]
-                        (discard odd [ 1, 2, 3 ])
-        ,
-            test "discard nothing" <|
-                \() ->
-                    Expect.equal [ 1, 3, 5, 7 ]
-                        (discard even [ 1, 3, 5, 7 ])
-        ,
-            test "discard neither first nor last" <|
-                \() ->
-                    Expect.equal [ 1, 3 ]
-                        (discard even [ 1, 2, 3 ])
-        ,
-            test "discard strings" <|
-                \() ->
-                    Expect.equal [ "apple", "banana", "cherimoya" ]
-                        (discard (isFirstLetter "z") [ "apple", "zebra", "banana", "zombies", "cherimoya", "zealot" ])
+        , test "keep everything" <|
+            \() ->
+                Expect.equal [ 1, 2, 3 ]
+                    (keep lessThanTen [ 1, 2, 3 ])
+        , test "keep first and last" <|
+            \() ->
+                Expect.equal [ 1, 3 ]
+                    (keep odd [ 1, 2, 3 ])
+        , test "keep nothing" <|
+            \() ->
+                Expect.equal []
+                    (keep even [ 1, 3, 5, 7 ])
+        , test "keep neither first nor last" <|
+            \() ->
+                Expect.equal [ 2 ]
+                    (keep even [ 1, 2, 3 ])
+        , test "keep strings" <|
+            \() ->
+                Expect.equal [ "zebra", "zombies", "zealot" ]
+                    (keep (isFirstLetter "z") [ "apple", "zebra", "banana", "zombies", "cherimoya", "zealot" ])
+        , test "empty discard" <|
+            \() ->
+                Expect.equal []
+                    (discard lessThanTen [])
+        , test "discard everything" <|
+            \() ->
+                Expect.equal []
+                    (discard lessThanTen [ 1, 2, 3 ])
+        , test "discard first and last" <|
+            \() ->
+                Expect.equal [ 2 ]
+                    (discard odd [ 1, 2, 3 ])
+        , test "discard nothing" <|
+            \() ->
+                Expect.equal [ 1, 3, 5, 7 ]
+                    (discard even [ 1, 3, 5, 7 ])
+        , test "discard neither first nor last" <|
+            \() ->
+                Expect.equal [ 1, 3 ]
+                    (discard even [ 1, 2, 3 ])
+        , test "discard strings" <|
+            \() ->
+                Expect.equal [ "apple", "banana", "cherimoya" ]
+                    (discard (isFirstLetter "z") [ "apple", "zebra", "banana", "zombies", "cherimoya", "zealot" ])
         ]

@@ -3,7 +3,7 @@ module Pangram exposing (..)
 import Set exposing (..)
 
 
-isPangram: String -> Bool
+isPangram : String -> Bool
 isPangram sentence =
     String.toUpper sentence
         |> String.toList
@@ -12,7 +12,7 @@ isPangram sentence =
         |> Set.isEmpty
 
 
-alphabet: Set Char
+alphabet : Set Char
 alphabet =
     String.toList "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         |> Set.fromList
