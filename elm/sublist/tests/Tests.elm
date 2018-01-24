@@ -51,7 +51,7 @@ tests =
         ,
             test "superlist at end" <|
                 \() -> Expect.equal Superlist (sublist [ 1, 2, 3, 4, 5 ] [ 3, 4, 5 ])
-        , skip <|
+        ,
             test "partially matching superlist at start" <|
                 \() -> Expect.equal Superlist (sublist [ 1, 1, 1, 2 ] [ 1, 1, 2 ])
         ,
