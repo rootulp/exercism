@@ -1,7 +1,5 @@
 module Sublist exposing (..)
 
-import Dict exposing (Dict)
-
 type ListComparison = Equal | Unequal | Sublist | Superlist
 
 
