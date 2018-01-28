@@ -1,9 +1,14 @@
 module Sublist exposing (..)
 
-type ListComparison = Equal | Unequal | Sublist | Superlist
+
+type ListComparison
+    = Equal
+    | Unequal
+    | Sublist
+    | Superlist
 
 
-sublist: List Int -> List Int -> ListComparison
+sublist : List Int -> List Int -> ListComparison
 sublist list1 list2 =
     if list1 == list2 then
         Equal
@@ -14,7 +19,8 @@ sublist list1 list2 =
     else
         Unequal
 
-isSublist: List Int -> List Int -> Bool
+
+isSublist : List Int -> List Int -> Bool
 isSublist list1 list2 =
     if list1 == List.take (List.length list1) list2 then
         True
