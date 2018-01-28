@@ -7,12 +7,22 @@ sublist: List Int -> List Int -> ListComparison
 sublist list1 list2 =
     if list1 == list2 then
         Equal
-    -- else if isSublist list1 list2 then
-    --     Sublist
-    -- else if isSublist list2 list1 then
-    --     Superlist
+    else if isSublist list1 list2 then
+        Sublist
+    else if isSublist list2 list1 then
+        Superlist
     else
         Unequal
+
+isSublist: List Int -> List Int -> Bool
+isSublist list1 list2 =
+    if list1 == list2 then
+        True
+    else if List.isEmpty list2 then
+        False
+    else
+        isSublist list1 (List.drop 1 list2) ||
+        isSublist list1 (List.take (List.length list2 - 1) list2)
 
 
 version : Int
