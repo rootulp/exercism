@@ -16,13 +16,12 @@ sublist list1 list2 =
 
 isSublist: List Int -> List Int -> Bool
 isSublist list1 list2 =
-    if list1 == list2 then
+    if list1 == List.take (List.length list1) list2 then
         True
     else if List.length list1 > List.length list2 then
         False
     else
-        isSublist list1 (List.drop 1 list2) ||
-        isSublist list1 (List.take (List.length list2 - 1) list2)
+        isSublist list1 (List.drop 1 list2)
 
 
 version : Int
