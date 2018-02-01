@@ -1,2 +1,0 @@
-def reverse(input=''):
-    pass
