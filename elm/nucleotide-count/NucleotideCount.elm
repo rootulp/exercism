@@ -12,23 +12,24 @@ type alias NucleotideCounts = {
 
 nucleotideCounts: String -> NucleotideCounts
 nucleotideCounts strand =
-  { a = occurencesOf strand 'A'
-  , t = occurencesOf strand 'T'
-  , c = occurencesOf strand 'C'
-  , g = occurencesOf strand 'G'
+  let occurencesInStrand = occurencesIn strand in
+  { a = occurencesInStrand 'A'
+  , t = occurencesInStrand 'T'
+  , c = occurencesInStrand 'C'
+  , g = occurencesInStrand 'G'
   }
 
 
-occurencesOf: String -> Char -> Int
-occurencesOf strand nucleotide =
-  let occurences = nucleotideOccurences strand in
-  occurences
+occurencesIn: String -> Char -> Int
+occurencesIn strand nucleotide =
+  let nucleotideOccurences = occurences strand in
+  nucleotideOccurences
     |> Dict.get nucleotide
     |> Maybe.withDefault 0
 
 
-nucleotideOccurences: String -> Dict Char Int
-nucleotideOccurences strand =
+occurences: String -> Dict Char Int
+occurences strand =
   strand
     |> String.toList
     |> List.foldl populateDict Dict.empty
