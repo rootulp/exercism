@@ -1,7 +1,8 @@
 module NucleotideCount exposing (..)
 
 import Dict exposing (Dict)
--- import Record exposing (Record)
+
+
 type alias NucleotideCounts = {
   a : Int,
   t : Int,
@@ -11,15 +12,27 @@ type alias NucleotideCounts = {
 
 nucleotideCounts: String -> NucleotideCounts
 nucleotideCounts strand =
-  let d = strand
-    |> String.toList
-    |> List.foldl populateDict Dict.empty in
-
-  { a = Maybe.withDefault 0 (Dict.get 'A' d)
-  , t = Maybe.withDefault 0 (Dict.get 'T' d)
-  , c = Maybe.withDefault 0 (Dict.get 'C' d)
-  , g = Maybe.withDefault 0 (Dict.get 'G' d)
+  { a = occurencesOf strand 'A'
+  , t = occurencesOf strand 'T'
+  , c = occurencesOf strand 'C'
+  , g = occurencesOf strand 'G'
   }
+
+
+occurencesOf: String -> Char -> Int
+occurencesOf strand nucleotide =
+  let occurences = nucleotideOccurences strand in
+  occurences
+    |> Dict.get nucleotide
+    |> Maybe.withDefault 0
+
+
+nucleotideOccurences: String -> Dict Char Int
+nucleotideOccurences strand =
+  strand
+    |> String.toList
+    |> List.foldl populateDict Dict.empty
+
 
 populateDict : Char -> Dict Char Int -> Dict Char Int
 populateDict nucleotide dict =
@@ -31,6 +44,7 @@ incrementValue maybe =
     Maybe.withDefault 0 maybe
         + 1
         |> Just
+
 
 version : Int
 version =
