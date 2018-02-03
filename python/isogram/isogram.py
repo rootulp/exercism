@@ -1,6 +1,5 @@
 def is_isogram(word):
-    stripped = remove_punctuation(word)
-    return len(stripped) == len(set(stripped))
+    return len(remove_punctuation(word)) == len(set(remove_punctuation(word)))
 
 def remove_punctuation(word):
-    return filter(str.isalpha, word)
+    return filter(str.isalpha, word.lower())
