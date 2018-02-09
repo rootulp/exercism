@@ -11,11 +11,6 @@ __pycache__/
 # Test Coverage
 coverage/
 
-# Intellij
-*.iml
-*.iws
-.idea/
-
 # Misc
 .keep
 

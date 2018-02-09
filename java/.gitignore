@@ -48,3 +48,8 @@ gradle/
 gradlew
 gradlew.bat
 build/
+
+# Intellij
+*.iml
+*.iws
+.idea/
