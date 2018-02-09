@@ -34,3 +34,5 @@ ratings:
 exclude_paths:
   - "**/*test*"
   - "**/*spec*"
+  - "**/node_modules/"
+
