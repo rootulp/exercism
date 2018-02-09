@@ -2,12 +2,6 @@
 vendor/
 .vscode/
 
-# Python Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-.cache/
-
 # Test Coverage
 coverage/
 
