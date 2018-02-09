@@ -1,6 +1,1 @@
 .exercism.json
-vendor/
-.vscode/
-
-# Test Coverage
-coverage/
