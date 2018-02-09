@@ -16,13 +16,6 @@ coverage/
 *.iws
 .idea/
 
-# Gradle files
-*.gradle
-gradle/
-gradlew
-gradlew.bat
-build/
-
 # Misc
 .keep
 
