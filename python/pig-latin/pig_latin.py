@@ -31,7 +31,7 @@ class PigLatinTranslator:
 
 
 def translate(phrase):
-    print PigLatinTranslator.alpha
-    print PigLatinTranslator.vowels
-    print PigLatinTranslator.consonants
+    print(PigLatinTranslator.alpha)
+    print(PigLatinTranslator.vowels)
+    print(PigLatinTranslator.consonants)
     return PigLatinTranslator.translate_phrase(phrase)
