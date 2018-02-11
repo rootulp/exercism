@@ -22,7 +22,9 @@ class ExerciseTestsRunner
 
   def setup_exercise_files_in(dir)
     FileUtils.cp_r @exercise.directory, dir
-    FileUtils.mv "#{dir}/#{@exercise.example_file}", "#{dir}/#{@exercise.testable_example_file}"
+
+    # No longer needed b/c the solutions aren't in example files to begin with
+    # FileUtils.mv "#{dir}/#{@exercise.example_file}", "#{dir}/#{@exercise.testable_example_file}"
   end
 
   def run_exercise_tests_in(dir)
