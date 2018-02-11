@@ -1,7 +1,7 @@
 # Garden
 class Garden
-  DEFAULT_STUDENTS = %w[Alice Bob Charlie David Eve Fred Ginny
-                        Harriet Ileana Joseph Kincaid Larry].freeze
+  DEFAULT_STUDENTS = %w(Alice Bob Charlie David Eve Fred Ginny
+                        Harriet Ileana Joseph Kincaid Larry).freeze
 
   PLANTS = { 'G' => :grass,
              'C' => :clover,

@@ -2,7 +2,7 @@
 class NthPrime
   class << self
     def nth(num)
-      raise ArgumentError if num < 1
+      fail ArgumentError if num < 1
       primes(num).last
     end
 

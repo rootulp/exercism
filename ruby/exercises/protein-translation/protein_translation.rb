@@ -21,7 +21,7 @@ class Translation
   }.freeze
 
   def self.of_codon(codon)
-    raise InvalidCodonError unless MAPPINGS.include?(codon)
+    fail InvalidCodonError unless MAPPINGS.include?(codon)
     MAPPINGS[codon]
   end
 

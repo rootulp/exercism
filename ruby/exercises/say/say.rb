@@ -40,7 +40,7 @@ class Say
 
   attr_reader :number
   def initialize(number)
-    raise ArgumentError unless ACCEPTED_RANGE.include?(number)
+    fail ArgumentError unless ACCEPTED_RANGE.include?(number)
     @number = number
   end
 

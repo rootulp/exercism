@@ -38,8 +38,8 @@ class CustomSetTest < Minitest::Test
 
   # rubocop:disable Metrics/LineLength
   def test_intersection
-    assert_equal CustomSet.new(%i[a c]),
-                 CustomSet.new(%i[a b c]).intersection(CustomSet.new(%i[a c d]))
+    assert_equal CustomSet.new(%i(a c)),
+                 CustomSet.new(%i(a b c)).intersection(CustomSet.new(%i(a c d)))
 
     assert_equal CustomSet.new([3]),
                  CustomSet.new([1, 2, 3]).intersection(CustomSet.new([1.0, 2.0, 3]))
@@ -88,7 +88,7 @@ class CustomSetTest < Minitest::Test
     assert_equal CustomSet.new([3, 2, 1]),
                  CustomSet.new([1, 3]).union(CustomSet.new([2]))
     skip CustomSet.new([3.0, 3, 2, 1]),
-                 CustomSet.new([1, 3]).union(CustomSet.new([2, 3.0]))
+         CustomSet.new([1, 3]).union(CustomSet.new([2, 3.0]))
     assert_equal CustomSet.new([3, 1]),
                  CustomSet.new([1, 3]).union(CustomSet.new)
     assert_equal CustomSet.new([2]),

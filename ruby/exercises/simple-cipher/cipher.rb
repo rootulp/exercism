@@ -3,7 +3,7 @@ class Cipher
   KEY_LENGTH = 100
   attr_reader :key
   def initialize(key = generate_key)
-    raise ArgumentError if invalid_key?(key)
+    fail ArgumentError if invalid_key?(key)
     @key = key
   end
 

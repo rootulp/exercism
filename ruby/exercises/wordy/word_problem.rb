@@ -12,7 +12,7 @@ class WordProblem
   end
 
   def answer
-    raise ArgumentError if empty_stacks?
+    fail ArgumentError if empty_stacks?
     calculate
   end
 

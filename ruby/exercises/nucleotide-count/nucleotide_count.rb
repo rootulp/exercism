@@ -1,6 +1,6 @@
 # Nucleotide
 class Nucleotide
-  NUCLEOTIDES = %w[A T C G].freeze
+  NUCLEOTIDES = %w(A T C G).freeze
   attr_reader :strand
 
   def self.from_dna(strand)
@@ -8,7 +8,7 @@ class Nucleotide
   end
 
   def initialize(strand)
-    raise ArgumentError if strand =~ /[^ATCG]/
+    fail ArgumentError if strand =~ /[^ATCG]/
     @strand = strand
   end
 

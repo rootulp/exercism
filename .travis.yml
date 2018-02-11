@@ -6,6 +6,7 @@
   install:
     - bundle install --quiet
   script:
+    - cd ruby
     - rubocop -fs -D
     - rake test
 

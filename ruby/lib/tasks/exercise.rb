@@ -12,7 +12,7 @@ class Exercise
   end
 
   attr_reader :slug
-  alias :to_s :slug
+  alias to_s slug
 
   def initialize(slug)
     @slug = slug

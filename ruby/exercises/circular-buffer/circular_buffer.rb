@@ -24,12 +24,12 @@ class CircularBuffer
   end
 
   def write(val)
-    raise BufferFullException if head == tail && buffer[head]
+    fail BufferFullException if head == tail && buffer[head]
     write_buffer(val)
   end
 
   def read
-    raise BufferEmptyException if buffer[tail].nil?
+    fail BufferEmptyException if buffer[tail].nil?
     result = buffer[tail]
     buffer[tail] = nil
     increment_tail

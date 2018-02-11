@@ -4,7 +4,7 @@ require 'set'
 class PigLatin
   class << self
     ALPHA = ('a'..'z').to_set.freeze
-    VOWELS = %w[a e i o u].to_set.freeze
+    VOWELS = %w(a e i o u).to_set.freeze
     CONSONANTS = (ALPHA - VOWELS).freeze
 
     def translate(phrase)

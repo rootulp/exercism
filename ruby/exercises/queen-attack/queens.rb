@@ -4,7 +4,7 @@ class Queens
   attr_reader :white, :black
   attr_accessor :board
   def initialize(positions = DEFAULTS)
-    raise ArgumentError if positions[:white] == positions[:black]
+    fail ArgumentError if positions[:white] == positions[:black]
     @board = Array.new(8) { Array.new(8, '_') }
     @white = [*positions[:white]]
     @black = [*positions[:black]]

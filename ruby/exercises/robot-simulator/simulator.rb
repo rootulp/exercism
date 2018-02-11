@@ -1,10 +1,10 @@
 # Robot
 class Robot
-  BEARINGS = %i[north east south west].freeze
+  BEARINGS = %i(north east south west).freeze
   attr_reader :bearing, :x, :y
 
   def orient(bearing)
-    raise ArgumentError unless BEARINGS.include?(bearing)
+    fail ArgumentError unless BEARINGS.include?(bearing)
     @bearing = bearing
   end
 

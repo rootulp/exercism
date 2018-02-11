@@ -13,12 +13,12 @@ class Complement
   }.freeze
 
   def self.of_dna(strand)
-    raise ArgumentError if strand.include?('U')
+    fail ArgumentError if strand.include?('U')
     strand.chars.map { |nucleobase| dna_pairing_for(nucleobase) }.join
   end
 
   def self.of_rna(strand)
-    raise ArgumentError if strand.include?('T')
+    fail ArgumentError if strand.include?('T')
     strand.chars.map { |nucleobase| rna_pairing_for(nucleobase) }.join
   end
 

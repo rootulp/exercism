@@ -8,7 +8,7 @@ class Triangle
   end
 
   def kind
-    raise TriangleError if error?
+    fail TriangleError if error?
     return :equilateral if equilateral?
     return :isosceles   if isosceles?
     :scalene
