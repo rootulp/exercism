@@ -9,7 +9,9 @@ class CustomSet
   def put(val)
     new_node = Node.new(val)
     arr << new_node unless arr.include?(new_node)
-    arr.sort!
+    arr.sort_by! do |node|
+      node.val
+    end
     self
   end
 
