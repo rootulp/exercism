@@ -1,6 +1,9 @@
 class IsbnVerifier(object):
 
-    VALID_CHARACTERS = set(["-", "X", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
+    VALID_SEPERATOR = "-"
+    VALID_CHECK_DIGIT = "X"
+    VALID_DIGITS = list(map(str, range(0, 10)))
+    VALID_CHARACTERS = set(VALID_DIGITS) | set([VALID_SEPERATOR, VALID_CHECK_DIGIT])
     VALID_LENGTH = 10
 
     @classmethod
@@ -26,7 +29,7 @@ class IsbnVerifier(object):
 
     @classmethod
     def invalid_X_other_than_check_digit(cls, string):
-        return "X" in string and not string.endswith("X")
+        return cls.VALID_CHECK_DIGIT in string and not string.endswith(cls.VALID_CHECK_DIGIT)
 
     @classmethod
     def remove_invalid_characters_and_slashes(cls, string):
@@ -42,7 +45,7 @@ class IsbnVerifier(object):
 
     @classmethod
     def convert_x_to_ten(cls, char):
-        return 10 if char == 'X' else char
+        return 10 if char == cls.VALID_CHECK_DIGIT else char
 
     @staticmethod
     def remove_slashes(string):
