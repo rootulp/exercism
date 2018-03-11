@@ -14,7 +14,7 @@ class IsbnVerifier(object):
 
     @classmethod
     def invalid(cls, string):
-        return cls.invalid_character(string) or cls.invalid_length(string)
+        return cls.invalid_character(string) or cls.invalid_length(string) or cls.invalid_X_other_than_check_digit(string)
 
     @classmethod
     def invalid_character(cls, string):
@@ -23,6 +23,10 @@ class IsbnVerifier(object):
     @classmethod
     def invalid_length(cls, string):
         return len(cls.remove_invalid_characters_and_slashes(string)) != cls.VALID_LENGTH
+
+    @classmethod
+    def invalid_X_other_than_check_digit(cls, string):
+        return "X" in string and not string.endswith("X")
 
     @classmethod
     def remove_invalid_characters_and_slashes(cls, string):
