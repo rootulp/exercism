@@ -10,6 +10,10 @@ class IsbnVerifier(object):
     def is_valid(cls, string):
         if cls.invalid(string):
             return False
+        return cls.verify(string)
+
+    @classmethod
+    def verify(cls, string):
         sum_so_far = 0
         for i, c in enumerate(cls.remove_seperator(string)):
             sum_so_far += cls.convert_char_to_int(c) * (10 - i)
