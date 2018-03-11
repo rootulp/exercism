@@ -22,7 +22,11 @@ class IsbnVerifier(object):
 
     @classmethod
     def invalid_length(cls, string):
-        return len(cls.remove_invalid_characters(string)) != cls.VALID_LENGTH
+        return len(cls.remove_invalid_characters_and_slashes(string)) != cls.VALID_LENGTH
+
+    @classmethod
+    def remove_invalid_characters_and_slashes(cls, string):
+        return cls.remove_slashes(cls.remove_invalid_characters(string))
 
     @classmethod
     def remove_invalid_characters(cls, string):
