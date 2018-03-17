@@ -21,7 +21,8 @@ class AcronymTest(unittest.TestCase):
         self.assertEqual('PHP', abbreviate('PHP: Hypertext Preprocessor'))
 
     def test_hyphenated(self):
-        self.assertEqual('CMOS', abbreviate('Complementary metal-oxide semiconductor'))
+        self.assertEqual('CMOS',
+                         abbreviate('Complementary metal-oxide semiconductor'))
 
 
 if __name__ == '__main__':
