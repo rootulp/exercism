@@ -1,10 +1,6 @@
----
   language: ruby
   gemfile: ruby/Gemfile
-  script:
-    - cd ruby
-    - rubocop -fs -D
-    - rake test
+  bundler_args: --gemfile ruby/Gemfile
 
 addons:
   code_climate:
