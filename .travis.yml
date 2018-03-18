@@ -1,6 +1,9 @@
   language: ruby
   bundler_args: --gemfile ruby/Gemfile
-  script: rake --rakefile ruby/Rakefile
+  script:
+    - cd ruby
+    # - rubocop
+    - rake
 
   notifications:
     email: false
