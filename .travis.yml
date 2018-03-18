@@ -1,6 +1,7 @@
   language: ruby
-  gemfile: ruby/Gemfile
+  # gemfile: ruby/Gemfile
   bundler_args: --gemfile ruby/Gemfile
+  script: rake --file ruby/Rakefile
 
 addons:
   code_climate:
