@@ -37,25 +37,25 @@ class AllergiesTest < Minitest::Test
 
   def test_allergic_to_eggs_and_peanuts
     allergies = Allergies.new(3)
-    assert_equal %w(eggs peanuts), allergies.list
+    assert_equal %w[eggs peanuts], allergies.list
   end
 
   def test_allergic_to_lots_of_stuff
     allergies = Allergies.new(248)
-    expected = %w(strawberries tomatoes chocolate pollen cats)
+    expected = %w[strawberries tomatoes chocolate pollen cats]
     assert_equal expected, allergies.list
   end
 
   def test_allergic_to_everything
     allergies = Allergies.new(255)
     # rubocop:disable Metrics/LineLength
-    expected = %w(eggs peanuts shellfish strawberries tomatoes chocolate pollen cats)
+    expected = %w[eggs peanuts shellfish strawberries tomatoes chocolate pollen cats]
     assert_equal expected, allergies.list
   end
 
   def test_ignore_non_allergen_score_parts
     allergies = Allergies.new(509)
-    expected = %w(eggs shellfish strawberries tomatoes chocolate pollen cats)
+    expected = %w[eggs shellfish strawberries tomatoes chocolate pollen cats]
     assert_equal expected, allergies.list
   end
 end

@@ -38,13 +38,13 @@ class CryptoTest < Minitest::Test
 
   def test_plaintext_segments
     crypto = Crypto.new('Never vex thine heart with idle woes')
-    expected = %w(neverv exthin eheart withid lewoes)
+    expected = %w[neverv exthin eheart withid lewoes]
     assert_equal expected, crypto.plaintext_segments
   end
 
   def test_other_plaintext_segments
     crypto = Crypto.new('ZOMG! ZOMBIES!!!')
-    assert_equal %w(zomg zomb ies), crypto.plaintext_segments
+    assert_equal %w[zomg zomb ies], crypto.plaintext_segments
   end
 
   def test_ciphertext

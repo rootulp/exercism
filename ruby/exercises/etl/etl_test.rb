@@ -9,14 +9,14 @@ class TransformTest < Minitest::Test
   end
 
   def test_transform_more_values
-    old = { 1 => %w(A E I O U) }
+    old = { 1 => %w[A E I O U] }
     expected = { 'a' => 1, 'e' => 1, 'i' => 1, 'o' => 1, 'u' => 1 }
 
     assert_equal expected, ETL.transform(old)
   end
 
   def test_more_keys
-    old = { 1 => %w(A E), 2 => %w(D G) }
+    old = { 1 => %w[A E], 2 => %w[D G] }
     expected = {
       'a' => 1,
       'e' => 1,
@@ -29,13 +29,13 @@ class TransformTest < Minitest::Test
 
   def test_full_dataset # rubocop:disable Metrics/MethodLength
     old = {
-      1 => %w(A E I O U L N R S T),
-      2 => %w(D G),
-      3 => %w(B C M P),
-      4 => %w(F H V W Y),
-      5 => %w(K),
-      8 => %w(J X),
-      10 => %w(Q Z)
+      1 => %w[A E I O U L N R S T],
+      2 => %w[D G],
+      3 => %w[B C M P],
+      4 => %w[F H V W Y],
+      5 => %w[K],
+      8 => %w[J X],
+      10 => %w[Q Z]
     }
 
     expected = {

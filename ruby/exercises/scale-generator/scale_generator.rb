@@ -1,9 +1,9 @@
 # Scale
 class Scale
-  ASCENDING_INTERVALS = %w(m M A).freeze
-  CHROMATIC_SCALE = %w(C C# D D# E F F# G G# A A# B).freeze
-  FLAT_CHROMATIC_SCALE = %w(C Db D Eb E F Gb G Ab A Bb B).freeze
-  FLAT_KEYS = %w(F Bb Eb Ab Db Gb d g c f bb eb).freeze
+  ASCENDING_INTERVALS = %w[m M A].freeze
+  CHROMATIC_SCALE = %w[C C# D D# E F F# G G# A A# B].freeze
+  FLAT_CHROMATIC_SCALE = %w[C Db D Eb E F Gb G Ab A Bb B].freeze
+  FLAT_KEYS = %w[F Bb Eb Ab Db Gb d g c f bb eb].freeze
 
   attr_reader :tonic, :scale_name, :pattern
   def initialize(tonic, scale_name, pattern = false)

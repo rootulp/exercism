@@ -10,7 +10,7 @@ class Series
   end
 
   def largest_product(size)
-    fail ArgumentError if size > digits.size
+    raise ArgumentError if size > digits.size
     return 1 if digits.empty?
     slices(size).map { |slice| slice.reduce(:*) }.max
   end

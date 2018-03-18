@@ -7,7 +7,7 @@ class Board
   attr_reader :grid
   def initialize(input)
     @grid = input.map(&:chars)
-    fail ValueError if error?
+    raise ValueError if error?
   end
 
   def transform
