@@ -1,7 +1,9 @@
   language: ruby
-  # gemfile: ruby/Gemfile
   bundler_args: --gemfile ruby/Gemfile
-  script: rake --file ruby/Rakefile
+  script: rake --rakefile ruby/Rakefile
+
+  notifications:
+    email: false
 
 addons:
   code_climate:
