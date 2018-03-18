@@ -6,7 +6,7 @@ class Series
   end
 
   def slices(length)
-    fail ArgumentError if length > digits.length
+    raise ArgumentError if length > digits.length
     digits.each_cons(length).to_a
   end
 end

@@ -12,7 +12,7 @@ class WordProblem
   end
 
   def answer
-    fail ArgumentError if empty_stacks?
+    raise ArgumentError if empty_stacks?
     calculate
   end
 
@@ -60,7 +60,7 @@ class WordProblem
 
   def number?(word)
     Integer(word)
-  rescue
+  rescue StandardError
     false
   end
 end

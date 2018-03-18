@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # OCR
 class OCR
   GARBLE = '?'.freeze

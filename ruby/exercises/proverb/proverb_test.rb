@@ -33,7 +33,7 @@ class ProverbTest < Minitest::Test
   end
 
   def test_the_whole_proverb
-    chain = %w(nail shoe horse rider message battle kingdom)
+    chain = %w[nail shoe horse rider message battle kingdom]
     proverb = Proverb.new(*chain)
     expected = "For want of a nail the shoe was lost.\n" \
       "For want of a shoe the horse was lost.\n" \
@@ -46,7 +46,7 @@ class ProverbTest < Minitest::Test
   end
 
   def test_an_optional_qualifier_in_the_final_consequence
-    chain = %w(nail shoe horse rider message battle kingdom)
+    chain = %w[nail shoe horse rider message battle kingdom]
     proverb = Proverb.new(*chain, qualifier: 'horseshoe')
     expected = "For want of a nail the shoe was lost.\n" \
       "For want of a shoe the horse was lost.\n" \
@@ -57,7 +57,6 @@ class ProverbTest < Minitest::Test
       'And all for the want of a horseshoe nail.'
     assert_equal expected, proverb.to_s
   end
-  # rubocop:enable Metrics/MethodLength
 
   def test_proverb_is_same_each_time
     proverb = Proverb.new('nail', 'shoe')
