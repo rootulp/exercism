@@ -2,10 +2,9 @@
 
 [![Build Status](https://img.shields.io/travis/rootulp/exercism.svg)](https://travis-ci.org/rootulp/exercism)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0587c23c2c8a70f35d37/maintainability)](https://codeclimate.com/github/rootulp/exercism/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/0587c23c2c8a70f35d37/test_coverage)](https://codeclimate.com/github/rootulp/exercism/test_coverage)
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://rootulp.mit-license.org)
 
-> [Exercism](http://exercism.io/rootulp) solutions 
+> [Exercism](http://exercism.io/rootulp) solutions
 
 ## Contribute
 
