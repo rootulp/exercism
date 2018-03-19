@@ -17,6 +17,6 @@ class SumOfMultiples
   end
 
   def divisible?(num)
-    multiples.any? { |multiple| num % multiple == 0 }
+    multiples.any? { |multiple| (num % multiple).zero? }
   end
 end

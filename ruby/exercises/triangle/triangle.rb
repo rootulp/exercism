@@ -1,10 +1,10 @@
 # Triangle
 class Triangle
   attr_accessor :side_a, :side_b, :side_c
-  def initialize(a, b, c)
-    @side_a = a
-    @side_b = b
-    @side_c = c
+  def initialize(side_a, side_b, side_c)
+    @side_a = side_a
+    @side_b = side_b
+    @side_c = side_c
   end
 
   def kind
@@ -22,8 +22,8 @@ class Triangle
       triangle_inequality?(side_a, side_c, side_b)
   end
 
-  def triangle_inequality?(x, y, z)
-    x + y <= z
+  def triangle_inequality?(side_x, side_y, side_z)
+    side_x + side_y <= side_z
   end
 
   def equilateral?

@@ -20,7 +20,7 @@ class PascalsTriangle
   end
 
   def factorial(n)
-    return 1 if n == 0
+    return 1 if n.zero?
     n.downto(1).reduce(:*)
   end
 end

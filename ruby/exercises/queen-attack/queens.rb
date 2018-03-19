@@ -30,7 +30,7 @@ class Queens
     board[x][y] = color
   end
 
-  # BUG hard-coded indices
+  # TODO: remove hard-coded indices
   def same_row?
     white[0] == black[0]
   end

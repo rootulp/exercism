@@ -1,3 +1,4 @@
+# Run Length Encoding
 class RunLengthEncoding
   VERSION = 1
 

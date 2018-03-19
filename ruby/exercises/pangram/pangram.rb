@@ -1,5 +1,6 @@
 require 'set'
 
+# Pangram
 class Pangram
   VERSION = 1
 

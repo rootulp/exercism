@@ -51,7 +51,7 @@ class Say
   private
 
   def number_to_words(number)
-    return 'zero' if number == 0
+    return 'zero' if number.zero?
     result = ''
     chunkify(number).each_with_index do |chunk, index|
       val = chunk_for(chunk)

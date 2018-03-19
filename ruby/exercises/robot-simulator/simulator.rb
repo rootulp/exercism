@@ -58,6 +58,7 @@ class Robot
   end
 end
 
+# Simulator
 class Simulator
   INSTRUCTIONS = {
     'L' => :turn_left,
