@@ -25,9 +25,7 @@ class SaddlePoints
     results
   end
 
-  # rubocop:disable Naming/UncommunicativeMethodParamName
   def saddle_point?(val, x, y)
     val == rows[x].max && val == columns[y].min
   end
-  # rubocop:enable Naming/UncommunicativeMethodParamName
 end

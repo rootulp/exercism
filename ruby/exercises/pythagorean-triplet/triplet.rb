@@ -8,7 +8,6 @@ require 'set'
 
 # Triplet
 class Triplet
-  # rubocop:disable Naming/UncommunicativeMethodParamName
   attr_reader :a, :b, :c, :sides
   def initialize(a, b, c)
     @a = a
@@ -16,7 +15,6 @@ class Triplet
     @c = c
     @sides = Set.new [a, b, c]
   end
-  # rubocop:enable Naming/UncommunicativeMethodParamName
 
   def sum
     sides.reduce(:+)

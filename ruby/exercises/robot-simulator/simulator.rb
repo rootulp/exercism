@@ -8,12 +8,10 @@ class Robot
     @bearing = bearing
   end
 
-  # rubocop:disable Naming/UncommunicativeMethodParamName
   def at(x, y)
     @x = x
     @y = y
   end
-  # rubocop:enable Naming/UncommunicativeMethodParamName
 
   def turn_right
     turn(bearing_index + 1)
@@ -72,12 +70,10 @@ class Simulator
     list.chars.map { |instruction| INSTRUCTIONS[instruction] }
   end
 
-  # rubocop:disable Naming/UncommunicativeMethodParamName
   def place(robot, x: 0, y: 0, direction: :north)
     robot.orient(direction)
     robot.at(x, y)
   end
-  # rubocop:enable Naming/UncommunicativeMethodParamName
 
   def evaluate(robot, list)
     instructions(list).each do |instruction|

@@ -15,7 +15,6 @@ class PascalsTriangle
 
   private
 
-  # rubocop:disable Naming/UncommunicativeMethodParamName
   def n_choose_k(n, k)
     factorial(n) / (factorial(k) * factorial(n - k))
   end
@@ -24,5 +23,4 @@ class PascalsTriangle
     return 1 if n.zero?
     n.downto(1).reduce(:*)
   end
-  # rubocop:enable Naming/UncommunicativeMethodParamName
 end
