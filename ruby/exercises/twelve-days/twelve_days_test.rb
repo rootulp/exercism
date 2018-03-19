@@ -81,4 +81,5 @@ class TwelveDaysTest < Minitest::Test
   def test_the_whole_song
     assert_equal song.verses(1, 12), song.sing
   end
+  # rubocop:enable Metrics/LineLength
 end

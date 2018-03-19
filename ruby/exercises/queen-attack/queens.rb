@@ -21,10 +21,12 @@ class Queens
 
   private
 
+  # rubocop:disable Naming/UncommunicativeMethodParamName
   def set_queens
     set_queen('W', white.first, white.last)
     set_queen('B', black.first, black.last)
   end
+  # rubocop:enable Naming/UncommunicativeMethodParamName
 
   def set_queen(color, x, y)
     board[x][y] = color

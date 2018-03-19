@@ -21,6 +21,6 @@ class Sieve
   end
 
   def multiples(num)
-    range.select { |multiple| multiple % num == 0 }
+    range.select { |multiple| (multiple % num).zero? }
   end
 end

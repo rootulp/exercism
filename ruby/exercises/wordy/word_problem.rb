@@ -22,16 +22,16 @@ class WordProblem
     operators = operator_stack
     numbers = number_stack
     while operators.any?
-      op = operators.shift
+      operator = operators.shift
       num1, num2 = numbers.shift(2)
-      result = evaluate(op, num1, num2)
+      result = evaluate(operator, num1, num2)
       numbers.unshift(result)
     end
     numbers.pop
   end
 
-  def evaluate(op, num1, num2)
-    num1.send(op, num2)
+  def evaluate(operator, num1, num2)
+    num1.send(operator, num2)
   end
 
   def empty_stacks?
@@ -54,8 +54,8 @@ class WordProblem
     OPERATORS.include?(word)
   end
 
-  def to_op(op)
-    OPERATORS[op]
+  def to_op(operator)
+    OPERATORS[operator]
   end
 
   def number?(word)
