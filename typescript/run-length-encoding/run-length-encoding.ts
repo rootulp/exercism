@@ -3,12 +3,12 @@ import {last, isUndefined, startsWith, concat, slice, repeat} from "lodash"
 export default class RunLengthEncoding {
     static encode(data: string): string {
         const chunks = RunLengthEncoding.splitIntoConsecutiveCharacters(data)
-        return chunks.map((chunk) => RunLengthEncoding.encodeChunk(chunk)).join('')
+        return chunks.map(RunLengthEncoding.encodeChunk).join('')
     }
 
     static decode(encodedData: string): string {
         const encodedChunks = RunLengthEncoding.splitIntoChunks(encodedData)
-        return encodedChunks.map((encodedChunk) => RunLengthEncoding.decodeChunk(encodedChunk)).join('')
+        return encodedChunks.map(RunLengthEncoding.decodeChunk).join('')
     }
 
     static splitIntoConsecutiveCharacters(data: string): string[] {
