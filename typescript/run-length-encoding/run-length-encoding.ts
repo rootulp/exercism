@@ -2,16 +2,16 @@ import {last, isUndefined, startsWith, concat, slice, repeat} from "lodash"
 
 export default class RunLengthEncoding {
     static encode(data: string): string {
-        const chunks = RunLengthEncoding.splitIntoConsecutiveCharacters(data)
+        const chunks: string[] = RunLengthEncoding.splitIntoChunks(data)
         return chunks.map(RunLengthEncoding.encodeChunk).join('')
     }
 
     static decode(encodedData: string): string {
-        const encodedChunks = RunLengthEncoding.splitIntoChunks(encodedData)
+        const encodedChunks: string[] = RunLengthEncoding.splitIntoEncodedChunks(encodedData)
         return encodedChunks.map(RunLengthEncoding.decodeChunk).join('')
     }
 
-    static splitIntoConsecutiveCharacters(data: string): string[] {
+    static splitIntoChunks(data: string): string[] {
         return data.split("").reduce((chunks: string[], currentCharacter: string) => {
             const lastChunkOfConsecutiveCharacters: string | undefined = last(chunks)
 
@@ -23,7 +23,7 @@ export default class RunLengthEncoding {
         }, [])
     }
 
-    static splitIntoChunks(encodedData: string): string[] {
+    static splitIntoEncodedChunks(encodedData: string): string[] {
         const digitsFollowedByData = new RegExp(/(\d*\D{1})/g)
         const encodedChunk = encodedData.match(digitsFollowedByData)
         return encodedChunk ? encodedChunk : []
