@@ -6,6 +6,10 @@
   version "21.1.5"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.5.tgz#3db93d069d12602ca115d3604550e15131d8eb7a"
 
+"@types/lodash@^4.14.116":
+  version "4.14.116"
+  resolved "https://artifactory.palantir.build:443/artifactory/api/npm/all-npm/@types/lodash/-/lodash-4.14.116.tgz#5ccf215653e3e8c786a58390751033a9adca0eb9"
+
 "@types/node@^8.0.47":
   version "8.0.47"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.47.tgz#968e596f91acd59069054558a00708c445ca30c2"
@@ -1565,6 +1569,10 @@ locate-path@^2.0.0:
 lodash@^4.14.0, lodash@^4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
+lodash@^4.17.10:
+  version "4.17.10"
+  resolved "https://artifactory.palantir.build:443/artifactory/api/npm/all-npm/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
 longest@^1.0.1:
   version "1.0.1"
