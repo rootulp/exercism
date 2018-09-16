@@ -17,7 +17,7 @@ describe('Random key cipher', () => {
         expect(simpleCipher.key).toMatch(/^[a-z]+$/)
     })
 
-    xit('has a key that is at least 100 characters long', () => {
+    it('has a key that is at least 100 characters long', () => {
         expect(simpleCipher.key.length).toBeGreaterThanOrEqual(100)
     })
 

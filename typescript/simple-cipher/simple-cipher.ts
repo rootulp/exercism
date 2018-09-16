@@ -5,7 +5,17 @@ class SimpleCipher {
     }
 
     static generateRandomKey(): string {
-        return "foo"
+        const KEY_LENGTH: number = 100
+        return SimpleCipher.randomString(KEY_LENGTH)
+    }
+
+    static randomString(length: number): string {
+        return [...Array(length)].map(this.randomCharacter).join("")
+    }
+
+    static randomCharacter(): string  {
+        const alphabet = "abcdefghijklmnopqrstuvwxyz"
+        return alphabet.charAt(Math.floor(Math.random() * alphabet.length))
     }
 
     public key: string
@@ -26,6 +36,7 @@ class SimpleCipher {
     public decode(encodedData: string): string {
         return encodedData
     }
+
 }
 
 export default SimpleCipher
