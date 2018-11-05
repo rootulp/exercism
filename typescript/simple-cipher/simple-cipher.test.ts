@@ -24,7 +24,7 @@ describe('Random key cipher', () => {
     // Here we take advantage of the fact that plaintext of "aaa..."
     // outputs the key. This is a critical problem with shift ciphers, some
     // characters will always output the key verbatim.
-    xit('can encode', () => {
+    it('can encode', () => {
         expect(simpleCipher.encode('aaaaaaaaaa')).toEqual(simpleCipher.key.substr(0, 10))
     })
 
@@ -66,7 +66,7 @@ describe('Substitution cipher', () => {
         expect(simpleCipher.key).toEqual(key)
     })
 
-    xit('can encode', () => {
+    it('can encode', () => {
         expect(simpleCipher.encode('aaaaaaaaaa')).toEqual('abcdefghij')
     })
 

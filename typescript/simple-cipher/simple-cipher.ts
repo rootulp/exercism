@@ -1,5 +1,6 @@
 class SimpleCipher {
     public key: string
+    static readonly alphabet = "abcdefghijklmnopqrstuvwxyz"
 
     constructor(inputKey ?: string) {
         if (inputKey === undefined) {
@@ -10,11 +11,28 @@ class SimpleCipher {
             throw "Bad key"
         }
     }
-    public encode(data: string): string {
-        return data
+    public encode = (data: string): string => {
+        return data.split("").map(this.encodeCharacter).join("")
     }
 
-    public decode(encodedData: string): string {
+    private encodeCharacter = (character: string, index: number): string => {
+        const encryptionCharacter = this.getEncryptionCharacter(index)
+        const encryptionValue = this.valueOf(encryptionCharacter)
+        const dataValue = this.valueOf(character)
+        const encodedCharacter = SimpleCipher.alphabet[encryptionValue + dataValue % SimpleCipher.alphabet.length]
+        return encodedCharacter
+    }
+
+    private getEncryptionCharacter = (index: number): string => {
+        return this.key[index % this.key.length]
+    }
+
+    private valueOf = (character: string): number => {
+        return SimpleCipher.alphabet.indexOf(character)
+
+    }
+
+    public decode = (encodedData: string): string => {
         return encodedData
     }
 
@@ -51,7 +69,6 @@ class Key {
     static isNotEmpty(inputKey: string): boolean {
         return inputKey !== ""
     }
-
 }
 
 export default SimpleCipher
