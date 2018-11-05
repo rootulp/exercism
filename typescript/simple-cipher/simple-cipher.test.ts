@@ -83,7 +83,7 @@ describe('Substitution cipher', () => {
             .toEqual('qayaeaagaciai')
     })
 
-    xit('can wrap on encode', () => {
+    it('can wrap on encode', () => {
         expect(simpleCipher.encode('zzzzzzzzzz')).toEqual('zabcdefghi')
     })
 
@@ -91,7 +91,7 @@ describe('Substitution cipher', () => {
         expect(simpleCipher.decode('zabcdefghi')).toEqual('zzzzzzzzzz')
     })
 
-    xit('can handle messages longer than the key', () => {
+    it('can handle messages longer than the key', () => {
         expect(new SimpleCipher('abc').encode('iamapandabear'))
             .toEqual('iboaqcnecbfcr')
     })

@@ -16,12 +16,16 @@ class SimpleCipher {
     }
 
     private encodeCharacter = (character: string, index: number): string => {
-        const encryptionCharacter = this.getEncryptionCharacter(index)
-        const encryptionValue = this.valueOf(encryptionCharacter)
         const dataValue = this.valueOf(character)
-        const encryptedValue = encryptionValue + dataValue
+        const shiftDistance = this.getShiftDistance(index)
+        const encryptedValue = dataValue + shiftDistance
         const encodedCharacter = SimpleCipher.alphabet[encryptedValue % SimpleCipher.alphabet.length]
         return encodedCharacter
+    }
+
+    private getShiftDistance = (index: number): number => {
+        const encryptionCharacter = this.getEncryptionCharacter(index)
+        return this.valueOf(encryptionCharacter)
     }
 
     private getEncryptionCharacter = (index: number): string => {
