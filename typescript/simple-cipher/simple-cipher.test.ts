@@ -39,19 +39,19 @@ describe('Random key cipher', () => {
 })
 
 describe('Incorrect key cipher', () => {
-    xit('throws an error with an all caps key', () => {
+    it('throws an error with an all caps key', () => {
         expect(() => {
             new SimpleCipher('ABCDEF')
         }).toThrowError('Bad key')
     })
 
-    xit('throws an error with a numeric key', () => {
+    it('throws an error with a numeric key', () => {
         expect(() => {
             new SimpleCipher('12345')
         }).toThrow('Bad key')
     })
 
-    xit('throws an error with an empty key', () => {
+    it('throws an error with an empty key', () => {
         expect(() => {
             new SimpleCipher('')
         }).toThrow('Bad key')

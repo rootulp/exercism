@@ -21,8 +21,10 @@ class SimpleCipher {
 }
 
 class Key {
-    static isValid(_inputKey: string): boolean {
-        return true
+    static readonly alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+    static isValid(inputKey: string): boolean {
+        return Key.containsOnlyLowercaseCharacters(inputKey) && Key.isNotEmpty(inputKey)
     }
 
     static generate(): string {
@@ -35,8 +37,19 @@ class Key {
     }
 
     static generateRandomCharacter(): string  {
-        const alphabet = "abcdefghijklmnopqrstuvwxyz"
-        return alphabet.charAt(Math.floor(Math.random() * alphabet.length))
+        return Key.alphabet.charAt(Math.floor(Math.random() * Key.alphabet.length))
+    }
+
+    static containsOnlyLowercaseCharacters(inputKey: string): boolean {
+        return inputKey.split("").every(Key.isLowercaseLetter)
+    }
+
+    static isLowercaseLetter(character: string): boolean {
+        return Key.alphabet.includes(character)
+    }
+
+    static isNotEmpty(inputKey: string): boolean {
+        return inputKey !== ""
     }
 
 }
