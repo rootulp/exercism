@@ -78,7 +78,7 @@ describe('Substitution cipher', () => {
         expect(simpleCipher.decode(simpleCipher.encode('abcdefghij'))).toEqual('abcdefghij')
     })
 
-    xit(': double shift encode', () => {
+    it(': double shift encode', () => {
         expect(new SimpleCipher('iamapandabear').encode('iamapandabear'))
             .toEqual('qayaeaagaciai')
     })

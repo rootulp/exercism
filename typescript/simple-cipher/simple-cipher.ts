@@ -19,7 +19,8 @@ class SimpleCipher {
         const encryptionCharacter = this.getEncryptionCharacter(index)
         const encryptionValue = this.valueOf(encryptionCharacter)
         const dataValue = this.valueOf(character)
-        const encodedCharacter = SimpleCipher.alphabet[encryptionValue + dataValue % SimpleCipher.alphabet.length]
+        const encryptedValue = encryptionValue + dataValue
+        const encodedCharacter = SimpleCipher.alphabet[encryptedValue % SimpleCipher.alphabet.length]
         return encodedCharacter
     }
 
