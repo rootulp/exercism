@@ -2,7 +2,7 @@ class SimpleCipher {
     public key: string
     static readonly alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-    constructor(inputKey ?: string) {
+    constructor(inputKey?: string) {
         if (inputKey === undefined) {
             this.key = Key.generate()
         } else if (Key.isValid(inputKey)) {
