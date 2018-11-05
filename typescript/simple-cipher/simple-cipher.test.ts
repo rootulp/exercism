@@ -1,7 +1,7 @@
 import SimpleCipher from './simple-cipher'
 
 describe('Random key generation', () => {
-    xit('generates keys at random', () => {
+    it('generates keys at random', () => {
         // Strictly speaking, this is difficult to test with 100% certainty.
         // But, if you have a generator that generates 100-character-long
         // strings of lowercase letters at random, the odds of two consecutively
