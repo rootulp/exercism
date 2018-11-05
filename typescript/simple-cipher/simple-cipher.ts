@@ -1,29 +1,10 @@
 class SimpleCipher {
-
-    static isValidKey(_inputKey: string): boolean {
-        return true
-    }
-
-    static generateRandomKey(): string {
-        const KEY_LENGTH: number = 100
-        return SimpleCipher.randomString(KEY_LENGTH)
-    }
-
-    static randomString(length: number): string {
-        return [...Array(length)].map(this.randomCharacter).join("")
-    }
-
-    static randomCharacter(): string  {
-        const alphabet = "abcdefghijklmnopqrstuvwxyz"
-        return alphabet.charAt(Math.floor(Math.random() * alphabet.length))
-    }
-
-    public key: string
+    public key: Key
 
     constructor(inputKey ?: string) {
         if (inputKey === undefined) {
-            this.key = SimpleCipher.generateRandomKey()
-        } else if (SimpleCipher.isValidKey(inputKey)) {
+            this.key = Key.generate()
+        } else if (Key.isValid(inputKey)) {
             this.key = inputKey
         } else {
             throw "Bad key"
@@ -35,6 +16,27 @@ class SimpleCipher {
 
     public decode(encodedData: string): string {
         return encodedData
+    }
+
+}
+
+class Key {
+    static isValid(_inputKey: string): boolean {
+        return true
+    }
+
+    static generate(): string {
+        const KEY_LENGTH: number = 100
+        return Key.generateRandomString(KEY_LENGTH)
+    }
+
+    static generateRandomString(length: number): string {
+        return [...Array(length)].map(this.generateRandomCharacter).join("")
+    }
+
+    static generateRandomCharacter(): string  {
+        const alphabet = "abcdefghijklmnopqrstuvwxyz"
+        return alphabet.charAt(Math.floor(Math.random() * alphabet.length))
     }
 
 }
