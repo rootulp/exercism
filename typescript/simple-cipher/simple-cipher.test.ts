@@ -62,7 +62,7 @@ describe('Substitution cipher', () => {
     const key = 'abcdefghij'
     const simpleCipher = new SimpleCipher(key)
 
-    xit('keeps the submitted key', () => {
+    it('keeps the submitted key', () => {
         expect(simpleCipher.key).toEqual(key)
     })
 
@@ -70,11 +70,11 @@ describe('Substitution cipher', () => {
         expect(simpleCipher.encode('aaaaaaaaaa')).toEqual('abcdefghij')
     })
 
-    xit('can decode', () => {
+    it('can decode', () => {
         expect(simpleCipher.decode('abcdefghij')).toEqual('aaaaaaaaaa')
     })
 
-    xit('is reversible', () => {
+    it('is reversible', () => {
         expect(simpleCipher.decode(simpleCipher.encode('abcdefghij'))).toEqual('abcdefghij')
     })
 

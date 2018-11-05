@@ -15,12 +15,24 @@ class SimpleCipher {
         return data.split("").map(this.encodeCharacter).join("")
     }
 
+    public decode = (encodedData: string): string => {
+        return encodedData.split("").map(this.decodeCharacter).join("")
+    }
+
     private encodeCharacter = (character: string, index: number): string => {
         const dataValue = this.valueOf(character)
         const shiftDistance = this.getShiftDistance(index)
         const encryptedValue = dataValue + shiftDistance
         const encodedCharacter = SimpleCipher.alphabet[encryptedValue % SimpleCipher.alphabet.length]
         return encodedCharacter
+    }
+
+    private decodeCharacter = (character: string, index: number): string => {
+        const dataValue = this.valueOf(character)
+        const shiftDistance = this.getShiftDistance(index)
+        const decryptedValue = dataValue - shiftDistance
+        const decodedCharacter = SimpleCipher.alphabet[decryptedValue % SimpleCipher.alphabet.length]
+        return decodedCharacter
     }
 
     private getShiftDistance = (index: number): number => {
@@ -35,10 +47,6 @@ class SimpleCipher {
     private valueOf = (character: string): number => {
         return SimpleCipher.alphabet.indexOf(character)
 
-    }
-
-    public decode = (encodedData: string): string => {
-        return encodedData
     }
 
 }
