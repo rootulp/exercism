@@ -28,11 +28,11 @@ describe('Random key cipher', () => {
         expect(simpleCipher.encode('aaaaaaaaaa')).toEqual(simpleCipher.key.substr(0, 10))
     })
 
-    xit('can decode', () => {
+    it('can decode', () => {
         expect(simpleCipher.decode(simpleCipher.key.substr(0, 10))).toEqual('aaaaaaaaaa')
     })
 
-    xit('is reversible', () => {
+    it('is reversible', () => {
         const plaintext = 'abcdefghij'
         expect(simpleCipher.decode(simpleCipher.encode(plaintext))).toEqual(plaintext)
     })
@@ -87,7 +87,7 @@ describe('Substitution cipher', () => {
         expect(simpleCipher.encode('zzzzzzzzzz')).toEqual('zabcdefghi')
     })
 
-    xit('can wrap on decode', () => {
+    it('can wrap on decode', () => {
         expect(simpleCipher.decode('zabcdefghi')).toEqual('zzzzzzzzzz')
     })
 

@@ -31,7 +31,7 @@ class SimpleCipher {
         const dataValue = this.valueOf(character)
         const shiftDistance = this.getShiftDistance(index)
         const decryptedValue = dataValue - shiftDistance
-        const decodedCharacter = SimpleCipher.alphabet[decryptedValue % SimpleCipher.alphabet.length]
+        const decodedCharacter = SimpleCipher.alphabet[mod(decryptedValue,  SimpleCipher.alphabet.length)]
         return decodedCharacter
     }
 
@@ -46,9 +46,7 @@ class SimpleCipher {
 
     private valueOf = (character: string): number => {
         return SimpleCipher.alphabet.indexOf(character)
-
     }
-
 }
 
 class Key {
@@ -82,6 +80,12 @@ class Key {
     static isNotEmpty(inputKey: string): boolean {
         return inputKey !== ""
     }
+}
+
+// % in JavaScript is the remainder operator (rather than modulo)
+// See: https://stackoverflow.com/questions/4467539/javascript-modulo-gives-a-negative-result-for-negative-numbers
+function mod(n: number, m: number) {
+    return ((n % m) + m) % m
 }
 
 export default SimpleCipher
