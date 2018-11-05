@@ -1,5 +1,5 @@
 class SimpleCipher {
-    public key: Key
+    public key: string
 
     constructor(inputKey ?: string) {
         if (inputKey === undefined) {
