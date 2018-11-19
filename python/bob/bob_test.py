@@ -114,5 +114,6 @@ class BobTests(unittest.TestCase):
             'Sure.', bob.hey('What if we end with whitespace?   ')
         )
 
+
 if __name__ == '__main__':
     unittest.main()
