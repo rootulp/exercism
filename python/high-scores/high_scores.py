@@ -11,6 +11,9 @@ class HighScores(object):
     def latest(self):
         return self.scores[-1]
 
+    def top(self):
+        return heapq.nlargest(3, self.scores)
+
     def report(self):
         return f"{self.latest_score_message()} {self.personal_best_message()}"
 
@@ -25,6 +28,3 @@ class HighScores(object):
 
     def amount_short(self):
         return self.highest() - self.latest()
-
-    def top(self):
-        return heapq.nlargest(3, self.scores)
