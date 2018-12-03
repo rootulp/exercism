@@ -1,6 +1,7 @@
 def binary_search(array, value):
     return binary_search_with_bounds(array, value, 0, len(array) - 1)
 
+
 def binary_search_with_bounds(array, value, left, right):
     if (left > right):
         raise ValueError("Value not found")
