@@ -1,16 +1,16 @@
-def binary_search(list_of_numbers, number_to_find):
-    return binary_search_with_bounds(list_of_numbers, number_to_find, 0, len(list_of_numbers) - 1)
+def binary_search(array, num_to_find):
+    return binary_search_with_bounds(array, num_to_find, 0, len(array) - 1)
 
-def binary_search_with_bounds(list_of_numbers, number_to_find, left_index, right_index):
-    if (left_index <= right_index):
-        middle_index = left_index + (right_index - left_index) // 2
-        middle = list_of_numbers[middle_index]
+def binary_search_with_bounds(array, num_to_find, left, right):
+    if (left <= right):
+        middle = left + (right - left) // 2
+        middle_value = array[middle]
 
-        if (number_to_find == middle):
-            return middle_index
-        elif (number_to_find < middle):
-            return binary_search_with_bounds(list_of_numbers, number_to_find, left_index, middle_index - 1)
-        elif (number_to_find > middle):
-            return binary_search_with_bounds(list_of_numbers, number_to_find, middle_index + 1, right_index)
+        if (num_to_find == middle_value):
+            return middle
+        elif (num_to_find < middle_value):
+            return binary_search_with_bounds(array, num_to_find, left, middle - 1)
+        elif (num_to_find > middle_value):
+            return binary_search_with_bounds(array, num_to_find, middle + 1, right)
     else:
         raise ValueError("Value not found")
