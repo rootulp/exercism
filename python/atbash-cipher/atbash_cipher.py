@@ -19,7 +19,7 @@ class Atbash:
     @staticmethod
     def encoded(self, msg):
         return ''.join(([char if char.isdigit() else self.CIPHER[char]
-                        for char in self.clean(self, msg)]))
+                         for char in self.clean(self, msg)]))
 
     @staticmethod
     def clean(self, msg):

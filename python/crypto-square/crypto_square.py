@@ -12,8 +12,8 @@ class CryptoSquare:
 
     @classmethod
     def squarify(cls, msg):
-        return [msg[i:i + cls.square_size(len(msg))] for i in range(0,
-                len(msg), cls.square_size(len(msg)))]
+        return [msg[i:i + cls.square_size(len(msg))]
+                for i in range(0, len(msg), cls.square_size(len(msg)))]
 
     @staticmethod
     def transpose_square(square):

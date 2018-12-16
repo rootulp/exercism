@@ -21,7 +21,7 @@ class Minesweeper:
     @classmethod
     def generate_board(cls, inp):
         return [[cls.convert_square(inp, y, x)
-                for x, square in enumerate(row)]
+                 for x, square in enumerate(row)]
                 for y, row in enumerate(inp)]
 
     # Only convert squares that are spaces
@@ -38,8 +38,11 @@ class Minesweeper:
 
     @classmethod
     def num_of_neighbor_mines(cls, inp, y, x):
-        return len(filter(lambda neighbor: cls.is_neighbor_a_mine(inp,
-                          neighbor), cls.all_neighbor_coords(inp, y, x)))
+        return len(
+            filter(
+                lambda neighbor: cls.is_neighbor_a_mine(
+                    inp, neighbor), cls.all_neighbor_coords(
+                    inp, y, x)))
 
     # Checks if coords are within bounds then checks for is_mine
     @classmethod

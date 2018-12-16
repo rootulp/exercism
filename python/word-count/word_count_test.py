@@ -54,5 +54,6 @@ class WordCountTests(unittest.TestCase):
                        'want your bad romance')
         )
 
+
 if __name__ == '__main__':
     unittest.main()

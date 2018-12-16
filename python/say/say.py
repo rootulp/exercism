@@ -39,8 +39,8 @@ class Say:
 
     def wordify(self, num):
         self.check_valid(num)
-        return ' '.join(map(lambda (i, chunk): self.wordify_chunk(chunk, i),
-                        enumerate(self.chunkify(num)))).rstrip()
+        return ' '.join(map(lambda i_chunk: self.wordify_chunk(
+            i_chunk[1], i_chunk[0]), enumerate(self.chunkify(num)))).rstrip()
 
     def chunkify(self, num):
         rev = str(num)[::-1]

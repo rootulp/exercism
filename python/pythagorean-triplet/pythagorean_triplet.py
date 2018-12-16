@@ -47,7 +47,7 @@ class Triplet:
             raise ValueError
         else:
             return set([triplet for triplet in cls.triplets(n) if
-                       cls(triplet).valid_primitive()])
+                        cls(triplet).valid_primitive()])
 
     @classmethod
     def triplets_in_range(cls, low, high):

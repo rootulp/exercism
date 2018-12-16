@@ -15,8 +15,8 @@ class PigLatinTranslator:
     @classmethod
     def translate(cls, word):
         if (word[0] in cls.vowels or
-           word.startswith('yt') or
-           word.startswith('xr')):
+            word.startswith('yt') or
+                word.startswith('xr')):
             return word + 'ay'
         elif (word.startswith('squ') or
                 word.startswith('sch') or

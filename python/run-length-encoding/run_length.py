@@ -11,8 +11,8 @@ def helper(g):
 
 
 def decode(s):
-    groups = re.findall('(\d*\D{1})', s)
-    pairs = map(lambda g: [re.match('\d*', g).group(), g[-1]], groups)
+    groups = re.findall(r'(\d*\D{1})', s)
+    pairs = map(lambda g: [re.match(r'\d*', g).group(), g[-1]], groups)
 
     # Fix hardcoded 0 and 1 indices
     # Also change name of x variable

@@ -1,7 +1,7 @@
 class NORTH:
     @staticmethod
     def advance(self, x, y):
-        return (x, y+1)
+        return (x, y + 1)
 
     @staticmethod
     def turn_right(self):
@@ -15,7 +15,7 @@ class NORTH:
 class EAST:
     @staticmethod
     def advance(self, x, y):
-        return (x+1, y)
+        return (x + 1, y)
 
     @staticmethod
     def turn_right(self):
@@ -29,7 +29,7 @@ class EAST:
 class SOUTH:
     @staticmethod
     def advance(self, x, y):
-        return (x, y-1)
+        return (x, y - 1)
 
     @staticmethod
     def turn_right(self):
@@ -43,7 +43,7 @@ class SOUTH:
 class WEST:
     @staticmethod
     def advance(self, x, y):
-        return (x-1, y)
+        return (x - 1, y)
 
     @staticmethod
     def turn_right(self):

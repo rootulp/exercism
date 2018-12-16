@@ -9,4 +9,4 @@ def flatten_list(nested_list):
                 yield element
         else:
             for subelement in flatten_list(element):
-                    yield subelement
+                yield subelement

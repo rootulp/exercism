@@ -37,5 +37,6 @@ class MeetupTest(unittest.TestCase):
         self.assertEqual(date(2012, 2, 29),
                          meetup_day(2012, 2, 'Wednesday', 'last'))
 
+
 if __name__ == '__main__':
     unittest.main()

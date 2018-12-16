@@ -1,4 +1,5 @@
 import math
+from functools import reduce
 
 
 def is_perfect(number):

@@ -41,5 +41,6 @@ class RobotTest(unittest.TestCase):
         self.assertNotEqual(name, name2)
         self.assertRegexpMatches(name2, self.name_re)
 
+
 if __name__ == '__main__':
     unittest.main()

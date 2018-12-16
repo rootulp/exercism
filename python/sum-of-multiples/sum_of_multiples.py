@@ -1,3 +1,6 @@
+from functools import reduce
+
+
 def sum_of_multiples(limit, factors=[3, 5]):
     mult = set()
     for factor in factors:
