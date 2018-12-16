@@ -19,6 +19,8 @@ CODON_TO_PROTEIN = {
     "UCC": "Serine",
     "UCA": "Serine",
     "UCG": "Serine",
+    "UAU": "Tyrosine",
+    "UAC": "Tyrosine",
     "UGU": "Cysteine",
     "UGC": "Cysteine",
     "UGG": "Tryptophan",
