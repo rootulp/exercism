@@ -3,7 +3,7 @@
 # AUG                   | Methionine
 # UUU, UUC              | Phenylalanine
 # UUA, UUG              | Leucine
-# UCU, UCC, UCC, UCC    | Serine
+# UCU, UCC, UCA, UCG    | Serine
 # UAU, UAC              | Tyrosine
 # UGU, UGC              | Cysteine
 # UGG                   | Tryptophan
@@ -17,8 +17,8 @@ CODON_TO_PROTEIN = {
     "UUG": "Leucine",
     "UCU": "Serine",
     "UCC": "Serine",
-    "UCC": "Serine",
-    "UCC": "Serine",
+    "UCA": "Serine",
+    "UCG": "Serine",
     "UGU": "Cysteine",
     "UGC": "Cysteine",
     "UGG": "Tryptophan",
