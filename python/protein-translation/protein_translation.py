@@ -23,12 +23,13 @@ CODON_TO_PROTEIN = {
     "UAC": "Tyrosine",
     "UGU": "Cysteine",
     "UGC": "Cysteine",
-    "UGG": "Tryptophan",
-    "UAA": "STOP",
-    "UAG": "STOP",
-    "UGA": "STOP"
+    "UGG": "Tryptophan"
 }
+
+STOP_CODONS = set({"UAA", "UAG", "UGA"})
 
 
 def proteins(strand):
+    if (strand in STOP_CODONS):
+        return []
     return [CODON_TO_PROTEIN[strand]]
