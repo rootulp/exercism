@@ -30,7 +30,10 @@ def length(xs):
 
 
 def map_clone(function, xs):
-    pass
+    clone = []
+    for element in xs:
+        clone = append(clone, [function(element)])
+    return clone
 
 
 def foldl(function, xs, acc):
