@@ -47,4 +47,7 @@ def foldr(function, xs, acc):
 
 
 def reverse(xs):
-    pass
+    reversed_list = []
+    for element in xs:
+        reversed_list = append([element], reversed_list)
+    return reversed_list

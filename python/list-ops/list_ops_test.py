@@ -89,15 +89,12 @@ class ListOpsTest(unittest.TestCase):
             "exercism!")
 
     # tests for reverse
-    @pytest.mark.xfail
     def test_reverse_empty_list(self):
         self.assertEqual(list_ops.reverse([]), [])
 
-    @pytest.mark.xfail
     def test_reverse_nonempty_list(self):
         self.assertEqual(list_ops.reverse([1, 3, 5, 7]), [7, 5, 3, 1])
 
-    @pytest.mark.xfail
     # additional test for reverse
     def test_reverse_mixed_types(self):
         self.assertEqual(
