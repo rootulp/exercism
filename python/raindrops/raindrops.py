@@ -1,2 +1,2 @@
 def raindrops(number):
-    pass
+    return "{}".format(number)
