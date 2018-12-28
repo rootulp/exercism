@@ -37,7 +37,9 @@ def map_clone(function, xs):
 
 
 def foldl(function, xs, acc):
-    pass
+    for element in xs:
+        acc = function(acc, element)
+    return acc
 
 
 def foldr(function, xs, acc):

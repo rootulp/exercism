@@ -58,15 +58,12 @@ class ListOpsTest(unittest.TestCase):
                          [2, 4, 6, 8])
 
     # tests for foldl
-    @pytest.mark.xfail
     def test_foldl_empty_list(self):
         self.assertEqual(list_ops.foldl(operator.mul, [], 2), 2)
 
-    @pytest.mark.xfail
     def test_foldl_nonempty_list_addition(self):
         self.assertEqual(list_ops.foldl(operator.add, [1, 2, 3, 4], 5), 15)
 
-    @pytest.mark.xfail
     def test_foldl_nonempty_list_floordiv(self):
         self.assertEqual(list_ops.foldl(operator.floordiv, [2, 5], 5), 0)
 
