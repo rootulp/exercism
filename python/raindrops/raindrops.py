@@ -15,10 +15,14 @@ def convert_to_raindrop_message(number):
     return raindropMessage
 
 def is_three_a_factor(number):
-    return number % 3 == 0
+    return is_factor(number, 3)
 
 def is_five_a_factor(number):
-    return number % 5 == 0
+    return is_factor(number, 5)
 
 def is_seven_a_factor(number):
-    return number % 7 == 0
+    return is_factor(number, 7)
+
+def is_factor(number, potentialFactor):
+    return number % potentialFactor == 0
+
