@@ -1,0 +1,2 @@
+def raindrops(number):
+    pass
