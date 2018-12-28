@@ -15,7 +15,11 @@ def concat(lists):
 
 
 def filter_clone(function, xs):
-    pass
+    result = []
+    for element in xs:
+        if function(element):
+            result = append(result, [element])
+    return result
 
 
 def length(xs):
