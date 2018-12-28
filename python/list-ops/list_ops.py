@@ -23,7 +23,10 @@ def filter_clone(function, xs):
 
 
 def length(xs):
-    pass
+    n = 0
+    for _element in xs:
+        n += 1
+    return n
 
 
 def map_clone(function, xs):
