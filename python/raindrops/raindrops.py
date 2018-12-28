@@ -1,18 +1,11 @@
 def raindrops(number):
     raindropMessage = convert_to_raindrop_message(number)
-    if raindropMessage:
-        return raindropMessage
-    return "{}".format(number)
+    return raindropMessage if raindropMessage else "{}".format(number)
 
 def convert_to_raindrop_message(number):
-    raindropMessage = ""
-    if is_three_a_factor(number):
-        raindropMessage += "Pling"
-    if is_five_a_factor(number):
-        raindropMessage += "Plang"
-    if is_seven_a_factor(number):
-        raindropMessage += "Plong"
-    return raindropMessage
+    return f"{'Pling' if is_three_a_factor(number) else ''}" \
+           f"{'Plang' if is_five_a_factor(number) else ''}" \
+           f"{'Plong' if is_seven_a_factor(number) else ''}"
 
 def is_three_a_factor(number):
     return is_factor(number, 3)
