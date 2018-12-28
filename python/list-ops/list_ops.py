@@ -1,14 +1,17 @@
 def append(xs, ys):
     result = []
     for element in xs:
-        result.append(element)
+        result.append(element) # Not sure if using .append here is cheating
     for element in ys:
         result.append(element)
     return result
 
 
 def concat(lists):
-    pass
+    result = []
+    for l in lists:
+        result = append(result, l)
+    return result
 
 
 def filter_clone(function, xs):
