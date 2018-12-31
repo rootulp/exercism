@@ -5,8 +5,8 @@ class Clock:
         self.fixup()
 
     def __eq__(self, other):
-        return (self.hours == other.hours and
-                self.mins == other.mins)
+        print("self.hours {}, other.hours {}, self.mins {}, other.mins {}".format(self.hours, other.hours, self.mins, other.mins))
+        return self.hours == other.hours and self.mins == other.mins
 
     def __str__(self):
         return (self.format_hours() + ':' +
@@ -22,11 +22,11 @@ class Clock:
         self.fixup_hours()
 
     def fixup_hours(self):
-        self.hours = self.hours % 24
+        self.hours = int(self.hours % 24)
 
     def fixup_mins(self):
-        self.hours += self.mins / 60
-        self.mins = self.mins % 60
+        self.hours += self.mins // 60
+        self.mins = int(self.mins % 60)
 
     def format_hours(self):
         return str(self.hours).zfill(2)
