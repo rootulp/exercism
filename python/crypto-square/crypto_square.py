@@ -20,8 +20,7 @@ class CryptoSquare:
     def transpose_square(cls, square):
         matrix = [list(row) for row in square]
         transposed_matrix = cls.filter_out_none(cls.transpose_uneven_matrix(matrix))
-        transposed_square = [''.join(row) for row in transposed_matrix]
-        return transposed_square
+        return [''.join(row) for row in transposed_matrix]
 
     @staticmethod
     def normalize(msg):
