@@ -1,11 +1,10 @@
-import sets
 import string
 
 
 class PigLatinTranslator:
 
-    alpha = sets.Set(string.ascii_lowercase)
-    vowels = sets.Set(['a', 'e', 'i', 'o', 'u'])
+    alpha = set(string.ascii_lowercase)
+    vowels = set(['a', 'e', 'i', 'o', 'u'])
     consonants = alpha - vowels
 
     @classmethod
