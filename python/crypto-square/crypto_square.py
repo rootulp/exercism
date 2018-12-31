@@ -19,7 +19,7 @@ class CryptoSquare:
     @classmethod
     def transpose_square(cls, square):
         matrix = [list(row) for row in square]
-        transposed_matrix = cls.filter_out_none(cls.transpose_uneven_matrix(matrix))
+        transposed_matrix = cls.transpose_uneven_matrix(matrix)
         return [''.join(row) for row in transposed_matrix]
 
     @staticmethod
@@ -34,11 +34,9 @@ class CryptoSquare:
     # https://stackoverflow.com/a/4938130/2813210
     @staticmethod
     def transpose_uneven_matrix(matrix):
-        return list(itertools.zip_longest(*matrix))
+        transposed_matrix = list(itertools.zip_longest(*matrix))
+        return [[val for val in row if val is not None] for row in transposed_matrix] # Remove None's
 
-    @staticmethod
-    def filter_out_none(matrix):
-        return [[val for val in row if val is not None] for row in matrix]
 
 def encode(msg):
     return CryptoSquare.encode(msg)
