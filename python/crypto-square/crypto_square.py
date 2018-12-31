@@ -1,5 +1,6 @@
 import string
 import math
+import itertools
 
 
 class CryptoSquare:
@@ -15,10 +16,12 @@ class CryptoSquare:
         return [msg[i:i + cls.square_size(len(msg))]
                 for i in range(0, len(msg), cls.square_size(len(msg)))]
 
-    @staticmethod
-    def transpose_square(square):
-        return list(map(lambda *row: ''.join([ch if ch else '' for ch in row]),
-                   *square))
+    @classmethod
+    def transpose_square(cls, square):
+        matrix = [list(row) for row in square]
+        transposed_matrix = cls.transpose_uneven_matrix(matrix)
+        joined_matrix = [''.join([x for x in row if x is not None]) for row in transposed_matrix]
+        return joined_matrix
 
     @staticmethod
     def normalize(msg):
@@ -27,8 +30,12 @@ class CryptoSquare:
 
     @staticmethod
     def square_size(msg_length):
-        return int(math.ceil(msg_length**.5))
+        return int(math.ceil(msg_length ** 0.5))
 
+    # https://stackoverflow.com/a/4938130/2813210
+    @staticmethod
+    def transpose_uneven_matrix(matrix):
+        return list(itertools.zip_longest(*matrix))
 
 def encode(msg):
     return CryptoSquare.encode(msg)
