@@ -15,8 +15,8 @@ class Minesweeper:
     # Split rows (String -> List) and operate on board in place
     @classmethod
     def solve(cls, inp):
-        inp = map(lambda row: list(row), inp)
-        return map(lambda row: "".join(row), cls.generate_board(inp))
+        inp = list(map(lambda row: list(row), inp))
+        return list(map(lambda row: "".join(row), cls.generate_board(inp)))
 
     @classmethod
     def generate_board(cls, inp):
@@ -39,10 +39,10 @@ class Minesweeper:
     @classmethod
     def num_of_neighbor_mines(cls, inp, y, x):
         return len(
-            filter(
+            list(filter(
                 lambda neighbor: cls.is_neighbor_a_mine(
                     inp, neighbor), cls.all_neighbor_coords(
-                    inp, y, x)))
+                    inp, y, x))))
 
     # Checks if coords are within bounds then checks for is_mine
     @classmethod
