@@ -17,8 +17,8 @@ class CryptoSquare:
 
     @staticmethod
     def transpose_square(square):
-        return map(lambda *row: ''.join([ch if ch else '' for ch in row]),
-                   *square)
+        return list(map(lambda *row: ''.join([ch if ch else '' for ch in row]),
+                   *square))
 
     @staticmethod
     def normalize(msg):

@@ -2,7 +2,7 @@ class Rails:
 
     def __init__(self, num_rails):
         self.num_rails = num_rails
-        self.rails = [[] for _ in xrange(num_rails)]
+        self.rails = [[] for _ in range(num_rails)]
 
     def populate_rails_linear(self, message, rail_lengths):
         message_list = list(message)
@@ -22,8 +22,8 @@ class Rails:
                         self.zig_zag_iterator(message)])
 
     def linear_iterator(self, rail_lengths):
-        for index in xrange(len(self.rails)):
-            for rail_length in xrange(rail_lengths[index]):
+        for index in range(len(self.rails)):
+            for rail_length in range(rail_lengths[index]):
                 yield self.rails[index]
 
     def zig_zag_iterator(self, message):

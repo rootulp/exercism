@@ -1,5 +1,5 @@
 def detect_anagrams(w, poss):
-    return filter(lambda p: anagram(w, p), poss)
+    return [p for p in poss if anagram(w, p)]
 
 
 def anagram(w, p):

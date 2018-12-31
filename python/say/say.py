@@ -39,13 +39,13 @@ class Say:
 
     def wordify(self, num):
         self.check_valid(num)
-        return ' '.join(map(lambda i_chunk: self.wordify_chunk(
-            i_chunk[1], i_chunk[0]), enumerate(self.chunkify(num)))).rstrip()
+        return ' '.join([self.wordify_chunk(
+            i_chunk[1], i_chunk[0]) for i_chunk in enumerate(self.chunkify(num))]).rstrip()
 
     def chunkify(self, num):
         rev = str(num)[::-1]
         rev_chunks = ([rev[i:i + 3] for i in range(0, len(rev), 3)])[::-1]
-        return map(lambda x: int(x[::-1]), rev_chunks)
+        return [int(x[::-1]) for x in rev_chunks]
 
     def wordify_chunk(self, chunk, i):
         hundreds_digit, left_over = divmod(chunk, 100)

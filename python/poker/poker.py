@@ -14,7 +14,7 @@ class Poker:
         self.hands = [Hand(hand) for hand in hands]
 
     def best_hand(self):
-        return [hand.hand for hand, score in self.scores().items() if score ==
+        return [hand.hand for hand, score in list(self.scores().items()) if score ==
                 self.best_score()]
 
     def best_score(self):
@@ -55,7 +55,7 @@ class Hand:
         return self.straight() and self.flush()
 
     def straight(self):
-        return (range(min(self.ranks), max(self.ranks) + 1) ==
+        return (list(range(min(self.ranks), max(self.ranks) + 1)) ==
                 sorted(self.ranks))
 
     def flush(self):
@@ -68,13 +68,13 @@ class Hand:
         return self.three_of_a_kind() and self.one_pair()
 
     def three_of_a_kind(self):
-        return 3 in self.rank_occurences().values()
+        return 3 in list(self.rank_occurences().values())
 
     def two_pair(self):
-        return 2 == self.rank_occurences().values().count(2)
+        return 2 == list(self.rank_occurences().values()).count(2)
 
     def one_pair(self):
-        return 2 in self.rank_occurences().values()
+        return 2 in list(self.rank_occurences().values())
 
     def high_card(self):
         return max(self.ranks)
@@ -102,7 +102,7 @@ class Card:
 
     @classmethod
     def numberify_face_cards(cls, rank):
-        if rank in cls.FACE_CARDS.keys():
+        if rank in list(cls.FACE_CARDS.keys()):
             return cls.FACE_CARDS[rank]
         return int(rank)
 

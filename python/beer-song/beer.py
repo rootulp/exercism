@@ -6,7 +6,7 @@ class Beer:
     @classmethod
     def song(cls, start, stop):
         return "\n".join([cls.verse(verse_num) for verse_num
-                          in reversed(range(stop, start + 1))]) + "\n"
+                          in reversed(list(range(stop, start + 1)))]) + "\n"
 
     @classmethod
     def verse(cls, verse_num):

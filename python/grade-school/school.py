@@ -14,7 +14,7 @@ class School:
 
     def sort(self):
         students = []
-        for grade in self.db.keys():
+        for grade in list(self.db.keys()):
             students.append((grade, tuple(self.db[grade])))
         return students
 

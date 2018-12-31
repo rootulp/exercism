@@ -14,15 +14,15 @@ class Ocr:
                  "8": [" _ ", "|_|", "|_|", "   "],
                  "9": [" _ ", "|_|", " _|", "   "]}
 
-    NUMS = {"".join(value): key for key, value in GRID_NUMS.items()}
+    NUMS = {"".join(value): key for key, value in list(GRID_NUMS.items())}
 
     @classmethod
     def numbers(cls, inp):
-        return "".join(map(cls.number, zip(*map(cls.split_every_three, inp))))
+        return "".join(map(cls.number, list(zip(*list(map(cls.split_every_three, inp))))))
 
     @classmethod
     def grids(cls, inp):
-        return map("".join, zip(*map(cls.grid, inp)))
+        return list(map("".join, list(zip(*list(map(cls.grid, inp))))))
 
     @classmethod
     def number(cls, inp):
@@ -43,7 +43,7 @@ class Ocr:
 
     @classmethod
     def valid_grid(cls, inp):
-        return all(char in cls.GRID_NUMS.keys() for char in inp)
+        return all(char in list(cls.GRID_NUMS.keys()) for char in inp)
 
     @classmethod
     def split_every_three(cls, inp):

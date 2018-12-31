@@ -30,10 +30,10 @@ class Calculator:
         return eval(str(num1) + operator + str(num2))
 
     def num_stack(self):
-        return map(int, filter(self.digit, self.tokens))
+        return list(map(int, list(filter(self.digit, self.tokens))))
 
     def operator_stack(self):
-        return filter(self.operator, self.tokens)
+        return list(filter(self.operator, self.tokens))
 
     def valid(self):
         return (self.valid_elements() and
@@ -49,7 +49,7 @@ class Calculator:
                    self.slices_of_two())
 
     def slices_of_two(self):
-        return zip(self.tokens, self.tokens[1:])
+        return list(zip(self.tokens, self.tokens[1:]))
 
     def valid_elements(self):
         return all(self.valid_element(element) for element in self.tokens)
@@ -60,7 +60,7 @@ class Calculator:
 
     @classmethod
     def tokenize(cls, inp):
-        for operator, token in cls.OPERATORS.items():
+        for operator, token in list(cls.OPERATORS.items()):
             inp = inp.replace(operator, token)
         return inp
 
@@ -70,7 +70,7 @@ class Calculator:
 
     @classmethod
     def operator(cls, element):
-        return element in cls.OPERATORS.values()
+        return element in list(cls.OPERATORS.values())
 
 
 def calculate(inp):

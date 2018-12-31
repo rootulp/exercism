@@ -5,7 +5,7 @@ class Atbash:
 
     PLAIN = 'abcdefghijklmnopqrstuvwxyz'
     PRIME = 'zyxwvutsrqponmlkjihgfedcba'
-    CIPHER = dict(zip(list(PLAIN), list(PRIME)))
+    CIPHER = dict(list(zip(list(PLAIN), list(PRIME))))
     EXCLUDE = set(string.punctuation + ' ')
 
     @staticmethod

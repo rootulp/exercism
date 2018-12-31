@@ -3,4 +3,4 @@ def is_isogram(word):
 
 
 def remove_punctuation(word):
-    return filter(str.isalpha, word.lower())
+    return list(filter(str.isalpha, word.lower()))

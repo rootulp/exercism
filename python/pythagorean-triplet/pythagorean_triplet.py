@@ -31,7 +31,7 @@ class Triplet:
                                  gcd(self.a, self.c) == 1)
 
     def valid_in_range(self, low, high):
-        valid_range = range(low, high + 1)
+        valid_range = list(range(low, high + 1))
         return self.valid() and (self.a in valid_range and
                                  self.b in valid_range and
                                  self.c in valid_range)
@@ -74,7 +74,7 @@ class Triplet:
 
     @staticmethod
     def possible_triplets(low, high):
-        return combinations(range(low, high), 3)
+        return combinations(list(range(low, high)), 3)
 
     @staticmethod
     def odd(n):

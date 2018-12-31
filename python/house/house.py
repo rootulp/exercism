@@ -21,7 +21,7 @@ class House:
 
     @classmethod
     def verse(cls, verse_num):
-        return "\n".join(filter(None, cls.parts(verse_num)))
+        return "\n".join([_f for _f in cls.parts(verse_num) if _f])
 
     @classmethod
     def parts(cls, verse_num):

@@ -10,10 +10,10 @@ class Board:
         self.board = self.generate_board()
 
     def generate_board(self):
-        board = map(lambda row: list(row), self.EMPTY_BOARD)
+        board = [list(row) for row in self.EMPTY_BOARD]
         board = self.place_piece(board, "W", self.white_coords)
         board = self.place_piece(board, "B", self.black_coords)
-        return map(lambda row: "".join(row), board)
+        return ["".join(row) for row in board]
 
     def can_attack(self):
         return self.same_row() or self.same_col() or self.same_diag()

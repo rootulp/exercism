@@ -1,7 +1,7 @@
 class SaddlePoints:
     def __init__(self, matrix):
         self.matrix = matrix
-        self.columns = zip(*self.matrix)
+        self.columns = list(zip(*self.matrix))
 
     def get_saddle_points(self):
         if self.invalid_matrix():

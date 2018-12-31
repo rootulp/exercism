@@ -49,7 +49,7 @@ class BinarySearchTest(unittest.TestCase):
         try:
             self.assertRaisesRegex
         except AttributeError:
-            self.assertRaisesRegex = self.assertRaisesRegexp
+            self.assertRaisesRegex = self.assertRaisesRegex
 
     def assertRaisesWithMessage(self, exception):
         return self.assertRaisesRegex(exception, r".+")

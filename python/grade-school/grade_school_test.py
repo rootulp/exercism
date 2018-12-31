@@ -54,7 +54,7 @@ class SchoolTest(unittest.TestCase):
                         isinstance(result, GeneratorType) or
                         callable(getattr(result, '__reversed__', False)))
 
-        result_list = list(result.items() if hasattr(result, "items")
+        result_list = list(list(result.items()) if hasattr(result, "items")
                            else result)
 
         self.assertEqual(result_list, students)

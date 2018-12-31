@@ -4,7 +4,7 @@ def word_count(phrase):
     words = phrase.strip().replace("\n", " ").split(" ")
 
     # Remove empty strings
-    words = filter(None, words)
+    words = [_f for _f in words if _f]
 
     # Initialize new dict for count of occurences
     count = {}

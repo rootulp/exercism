@@ -20,7 +20,7 @@ class Cipher:
                         enumerate(self.clean(phrase))])
 
     def clean(self, phrase):
-        return filter(str.isalpha, phrase.lower())
+        return list(filter(str.isalpha, phrase.lower()))
 
     def generate_random_key(self):
         return ''.join(random.SystemRandom().choice(string.ascii_lowercase)

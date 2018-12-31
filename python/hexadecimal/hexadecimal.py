@@ -5,7 +5,7 @@ class Hexa:
                    'd': 13,
                    'e': 14,
                    'f': 15}
-    VALID_CHARS = set(list(map(str, range(0, 10))) + list(CHAR_VALUES.keys()))
+    VALID_CHARS = set(list(map(str, list(range(0, 10)))) + list(CHAR_VALUES.keys()))
     BASE = 16
 
     @classmethod

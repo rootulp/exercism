@@ -22,5 +22,5 @@ def add_on_planet_fn(planet):
     setattr(SpaceAge, 'on_' + planet, lambda self: self.on_planet(planet))
 
 
-for planet in SpaceAge.ORBITAL_PERIODS.keys():
+for planet in list(SpaceAge.ORBITAL_PERIODS.keys()):
     add_on_planet_fn(planet)

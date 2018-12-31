@@ -2,7 +2,7 @@ class IsbnVerifier(object):
 
     VALID_SEPERATOR = "-"
     VALID_CHECK_CHARACTER = "X"
-    VALID_DIGITS = list(map(str, range(0, 10)))
+    VALID_DIGITS = list(map(str, list(range(0, 10))))
     VALID_CHARACTERS = (set(VALID_DIGITS) |
                         set([VALID_SEPERATOR, VALID_CHECK_CHARACTER]))
     VALID_LENGTH = 10
@@ -46,8 +46,7 @@ class IsbnVerifier(object):
 
     @classmethod
     def remove_invalid_characters(cls, string):
-        return "".join(filter(lambda char: char in cls.VALID_CHARACTERS,
-                              string))
+        return "".join([char for char in string if char in cls.VALID_CHARACTERS])
 
     @classmethod
     def convert_char_to_int(cls, char):
@@ -59,8 +58,7 @@ class IsbnVerifier(object):
 
     @classmethod
     def remove_seperator(cls, string):
-        return "".join(filter(lambda char: char != cls.VALID_SEPERATOR,
-                              string))
+        return "".join([char for char in string if char != cls.VALID_SEPERATOR])
 
 
 def verify(isbn):

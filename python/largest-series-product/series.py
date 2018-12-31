@@ -9,7 +9,7 @@ def largest_product(digits, size):
 def slices(digits, size):
     if len(digits) < size:
         raise ValueError
-    return each_cons(map(int, list(digits)), size)
+    return each_cons(list(map(int, list(digits))), size)
 
 
 def each_cons(x, size):

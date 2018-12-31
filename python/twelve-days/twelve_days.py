@@ -34,8 +34,8 @@ class TwelveDays:
 
     @classmethod
     def verse(cls, verse_num):
-        return ", ".join(filter(None, [cls.head(verse_num), cls.mid(verse_num),
-                                       cls.tail(verse_num)]))
+        return ", ".join([_f for _f in [cls.head(verse_num), cls.mid(verse_num),
+                                       cls.tail(verse_num)] if _f])
 
     @classmethod
     def head(cls, verse_num):
