@@ -19,9 +19,9 @@ class CryptoSquare:
     @classmethod
     def transpose_square(cls, square):
         matrix = [list(row) for row in square]
-        transposed_matrix = cls.transpose_uneven_matrix(matrix)
-        joined_matrix = [''.join([x for x in row if x is not None]) for row in transposed_matrix]
-        return joined_matrix
+        transposed_matrix = cls.filter_out_none(cls.transpose_uneven_matrix(matrix))
+        transposed_square = [''.join(row) for row in transposed_matrix]
+        return transposed_square
 
     @staticmethod
     def normalize(msg):
@@ -36,6 +36,10 @@ class CryptoSquare:
     @staticmethod
     def transpose_uneven_matrix(matrix):
         return list(itertools.zip_longest(*matrix))
+
+    @staticmethod
+    def filter_out_none(matrix):
+        return [[val for val in row if val is not None] for row in matrix]
 
 def encode(msg):
     return CryptoSquare.encode(msg)
