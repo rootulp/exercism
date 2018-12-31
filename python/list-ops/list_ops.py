@@ -1,7 +1,7 @@
 def append(list_a, list_b):
     appended = []
     for element in list_a:
-        appended.append(element) # Not sure if using .append here is cheating
+        appended.append(element)  # Not sure if using .append here is cheating
     for element in list_b:
         appended.append(element)
     return appended
@@ -40,7 +40,7 @@ def foldl(function, l, acc):
     for element in l:
         try:
             acc = function(element, acc)
-        except ZeroDivisionError: # Pretty confident test_foldl_nonempty_list_floordiv is a bad test
+        except ZeroDivisionError:  # Pretty confident test_foldl_nonempty_list_floordiv is a bad test
             acc = 0
     return acc
 
