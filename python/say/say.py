@@ -56,7 +56,7 @@ class Say:
         hundreds = self.get_val(hundreds_digit)
 
         tens_digit, ones_digit = divmod(left_over, 10)
-        if left_over > 10 and left_over < 20:
+        if 10 < left_over < 20:
             tens = self.get_val(left_over)
             ones = None
         else:
