@@ -43,15 +43,15 @@ class Say:
         if num == 0:
             return 'zero'
         else:
-            return ' '.join([self.wordify_chunk(
-            chunk, index) for index, chunk in enumerate(self.chunkify(num))]).rstrip()
+            return ' '.join([self.convert_chunk_to_word(
+            chunk, index) for index, chunk in enumerate(self.get_chunks(num))]).rstrip()
 
-    def chunkify(self, num):
+    def get_chunks(self, num):
         rev = str(num)[::-1]
         rev_chunks = ([rev[i:i + 3] for i in range(0, len(rev), 3)])[::-1]
         return [int(x[::-1]) for x in rev_chunks]
 
-    def wordify_chunk(self, chunk, i):
+    def convert_chunk_to_word(self, chunk, i):
         hundreds_digit, left_over = divmod(chunk, 100)
         hundreds = self.get_val(hundreds_digit)
 
@@ -64,7 +64,7 @@ class Say:
             ones = self.get_val(ones_digit)
 
         word_chunk = self.frmt_chunk(hundreds, tens, ones)
-        units = self.get_units(len(self.chunkify(self.num)) - 1 - i)
+        units = self.get_units(len(self.get_chunks(self.num)) - 1 - i)
         return word_chunk + ' ' + units if word_chunk else ''
 
     def frmt_chunk(self, hundreds, tens, ones):
