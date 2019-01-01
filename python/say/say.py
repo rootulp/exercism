@@ -53,15 +53,15 @@ class Say:
 
     def convert_chunk_to_word(self, chunk, i):
         hundreds_digit, left_over = divmod(chunk, 100)
-        hundreds = self.get_val(hundreds_digit)
+        hundreds = self.convert_num_to_word(hundreds_digit)
 
         tens_digit, ones_digit = divmod(left_over, 10)
         if 10 < left_over < 20:
-            tens = self.get_val(left_over)
+            tens = self.convert_num_to_word(left_over)
             ones = None
         else:
-            tens = self.get_val(tens_digit * 10)
-            ones = self.get_val(ones_digit)
+            tens = self.convert_num_to_word(tens_digit * 10)
+            ones = self.convert_num_to_word(ones_digit)
 
         word_chunk = self.format_chunk(hundreds, tens, ones)
         units = self.get_units(len(self.get_chunks(self.num)) - 1 - i)
@@ -86,10 +86,10 @@ class Say:
             raise AttributeError
 
     def get_units(self, d):
-        return self.get_val(1000 ** d) if 1000 ** d > 1 else ''
+        return self.convert_num_to_word(1000 ** d) if 1000 ** d > 1 else ''
 
-    def get_val(self, d):
-        return self.NUM_TO_WORD[d]
+    def convert_num_to_word(self, num):
+        return self.NUM_TO_WORD[num]
 
     def in_english(self):
         return self._words
