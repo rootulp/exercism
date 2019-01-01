@@ -34,8 +34,8 @@ class Say:
     }
 
     def __init__(self, num):
-        self.num = num
-        self._words = self.get_words(num)
+        self.num = int(num)
+        self._words = self.get_words(self.num)
 
     def get_words(self, num):
         self.raise_if_invalid(num)
@@ -96,4 +96,4 @@ class Say:
 
 
 def say(num):
-    return Say(int(num)).in_english()
+    return Say(num).in_english()
