@@ -35,9 +35,9 @@ class Say:
 
     def __init__(self, num):
         self.num = num
-        self._words = 'zero' if num == 0 else self.wordify(num)
+        self._words = 'zero' if num == 0 else self.get_words(num)
 
-    def wordify(self, num):
+    def get_words(self, num):
         self.check_valid(num)
         return ' '.join([self.wordify_chunk(
             chunk, index) for index, chunk in enumerate(self.chunkify(num))]).rstrip()
