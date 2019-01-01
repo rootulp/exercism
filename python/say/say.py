@@ -35,7 +35,7 @@ class Say:
 
     def __init__(self, num):
         self.num = num
-        self.words = 'zero' if num == 0 else self.wordify(num)
+        self._words = 'zero' if num == 0 else self.wordify(num)
 
     def wordify(self, num):
         self.check_valid(num)
@@ -87,6 +87,9 @@ class Say:
     def get_val(self, d):
         return self.VALS[d]
 
+    def in_english(self):
+        return self._words
+
 
 def say(num):
-    return Say(int(num)).words
+    return Say(int(num)).in_english()
