@@ -63,11 +63,11 @@ class Say:
             tens = self.get_val(tens_digit * 10)
             ones = self.get_val(ones_digit)
 
-        word_chunk = self.frmt_chunk(hundreds, tens, ones)
+        word_chunk = self.format_chunk(hundreds, tens, ones)
         units = self.get_units(len(self.get_chunks(self.num)) - 1 - i)
         return word_chunk + ' ' + units if word_chunk else ''
 
-    def frmt_chunk(self, hundreds, tens, ones):
+    def format_chunk(self, hundreds, tens, ones):
         chunk = ''
         if hundreds:
             chunk += hundreds + ' hundred '
