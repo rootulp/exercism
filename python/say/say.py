@@ -1,6 +1,6 @@
 class Say:
 
-    VALS = {
+    NUM_TO_WORD = {
         1000000000: 'billion',
         1000000: 'million',
         1000: 'thousand',
@@ -85,7 +85,7 @@ class Say:
         return self.get_val(1000 ** d) if 1000 ** d > 1 else ''
 
     def get_val(self, d):
-        return self.VALS[d]
+        return self.NUM_TO_WORD[d]
 
     def in_english(self):
         return self._words
