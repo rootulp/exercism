@@ -40,7 +40,7 @@ class Say:
     def wordify(self, num):
         self.check_valid(num)
         return ' '.join([self.wordify_chunk(
-            i_chunk[1], i_chunk[0]) for i_chunk in enumerate(self.chunkify(num))]).rstrip()
+            chunk, index) for index, chunk in enumerate(self.chunkify(num))]).rstrip()
 
     def chunkify(self, num):
         rev = str(num)[::-1]
