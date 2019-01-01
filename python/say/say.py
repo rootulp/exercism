@@ -35,11 +35,15 @@ class Say:
 
     def __init__(self, num):
         self.num = num
-        self._words = 'zero' if num == 0 else self.get_words(num)
+        self._words = self.get_words(num)
 
     def get_words(self, num):
         self.check_valid(num)
-        return ' '.join([self.wordify_chunk(
+
+        if num == 0:
+            return 'zero'
+        else:
+            return ' '.join([self.wordify_chunk(
             chunk, index) for index, chunk in enumerate(self.chunkify(num))]).rstrip()
 
     def chunkify(self, num):
