@@ -65,7 +65,10 @@ class Say:
 
         word_chunk = self.format_chunk(hundreds, tens, ones)
         units = self.get_units(len(self.get_chunks(self.num)) - 1 - i)
-        return word_chunk + ' ' + units if word_chunk else ''
+
+        if not word_chunk:
+            return ''
+        return ' '.join((word_chunk, units))
 
     def format_chunk(self, hundreds, tens, ones):
         chunk = ''
