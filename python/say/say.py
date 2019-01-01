@@ -38,7 +38,7 @@ class Say:
         self._words = self.get_words(num)
 
     def get_words(self, num):
-        self.check_valid(num)
+        self.raise_if_invalid(num)
 
         if num == 0:
             return 'zero'
@@ -81,7 +81,7 @@ class Say:
             chunk += ones
         return chunk
 
-    def check_valid(self, num):
+    def raise_if_invalid(self, num):
         if num < 0 or num > 999999999999:
             raise AttributeError
 
