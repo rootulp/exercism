@@ -1,12 +1,15 @@
-class School(object):
+from collections import defaultdict
+
+class School:
     def __init__(self):
-        pass
+        self.db = defaultdict(list)
 
     def add_student(self, name, grade):
-        pass
+        self.db[grade].append(name)
+        self.db[grade] = sorted(self.db[grade])
 
     def roster(self):
         pass
 
     def grade(self, grade_number):
-        pass
+        return self.db[grade_number]
