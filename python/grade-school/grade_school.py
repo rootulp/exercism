@@ -11,7 +11,7 @@ class School:
     def roster(self):
         all_student_names = []
         for grade_number in sorted(self.db.keys()):
-            all_student_names.extend(sorted(self.db[grade_number]))
+            all_student_names.extend(self.db[grade_number])
         return all_student_names
 
     def grade(self, grade_number):
