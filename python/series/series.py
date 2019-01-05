@@ -1,10 +1,14 @@
-def slices(string, length):
-    if length <= 0 or length > len(string):
-        raise ValueError('Invalid slice length')
+def slices(string, size):
+    if size <= 0 or size > len(string):
+        raise ValueError('Invalid slice size')
 
-    nums = list(map(int, list(string)))
-    return get_slices(nums, length)
-
-
-def get_slices(arr, length):
-    return [arr[i:i + length] for i in range(len(arr) - length + 1)]
+    slices = []
+    for indx, elem in enumerate(string):
+        if len(string) - indx >= size:
+            curr_slice = []
+            curr_indx = indx
+            while len(curr_slice) < size:
+                curr_slice.append(int(string[curr_indx]))
+                curr_indx += 1
+            slices.append(curr_slice)
+    return slices
