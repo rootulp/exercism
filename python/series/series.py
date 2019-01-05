@@ -3,4 +3,8 @@ def slices(string, length):
         raise ValueError('Invalid slice length')
 
     nums = list(map(int, list(string)))
-    return [nums[i : i + length] for i in range(len(nums) - length + 1)]
+    return get_slices(nums, length)
+
+
+def get_slices(arr, length):
+    return [arr[i:i + length] for i in range(len(arr) - length + 1)]
