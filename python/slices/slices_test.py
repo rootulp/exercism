@@ -6,7 +6,7 @@ message if its length argument doesn't fit the series.
 """
 import unittest
 
-from series import slices
+from slices import slices
 
 
 # Tests adapted from `problem-specifications//canonical-data.json` @ v1.0.0
