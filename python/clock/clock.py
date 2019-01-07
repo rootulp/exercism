@@ -5,7 +5,6 @@ class Clock:
         self.fixup()
 
     def __eq__(self, other):
-        print("self.hours {}, other.hours {}, self.mins {}, other.mins {}".format(self.hours, other.hours, self.mins, other.mins))
         return self.hours == other.hours and self.mins == other.mins
 
     def __str__(self):
