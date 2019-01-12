@@ -12,9 +12,5 @@ def get_multiples(limit, factor):
     if factor == 0:
         return []
 
-    multiples = set()
-    for i in range(0, limit):
-        if i % factor == 0:
-            multiples.add(i)
-    return multiples
+    return [multiple for multiple in range(limit) if multiple % factor == 0]
 
