@@ -40,8 +40,8 @@ class Minesweeper:
     def num_of_neighbor_mines(cls, inp, y, x):
         return len(
             list([neighbor for neighbor in cls.all_neighbor_coords(
-                    inp, y, x) if cls.is_neighbor_a_mine(
-                    inp, neighbor)]))
+                inp, y, x) if cls.is_neighbor_a_mine(
+                inp, neighbor)]))
 
     # Checks if coords are within bounds then checks for is_mine
     @classmethod
