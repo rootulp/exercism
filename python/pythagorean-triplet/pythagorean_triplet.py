@@ -6,10 +6,6 @@ def is_triplet(sides):
     return Triplet(sides).valid()
 
 
-def primitive_triplets(n):
-    return Triplet.primitive_triplets(n)
-
-
 def triplets_in_range(low, high):
     return Triplet.triplets_in_range(low, high)
 
@@ -25,11 +21,6 @@ class Triplet:
     def valid(self):
         return self.a**2 + self.b**2 == self.c**2
 
-    def valid_primitive(self):
-        return self.valid() and (gcd(self.a, self.b) == 1 and
-                                 gcd(self.b, self.c) == 1 and
-                                 gcd(self.a, self.c) == 1)
-
     def valid_in_range(self, low, high):
         valid_range = list(range(low, high + 1))
         return self.valid() and (self.a in valid_range and
@@ -40,19 +31,6 @@ class Triplet:
     def triplets(cls, n):
         return set([cls.generate_sides(pair) for pair in
                     cls.valid_pairs(n / 2)])
-
-    @classmethod
-    def primitive_triplets(cls, n):
-        if cls.odd(n):
-            raise ValueError
-        else:
-            return set([triplet for triplet in cls.triplets(n) if
-                        cls(triplet).valid_primitive()])
-
-    @classmethod
-    def triplets_in_range(cls, low, high):
-        return set([triplet for triplet in cls.possible_triplets(low, high + 1)
-                    if cls(triplet).valid_in_range(low, high)])
 
     @classmethod
     def valid_pairs(cls, n):
