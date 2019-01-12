@@ -1,30 +1,67 @@
 # Pythagorean Triplet
 
-There exists exactly one Pythagorean triplet for which a + b + c = 1000. Find the product a * b * c.
-
 A Pythagorean triplet is a set of three natural numbers, {a, b, c}, for
 which,
 
-```
+```text
 a**2 + b**2 = c**2
 ```
 
-For example, 
+For example,
 
-```
+```text
 3**2 + 4**2 = 9 + 16 = 25 = 5**2.
 ```
 
-### Submitting Exercises
+There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 
-Note that, when trying to submit an exercise, make sure the solution is in the `exercism/python/<exerciseName>` directory.
+Find the product a * b * c.
 
-For example, if you're submitting `bob.py` for the Bob exercise, the submit command would be something like `exercism submit <path_to_exercism_dir>/python/bob/bob.py`.
+## Exception messages
 
+Sometimes it is necessary to raise an exception. When you do this, you should include a meaningful error message to
+indicate what the source of the error is. This makes your code more readable and helps significantly with debugging. Not
+every exercise will require you to raise an exception, but for those that do, the tests will only pass if you include
+a message.
+
+To raise a message with an exception, just write it as an argument to the exception type. For example, instead of
+`raise Exception`, you should write:
+
+```python
+raise Exception("Meaningful message indicating the source of the error")
+```
+
+## Running the tests
+
+To run the tests, run the appropriate command below ([why they are different](https://github.com/pytest-dev/pytest/issues/1629#issue-161422224)):
+
+- Python 2.7: `py.test pythagorean_triplet_test.py`
+- Python 3.4+: `pytest pythagorean_triplet_test.py`
+
+Alternatively, you can tell Python to run the pytest module (allowing the same command to be used regardless of Python version):
+`python -m pytest pythagorean_triplet_test.py`
+
+### Common `pytest` options
+
+- `-v` : enable verbose output
+- `-x` : stop running tests on first failure
+- `--ff` : run failures from previous test before running other test cases
+
+For other options, see `python -m pytest -h`
+
+## Submitting Exercises
+
+Note that, when trying to submit an exercise, make sure the solution is in the `$EXERCISM_WORKSPACE/python/pythagorean-triplet` directory.
+
+You can find your Exercism workspace by running `exercism debug` and looking for the line that starts with `Workspace`.
 
 For more detailed information about running tests, code style and linting,
-please see the [help page](http://help.exercism.io/getting-started-with-python.html).
+please see [Running the Tests](http://exercism.io/tracks/python/tests).
 
 ## Source
 
-Problem 9 at Project Euler [view source](http://projecteuler.net/problem=9)
+Problem 9 at Project Euler [http://projecteuler.net/problem=9](http://projecteuler.net/problem=9)
+
+## Submitting Incomplete Solutions
+
+It's possible to submit an incomplete solution so you can see how others have completed the exercise.
