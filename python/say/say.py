@@ -43,12 +43,13 @@ class Say:
         if num == 0:
             return 'zero'
         else:
-            return ' '.join([self.convert_chunk_to_word(
-            chunk, index) for index, chunk in enumerate(self.get_chunks(num))]).rstrip()
+            return ' '.join([self.convert_chunk_to_word(chunk, index)
+                             for index, chunk in enumerate(self.get_chunks(num))]).rstrip()
 
     def get_chunks(self, num):
         reversed_string = str(num)[::-1]
-        reversed_chunks = ([reversed_string[i:i + 3] for i in range(0, len(reversed_string), 3)])[::-1]
+        reversed_chunks = ([reversed_string[i:i + 3]
+                            for i in range(0, len(reversed_string), 3)])[::-1]
         return [int(x[::-1]) for x in reversed_chunks]
 
     def convert_chunk_to_word(self, chunk, i):

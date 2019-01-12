@@ -16,4 +16,5 @@ def decode(s):
 
     # Fix hardcoded 0 and 1 indices
     # Also change name of x variable
-    return ''.join([int(x[0]) * x[1] if x[0].isdigit() else x[1] for x in pairs])
+    return ''.join([int(x[0]) * x[1] if x[0].isdigit() else x[1]
+                    for x in pairs])

@@ -40,7 +40,8 @@ def foldl(function, l, acc):
     for element in l:
         try:
             acc = function(element, acc)
-        except ZeroDivisionError:  # Pretty confident test_foldl_nonempty_list_floordiv is a bad test
+        # Pretty confident test_foldl_nonempty_list_floordiv is a bad test
+        except ZeroDivisionError:
             acc = 0
     return acc
 

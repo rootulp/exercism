@@ -46,7 +46,8 @@ class IsbnVerifier(object):
 
     @classmethod
     def remove_invalid_characters(cls, string):
-        return "".join([char for char in string if char in cls.VALID_CHARACTERS])
+        return "".join(
+            [char for char in string if char in cls.VALID_CHARACTERS])
 
     @classmethod
     def convert_char_to_int(cls, char):
@@ -58,7 +59,8 @@ class IsbnVerifier(object):
 
     @classmethod
     def remove_seperator(cls, string):
-        return "".join([char for char in string if char != cls.VALID_SEPERATOR])
+        return "".join(
+            [char for char in string if char != cls.VALID_SEPERATOR])
 
 
 def verify(isbn):

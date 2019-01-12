@@ -35,7 +35,9 @@ class CryptoSquare:
     @staticmethod
     def transpose_uneven_matrix(matrix):
         transposed_matrix = list(itertools.zip_longest(*matrix))
-        return [[val for val in row if val is not None] for row in transposed_matrix] # Remove None's
+        # Remove None's
+        return [[val for val in row if val is not None]
+                for row in transposed_matrix]
 
 
 def encode(msg):

@@ -18,7 +18,8 @@ class Roman:
 
     @classmethod
     def numeral(cls, arabic):
-        return ''.join([cls.NUMERALS[key] for key in cls.get_components(arabic)])
+        return ''.join([cls.NUMERALS[key]
+                        for key in cls.get_components(arabic)])
 
     @classmethod
     def get_components(cls, arabic):

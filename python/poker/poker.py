@@ -14,8 +14,8 @@ class Poker:
         self.hands = [Hand(hand) for hand in hands]
 
     def best_hand(self):
-        return [hand.hand for hand, score in list(self.scores().items()) if score ==
-                self.best_score()]
+        return [hand.hand for hand, score in list(
+            self.scores().items()) if score == self.best_score()]
 
     def best_score(self):
         return max(self.scores(), key=self.scores().get).score()

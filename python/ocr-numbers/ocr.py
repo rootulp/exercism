@@ -18,7 +18,8 @@ class Ocr:
 
     @classmethod
     def numbers(cls, inp):
-        return "".join(map(cls.number, list(zip(*list(map(cls.split_every_three, inp))))))
+        return "".join(map(cls.number, list(
+            zip(*list(map(cls.split_every_three, inp))))))
 
     @classmethod
     def grids(cls, inp):
