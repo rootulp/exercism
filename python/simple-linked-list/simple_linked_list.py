@@ -14,7 +14,6 @@ class LinkedList:
     def __init__(self, values=[]):
         self._size = 0
         self._head = None
-        self._current = None
 
         for value in values:
             self.push(value)
@@ -28,8 +27,8 @@ class LinkedList:
         return self._head
 
     def push(self, value):
-        node = Node(value, self._head)
-        self._head = node
+        new_node = Node(value, self._head)
+        self._head = new_node
         self._size += 1
 
     def pop(self):
@@ -47,17 +46,17 @@ class LinkedList:
 
 class LinkedListIterator:
     def __init__(self, linked_list):
-        self.current = linked_list._head
+        self._current = linked_list._head
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.current is None:
+        if self._current is None:
             raise StopIteration
-        value = self.current.value()
-        self.current = self.current.next()
-        return value
+        current_value = self._current.value()
+        self._current = self._current.next()
+        return current_value
 
 
 class EmptyListException(Exception):
