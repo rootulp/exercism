@@ -87,13 +87,13 @@ class SimpleLinkedListTest(unittest.TestCase):
         sut = LinkedList()
         self.assertEqual(list(sut), [])
 
-    # def test_singleton_linked_list_to_list_list_with_singular_element(self):
-    #     sut = LinkedList([1])
-    #     self.assertEqual(list(sut), [1])
+    def test_singleton_linked_list_to_list_list_with_singular_element(self):
+        sut = LinkedList([1])
+        self.assertEqual(list(sut), [1])
 
-    # def test_non_empty_linked_list_to_list_is_list_with_all_elements(self):
-    #     sut = LinkedList([1, 2, 3])
-    #     self.assertEqual(list(sut), [3, 2, 1])
+    def test_non_empty_linked_list_to_list_is_list_with_all_elements(self):
+        sut = LinkedList([1, 2, 3])
+        self.assertEqual(list(sut), [3, 2, 1])
 
     # def test_reversed_empty_list_is_empty_list(self):
     #     sut = LinkedList([])

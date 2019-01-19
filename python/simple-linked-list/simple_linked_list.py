@@ -6,7 +6,7 @@ class Node:
     def value(self):
         return self._value
 
-    def __next__(self):
+    def next(self):
         return self._next_node
 
     def __str__(self):
