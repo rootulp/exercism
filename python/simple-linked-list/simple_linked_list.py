@@ -1,4 +1,4 @@
-class Node(object):
+class Node():
     def __init__(self, value, next_node=None):
         self._value = value
         self._next_node = next_node
@@ -9,8 +9,11 @@ class Node(object):
     def next(self):
         return self._next_node
 
+    def __str__(self):
+        return "({} -> {})".format(self._value, self._next_node)
 
-class LinkedList(object):
+
+class LinkedList():
     def __init__(self, values=[]):
         self._size = 0
         self._head = None
@@ -27,19 +30,15 @@ class LinkedList(object):
         return self._head
 
     def push(self, value):
-        current = self._head
-        while current is not None:
-            current = current.next()
-
-        node = Node(value, current)
+        node = Node(value, self._head)
         self._head = node
         self._size += 1
 
     def pop(self):
         current_head = self.head()
         self._head = current_head.next()
-        self._size += 1
-        return current_head
+        self._size -= 1
+        return current_head.value()
 
     def reversed(self):
         pass

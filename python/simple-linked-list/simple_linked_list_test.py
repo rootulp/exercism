@@ -42,38 +42,38 @@ class SimpleLinkedListTest(unittest.TestCase):
         self.assertEqual(len(sut), 1)
         self.assertEqual(sut.head().value(), 5)
 
-    def test_can_from_non_empty_list(self):
+    def test_can_pop_from_non_empty_list(self):
         sut = LinkedList([3, 4, 5])
         self.assertEqual(sut.pop(), 5)
         self.assertEqual(len(sut), 2)
         self.assertEqual(sut.head().value(), 4)
 
-    # def test_pop_from_singleton_list_removes_head(self):
-    #     sut = LinkedList([1])
-    #     self.assertEqual(sut.pop(), 1)
-    #     with self.assertRaisesWithMessage(EmptyListException):
-    #         sut.head()
+    def test_pop_from_singleton_list_removes_head(self):
+        sut = LinkedList([1])
+        self.assertEqual(sut.pop(), 1)
+        with self.assertRaisesWithMessage(EmptyListException):
+            sut.head()
 
-    # def test_error_on_empty_list_pop(self):
-    #     sut = LinkedList()
-    #     with self.assertRaisesWithMessage(EmptyListException):
-    #         sut.pop()
+    def test_error_on_empty_list_pop(self):
+        sut = LinkedList()
+        with self.assertRaisesWithMessage(EmptyListException):
+            sut.pop()
 
-    # def test_push_and_pop(self):
-    #     sut = LinkedList([1, 2])
-    #     sut.push(3)
-    #     self.assertEqual(len(sut), 3)
-    #     self.assertEqual(sut.pop(), 3)
-    #     self.assertEqual(sut.pop(), 2)
-    #     self.assertEqual(sut.pop(), 1)
-    #     self.assertEqual(len(sut), 0)
-    #     sut.push(4)
-    #     self.assertEqual(len(sut), 1)
-    #     self.assertEqual(sut.head().value(), 4)
+    def test_push_and_pop(self):
+        sut = LinkedList([1, 2])
+        sut.push(3)
+        self.assertEqual(len(sut), 3)
+        self.assertEqual(sut.pop(), 3)
+        self.assertEqual(sut.pop(), 2)
+        self.assertEqual(sut.pop(), 1)
+        self.assertEqual(len(sut), 0)
+        sut.push(4)
+        self.assertEqual(len(sut), 1)
+        self.assertEqual(sut.head().value(), 4)
 
-    # def test_singleton_list_head_has_no_next(self):
-    #     sut = LinkedList([1])
-    #     self.assertIsNone(sut.head().next())
+    def test_singleton_list_head_has_no_next(self):
+        sut = LinkedList([1])
+        self.assertIsNone(sut.head().next())
 
     # def test_non_empty_list_traverse(self):
     #     sut = LinkedList(range(10))
