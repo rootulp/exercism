@@ -9,9 +9,6 @@ class Node:
     def next(self):
         return self._next_node
 
-    def __str__(self):
-        return "({} -> {})".format(self._value, self._next_node)
-
 
 class LinkedList:
     def __init__(self, values=[]):
