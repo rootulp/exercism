@@ -42,7 +42,7 @@ class LinkedList:
         return current_head.value()
 
     def reversed(self):
-        pass
+        return LinkedList(self)
 
     def __iter__(self):
         return LinkedListIterator(self)

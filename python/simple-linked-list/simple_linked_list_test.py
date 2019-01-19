@@ -95,17 +95,17 @@ class SimpleLinkedListTest(unittest.TestCase):
         sut = LinkedList([1, 2, 3])
         self.assertEqual(list(sut), [3, 2, 1])
 
-    # def test_reversed_empty_list_is_empty_list(self):
-    #     sut = LinkedList([])
-    #     self.assertEqual(list(sut.reversed()), [])
+    def test_reversed_empty_list_is_empty_list(self):
+        sut = LinkedList([])
+        self.assertEqual(list(sut.reversed()), [])
 
-    # def test_reversed_singleton_list_is_same_list(self):
-    #     sut = LinkedList([1])
-    #     self.assertEqual(list(sut.reversed()), [1])
+    def test_reversed_singleton_list_is_same_list(self):
+        sut = LinkedList([1])
+        self.assertEqual(list(sut.reversed()), [1])
 
-    # def test_reverse_non_empty_list(self):
-    #     sut = LinkedList([1, 2, 3])
-    #     self.assertEqual(list(sut.reversed()), [1, 2, 3])
+    def test_reverse_non_empty_list(self):
+        sut = LinkedList([1, 2, 3])
+        self.assertEqual(list(sut.reversed()), [1, 2, 3])
 
     # Utility functions
     def setUp(self):
