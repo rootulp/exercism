@@ -44,7 +44,8 @@ class Say:
             return 'zero'
         else:
             return ' '.join([self.convert_chunk_to_word(chunk, index)
-                             for index, chunk in enumerate(self.get_chunks(num))]).rstrip()
+                             for index, chunk
+                             in enumerate(self.get_chunks(num))]).rstrip()
 
     def get_chunks(self, num):
         reversed_string = str(num)[::-1]
