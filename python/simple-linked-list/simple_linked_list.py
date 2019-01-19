@@ -11,22 +11,25 @@ class Node(object):
 
 class LinkedList(object):
     def __init__(self, values=[]):
-        self.size = 0
+        self._size = 0
+        self._head = None
+
         for value in values:
             self.push(value)
 
     def __len__(self):
-        return self.size
+        return self._size
 
     def head(self):
-        pass
+        if self._head is None:
+            raise EmptyListException("Head is empty")
 
     def push(self, value):
         node = Node(value)
-        if self.head is None:
-            self.head = node
+        if self._head is None:
+            self._head = node
 
-        self.size += 1
+        self._size += 1
 
     def pop(self):
         pass
@@ -36,4 +39,5 @@ class LinkedList(object):
 
 
 class EmptyListException(Exception):
-    pass
+    def __init__(self, message):
+        self.message = message
