@@ -12,6 +12,8 @@ class Node(object):
 class LinkedList(object):
     def __init__(self, values=[]):
         self.size = 0
+        for value in values:
+            self.push(value)
 
     def __len__(self):
         return self.size
@@ -20,7 +22,11 @@ class LinkedList(object):
         pass
 
     def push(self, value):
-        pass
+        node = Node(value)
+        if self.head is None:
+            self.head = node
+
+        self.size += 1
 
     def pop(self):
         pass
