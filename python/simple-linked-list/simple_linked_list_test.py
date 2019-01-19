@@ -75,17 +75,17 @@ class SimpleLinkedListTest(unittest.TestCase):
         sut = LinkedList([1])
         self.assertIsNone(sut.head().next())
 
-    # def test_non_empty_list_traverse(self):
-    #     sut = LinkedList(range(10))
-    #     current = sut.head()
-    #     for i in range(10):
-    #         self.assertEqual(current.value(), 9 - i)
-    #         current = current.next()
-    #     self.assertIsNone(current)
+    def test_non_empty_list_traverse(self):
+        sut = LinkedList(range(10))
+        current = sut.head()
+        for i in range(10):
+            self.assertEqual(current.value(), 9 - i)
+            current = current.next()
+        self.assertIsNone(current)
 
-    # def test_empty_linked_list_to_list_is_empty(self):
-    #     sut = LinkedList()
-    #     self.assertEqual(list(sut), [])
+    def test_empty_linked_list_to_list_is_empty(self):
+        sut = LinkedList()
+        self.assertEqual(list(sut), [])
 
     # def test_singleton_linked_list_to_list_list_with_singular_element(self):
     #     sut = LinkedList([1])
