@@ -42,11 +42,11 @@ class SimpleLinkedListTest(unittest.TestCase):
         self.assertEqual(len(sut), 1)
         self.assertEqual(sut.head().value(), 5)
 
-    # def test_can_from_non_empty_list(self):
-    #     sut = LinkedList([3, 4, 5])
-    #     self.assertEqual(sut.pop(), 5)
-    #     self.assertEqual(len(sut), 2)
-    #     self.assertEqual(sut.head().value(), 4)
+    def test_can_from_non_empty_list(self):
+        sut = LinkedList([3, 4, 5])
+        self.assertEqual(sut.pop(), 5)
+        self.assertEqual(len(sut), 2)
+        self.assertEqual(sut.head().value(), 4)
 
     # def test_pop_from_singleton_list_removes_head(self):
     #     sut = LinkedList([1])

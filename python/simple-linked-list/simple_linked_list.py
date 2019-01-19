@@ -36,7 +36,10 @@ class LinkedList(object):
         self._size += 1
 
     def pop(self):
-        pass
+        current_head = self.head()
+        self._head = current_head.next()
+        self._size += 1
+        return current_head
 
     def reversed(self):
         pass
