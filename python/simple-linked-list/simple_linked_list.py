@@ -11,10 +11,10 @@ class Node(object):
 
 class LinkedList(object):
     def __init__(self, values=[]):
-        pass
+        self.size = 0
 
     def __len__(self):
-        pass
+        return self.size
 
     def head(self):
         pass
