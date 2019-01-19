@@ -1,12 +1,13 @@
 class Node(object):
-    def __init__(self, value):
-        pass
+    def __init__(self, value, next_node=None):
+        self._value = value
+        self._next_node = next_node
 
     def value(self):
-        pass
+        return self._value
 
     def next(self):
-        pass
+        return self._next_node
 
 
 class LinkedList(object):
@@ -23,12 +24,15 @@ class LinkedList(object):
     def head(self):
         if self._head is None:
             raise EmptyListException("Head is empty")
+        return self._head
 
     def push(self, value):
-        node = Node(value)
-        if self._head is None:
-            self._head = node
+        current = self._head
+        while current is not None:
+            current = current.next()
 
+        node = Node(value, current)
+        self._head = node
         self._size += 1
 
     def pop(self):
