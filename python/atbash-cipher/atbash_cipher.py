@@ -2,7 +2,6 @@ import string
 
 
 class Atbash:
-
     PLAIN = 'abcdefghijklmnopqrstuvwxyz'
     PRIME = 'zyxwvutsrqponmlkjihgfedcba'
     CIPHER = dict(zip(list(PLAIN), list(PRIME)))
