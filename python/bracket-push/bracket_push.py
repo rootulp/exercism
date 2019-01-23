@@ -1,3 +1,6 @@
+def isEmpty(stack):
+    return stack == []
+
 class CheckBrackets:
     BRACKETS = {'{': '}',
                '[': ']',
@@ -5,23 +8,26 @@ class CheckBrackets:
     OPENERS = set(BRACKETS.keys())
     CLOSERS = set(BRACKETS.values())
 
-    @classmethod
-    def is_paired(cls, inp):
+    def __init__(self, inp):
+        self.inp = inp
+
+    def is_paired(self):
         stack = []
-        for char in list(inp):
-            if char in cls.OPENERS:
+        for char in list(self.inp):
+            if char in self.OPENERS:
                 stack.append(char)
-            elif (char in cls.CLOSERS and stack and
-                  cls.corresponding_brackets(stack[-1], char)):
+            elif self.is_closing_bracket(char, stack):
                 stack.pop()
             else:
                 return False
-        return not bool(stack)
+        return isEmpty(stack)
 
-    @classmethod
-    def corresponding_brackets(cls, opener, closer):
-        return cls.BRACKETS[opener] == closer
+    def is_closing_bracket(self, char, stack):
+        return char in self.CLOSERS and stack and self.matching_brackets(stack[-1], char)
+
+    def matching_brackets(self, opener, closer):
+        return self.BRACKETS[opener] == closer
 
 
 def is_paired(inp):
-    return CheckBrackets.is_paired(inp)
+    return CheckBrackets(inp).is_paired()
