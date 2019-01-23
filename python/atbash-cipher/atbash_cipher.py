@@ -3,9 +3,9 @@ import string
 
 class Atbash:
 
-    PLAIN = string.ascii_lowercase
-    PRIME = ''.join(reversed(string.ascii_lowercase))
-    CIPHER = dict(list(zip(list(PLAIN), list(PRIME))))
+    PLAIN = 'abcdefghijklmnopqrstuvwxyz'
+    PRIME = 'zyxwvutsrqponmlkjihgfedcba'
+    CIPHER = dict(zip(list(PLAIN), list(PRIME)))
     EXCLUDE = set(string.punctuation + ' ')
 
     @staticmethod
@@ -19,7 +19,7 @@ class Atbash:
     @staticmethod
     def encoded(self, msg):
         return ''.join(([char if char.isdigit() else self.CIPHER[char]
-                         for char in self.clean(self, msg)]))
+                        for char in self.clean(self, msg)]))
 
     @staticmethod
     def clean(self, msg):
