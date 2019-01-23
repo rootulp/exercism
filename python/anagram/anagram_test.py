@@ -1,71 +1,62 @@
 import unittest
 
-from anagram import detect_anagrams
+from anagram import find_anagrams
 
 
-class AnagramTests(unittest.TestCase):
+# Tests adapted from `problem-specifications//canonical-data.json` @ v1.4.0
+
+class AnagramTest(unittest.TestCase):
     def test_no_matches(self):
-        self.assertEqual(
-            [],
-            detect_anagrams('diaper', 'hello world zombies pants'.split())
-        )
+        candidates = ["hello", "world", "zombies", "pants"]
+        self.assertEqual(find_anagrams("diaper", candidates), [])
 
-    def test_detect_simple_anagram(self):
+    def test_detects_two_anagrams(self):
+        candidates = ["stream", "pigeon", "maters"]
         self.assertEqual(
-            ['tan'],
-            detect_anagrams('ant', 'tan stand at'.split())
-        )
+            find_anagrams("master", candidates), ["stream", "maters"])
 
-    def test_detect_multiple_anagrams(self):
-        self.assertEqual(
-            ['stream', 'maters'],
-            detect_anagrams('master', 'stream pigeon maters'.split())
-        )
+    def test_does_not_detect_anagram_subsets(self):
+        self.assertEqual(find_anagrams("good", ["dog", "goody"]), [])
 
-    def test_does_not_confuse_different_duplicates(self):
-        self.assertEqual(
-            [],
-            detect_anagrams('galea', ['eagle'])
-        )
+    def test_detects_anagram(self):
+        candidates = ["enlists", "google", "inlets", "banana"]
+        self.assertEqual(find_anagrams("listen", candidates), ["inlets"])
 
-    def test_eliminate_anagram_subsets(self):
+    def test_detects_three_anagrams(self):
+        candidates = [
+            "gallery", "ballerina", "regally", "clergy", "largely", "leading"
+        ]
         self.assertEqual(
-            [],
-            detect_anagrams('good', 'dog goody'.split())
-        )
+            find_anagrams("allergy", candidates),
+            ["gallery", "regally", "largely"])
 
-    def test_detect_anagram(self):
-        self.assertEqual(
-            ['inlets'],
-            detect_anagrams('listen', 'enlists google inlets banana'.split())
-        )
+    def test_does_not_detect_non_anagrams_with_identical_checksum(self):
+        self.assertEqual(find_anagrams("mass", ["last"]), [])
 
-    def test_multiple_anagrams(self):
+    def test_detects_anagrams_case_insensitively(self):
+        candidates = ["cashregister", "Carthorse", "radishes"]
         self.assertEqual(
-            'gallery regally largely'.split(),
-            detect_anagrams(
-                'allergy',
-                'gallery ballerina regally clergy largely leading'.split()
-            )
-        )
+            find_anagrams("Orchestra", candidates), ["Carthorse"])
 
-    def test_anagrams_are_case_insensitive(self):
+    def test_detects_anagrams_using_case_insensitive_subject(self):
+        candidates = ["cashregister", "carthorse", "radishes"]
         self.assertEqual(
-            ['Carthorse'],
-            detect_anagrams('Orchestra',
-                            'cashregister Carthorse radishes'.split())
-        )
+            find_anagrams("Orchestra", candidates), ["carthorse"])
 
-    def test_same_word_isnt_anagram(self):
+    def test_detects_anagrams_using_case_insensitive_possible_matches(self):
+        candidates = ["cashregister", "Carthorse", "radishes"]
         self.assertEqual(
-            [],
-            detect_anagrams('banana', ['banana'])
-        )
+            find_anagrams("orchestra", candidates), ["Carthorse"])
 
-        self.assertEqual(
-            [],
-            detect_anagrams('go', 'go Go GO'.split())
-        )
+    def test_does_not_detect_a_anagram_if_the_original_word_is_repeated(self):
+        self.assertEqual(find_anagrams("go", ["go Go GO"]), [])
+
+    def test_anagrams_must_use_all_letters_exactly_once(self):
+        self.assertEqual(find_anagrams("tapper", ["patter"]), [])
+
+    def test_words_are_not_anagrams_of_themselves_case_insensitive(self):
+        candidates = ["BANANA", "Banana", "banana"]
+        self.assertEqual(find_anagrams("BANANA", candidates), [])
 
 
 if __name__ == '__main__':
