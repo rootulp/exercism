@@ -1,13 +1,11 @@
 class CheckBrackets:
-    OPENERS = {'{': '}',
+    BRACKETS = {'{': '}',
                '[': ']',
                '(': ')'}
-    CLOSERS = set(OPENERS.values())
+    OPENERS = set(BRACKETS.keys())
+    CLOSERS = set(BRACKETS.values())
 
-    def __init__(self, inp):
-        self.check_brackets = self.build_stack(inp)
-
-    def build_stack(self, inp):
+    def is_paired(self, inp):
         stack = []
         for char in list(inp):
             if char in self.OPENERS:
@@ -21,8 +19,8 @@ class CheckBrackets:
 
     @classmethod
     def corresponding_brackets(cls, opener, closer):
-        return cls.OPENERS[opener] == closer
+        return cls.BRACKETS[opener] == closer
 
 
 def is_paired(inp):
-    return CheckBrackets(inp).check_brackets
+    return CheckBrackets().is_paired(inp)
