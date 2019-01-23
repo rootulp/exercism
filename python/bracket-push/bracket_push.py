@@ -11,9 +11,12 @@ class CheckBrackets:
     def __init__(self, inp):
         self.inp = inp
 
+    def filter_non_brackets(self, str):
+        return [char for char in self.inp if self.is_bracket(char)]
+
     def is_paired(self):
         stack = []
-        for char in list(self.inp):
+        for char in self.filter_non_brackets(self.inp):
             if char in self.OPENERS:
                 stack.append(char)
             elif self.is_closing_bracket(char, stack):
@@ -27,6 +30,9 @@ class CheckBrackets:
 
     def matching_brackets(self, opener, closer):
         return self.BRACKETS[opener] == closer
+
+    def is_bracket(self, char):
+        return char in self.OPENERS or char in self.CLOSERS
 
 
 def is_paired(inp):
