@@ -24,5 +24,5 @@ class CheckBrackets:
         return cls.OPENERS[opener] == closer
 
 
-def check_brackets(inp):
+def is_paired(inp):
     return CheckBrackets(inp).check_brackets
