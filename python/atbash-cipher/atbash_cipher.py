@@ -3,8 +3,8 @@ import string
 
 class Atbash:
 
-    PLAIN = 'abcdefghijklmnopqrstuvwxyz'
-    PRIME = 'zyxwvutsrqponmlkjihgfedcba'
+    PLAIN = string.ascii_lowercase
+    PRIME = ''.join(reversed(string.ascii_lowercase))
     CIPHER = dict(list(zip(list(PLAIN), list(PRIME))))
     EXCLUDE = set(string.punctuation + ' ')
 
