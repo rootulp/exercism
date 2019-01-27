@@ -31,9 +31,14 @@ class Tournament:
 
     def results_table(self):
         table = [self.header()]
-        for team in reversed(sorted(self.teams.values(), key=lambda team: team.points())):
+        for team in self.sorted_teams():
             table.append(str(team))
         return "\n".join(table)
+
+    def sorted_teams(self):
+        alphabetic = sorted(self.teams.values(), key=lambda team: team.name)
+        descending_points = sorted(alphabetic, key=lambda team: team.points(), reverse=True)
+        return descending_points
 
     def parse_results(self):
         if (self.results == ''):

@@ -33,12 +33,12 @@ class TournamentTest(unittest.TestCase):
                  'Allegoric Alaskans             |  1 |  0 |  0 |  1 |  0')
         self.assertEqual(tally(results), table)
 
-    # def test_a_draw_is_one_point_each(self):
-    #     results = 'Allegoric Alaskans;Blithering Badgers;draw'
-    #     table = ('Team                           | MP |  W |  D |  L |  P\n'
-    #              'Allegoric Alaskans             |  1 |  0 |  1 |  0 |  1\n'
-    #              'Blithering Badgers             |  1 |  0 |  1 |  0 |  1')
-    #     self.assertEqual(tally(results), table)
+    def test_a_draw_is_one_point_each(self):
+        results = 'Allegoric Alaskans;Blithering Badgers;draw'
+        table = ('Team                           | MP |  W |  D |  L |  P\n'
+                 'Allegoric Alaskans             |  1 |  0 |  1 |  0 |  1\n'
+                 'Blithering Badgers             |  1 |  0 |  1 |  0 |  1')
+        self.assertEqual(tally(results), table)
 
     def test_there_can_be_more_than_one_match(self):
         results = ('Allegoric Alaskans;Blithering Badgers;win\n'
@@ -48,13 +48,13 @@ class TournamentTest(unittest.TestCase):
                  'Blithering Badgers             |  2 |  0 |  0 |  2 |  0')
         self.assertEqual(tally(results), table)
 
-    # def test_there_can_be_more_than_one_winner(self):
-    #     results = ('Allegoric Alaskans;Blithering Badgers;loss\n'
-    #                'Allegoric Alaskans;Blithering Badgers;win')
-    #     table = ('Team                           | MP |  W |  D |  L |  P\n'
-    #              'Allegoric Alaskans             |  2 |  1 |  0 |  1 |  3\n'
-    #              'Blithering Badgers             |  2 |  1 |  0 |  1 |  3')
-    #     self.assertEqual(tally(results), table)
+    def test_there_can_be_more_than_one_winner(self):
+        results = ('Allegoric Alaskans;Blithering Badgers;loss\n'
+                   'Allegoric Alaskans;Blithering Badgers;win')
+        table = ('Team                           | MP |  W |  D |  L |  P\n'
+                 'Allegoric Alaskans             |  2 |  1 |  0 |  1 |  3\n'
+                 'Blithering Badgers             |  2 |  1 |  0 |  1 |  3')
+        self.assertEqual(tally(results), table)
 
     def test_there_can_be_more_than_two_teams(self):
         results = ('Allegoric Alaskans;Blithering Badgers;win\n'
@@ -96,21 +96,21 @@ class TournamentTest(unittest.TestCase):
 
         self.assertEqual(tally(results), table)
 
-    # def test_ties_broken_alphabetically(self):
-    #     results = ('Courageous Californians;Devastating Donkeys;win\n'
-    #                'Allegoric Alaskans;Blithering Badgers;win\n'
-    #                'Devastating Donkeys;Allegoric Alaskans;loss\n'
-    #                'Courageous Californians;Blithering Badgers;win\n'
-    #                'Blithering Badgers;Devastating Donkeys;draw\n'
-    #                'Allegoric Alaskans;Courageous Californians;draw')
+    def test_ties_broken_alphabetically(self):
+        results = ('Courageous Californians;Devastating Donkeys;win\n'
+                   'Allegoric Alaskans;Blithering Badgers;win\n'
+                   'Devastating Donkeys;Allegoric Alaskans;loss\n'
+                   'Courageous Californians;Blithering Badgers;win\n'
+                   'Blithering Badgers;Devastating Donkeys;draw\n'
+                   'Allegoric Alaskans;Courageous Californians;draw')
 
-    #     table = ('Team                           | MP |  W |  D |  L |  P\n'
-    #              'Allegoric Alaskans             |  3 |  2 |  1 |  0 |  7\n'
-    #              'Courageous Californians        |  3 |  2 |  1 |  0 |  7\n'
-    #              'Blithering Badgers             |  3 |  0 |  1 |  2 |  1\n'
-    #              'Devastating Donkeys            |  3 |  0 |  1 |  2 |  1')
+        table = ('Team                           | MP |  W |  D |  L |  P\n'
+                 'Allegoric Alaskans             |  3 |  2 |  1 |  0 |  7\n'
+                 'Courageous Californians        |  3 |  2 |  1 |  0 |  7\n'
+                 'Blithering Badgers             |  3 |  0 |  1 |  2 |  1\n'
+                 'Devastating Donkeys            |  3 |  0 |  1 |  2 |  1')
 
-    #     self.assertEqual(tally(results), table)
+        self.assertEqual(tally(results), table)
 
 
 if __name__ == '__main__':
