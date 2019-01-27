@@ -12,16 +12,18 @@ class Team:
 
 class Tournament:
 
+    COLUMN_HEADERS = ['Team', 'MP', 'W', 'D', 'L', 'P']
+
     def __init__(self, results):
         self.teams = {}
         self.results = results
         self.parse_results()
 
     def header(self):
-        return 'Team                           | MP |  W |  D |  L |  P'
+        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(*self.COLUMN_HEADERS)
 
     def results_table(self):
-        print("Teams {}".format(self.teams))
+        # print("Teams {}".format(self.teams))
         return self.header()
 
     def parse_results(self):
