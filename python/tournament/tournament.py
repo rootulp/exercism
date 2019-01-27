@@ -51,14 +51,23 @@ class Tournament:
 
     def tally_outcome(self, team_a, team_b, outcome):
         if outcome == self.WIN:
-            self.teams[team_a].wins += 1
-            self.teams[team_b].losses += 1
+            self.tally_win(team_a, team_b)
         if outcome == self.LOSS:
-            self.teams[team_a].losses += 1
-            self.teams[team_b].wins += 1
+            self.tally_loss(team_a, team_b)
         if outcome == self.DRAW:
-            self.teams[team_a].draws += 1
-            self.teams[team_b].draws += 1
+            self.tally_draw(team_a, team_b)
+
+    def tally_win(self, team_a, team_b):
+        self.teams[team_a].wins += 1
+        self.teams[team_b].losses += 1
+
+    def tally_loss(self, team_a, team_b):
+        self.teams[team_a].losses += 1
+        self.teams[team_b].wins += 1
+
+    def tally_draw(self, team_a, team_b):
+        self.teams[team_a].draws += 1
+        self.teams[team_b].draws += 1
 
     def maybe_initialize_teams(self, team_a, team_b):
         self.maybe_initialize_team(team_a)
