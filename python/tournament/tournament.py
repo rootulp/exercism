@@ -17,6 +17,15 @@ class Team:
     def points(self):
         return (self.wins * self.POINTS_PER_WIN) + (self.draws * self.POINTS_PER_DRAW)
 
+    def tally_win(self):
+        self.wins += 1
+
+    def tally_draw(self):
+        self.draws += 1
+
+    def tally_loss(self):
+        self.losses += 1
+
     def __str__(self):
         return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(self.name, self.matches_played, self.wins, self.draws, self.losses, self.points)
 
@@ -30,7 +39,7 @@ class Tournament:
     COLUMN_HEADERS = ['Team', 'MP', 'W', 'D', 'L', 'P']
 
     def __init__(self, results):
-        self.teams = {}
+        self._teams = {}
         if results:
             self.parse(results)
 
@@ -41,7 +50,7 @@ class Tournament:
         return "\n".join(table)
 
     def sorted_teams(self):
-        alphabetic = sorted(self.teams.values(), key=lambda team: team.name)
+        alphabetic = sorted(self._teams.values(), key=lambda team: team.name)
         alphabetic_descending_points = sorted(alphabetic, key=lambda team: team.points, reverse=True)
         return alphabetic_descending_points
 
@@ -59,25 +68,25 @@ class Tournament:
         if outcome == self.DRAW:
             self.tally_draw(team_a, team_b)
 
-    def tally_win(self, team_a, team_b):
-        self.teams[team_a].wins += 1
-        self.teams[team_b].losses += 1
+    def tally_win(self, winner, loser):
+        self._teams[winner].tally_win()
+        self._teams[loser].tally_loss()
 
-    def tally_loss(self, team_a, team_b):
-        self.teams[team_a].losses += 1
-        self.teams[team_b].wins += 1
+    def tally_loss(self, loser, winner):
+        self._teams[loser].tally_loss()
+        self._teams[winner].tally_win()
 
     def tally_draw(self, team_a, team_b):
-        self.teams[team_a].draws += 1
-        self.teams[team_b].draws += 1
+        self._teams[team_a].tally_draw()
+        self._teams[team_b].tally_draw()
 
     def maybe_initialize_teams(self, team_a, team_b):
         self.maybe_initialize_team(team_a)
         self.maybe_initialize_team(team_b)
 
     def maybe_initialize_team(self, name):
-        if name not in self.teams:
-            self.teams[name] = Team(name)
+        if name not in self._teams:
+            self._teams[name] = Team(name)
 
     def table_header(self):
         return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(*self.COLUMN_HEADERS)
