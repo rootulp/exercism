@@ -33,7 +33,7 @@ class Tournament:
             self.parse(results)
 
     def results_table(self):
-        table = [self.header()]
+        table = [self.table_header()]
         for team in self.sorted_teams():
             table.append(str(team))
         return "\n".join(table)
@@ -77,9 +77,8 @@ class Tournament:
         if name not in self.teams:
             self.teams[name] = Team(name)
 
-    def header(self):
+    def table_header(self):
         return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(*self.COLUMN_HEADERS)
 
-def tally(tournament_results):
-    tournament = Tournament(tournament_results)
-    return tournament.results_table()
+def tally(results):
+    return Tournament(results).results_table()
