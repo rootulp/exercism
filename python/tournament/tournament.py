@@ -20,10 +20,11 @@ class Team:
 
 class Tournament:
 
-    COLUMN_HEADERS = ['Team', 'MP', 'W', 'D', 'L', 'P']
     WIN = 'win'
     DRAW = 'draw'
     LOSS = 'loss'
+    RESULT_SEPERATOR = ';'
+    COLUMN_HEADERS = ['Team', 'MP', 'W', 'D', 'L', 'P']
 
     def __init__(self, results):
         self.teams = {}
@@ -50,7 +51,7 @@ class Tournament:
             return # Nothing to parse
 
         for result in self.results.split("\n"):
-            team_a, team_b, outcome = result.split(";")
+            team_a, team_b, outcome = result.split(self.RESULT_SEPERATOR)
             self.maybe_initialize_teams(team_a, team_b)
             self.tally_outcome(team_a, team_b, outcome)
 
