@@ -9,14 +9,16 @@ class Team:
         self.draws = 0
         self.losses = 0
 
+    @property
     def matches_played(self):
         return self.wins + self.losses + self.draws
 
+    @property
     def points(self):
         return (self.wins * self.POINTS_PER_WIN) + (self.draws * self.POINTS_PER_DRAW)
 
     def __str__(self):
-        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(self.name, self.matches_played(), self.wins, self.draws, self.losses, self.points())
+        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(self.name, self.matches_played, self.wins, self.draws, self.losses, self.points)
 
 
 class Tournament:
@@ -40,7 +42,7 @@ class Tournament:
 
     def sorted_teams(self):
         alphabetic = sorted(self.teams.values(), key=lambda team: team.name)
-        alphabetic_descending_points = sorted(alphabetic, key=lambda team: team.points(), reverse=True)
+        alphabetic_descending_points = sorted(alphabetic, key=lambda team: team.points, reverse=True)
         return alphabetic_descending_points
 
     def parse(self, results):
