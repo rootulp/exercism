@@ -1,16 +1,19 @@
 class Team:
 
+    POINTS_PER_WIN = 3
+    POINTS_PER_DRAW = 1
+
     def __init__(self, name):
         self.name = name
         self.wins = 0
-        self.losses = 0
         self.draws = 0
+        self.losses = 0
 
     def matches_played(self):
         return self.wins + self.losses + self.draws
 
     def points(self):
-        return (self.wins * 3) + self.draws
+        return (self.wins * self.POINTS_PER_WIN) + (self.draws * self.POINTS_PER_DRAW)
 
     def __str__(self):
         return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(self.name, self.matches_played(), self.wins, self.draws, self.losses, self.points())
@@ -28,9 +31,6 @@ class Tournament:
         self.teams = {}
         if results:
             self.parse(results)
-
-    def header(self):
-        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(*self.COLUMN_HEADERS)
 
     def results_table(self):
         table = [self.header()]
@@ -67,6 +67,9 @@ class Tournament:
     def maybe_initialize_team(self, name):
         if name not in self.teams:
             self.teams[name] = Team(name)
+
+    def header(self):
+        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(*self.COLUMN_HEADERS)
 
 def tally(tournament_results):
     tournament = Tournament(tournament_results)
