@@ -1,5 +1,3 @@
-from enum import Enum
-
 class Team:
 
     def __init__(self, name):
@@ -28,9 +26,8 @@ class Tournament:
 
     def __init__(self, results):
         self.teams = {}
-        self.results = results
-        self.parse_results()
-        # print("Teams {}".format(self.teams))
+        if results:
+            self.parse(results)
 
     def header(self):
         return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(*self.COLUMN_HEADERS)
@@ -43,14 +40,11 @@ class Tournament:
 
     def sorted_teams(self):
         alphabetic = sorted(self.teams.values(), key=lambda team: team.name)
-        descending_points = sorted(alphabetic, key=lambda team: team.points(), reverse=True)
-        return descending_points
+        alphabetic_descending_points = sorted(alphabetic, key=lambda team: team.points(), reverse=True)
+        return alphabetic_descending_points
 
-    def parse_results(self):
-        if (self.results == ''):
-            return # Nothing to parse
-
-        for result in self.results.split("\n"):
+    def parse(self, results):
+        for result in results.split("\n"):
             team_a, team_b, outcome = result.split(self.RESULT_SEPERATOR)
             self.maybe_initialize_teams(team_a, team_b)
             self.tally_outcome(team_a, team_b, outcome)
