@@ -9,6 +9,12 @@ class Team:
     def matches_played(self):
         return self.wins + self.losses + self.draws
 
+    def points(self):
+        return (self.wins * 3) + self.draws
+
+    def __str__(self):
+        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(self.name, self.matches_played(), self.wins, self.draws, self.losses, self.points())
+
 
 class Tournament:
 
@@ -18,13 +24,16 @@ class Tournament:
         self.teams = {}
         self.results = results
         self.parse_results()
+        # print("Teams {}".format(self.teams))
 
     def header(self):
         return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(*self.COLUMN_HEADERS)
 
     def results_table(self):
-        # print("Teams {}".format(self.teams))
-        return self.header()
+        table = [self.header()]
+        for team in self.teams.values():
+            table.append(str(team))
+        return "\n".join(table)
 
     def parse_results(self):
         if (self.results == ''):
