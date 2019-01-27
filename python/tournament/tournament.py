@@ -51,11 +51,14 @@ class Tournament:
 
         for result in self.results.split("\n"):
             team_a, team_b, outcome = result.split(";")
-            if team_a not in self.teams:
-                self.teams[team_a] = Team(team_a)
-            if team_b not in self.teams:
-                self.teams[team_b] = Team(team_b)
+            self.maybe_initialize_team(team_a)
+            self.maybe_initialize_team(team_b)
             self.tally_outcome(team_a, team_b, outcome)
+
+    def maybe_initialize_team(self, name):
+        if name not in self.teams:
+            self.teams[name] = Team(name)
+
 
     def tally_outcome(self, team_a, team_b, outcome):
         if outcome == self.WIN:
