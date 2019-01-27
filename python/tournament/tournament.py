@@ -51,14 +51,8 @@ class Tournament:
 
         for result in self.results.split("\n"):
             team_a, team_b, outcome = result.split(";")
-            self.maybe_initialize_team(team_a)
-            self.maybe_initialize_team(team_b)
+            self.maybe_initialize_teams(team_a, team_b)
             self.tally_outcome(team_a, team_b, outcome)
-
-    def maybe_initialize_team(self, name):
-        if name not in self.teams:
-            self.teams[name] = Team(name)
-
 
     def tally_outcome(self, team_a, team_b, outcome):
         if outcome == self.WIN:
@@ -71,6 +65,13 @@ class Tournament:
             self.teams[team_a].draws += 1
             self.teams[team_b].draws += 1
 
+    def maybe_initialize_teams(self, team_a, team_b):
+        self.maybe_initialize_team(team_a)
+        self.maybe_initialize_team(team_b)
+
+    def maybe_initialize_team(self, name):
+        if name not in self.teams:
+            self.teams[name] = Team(name)
 
 def tally(tournament_results):
     tournament = Tournament(tournament_results)
