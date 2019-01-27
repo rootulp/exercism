@@ -31,7 +31,7 @@ class Tournament:
 
     def results_table(self):
         table = [self.header()]
-        for team in self.teams.values():
+        for team in reversed(sorted(self.teams.values(), key=lambda team: team.points())):
             table.append(str(team))
         return "\n".join(table)
 

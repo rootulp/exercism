@@ -19,12 +19,12 @@ class TournamentTest(unittest.TestCase):
                  'Blithering Badgers             |  1 |  0 |  0 |  1 |  0')
         self.assertEqual(tally(results), table)
 
-    # def test_a_win_can_also_be_expressed_as_a_loss(self):
-    #     results = 'Blithering Badgers;Allegoric Alaskans;loss'
-    #     table = ('Team                           | MP |  W |  D |  L |  P\n'
-    #              'Allegoric Alaskans             |  1 |  1 |  0 |  0 |  3\n'
-    #              'Blithering Badgers             |  1 |  0 |  0 |  1 |  0')
-    #     self.assertEqual(tally(results), table)
+    def test_a_win_can_also_be_expressed_as_a_loss(self):
+        results = 'Blithering Badgers;Allegoric Alaskans;loss'
+        table = ('Team                           | MP |  W |  D |  L |  P\n'
+                 'Allegoric Alaskans             |  1 |  1 |  0 |  0 |  3\n'
+                 'Blithering Badgers             |  1 |  0 |  0 |  1 |  0')
+        self.assertEqual(tally(results), table)
 
     # def test_a_different_team_can_win(self):
     #     results = 'Blithering Badgers;Allegoric Alaskans;win'
