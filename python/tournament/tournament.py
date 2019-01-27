@@ -1,3 +1,5 @@
+from enum import Enum
+
 class Team:
 
     def __init__(self, name):
@@ -19,6 +21,9 @@ class Team:
 class Tournament:
 
     COLUMN_HEADERS = ['Team', 'MP', 'W', 'D', 'L', 'P']
+    WIN = 'win'
+    DRAW = 'draw'
+    LOSS = 'loss'
 
     def __init__(self, results):
         self.teams = {}
@@ -53,13 +58,13 @@ class Tournament:
             self.tally_outcome(team_a, team_b, outcome)
 
     def tally_outcome(self, team_a, team_b, outcome):
-        if outcome == 'win':
+        if outcome == self.WIN:
             self.teams[team_a].wins += 1
             self.teams[team_b].losses += 1
-        if outcome == 'loss':
+        if outcome == self.LOSS:
             self.teams[team_a].losses += 1
             self.teams[team_b].wins += 1
-        if outcome == 'draw':
+        if outcome == self.DRAW:
             self.teams[team_a].draws += 1
             self.teams[team_b].draws += 1
 
