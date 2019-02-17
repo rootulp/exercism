@@ -2,16 +2,16 @@ from itertools import groupby
 import re
 
 
-def encode(s):
-    return ''.join([helper(g) for g in [list(g) for k, g in groupby(s)]])
+def encode(string):
+    return ''.join([helper(g) for g in [list(group) for _, group in groupby(string)]])
 
 
 def helper(g):
     return g[0] if len(g) == 1 else str(len(g)) + g[0]
 
 
-def decode(s):
-    groups = re.findall(r'(\d*\D{1})', s)
+def decode(string):
+    groups = re.findall(r'(\d*\D{1})', string)
     pairs = [[re.match(r'\d*', g).group(), g[-1]] for g in groups]
 
     # Fix hardcoded 0 and 1 indices
