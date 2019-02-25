@@ -17,6 +17,8 @@ class LinkedList(object):
             self.tail.succeeding = new_node
             new_node.previous = self.tail
         self.tail = new_node
+        if self.head is None:
+            self.head = new_node
 
     def pop(self):
         if self.tail is not None:
@@ -24,3 +26,11 @@ class LinkedList(object):
             self.tail = popped_node.previous
             return popped_node.value
 
+    def unshift(self, value):
+        pass
+
+    def shift(self):
+        if self.head is not None:
+            shifted_node = self.head
+            self.head = shifted_node.succeeding
+            return shifted_node.value
