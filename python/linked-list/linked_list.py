@@ -10,9 +10,11 @@ class LinkedList(object):
     def __init__(self):
         self.head = None
         self.tail = None
+        self.length = 0
 
     def push(self, value):
         new_node = Node(value)
+        self.length += 1
         if self.tail is not None:
             self.tail.succeeding = new_node
             new_node.previous = self.tail
@@ -20,7 +22,9 @@ class LinkedList(object):
         if self.head is None:
             self.head = new_node
 
+
     def pop(self):
+        self.length -= 1
         if self.tail is not None:
             popped_node = self.tail
             self.tail = popped_node.previous
@@ -28,6 +32,7 @@ class LinkedList(object):
 
     def unshift(self, value):
         new_node = Node(value)
+        self.length += 1
         if self.head is not None:
             self.head.previous = new_node
             new_node.succeeding = self.head
@@ -36,7 +41,11 @@ class LinkedList(object):
             self.tail = new_node
 
     def shift(self):
+        self.length -= 1
         if self.head is not None:
             shifted_node = self.head
             self.head = shifted_node.succeeding
             return shifted_node.value
+
+    def __len__(self):
+        return self.length
