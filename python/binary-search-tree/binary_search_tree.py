@@ -37,15 +37,15 @@ class BinarySearchTree(object):
 
     def insert_node(self, node_to_insert, position):
         if node_to_insert.data <= position.data:
-            if position.left is not None:
-                self.insert_node(node_to_insert, position.left)
-            else:
+            if position.left is None:
                 position.left = node_to_insert
-        elif node_to_insert.data > position.data:
-            if position.right is not None:
-                self.insert_node(node_to_insert, position.right)
             else:
+                self.insert_node(node_to_insert, position.left)
+        elif node_to_insert.data > position.data:
+            if position.right is None:
                 position.right = node_to_insert
+            else:
+                self.insert_node(node_to_insert, position.right)
 
 
 
