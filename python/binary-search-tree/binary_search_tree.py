@@ -23,13 +23,12 @@ class BinarySearchTree(object):
 
     def in_order_traversal(self, node):
         if node.left:
-            self.in_order_traversal(node.left)
+            yield from self.in_order_traversal(node.left)
 
         yield node
 
         if node.right:
-            self.in_order_traversal(node.right)
-
+            yield from self.in_order_traversal(node.right)
 
     def insert(self, node_data):
         node_to_insert = TreeNode(node_data)
