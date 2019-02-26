@@ -21,32 +21,28 @@ class BinarySearchTree(object):
     def sorted_data(self):
         return [node.data for node in self.inorder_traversal(self.head)]
 
+    def insert(self, node_data):
+        new_node = TreeNode(node_data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            self.insert_node_at(new_node, self.head)
+
+    def insert_node_at(self, new_node, position):
+        if new_node.data <= position.data:
+            if position.left is None:
+                position.left = new_node
+            else:
+                self.insert_node_at(new_node, position.left)
+        elif new_node.data > position.data:
+            if position.right is None:
+                position.right = new_node
+            else:
+                self.insert_node_at(new_node, position.right)
+
     def inorder_traversal(self, node):
         if node.left:
             yield from self.inorder_traversal(node.left)
         yield node
         if node.right:
             yield from self.inorder_traversal(node.right)
-
-    def insert(self, node_data):
-        node_to_insert = TreeNode(node_data)
-        if self.head is None:
-            self.head = node_to_insert
-        else:
-            self.insert_node(node_to_insert, self.head)
-
-    def insert_node(self, node_to_insert, position):
-        if node_to_insert.data <= position.data:
-            if position.left is None:
-                position.left = node_to_insert
-            else:
-                self.insert_node(node_to_insert, position.left)
-        elif node_to_insert.data > position.data:
-            if position.right is None:
-                position.right = node_to_insert
-            else:
-                self.insert_node(node_to_insert, position.right)
-
-
-
-
