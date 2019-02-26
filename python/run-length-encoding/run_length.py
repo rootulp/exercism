@@ -3,7 +3,8 @@ import re
 
 
 def encode(string):
-    return ''.join([helper(g) for g in [list(group) for _, group in groupby(string)]])
+    return ''.join([helper(g) for g in [list(group)
+                                        for _, group in groupby(string)]])
 
 
 def helper(g):

@@ -25,6 +25,7 @@ def euclidian_coprimes(limit):
             if (m - n) % 2 == 1 and gcd(m, n) == 1:
                 yield m, n
 
+
 def primitive_triplets(limit):
     """See Euclid's formula
     https://en.wikipedia.org/wiki/Pythagorean_triple#Generating_a_triple

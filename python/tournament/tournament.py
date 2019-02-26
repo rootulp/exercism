@@ -15,7 +15,8 @@ class Team:
 
     @property
     def points(self):
-        return (self.wins * self.POINTS_PER_WIN) + (self.draws * self.POINTS_PER_DRAW)
+        return (self.wins * self.POINTS_PER_WIN) + \
+            (self.draws * self.POINTS_PER_DRAW)
 
     def tally_win(self):
         self.wins += 1
@@ -27,7 +28,8 @@ class Team:
         self.losses += 1
 
     def __str__(self):
-        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(self.name, self.matches_played, self.wins, self.draws, self.losses, self.points)
+        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(
+            self.name, self.matches_played, self.wins, self.draws, self.losses, self.points)
 
 
 class Tournament:
@@ -51,7 +53,8 @@ class Tournament:
 
     def sorted_teams(self):
         alphabetic = sorted(self._teams.values(), key=lambda team: team.name)
-        alphabetic_descending_points = sorted(alphabetic, key=lambda team: team.points, reverse=True)
+        alphabetic_descending_points = sorted(
+            alphabetic, key=lambda team: team.points, reverse=True)
         return alphabetic_descending_points
 
     def parse(self, results):
@@ -89,7 +92,9 @@ class Tournament:
             self._teams[name] = Team(name)
 
     def table_header(self):
-        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(*self.COLUMN_HEADERS)
+        return '{:<30} | {:^3}| {:^3}| {:^3}| {:^3}| {:>2}'.format(
+            *self.COLUMN_HEADERS)
+
 
 def tally(results):
     return Tournament(results).results_table()

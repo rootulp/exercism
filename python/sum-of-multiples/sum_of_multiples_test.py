@@ -62,7 +62,7 @@ class SumOfMultiplesTest(unittest.TestCase):
 
     def test_multiples_of_several_factors(self):
         self.assertEqual(sum_of_multiples(10000,
-                         [2, 3, 5, 7, 11]), 39614537)
+                                          [2, 3, 5, 7, 11]), 39614537)
 
 
 if __name__ == '__main__':

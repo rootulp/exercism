@@ -22,7 +22,6 @@ class LinkedList(object):
         if self.head is None:
             self.head = new_node
 
-
     def pop(self):
         self.length -= 1
         if self.tail is not None:

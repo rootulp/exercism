@@ -45,4 +45,4 @@ def proteins(strand):
 
 def split_into_codons(strand):
     return [strand[i:i + CODON_LENGTH] for i in range(0, len(strand),
-            CODON_LENGTH)]
+                                                      CODON_LENGTH)]
