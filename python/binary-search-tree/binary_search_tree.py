@@ -19,16 +19,14 @@ class BinarySearchTree(object):
         return self.head
 
     def sorted_data(self):
-        return [node.data for node in self.in_order_traversal(self.head)]
+        return [node.data for node in self.inorder_traversal(self.head)]
 
-    def in_order_traversal(self, node):
+    def inorder_traversal(self, node):
         if node.left:
-            yield from self.in_order_traversal(node.left)
-
+            yield from self.inorder_traversal(node.left)
         yield node
-
         if node.right:
-            yield from self.in_order_traversal(node.right)
+            yield from self.inorder_traversal(node.right)
 
     def insert(self, node_data):
         node_to_insert = TreeNode(node_data)
