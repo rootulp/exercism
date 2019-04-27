@@ -6,7 +6,12 @@ class RestAPI(object):
     def __init__(self, database=None):
         self.database = database
 
-    # Public API
+    # Description: List of user information
+    # HTTP method: GET
+    # URL: /users
+    # Payload format: `{"users":["Adam","Bob"]}`
+    # Response without payload: `{"users":<List of all User objects>}`
+    # Response with payload: `{"users":<List of User objects for <users> (sorted by name)}`
     def get(self, url, payload=None):
         if payload is None:
             # List of all User objects
@@ -22,7 +27,6 @@ class RestAPI(object):
             raise ValueError("Payload must not be None.")
 
         payload = json.loads(payload)
-
         if url == '/add':
             return self.add(payload)
         elif url == '/iou':
@@ -30,12 +34,26 @@ class RestAPI(object):
 
     # Private methods
 
+    # Description: Create user
+    # HTTP method: POST
+    # URL: /add
+    # Payload format: `{"user":<name of new user (unique)>}`
+    # Response without payload: N/A
+    # Response with payload: `<User object for new user>`
     def add(self, payload):
         username = payload['user']
 
         self.create_user(username)
         return json.dumps(self.get_user(username))
 
+    # Description: Create IOU
+    # HTTP method: POST
+    # URL: /iou
+    # Payload format: `{"lender":<name of lender>,"borrower":<name of
+    # borrower>,"amount":5.25}`
+    # Response without payload: N/A
+    # Response with payload: `{"users":<updated User objects for <lender> and
+    # <borrower> (sorted by name)>}`
     def iou(self, payload):
         lender_username = payload['lender']
         borrower_username = payload['borrower']
