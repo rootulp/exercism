@@ -8,11 +8,12 @@ class RestAPI(object):
 
     # Public API
     def get(self, url, payload=None):
-        if payload is not None:
-            payload = json.loads(payload)
-            usernames = payload['users']
-            return json.dumps({'users': self.get_users(usernames)})
-        return json.dumps(self.database)
+        if payload is None:
+            # List of all User objects
+            return json.dumps(self.database)
+        payload = json.loads(payload)
+        usernames = payload['users']
+        return json.dumps({'users': self.get_users(usernames)})
 
     def post(self, url, payload=None):
         if payload is None:
@@ -29,16 +30,17 @@ class RestAPI(object):
 
     def add(self, payload):
         username = payload['user']
+
         self.create_user(username)
         return json.dumps(self.get_user(username))
 
     def iou(self, payload):
         lender_username = payload['lender']
         borrower_username = payload['borrower']
+        amount = payload['amount']
 
         lender = self.get_user(lender_username)
         borrower = self.get_user(borrower_username)
-        amount = payload['amount']
 
         self.execute_iou(lender, borrower, amount)
 
@@ -80,7 +82,6 @@ class RestAPI(object):
     def update_balance(self, lender, borrower, amount):
         lender['balance'] += amount
         borrower['balance'] -= amount
-
 
     def create_user(self, username):
         new_user = {
