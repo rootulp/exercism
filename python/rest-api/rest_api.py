@@ -45,7 +45,8 @@ class RestAPI(object):
         borrower['owes'][lender['name']] += amount
         borrower['balance'] -= amount
 
-        return json.dumps(self.database)
+        usernames = [payload['lender'], payload['borrower']]
+        return json.dumps({'users': self.get_users(usernames)})
 
     def create_user(self, username):
         new_user = {
