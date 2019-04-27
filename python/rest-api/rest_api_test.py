@@ -165,63 +165,63 @@ class RestAPITest(unittest.TestCase):
         }
         self.assertDictEqual(json.loads(response), expected)
 
-    # def test_lender_has_negative_balance(self):
-    #     database = {
-    #         'users': [
-    #             {
-    #                 'name': 'Adam',
-    #                 'owes': {},
-    #                 'owed_by': {},
-    #                 'balance': 0
-    #             },
-    #             {
-    #                 'name': 'Bob',
-    #                 'owes': {
-    #                     'Chuck': 3
-    #                 },
-    #                 'owed_by': {},
-    #                 'balance': -3
-    #             },
-    #             {
-    #                 'name': 'Chuck',
-    #                 'owes': {},
-    #                 'owed_by': {
-    #                     'Bob': 3
-    #                 },
-    #                 'balance': 3
-    #             }
-    #         ]
-    #     }
-    #     api = RestAPI(database)
-    #     payload = json.dumps({
-    #         'lender': 'Bob',
-    #         'borrower': 'Adam',
-    #         'amount': 3
-    #     })
-    #     response = api.post('/iou', payload)
-    #     expected = {
-    #         'users': [
-    #             {
-    #                 'name': 'Adam',
-    #                 'owes': {
-    #                     'Bob': 3
-    #                 },
-    #                 'owed_by': {},
-    #                 'balance': -3
-    #             },
-    #             {
-    #                 'name': 'Bob',
-    #                 'owes': {
-    #                     'Chuck': 3
-    #                 },
-    #                 'owed_by': {
-    #                     'Adam': 3
-    #                 },
-    #                 'balance': 0
-    #             }
-    #         ]
-    #     }
-    #     self.assertDictEqual(json.loads(response), expected)
+    def test_lender_has_negative_balance(self):
+        database = {
+            'users': [
+                {
+                    'name': 'Adam',
+                    'owes': {},
+                    'owed_by': {},
+                    'balance': 0
+                },
+                {
+                    'name': 'Bob',
+                    'owes': {
+                        'Chuck': 3
+                    },
+                    'owed_by': {},
+                    'balance': -3
+                },
+                {
+                    'name': 'Chuck',
+                    'owes': {},
+                    'owed_by': {
+                        'Bob': 3
+                    },
+                    'balance': 3
+                }
+            ]
+        }
+        api = RestAPI(database)
+        payload = json.dumps({
+            'lender': 'Bob',
+            'borrower': 'Adam',
+            'amount': 3
+        })
+        response = api.post('/iou', payload)
+        expected = {
+            'users': [
+                {
+                    'name': 'Adam',
+                    'owes': {
+                        'Bob': 3
+                    },
+                    'owed_by': {},
+                    'balance': -3
+                },
+                {
+                    'name': 'Bob',
+                    'owes': {
+                        'Chuck': 3
+                    },
+                    'owed_by': {
+                        'Adam': 3
+                    },
+                    'balance': 0
+                }
+            ]
+        }
+        self.assertDictEqual(json.loads(response), expected)
 
     # def test_lender_owes_borrower(self):
     #     database = {
