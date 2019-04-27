@@ -33,15 +33,16 @@ class RestAPI(object):
         return json.dumps(self.get_user(username))
 
     def iou(self, payload):
-        lender = self.get_user(payload['lender'])
-        borrower = self.get_user(payload['borrower'])
+        lender_username = payload['lender']
+        borrower_username = payload['borrower']
+
+        lender = self.get_user(lender_username)
+        borrower = self.get_user(borrower_username)
         amount = payload['amount']
 
         self.execute_iou(lender, borrower, amount)
 
-        usernames = [payload['lender'], payload['borrower']]
-        users = self.get_users(usernames)
-        print(users)
+        users = self.get_users([lender_username, borrower_username])
         return json.dumps({'users': users})
 
     def execute_iou(self, lender, borrower, amount):
