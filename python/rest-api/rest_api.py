@@ -37,16 +37,36 @@ class RestAPI(object):
         borrower = self.get_user(payload['borrower'])
         amount = payload['amount']
 
-        lender['owed_by'].setdefault(borrower['name'], 0)
-        lender['owed_by'][borrower['name']] += amount
-        lender['balance'] += amount
-
-        borrower['owes'].setdefault(lender['name'], 0)
-        borrower['owes'][lender['name']] += amount
-        borrower['balance'] -= amount
+        self.execute_iou(lender, borrower, amount)
 
         usernames = [payload['lender'], payload['borrower']]
-        return json.dumps({'users': self.get_users(usernames)})
+        users = self.get_users(usernames)
+        print(users)
+        return json.dumps({'users': users})
+
+    def execute_iou(self, lender, borrower, amount):
+        self.update_balance(lender, borrower, amount)
+
+        if self.lender_owes_borrower(lender, borrower):
+            self.pay_debt(lender, borrower, amount)
+        else:
+            lender['owed_by'].setdefault(borrower['name'], 0)
+            lender['owed_by'][borrower['name']] += amount
+
+            borrower['owes'].setdefault(lender['name'], 0)
+            borrower['owes'][lender['name']] += amount
+
+    def lender_owes_borrower(self, lender, borrower):
+        return lender['owes'].get(borrower['name'], 0) != 0
+
+    def pay_debt(self, lender, borrower, amount):
+        lender['owes'][borrower['name']] -= amount
+        borrower['owed_by'][lender['name']] -= amount
+
+    def update_balance(self, lender, borrower, amount):
+        lender['balance'] += amount
+        borrower['balance'] -= amount
+
 
     def create_user(self, username):
         new_user = {
