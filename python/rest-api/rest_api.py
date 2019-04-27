@@ -70,13 +70,17 @@ class RestAPI(object):
     def execute_iou(self, lender, borrower, amount):
         self.update_balance(lender, borrower, amount)
 
+        # if lender owes borrower, pay off debt first.
         remaining_amount_to_borrow = self.pay_debt(lender, borrower, amount)
         if remaining_amount_to_borrow != 0:
-            lender['owed_by'].setdefault(borrower['name'], 0)
-            lender['owed_by'][borrower['name']] += remaining_amount_to_borrow
+            self.execute_borrow(lender, borrower, remaining_amount_to_borrow)
 
-            borrower['owes'].setdefault(lender['name'], 0)
-            borrower['owes'][lender['name']] += remaining_amount_to_borrow
+    def execute_borrow(self, lender, borrower, amount):
+        lender['owed_by'].setdefault(borrower['name'], 0)
+        lender['owed_by'][borrower['name']] += amount
+
+        borrower['owes'].setdefault(lender['name'], 0)
+        borrower['owes'][lender['name']] += amount
 
     def lender_owes_borrower(self, lender, borrower):
         return lender['owes'].get(borrower['name'], 0) != 0
