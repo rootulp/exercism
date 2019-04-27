@@ -15,6 +15,11 @@ class RestAPI(object):
         return json.dumps(self.database)
 
     def post(self, url, payload=None):
+        if payload is None:
+            raise ValueError("Payload must not be None.")
+
+        payload = json.loads(payload)
+
         if url == '/add':
             return self.add(payload)
         elif url == '/iou':
@@ -22,14 +27,12 @@ class RestAPI(object):
 
     # Private methods
 
-    def add(self, payload=None):
-        payload = json.loads(payload)
+    def add(self, payload):
         username = payload['user']
         self.create_user(username)
         return json.dumps(self.get_user(username))
 
-    def iou(self, payload=None):
-        payload = json.loads(payload)
+    def iou(self, payload):
         lender = self.get_user(payload['lender'])
         borrower = self.get_user(payload['borrower'])
         amount = payload['amount']
