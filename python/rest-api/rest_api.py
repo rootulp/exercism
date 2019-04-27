@@ -11,6 +11,8 @@ class RestAPI(object):
         if payload is None:
             # List of all User objects
             return json.dumps(self.database)
+
+        # List of User objects for <users> (sorted by name)
         payload = json.loads(payload)
         usernames = payload['users']
         return json.dumps({'users': self.get_users(usernames)})
