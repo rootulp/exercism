@@ -59,7 +59,8 @@ class RestAPI(object):
         self.database['users'].append(new_user)
 
     def get_users(self, usernames):
-        return [self.get_user(username) for username in usernames]
+        users = [self.get_user(username) for username in usernames]
+        return sorted(users, key=lambda user: user['name'])
 
     def get_user(self, username):
         users = self.database['users']
