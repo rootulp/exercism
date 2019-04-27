@@ -47,21 +47,34 @@ class RestAPI(object):
     def execute_iou(self, lender, borrower, amount):
         self.update_balance(lender, borrower, amount)
 
-        if self.lender_owes_borrower(lender, borrower):
-            self.pay_debt(lender, borrower, amount)
-        else:
+        remaining_amount_to_borrow = self.pay_debt(lender, borrower, amount)
+        if remaining_amount_to_borrow != 0:
             lender['owed_by'].setdefault(borrower['name'], 0)
-            lender['owed_by'][borrower['name']] += amount
+            lender['owed_by'][borrower['name']] += remaining_amount_to_borrow
 
             borrower['owes'].setdefault(lender['name'], 0)
-            borrower['owes'][lender['name']] += amount
+            borrower['owes'][lender['name']] += remaining_amount_to_borrow
 
     def lender_owes_borrower(self, lender, borrower):
         return lender['owes'].get(borrower['name'], 0) != 0
 
     def pay_debt(self, lender, borrower, amount):
-        lender['owes'][borrower['name']] -= amount
-        borrower['owed_by'][lender['name']] -= amount
+
+        if not self.lender_owes_borrower(lender, borrower):
+            return amount
+
+        debt = lender['owes'][borrower['name']]
+
+        if amount < debt:
+            lender['owes'][borrower['name']] -= amount
+            borrower['owed_by'][lender['name']] -= amount
+            return 0
+        else:
+            # debt can be fully paid off and remaining amount will be borrowed.
+            del lender['owes'][borrower['name']]
+            del borrower['owed_by'][lender['name']]
+            remaining_amount = amount - debt
+            return remaining_amount
 
     def update_balance(self, lender, borrower, amount):
         lender['balance'] += amount
