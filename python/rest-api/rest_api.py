@@ -6,6 +6,7 @@ class RestAPI(object):
     def __init__(self, database=None):
         self.database = database
 
+    # Public API
     def get(self, url, payload=None):
         if payload is not None:
             payload = json.loads(payload)
@@ -14,6 +15,12 @@ class RestAPI(object):
         return json.dumps(self.database)
 
     def post(self, url, payload=None):
+        if (url == '/add'):
+            return self.add(payload)
+
+    # Private methods
+
+    def add(self, payload=None):
         payload = json.loads(payload)
         username = payload['user']
         self.create_user(username)
