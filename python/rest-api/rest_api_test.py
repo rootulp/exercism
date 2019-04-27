@@ -28,39 +28,39 @@ class RestAPITest(unittest.TestCase):
         }
         self.assertDictEqual(json.loads(response), expected)
 
-    # def test_get_single_user(self):
-    #     database = {
-    #         'users': [
-    #             {
-    #                 'name': 'Adam',
-    #                 'owes': {},
-    #                 'owed_by': {},
-    #                 'balance': 0
-    #             },
-    #             {
-    #                 'name': 'Bob',
-    #                 'owes': {},
-    #                 'owed_by': {},
-    #                 'balance': 0
-    #             }
-    #         ]
-    #     }
-    #     api = RestAPI(database)
-    #     payload = json.dumps({
-    #         'users': ['Bob']
-    #     })
-    #     response = api.get('/users', payload)
-    #     expected = {
-    #         'users': [
-    #             {
-    #                 'name': 'Bob',
-    #                 'owes': {},
-    #                 'owed_by': {},
-    #                 'balance': 0
-    #             }
-    #         ]
-    #     }
-    #     self.assertDictEqual(json.loads(response), expected)
+    def test_get_single_user(self):
+        database = {
+            'users': [
+                {
+                    'name': 'Adam',
+                    'owes': {},
+                    'owed_by': {},
+                    'balance': 0
+                },
+                {
+                    'name': 'Bob',
+                    'owes': {},
+                    'owed_by': {},
+                    'balance': 0
+                }
+            ]
+        }
+        api = RestAPI(database)
+        payload = json.dumps({
+            'users': ['Bob']
+        })
+        response = api.get('/users', payload)
+        expected = {
+            'users': [
+                {
+                    'name': 'Bob',
+                    'owes': {},
+                    'owed_by': {},
+                    'balance': 0
+                }
+            ]
+        }
+        self.assertDictEqual(json.loads(response), expected)
 
     # def test_iou_both_users_have_0_balance(self):
     #     database = {

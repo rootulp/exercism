@@ -7,6 +7,12 @@ class RestAPI(object):
         self.database = database
 
     def get(self, url, payload=None):
+        if payload is not None:
+            payload = json.loads(payload)
+            # print(payload['users'])
+            usernames = payload['users']
+            print(usernames)
+            return self.get_usernames(usernames)
         return json.dumps(self.database)
 
     def post(self, url, payload=None):
@@ -30,3 +36,8 @@ class RestAPI(object):
         for user in users:
             if user['name'] == username:
                 return json.dumps(user)
+
+    def get_usernames(self, usernames):
+        return json.dumps({'users': [user for user in self.database['users']
+                           if user['name'] in usernames]})
+
