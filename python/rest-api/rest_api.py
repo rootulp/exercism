@@ -9,17 +9,15 @@ class RestAPI(object):
     def get(self, url, payload=None):
         if payload is not None:
             payload = json.loads(payload)
-            # print(payload['users'])
             usernames = payload['users']
-            print(usernames)
-            return self.get_usernames(usernames)
+            return json.dumps({'users': self.get_users(usernames)})
         return json.dumps(self.database)
 
     def post(self, url, payload=None):
         payload = json.loads(payload)
         username = payload['user']
         self.create_user(username)
-        return self.get_user(username)
+        return json.dumps(self.get_user(username))
 
     def create_user(self, username):
         new_user = {
@@ -31,13 +29,11 @@ class RestAPI(object):
 
         self.database['users'].append(new_user)
 
+    def get_users(self, usernames):
+        return [self.get_user(username) for username in usernames]
+
     def get_user(self, username):
         users = self.database['users']
         for user in users:
             if user['name'] == username:
-                return json.dumps(user)
-
-    def get_usernames(self, usernames):
-        return json.dumps({'users': [user for user in self.database['users']
-                           if user['name'] in usernames]})
-
+                return user
