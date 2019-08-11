@@ -28,12 +28,12 @@ describe('words()', () => {
     expect(words.count('1 2 testing testing')).toEqual(expectedCounts)
   })
 
-  xit('normalizes to lower case', () => {
+  it('normalizes to lower case', () => {
     const expectedCounts = new Map(Object.entries({ go: 3 }))
     expect(words.count('go Go GO')).toEqual(expectedCounts)
   })
 
-  xit('counts properly international characters', () => {
+  it('counts properly international characters', () => {
     const expectedCounts = new Map(Object.entries({ '¡hola!': 1, '¿qué': 1, 'tal?': 1, 'привет!': 1 }))
     expect(words.count('¡Hola! ¿Qué tal? Привет!')).toEqual(expectedCounts)
   })
