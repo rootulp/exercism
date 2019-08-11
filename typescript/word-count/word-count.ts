@@ -1,13 +1,12 @@
 
 export default class Words {
     public count(sentence: string): Map<string | number, number> {
-        const counts: Map<string | number, number> = new Map()
-        this.removeFormatting(sentence).split(" ").map((word) => word.trim()).filter((word) => word !== "").forEach((word) => {
+        return this.removeFormatting(sentence).split(" ").map((word) => word.trim()).filter((word) => word !== "").reduce((counts: Map<string | number, number>, word: string) => {
             const currentCountForWord = counts.get(word)
             const newCountForWord = currentCountForWord ? currentCountForWord + 1 : 1
             counts.set(word, newCountForWord)
-        })
-        return counts
+            return counts
+        }, new Map<string | number, number>())
     }
 
     private removeFormatting(sentence: string): string {
