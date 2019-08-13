@@ -7,12 +7,22 @@ export default class Triangle {
     }
 
     public kind(): string {
-        if (this.is_equilateral()){
+        if (this.is_illegal()) {
+            throw("Illegal triangle sides");
+        } else if (this.is_equilateral()){
             return 'equilateral'
         } else if (this.is_isosceles()) {
             return 'isosceles'
         }
         return 'scalene'
+    }
+
+    private is_illegal(): boolean {
+        return this.is_any_side_illegal()
+    }
+
+    private is_any_side_illegal(): boolean {
+        return this.sides.some(side => side === 0);
     }
 
     private is_equilateral(): boolean {
