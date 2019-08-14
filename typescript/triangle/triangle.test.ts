@@ -56,7 +56,7 @@ describe('Triangle', () => {
         expect(triangle.kind.bind(triangle)).toThrow()
     })
 
-    xit('triangles with negative sides are illegal', () => {
+    it('triangles with negative sides are illegal', () => {
         const triangle = new Triangle(3, 4, -5)
         expect(triangle.kind.bind(triangle)).toThrow()
     })
