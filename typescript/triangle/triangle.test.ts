@@ -61,17 +61,17 @@ describe('Triangle', () => {
         expect(triangle.kind.bind(triangle)).toThrow()
     })
 
-    xit('triangles violating triangle inequality are illegal', () => {
+    it('triangles violating triangle inequality are illegal', () => {
         const triangle = new Triangle(1, 1, 3)
         expect(triangle.kind.bind(triangle)).toThrow()
     })
 
-    xit('triangles violating triangle inequality are illegal 2', () => {
+    it('triangles violating triangle inequality are illegal 2', () => {
         const triangle = new Triangle(7, 3, 2)
         expect(triangle.kind.bind(triangle)).toThrow()
     })
 
-    xit('triangles violating triangle inequality are illegal 3', () => {
+    it('triangles violating triangle inequality are illegal 3', () => {
         const triangle = new Triangle(10, 1, 3)
         expect(triangle.kind.bind(triangle)).toThrow()
     })

@@ -18,11 +18,17 @@ export default class Triangle {
     }
 
     private is_illegal(): boolean {
-        return this.is_any_side_illegal()
+        return this.is_any_side_illegal() || this.is_triangle_inequality_illegal()
     }
 
     private is_any_side_illegal(): boolean {
         return this.sides.some(side => side <= 0);
+    }
+
+    private is_triangle_inequality_illegal(): boolean {
+        return this.sides[0] + this.sides[1] < this.sides[2] ||
+               this.sides[0] + this.sides[2] < this.sides[1] ||
+               this.sides[1] + this.sides[2] < this.sides[0]
     }
 
     private is_equilateral(): boolean {
