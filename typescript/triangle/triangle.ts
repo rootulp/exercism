@@ -8,7 +8,7 @@ export default class Triangle {
 
     public kind(): string {
         if (this.is_illegal()) {
-            throw('Illegal triangle sides');
+            throw('illegal triangle sides');
         } else if (this.is_equilateral()){
             return 'equilateral'
         } else if (this.is_isosceles()) {
