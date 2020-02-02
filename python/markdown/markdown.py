@@ -10,17 +10,17 @@ def convert_headers(line):
     return line
 
 def convert_bold(item):
-    is_bold = re.match('(.*)__(.*)__(.*)', item)
-    if is_bold:
-        return is_bold.group(1) + '<strong>' + \
-            is_bold.group(2) + '</strong>' + is_bold.group(3)
+    bold_item = re.match('(.*)__(.*)__(.*)', item)
+    if bold_item:
+        return bold_item.group(1) + '<strong>' + \
+            bold_item.group(2) + '</strong>' + bold_item.group(3)
     return item
 
 def convert_italic(item):
-    is_italic = re.match('(.*)_(.*)_(.*)', item)
-    if is_italic:
-        return is_italic.group(1) + '<em>' + is_italic.group(2) + \
-            '</em>' + is_italic.group(3)
+    italic_item = re.match('(.*)_(.*)_(.*)', item)
+    if italic_item:
+        return italic_item.group(1) + '<em>' + italic_item.group(2) + \
+            '</em>' + italic_item.group(3)
     return item
 
 def parse_markdown(markdown):
@@ -31,14 +31,12 @@ def parse_markdown(markdown):
         list_item = re.match(r'\* (.*)', line)
         if list_item:
             item = list_item.group(1)
+            item = convert_bold(item)
+            item = convert_italic(item)
             if not in_list:
                 in_list = True
-                item = convert_bold(item)
-                item = convert_italic(item)
                 line = '<ul><li>' + item + '</li>'
             else:
-                item = convert_bold(item)
-                item = convert_italic(item)
                 line = '<li>' + item + '</li>'
         else:
             if in_list:
