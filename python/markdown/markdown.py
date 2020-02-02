@@ -15,51 +15,43 @@ def parse_markdown(markdown):
     in_list = False
     for line in markdown.split('\n'):
         line = convert_headers(line)
-        m = re.match(r'\* (.*)', line)
-        if m:
-            is_bold = False
-            is_italic = False
-            curr = m.group(1)
-            m1 = re.match('(.*)__(.*)__(.*)', curr)
+        list_item = re.match(r'\* (.*)', line)
+        if list_item:
+            item = list_item.group(1)
+            bold_item = re.match('(.*)__(.*)__(.*)', item)
             if not in_list:
                 in_list = True
-                if m1:
-                    is_bold = True
-                    curr = m1.group(1) + '<strong>' + \
-                        m1.group(2) + '</strong>' + m1.group(3)
-                m1 = re.match('(.*)_(.*)_(.*)', curr)
-                if m1:
-                    curr = m1.group(1) + '<em>' + m1.group(2) + \
-                        '</em>' + m1.group(3)
-                    is_italic = True
-                line = '<ul><li>' + curr + '</li>'
+                if bold_item:
+                    item = bold_item.group(1) + '<strong>' + \
+                        bold_item.group(2) + '</strong>' + bold_item.group(3)
+                italic_item = re.match('(.*)_(.*)_(.*)', item)
+                if italic_item:
+                    item = italic_item.group(1) + '<em>' + italic_item.group(2) + \
+                        '</em>' + italic_item.group(3)
+                line = '<ul><li>' + item + '</li>'
             else:
-                if m1:
-                    is_bold = True
-                m1 = re.match('(.*)_(.*)_(.*)', curr)
-                if m1:
-                    is_italic = True
-                if is_bold:
-                    curr = m1.group(1) + '<strong>' + \
-                        m1.group(2) + '</strong>' + m1.group(3)
-                if is_italic:
-                    curr = m1.group(1) + '<em>' + m1.group(2) + \
-                        '</em>' + m1.group(3)
-                line = '<li>' + curr + '</li>'
+                if bold_item:
+                    item = bold_item.group(1) + '<strong>' + \
+                        bold_item.group(2) + '</strong>' + bold_item.group(3)
+                italic_item = re.match('(.*)_(.*)_(.*)', item)
+                if italic_item:
+                    item = italic_item.group(1) + '<em>' + italic_item.group(2) + \
+                        '</em>' + italic_item.group(3)
+                line = '<li>' + item + '</li>'
         else:
             if in_list:
                 line = '</ul>+i'
                 in_list = False
 
-        m = re.match('<h|<ul|<p|<li', line)
-        if not m:
+        list_item = re.match('<h|<ul|<p|<li', line)
+        if not list_item:
             line = '<p>' + line + '</p>'
-        m = re.match('(.*)__(.*)__(.*)', line)
-        if m:
-            line = m.group(1) + '<strong>' + m.group(2) + '</strong>' + m.group(3)
-        m = re.match('(.*)_(.*)_(.*)', line)
-        if m:
-            line = m.group(1) + '<em>' + m.group(2) + '</em>' + m.group(3)
+        list_item = re.match('(.*)__(.*)__(.*)', line)
+        if list_item:
+            line = list_item.group(1) + '<strong>' + list_item.group(2) + '</strong>' + list_item.group(3)
+        list_item = re.match('(.*)_(.*)_(.*)', line)
+        if list_item:
+            line = list_item.group(1) + '<em>' + list_item.group(2) + '</em>' + list_item.group(3)
         result += line
 
     if in_list:
