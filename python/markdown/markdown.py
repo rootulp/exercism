@@ -17,16 +17,16 @@ def parse_markdown(markdown):
         line = convert_headers(line)
         m = re.match(r'\* (.*)', line)
         if m:
+            is_bold = False
+            is_italic = False
+            curr = m.group(1)
+            m1 = re.match('(.*)__(.*)__(.*)', curr)
             if not in_list:
                 in_list = True
-                is_bold = False
-                is_italic = False
-                curr = m.group(1)
-                m1 = re.match('(.*)__(.*)__(.*)', curr)
                 if m1:
+                    is_bold = True
                     curr = m1.group(1) + '<strong>' + \
                         m1.group(2) + '</strong>' + m1.group(3)
-                    is_bold = True
                 m1 = re.match('(.*)_(.*)_(.*)', curr)
                 if m1:
                     curr = m1.group(1) + '<em>' + m1.group(2) + \
@@ -34,10 +34,6 @@ def parse_markdown(markdown):
                     is_italic = True
                 line = '<ul><li>' + curr + '</li>'
             else:
-                is_bold = False
-                is_italic = False
-                curr = m.group(1)
-                m1 = re.match('(.*)__(.*)__(.*)', curr)
                 if m1:
                     is_bold = True
                 m1 = re.match('(.*)_(.*)_(.*)', curr)
