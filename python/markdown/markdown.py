@@ -47,9 +47,7 @@ def parse_markdown(markdown):
         if not list_item:
             line = '<p>' + line + '</p>'
         line = convert_bold(line)
-        list_item = re.match('(.*)_(.*)_(.*)', line)
-        if list_item:
-            line = list_item.group(1) + '<em>' + list_item.group(2) + '</em>' + list_item.group(3)
+        line = convert_italic(line)
         result += line
 
     if in_list:
