@@ -46,9 +46,7 @@ def parse_markdown(markdown):
         list_item = re.match('<h|<ul|<p|<li', line)
         if not list_item:
             line = '<p>' + line + '</p>'
-        list_item = re.match('(.*)__(.*)__(.*)', line)
-        if list_item:
-            line = list_item.group(1) + '<strong>' + list_item.group(2) + '</strong>' + list_item.group(3)
+        line = convert_bold(line)
         list_item = re.match('(.*)_(.*)_(.*)', line)
         if list_item:
             line = list_item.group(1) + '<em>' + list_item.group(2) + '</em>' + list_item.group(3)
