@@ -3,7 +3,9 @@ def handle_error_by_throwing_exception():
 
 
 def handle_error_by_returning_none(input_data):
-    pass
+    if (input_data == '1'):
+        return 1
+    return None
 
 
 def handle_error_by_returning_tuple(input_data):
