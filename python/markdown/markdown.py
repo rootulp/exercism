@@ -11,10 +11,9 @@ def convert_headers(line):
 
 
 def parse_markdown(markdown):
-    lines = markdown.split('\n')
     result = ''
     in_list = False
-    for line in lines:
+    for line in markdown.split('\n'):
         line = convert_headers(line)
         m = re.match(r'\* (.*)', line)
         if m:
@@ -66,6 +65,7 @@ def parse_markdown(markdown):
         if m:
             line = m.group(1) + '<em>' + m.group(2) + '</em>' + m.group(3)
         result += line
+
     if in_list:
         result += '</ul>'
     return result
