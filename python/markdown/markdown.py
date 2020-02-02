@@ -1,5 +1,6 @@
 import re
 
+
 def parse_markdown(markdown):
     result = ''
     in_list = False

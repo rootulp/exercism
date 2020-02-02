@@ -11,7 +11,8 @@ class RestAPI(object):
     # URL: /users
     # Payload format: `{"users":["Adam","Bob"]}`
     # Response without payload: `{"users":<List of all User objects>}`
-    # Response with payload: `{"users":<List of User objects for <users> (sorted by name)}`
+    # Response with payload: `{"users":<List of User objects for <users>
+    # (sorted by name)}`
     def get(self, url, payload=None):
         if payload is None:
             # List of all User objects
