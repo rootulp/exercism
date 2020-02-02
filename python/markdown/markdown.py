@@ -28,6 +28,8 @@ def parse_markdown(markdown):
     in_list = False
     for line in markdown.split('\n'):
         line = convert_headers(line)
+        line = convert_bold(line)
+        line = convert_italic(line)
         list_item = re.match(r'\* (.*)', line)
         if list_item:
             item = list_item.group(1)
@@ -46,8 +48,6 @@ def parse_markdown(markdown):
         list_item = re.match('<h|<ul|<p|<li', line)
         if not list_item:
             line = '<p>' + line + '</p>'
-        line = convert_bold(line)
-        line = convert_italic(line)
         result += line
 
     if in_list:
