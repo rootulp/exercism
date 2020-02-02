@@ -9,6 +9,13 @@ def convert_headers(line):
         line = '<h1>' + line[2:] + '</h1>'
     return line
 
+def convert_bold(item):
+    is_bold = re.match('(.*)__(.*)__(.*)', item)
+    if is_bold:
+        return is_bold.group(1) + '<strong>' + \
+            is_bold.group(2) + '</strong>' + is_bold.group(3)
+    return item
+
 
 def parse_markdown(markdown):
     result = ''
@@ -18,21 +25,16 @@ def parse_markdown(markdown):
         list_item = re.match(r'\* (.*)', line)
         if list_item:
             item = list_item.group(1)
-            bold_item = re.match('(.*)__(.*)__(.*)', item)
             if not in_list:
                 in_list = True
-                if bold_item:
-                    item = bold_item.group(1) + '<strong>' + \
-                        bold_item.group(2) + '</strong>' + bold_item.group(3)
+                item = convert_bold(item)
                 italic_item = re.match('(.*)_(.*)_(.*)', item)
                 if italic_item:
                     item = italic_item.group(1) + '<em>' + italic_item.group(2) + \
                         '</em>' + italic_item.group(3)
                 line = '<ul><li>' + item + '</li>'
             else:
-                if bold_item:
-                    item = bold_item.group(1) + '<strong>' + \
-                        bold_item.group(2) + '</strong>' + bold_item.group(3)
+                item = convert_bold(item)
                 italic_item = re.match('(.*)_(.*)_(.*)', item)
                 if italic_item:
                     item = italic_item.group(1) + '<em>' + italic_item.group(2) + \
