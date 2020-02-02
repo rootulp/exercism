@@ -23,6 +23,13 @@ def convert_italic(item):
             '</em>' + italic_item.group(3)
     return item
 
+def maybe_wrap_line_in_paragraph(line):
+    any_surrounding_tag = re.match('<h|<ul|<p|<li', line)
+    if not any_surrounding_tag:
+        line = '<p>' + line + '</p>'
+    return line
+
+
 def parse_markdown(markdown):
     result = ''
     in_list = False
@@ -30,6 +37,7 @@ def parse_markdown(markdown):
         line = convert_headers(line)
         line = convert_bold(line)
         line = convert_italic(line)
+
         list_item = re.match(r'\* (.*)', line)
         if list_item:
             item = list_item.group(1)
@@ -45,9 +53,8 @@ def parse_markdown(markdown):
                 line = '</ul>+i'
                 in_list = False
 
-        list_item = re.match('<h|<ul|<p|<li', line)
-        if not list_item:
-            line = '<p>' + line + '</p>'
+        line = maybe_wrap_line_in_paragraph(line)
+
         result += line
 
     if in_list:
