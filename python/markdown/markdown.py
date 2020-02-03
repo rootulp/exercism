@@ -1,6 +1,7 @@
 import re
 
 
+# TODO Extract logic for parsing unordered lists.
 def parse_markdown(markdown):
     result = ''
     in_list = False
