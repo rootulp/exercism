@@ -7,5 +7,14 @@ repositories {
 }
 
 dependencies {
-  testCompile "junit:junit:4.10"
+  testCompile "junit:junit:4.13"
+  testImplementation "org.assertj:assertj-core:3.15.0"
+}
+
+test {
+  testLogging {
+    exceptionFormat = 'short'
+    showStandardStreams = true
+    events = ["passed", "failed", "skipped"]
+  }
 }

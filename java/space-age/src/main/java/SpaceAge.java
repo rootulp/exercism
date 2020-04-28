@@ -1,7 +1,6 @@
 public class SpaceAge {
 
   private final double seconds;
-  private static final double MAXIMUM_DELTA = 1E-02;
   private enum Planet {
     EARTH   (31557600),
     MERCURY (0.2408467),

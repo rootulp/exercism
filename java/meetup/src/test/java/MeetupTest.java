@@ -1,5 +1,4 @@
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
 import org.junit.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;

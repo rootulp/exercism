@@ -1,4 +1,3 @@
-import static org.hamcrest.CoreMatchers.*;
 import static org.junit.matchers.JUnitMatchers.*;
 import static org.junit.Assert.*;
 
