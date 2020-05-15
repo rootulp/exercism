@@ -23,7 +23,6 @@ public class DartsTest {
         assertEquals(5, darts.score());
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void onTheInnerCircle() {
         Darts darts = new Darts(0, -1);
