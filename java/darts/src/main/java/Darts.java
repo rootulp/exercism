@@ -1,6 +1,7 @@
 class Darts {
 
 	private static final int RADIUS_OF_OUTER_CIRCLE = 10;
+	private static final int RADIUS_OF_MIDDLE_CIRCLE = 5;
 	private final double x;
 	private final double y;
 
@@ -10,10 +11,17 @@ class Darts {
 	}
 
     int score() {
+		if(isInsideMiddleCircle()) {
+			return 5;
+		}
 		if(isInsideOutserCircle()) {
 			return 1;
 		}
 		return 0;
+	}
+
+	boolean isInsideMiddleCircle() {
+		return distanceToOrigin() <= RADIUS_OF_MIDDLE_CIRCLE;
 	}
 
 	boolean isInsideOutserCircle() {
