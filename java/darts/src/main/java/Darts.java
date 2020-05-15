@@ -1,11 +1,9 @@
 class Darts {
 
-    Darts(double x, double y) {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
-    }
+    Darts(final double x, final double y) {}
 
     int score() {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+		return 0;
     }
 
 }
