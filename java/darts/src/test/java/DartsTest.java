@@ -11,7 +11,6 @@ public class DartsTest {
         assertEquals(0, darts.score());
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void onTheOuterCircle() {
         Darts darts = new Darts(0, 10);
