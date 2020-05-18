@@ -47,7 +47,6 @@ public class GrainsTest {
         assertEquals(new BigInteger("2147483648"), result);
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void countAtSquare64() {
         BigInteger result = grains.grainsOnSquare(64);

@@ -1,10 +1,10 @@
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 class Grains {
 
     BigInteger grainsOnSquare(final int square) {
-		return BigDecimal.valueOf(Math.pow(2, square - 1)).toBigInteger();
+		BigInteger b1 = new BigInteger("2");
+		return b1.pow(square -1);
     }
 
     BigInteger grainsOnBoard() {
