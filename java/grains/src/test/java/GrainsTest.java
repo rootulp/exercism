@@ -2,7 +2,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -86,7 +85,6 @@ public class GrainsTest {
             .hasMessage("square must be between 1 and 64");
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void totalNumberOfGrainsOnABoard() {
         BigInteger total = grains.grainsOnBoard();
