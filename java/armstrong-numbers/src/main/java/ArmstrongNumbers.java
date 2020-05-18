@@ -13,7 +13,7 @@ class ArmstrongNumbers {
     private static double sumOfDigitsRaisedToNumberOfDigits(List<Integer> digits) {
         return digits.stream().map(digit -> {
             return Math.pow(digit, digits.size());
-        }).collect(Collectors.summingDouble(x -> x));
+        }).collect(Collectors.summingDouble(d -> d));
     }
 
     /**
