@@ -3,8 +3,8 @@ import java.util.stream.IntStream;
 
 class Grains {
 
-	private static final int MIN_BOARD_SQUARE = 1;
-	private static final int MAX_BOARD_SQUARE = 64;
+    private static final int MIN_BOARD_SQUARE = 1;
+    private static final int MAX_BOARD_SQUARE = 64;
 
     BigInteger grainsOnSquare(final int square) {
         if(square < MIN_BOARD_SQUARE || square > MAX_BOARD_SQUARE ){
