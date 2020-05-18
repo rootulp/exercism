@@ -53,7 +53,6 @@ public class GrainsTest {
         assertEquals(new BigInteger("9223372036854775808"), result);
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void errorOnNullBoardSize() {
         IllegalArgumentException expected =
