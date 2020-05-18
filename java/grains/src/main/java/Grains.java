@@ -3,16 +3,18 @@ import java.util.stream.IntStream;
 
 class Grains {
 
+	private static final int MIN_BOARD_SQUARE = 1;
+	private static final int MAX_BOARD_SQUARE = 64;
+
     BigInteger grainsOnSquare(final int square) {
-        if(square < 1 || square > 64 ){
-            throw new IllegalArgumentException("square must be between 1 and 64");
+        if(square < MIN_BOARD_SQUARE || square > MAX_BOARD_SQUARE ){
+            throw new IllegalArgumentException(String.format("square must be between %d and %d", MIN_BOARD_SQUARE, MAX_BOARD_SQUARE));
         }
-        BigInteger b1 = new BigInteger("2");
-        return b1.pow(square -1);
+        return new BigInteger("2").pow(square - 1);
     }
 
     BigInteger grainsOnBoard() {
-        return IntStream.rangeClosed(1, 64).boxed().map(n -> grainsOnSquare(n)).reduce(BigInteger.ZERO, BigInteger::add);
+        return IntStream.rangeClosed(MIN_BOARD_SQUARE, MAX_BOARD_SQUARE).boxed().map(n -> grainsOnSquare(n)).reduce(BigInteger.ZERO, BigInteger::add);
     }
 
 }
