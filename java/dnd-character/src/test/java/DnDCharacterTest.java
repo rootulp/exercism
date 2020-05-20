@@ -93,7 +93,6 @@ public class DnDCharacterTest {
         assertTrue(score > 2 && score < 19);
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testRandomCharacterIsValid() {
         for (int i = 0; i < 1000; i++) {
