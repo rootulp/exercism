@@ -87,7 +87,6 @@ public class DnDCharacterTest {
         assertEquals(4, dndCharacter.modifier(18));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testRandomAbilityIsWithinRange() {
         int score = dndCharacter.ability();
