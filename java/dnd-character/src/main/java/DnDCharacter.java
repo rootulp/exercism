@@ -4,8 +4,8 @@ class DnDCharacter {
         throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
     }
 
-    int modifier(int input) {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    int modifier(int constitution) {
+		return (int) Math.floor((constitution - 10) / 2.0);
     }
 
     int getStrength() {
