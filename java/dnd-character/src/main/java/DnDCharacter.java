@@ -2,11 +2,23 @@ import java.util.Arrays;
 
 class DnDCharacter {
 
-    int ability() {
+	public static int generateAbility() {
 		int[] rolls = { roll(), roll(), roll(), roll() };
 		Arrays.sort(rolls);
 		int[] topThreeRolls = Arrays.copyOf(rolls, 3);
 		return Arrays.stream(topThreeRolls).sum();
+	}
+
+	/**
+	 *
+	 * @return a random number between 1 and 6 inclusive.
+	 */
+	private static int roll() {
+		return (int) Math.floor(Math.random() * 6);
+	}
+
+    int ability() {
+		return generateAbility();
     }
 
     int modifier(int constitution) {
@@ -41,12 +53,5 @@ class DnDCharacter {
         throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
 	}
 
-	/**
-	 *
-	 * @return a random number between 1 and 6 inclusive.
-	 */
-	private int roll() {
-		return (int) Math.floor(Math.random() * 6);
-	}
 
 }
