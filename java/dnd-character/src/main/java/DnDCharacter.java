@@ -18,7 +18,7 @@ class DnDCharacter {
 	 * @return a random number between 1 and 6 inclusive.
 	 */
 	private static int roll() {
-		return (int) Math.floor(Math.random() * 6) ;
+		return (int) Math.floor(Math.random() * 6) + 1;
 	}
 
 	private final int strength;
