@@ -108,7 +108,6 @@ public class DnDCharacterTest {
         }
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testEachAbilityIsOnlyCalculatedOnce() {
         assertEquals(dndCharacter.getStrength(), dndCharacter.getStrength());
