@@ -23,7 +23,7 @@ class ProteinTranslator {
     );
     private static final Set<String> STOP_CODONS = Set.of("UAA", "UAG", "UGA");
 
-    List<String> translate(final String rnaSequence) {
+    public List<String> translate(final String rnaSequence) {
         final List<String> codons = splitIntoCodons(rnaSequence);
         List<String> proteins = new ArrayList<>();
         for(String codon: codons) {
@@ -35,7 +35,7 @@ class ProteinTranslator {
         return proteins;
     }
 
-    List<String> splitIntoCodons(final String rnaSequence) {
+    private static List<String> splitIntoCodons(final String rnaSequence) {
         final List<String> codons = new ArrayList<>();
         for(int i = 0; i < rnaSequence.length(); i += CODON_LENGTH) {
             codons.add(rnaSequence.substring(i, Math.min(rnaSequence.length(), i + CODON_LENGTH)));
@@ -43,7 +43,7 @@ class ProteinTranslator {
         return codons;
     }
 
-    String translateCodon(final String codon) {
+    private static String translateCodon(final String codon) {
         return CODON_TO_PROTEIN.get(codon);
     }
 }
