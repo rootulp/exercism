@@ -5,16 +5,6 @@ import java.util.Set;
 
 class ProteinTranslator {
     private static final Integer CODON_LENGTH = 3;
-    // Codon                 | Protein
-    // :---                  | :---
-    // AUG                   | Methionine
-    // UUU, UUC              | Phenylalanine
-    // UUA, UUG              | Leucine
-    // UCU, UCC, UCA, UCG    | Serine
-    // UAU, UAC              | Tyrosine
-    // UGU, UGC              | Cysteine
-    // UGG                   | Tryptophan
-    // UAA, UAG, UGA         | STOP
     private static final Map<String, String> CODON_TO_PROTEIN = Map.ofEntries(
         Map.entry("AUG", "Methionine"),
         Map.entry("UUU", "Phenylalanine"),
