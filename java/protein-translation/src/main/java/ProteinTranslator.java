@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 class ProteinTranslator {
 	private static final Integer CODON_LENGTH = 3;
@@ -36,7 +35,14 @@ class ProteinTranslator {
 
     List<String> translate(final String rnaSequence) {
 		final List<String> codons = splitIntoCodons(rnaSequence);
-		return codons.stream().map(codon -> translateCodon(codon)).collect(Collectors.toList());
+		List<String> proteins = new ArrayList<>();
+		for(String codon: codons) {
+			if(STOP_CODONS.contains(codon)) {
+				return proteins;
+			}
+			proteins.add(translateCodon(codon));
+		};
+		return proteins;
 	}
 
 	List<String> splitIntoCodons(final String rnaSequence) {
