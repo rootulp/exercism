@@ -1,8 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 class ProteinTranslator {
+	private static final Integer CODON_LENGTH = 3;
 	// Codon                 | Protein
 	// :---                  | :---
 	// AUG                   | Methionine
@@ -31,7 +34,20 @@ class ProteinTranslator {
 	);
 	private static final Set<String> STOP_CODONS = Set.of("UAA", "UAG", "UGA");
 
-    List<String> translate(String rnaSequence) {
-		return List.of(CODON_TO_PROTEIN.get(rnaSequence));
-    }
+    List<String> translate(final String rnaSequence) {
+		final List<String> codons = splitIntoCodons(rnaSequence);
+		return codons.stream().map(codon -> translateCodon(codon)).collect(Collectors.toList());
+	}
+
+	List<String> splitIntoCodons(final String rnaSequence) {
+		final List<String> codons = new ArrayList<>();
+		for(int i = 0; i < rnaSequence.length(); i += CODON_LENGTH) {
+			codons.add(rnaSequence.substring(i, Math.min(rnaSequence.length(), i + CODON_LENGTH)));
+		}
+		return codons;
+	}
+
+	String translateCodon(final String codon) {
+		return CODON_TO_PROTEIN.get(codon);
+	}
 }
