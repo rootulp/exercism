@@ -41,7 +41,6 @@ public class ErrorHandlingTest {
         assertThat(expected).isNotInstanceOf(RuntimeException.class);
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testThrowAnyCheckedExceptionWithDetailMessage() {
         Exception expected =

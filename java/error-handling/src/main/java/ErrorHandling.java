@@ -14,8 +14,8 @@ class ErrorHandling {
 		throw new CustomCheckedException();
     }
 
-    void handleErrorByThrowingAnyCheckedExceptionWithDetailMessage(String message) {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    void handleErrorByThrowingAnyCheckedExceptionWithDetailMessage(String message) throws CustomCheckedException {
+		throw new CustomCheckedException(message);
     }
 
     void handleErrorByThrowingAnyUncheckedException() {
