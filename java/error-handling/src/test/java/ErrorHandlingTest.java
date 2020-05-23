@@ -53,7 +53,6 @@ public class ErrorHandlingTest {
         assertThat(expected).hasMessage("This is the detail message.");
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testThrowAnyUncheckedException() {
         assertThrows(
@@ -61,7 +60,6 @@ public class ErrorHandlingTest {
             errorHandling::handleErrorByThrowingAnyUncheckedException);
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testThrowAnyUncheckedExceptionWithDetailMessage() {
         RuntimeException expected =

@@ -19,11 +19,11 @@ class ErrorHandling {
     }
 
     void handleErrorByThrowingAnyUncheckedException() {
-        // Delete this statement and write your own implementation.
+		throw new CustomUncheckedException();
     }
 
     void handleErrorByThrowingAnyUncheckedExceptionWithDetailMessage(String message) {
-        // Delete this statement and write your own implementation.
+		throw new CustomUncheckedException(message);
     }
 
     void handleErrorByThrowingCustomCheckedException() {
