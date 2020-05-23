@@ -7,11 +7,11 @@ class ErrorHandling {
     }
 
     void handleErrorByThrowingIllegalArgumentExceptionWithDetailMessage(String message) {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+		throw new IllegalArgumentException("This is the detail message.");
     }
 
-    void handleErrorByThrowingAnyCheckedException() {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    void handleErrorByThrowingAnyCheckedException() throws CustomCheckedException {
+		throw new CustomCheckedException();
     }
 
     void handleErrorByThrowingAnyCheckedExceptionWithDetailMessage(String message) {

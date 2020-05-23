@@ -20,7 +20,6 @@ public class ErrorHandlingTest {
             errorHandling::handleErrorByThrowingIllegalArgumentException);
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testThrowIllegalArgumentExceptionWithDetailMessage() {
         IllegalArgumentException expected =
@@ -33,7 +32,6 @@ public class ErrorHandlingTest {
         assertThat(expected).hasMessage("This is the detail message.");
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testThrowAnyCheckedException() {
         Exception expected =
