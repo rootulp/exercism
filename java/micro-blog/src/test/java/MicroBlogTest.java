@@ -55,28 +55,24 @@ public class MicroBlogTest {
         assertEquals(expected, microBlog.truncate("∅⊊ℕ⊊ℤ⊊ℚ⊊ℝ⊊ℂ"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void englishAndEmojiShort() {
         String expected = "Fly 🛫";
         assertEquals(expected, microBlog.truncate("Fly 🛫"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void emojiShort() {
         String expected = "💇";
         assertEquals(expected, microBlog.truncate("💇"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void emojiLong() {
         String expected = "❄🌡🤧🤒🏥";
         assertEquals(expected, microBlog.truncate("❄🌡🤧🤒🏥🕰😀"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void royalFlush() {
         String expected = "🃎🂸🃅🃋🃍";
