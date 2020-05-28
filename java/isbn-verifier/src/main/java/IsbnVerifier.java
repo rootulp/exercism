@@ -37,7 +37,9 @@ class IsbnVerifier {
 	}
 
 	static boolean isValidParsed(String parsed) {
-		return isValidCheckDigit(parsed.charAt((parsed.length() - 1))) && doesContainOnlyDigits(parsed.substring(0, parsed.length() - 1)) && isValidLength(parsed);
+		return isValidLength(parsed) &&
+			   isValidCheckDigit(parsed.charAt((parsed.length() - 1))) &&
+			   doesContainOnlyDigits(parsed.substring(0, parsed.length() - 1));
 	}
 
 	static boolean isValidCheckDigit(char checkDigit) {

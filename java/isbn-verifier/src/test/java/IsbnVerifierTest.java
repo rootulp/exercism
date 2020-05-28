@@ -1,5 +1,4 @@
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -78,7 +77,6 @@ public class IsbnVerifierTest {
         assertFalse(isbnVerifier.isValid("3-598-21515-X"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void emptyIsbn() {
         assertFalse(isbnVerifier.isValid(""));
