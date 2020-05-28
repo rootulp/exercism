@@ -1,5 +1,6 @@
 # exercism
 
+![Ruby](https://github.com/rootulp/exercism/workflows/Ruby/badge.svg?branch=master)
 [![Build Status](https://img.shields.io/travis/rootulp/exercism.svg)](https://travis-ci.org/rootulp/exercism)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0587c23c2c8a70f35d37/maintainability)](https://codeclimate.com/github/rootulp/exercism/maintainability)
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://rootulp.mit-license.org)
