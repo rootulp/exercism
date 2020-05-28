@@ -33,7 +33,6 @@ public class IsbnVerifierTest {
         assertFalse(isbnVerifier.isValid("3-598-21507-A"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void invalidCharacterInIsbn() {
         assertFalse(isbnVerifier.isValid("3-598-P1581-X"));
