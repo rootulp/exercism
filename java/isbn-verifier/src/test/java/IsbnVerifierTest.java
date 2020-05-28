@@ -23,7 +23,6 @@ public class IsbnVerifierTest {
         assertFalse(isbnVerifier.isValid("3-598-21508-9"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void validIsbnNumberWithCheckDigitOfTen() {
         assertTrue(isbnVerifier.isValid("3-598-21507-X"));
