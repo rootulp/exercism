@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 public class LargestSeriesProductCalculator {
 
@@ -31,16 +30,17 @@ public class LargestSeriesProductCalculator {
     return productOfSeries(series);
   }
 
-  private static long productOfSeries (long[] series) {
+  private static long productOfSeries(long[] series) {
     return Arrays.stream(series).reduce(1, (a, b) -> a * b);
   }
 
   private long[] parseDigits(String series) {
-    // This is for https://github.com/exercism/problem-specifications/blob/master/exercises/largest-series-product/canonical-data.json#L89
+    // This is for
+    // https://github.com/exercism/problem-specifications/blob/master/exercises/largest-series-product/canonical-data.json#L89
     if (series != "") {
       return Arrays.stream(series.split("")).mapToLong(Long::parseLong).toArray();
     }
-    return new long[]{};
+    return new long[] {};
   }
 
   private void throwExceptionIfInvalidSeries(String series) {
@@ -58,7 +58,8 @@ public class LargestSeriesProductCalculator {
 
   private void throwExceptionIfInvalidSeriesLength(int seriesLength) {
     if (seriesLength > digits.length) {
-      throw new IllegalArgumentException("Series length must be less than or equal to the length of the string to search.");
+      throw new IllegalArgumentException(
+          "Series length must be less than or equal to the length of the string to search.");
     }
     if (seriesLength < 0) {
       throw new IllegalArgumentException("Series length must be non-negative.");

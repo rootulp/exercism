@@ -13,7 +13,9 @@ public class Atbash {
     for (int i = 0, n = str.length(); i < n; i++) {
 
       // add space after every GROUP_SIZE num of chars
-      if (i != 0 && i % GROUP_SIZE == 0) { result += " "; }
+      if (i != 0 && i % GROUP_SIZE == 0) {
+        result += " ";
+      }
 
       result += cipherChar(str.charAt(i));
     }
@@ -27,5 +29,4 @@ public class Atbash {
     // return original char if it doesn't exist in PLAIN (i.e nums)
     return index >= 0 ? CIPHER.charAt(index) : c;
   }
-
 }

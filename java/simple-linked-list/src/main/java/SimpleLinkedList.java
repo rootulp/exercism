@@ -3,9 +3,12 @@ import java.util.NoSuchElementException;
 public class SimpleLinkedList {
   private Node head;
 
-  public SimpleLinkedList() { }
+  public SimpleLinkedList() {}
+
   public SimpleLinkedList(Integer[] values) {
-    for (Integer value: values) { push(value); }
+    for (Integer value : values) {
+      push(value);
+    }
   }
 
   public int size() {
@@ -28,7 +31,9 @@ public class SimpleLinkedList {
   }
 
   public int pop() {
-    if (size() == 0) { throw new NoSuchElementException(); }
+    if (size() == 0) {
+      throw new NoSuchElementException();
+    }
     if (size() == 1) {
       Integer data = this.head.getData();
       this.head = null;
@@ -42,7 +47,6 @@ public class SimpleLinkedList {
     curr.setNext(null);
     return data;
   }
-
 
   public void reverse() {
     reverseRecursive(this.head, null);

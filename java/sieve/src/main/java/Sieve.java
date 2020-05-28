@@ -1,5 +1,5 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class Sieve {
 
@@ -42,8 +42,7 @@ public final class Sieve {
     List<Integer> multiples = new ArrayList<Integer>();
     Integer multiplier = 2;
 
-    while (!possible.isEmpty() &&
-            curr * multiplier <= possible.get(possible.size() - 1)) {
+    while (!possible.isEmpty() && curr * multiplier <= possible.get(possible.size() - 1)) {
       multiples.add(curr * multiplier);
       multiplier += 1;
     }
@@ -51,5 +50,4 @@ public final class Sieve {
     possible.removeAll(multiples);
     return possible;
   }
-
 }

@@ -1,5 +1,5 @@
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 public final class DNA {
 
@@ -11,7 +11,9 @@ public final class DNA {
   }
 
   public int count(char nucleotide) {
-    if (invalid(nucleotide)) { throw new IllegalArgumentException(); }
+    if (invalid(nucleotide)) {
+      throw new IllegalArgumentException();
+    }
 
     try {
       return nucleotideCounts().get(nucleotide);

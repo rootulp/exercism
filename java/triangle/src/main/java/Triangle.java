@@ -5,7 +5,9 @@ public class Triangle {
   private final double sideC;
 
   public Triangle(double sideA, double sideB, double sideC) throws TriangleException {
-    if (triangleInvalid(sideA, sideB, sideC)) { throw new TriangleException(); }
+    if (triangleInvalid(sideA, sideB, sideC)) {
+      throw new TriangleException();
+    }
 
     this.sideA = sideA;
     this.sideB = sideB;
@@ -23,13 +25,12 @@ public class Triangle {
   }
 
   private boolean triangleInvalid(double sideA, double sideB, double sideC) {
-    return triangleInequality(sideA, sideB, sideC) ||
-           triangleInequality(sideC, sideB, sideA) ||
-           triangleInequality(sideA, sideC, sideB);
+    return triangleInequality(sideA, sideB, sideC)
+        || triangleInequality(sideC, sideB, sideA)
+        || triangleInequality(sideA, sideC, sideB);
   }
 
   private boolean triangleInequality(double side1, double side2, double side3) {
     return (side1 + side2 <= side3);
   }
-
 }

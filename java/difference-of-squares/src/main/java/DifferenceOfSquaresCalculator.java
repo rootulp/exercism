@@ -13,5 +13,4 @@ public final class DifferenceOfSquaresCalculator {
   public int computeDifferenceOfSquares(int num) {
     return Math.abs(computeSquareOfSumTo(num) - computeSumOfSquaresTo(num));
   }
-
 }

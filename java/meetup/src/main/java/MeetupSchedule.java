@@ -1,8 +1,8 @@
 public enum MeetupSchedule {
-    FIRST,
-    SECOND,
-    THIRD,
-    FOURTH,
-    LAST,
-    TEENTH
+  FIRST,
+  SECOND,
+  THIRD,
+  FOURTH,
+  LAST,
+  TEENTH
 }

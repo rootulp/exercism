@@ -11,12 +11,11 @@ class TwelveDays {
 
   String verses(int startVerse, int endVerse) {
     return IntStream.rangeClosed(startVerse, endVerse)
-            .mapToObj(this::verse)
-            .collect(Collectors.joining("\n"));
+        .mapToObj(this::verse)
+        .collect(Collectors.joining("\n"));
   }
 
   String verse(int verseIndex) {
     return Verse.toString(verseIndex);
   }
-
 }

@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 class NaturalNumber {
@@ -9,8 +7,9 @@ class NaturalNumber {
 
   public NaturalNumber(int naturalNumber) {
     if (invalidNaturalNumber(naturalNumber)) {
-      throw new IllegalArgumentException("You must supply a natural number (positive integer)",
-              new Throwable(Integer.toString(naturalNumber)));
+      throw new IllegalArgumentException(
+          "You must supply a natural number (positive integer)",
+          new Throwable(Integer.toString(naturalNumber)));
     }
     this.naturalNumber = naturalNumber;
   }
@@ -39,7 +38,9 @@ class NaturalNumber {
 
   private Set<Integer> factorsOf(int number) {
     Set<Integer> factors = new HashSet<Integer>();
-    for (int potentialFactor = 1; potentialFactor < Math.ceil(Math.sqrt(number)); potentialFactor += 1) {
+    for (int potentialFactor = 1;
+        potentialFactor < Math.ceil(Math.sqrt(number));
+        potentialFactor += 1) {
       if (number % potentialFactor == 0) {
         factors.add(potentialFactor);
         factors.add(number / potentialFactor);
@@ -51,5 +52,4 @@ class NaturalNumber {
   private boolean invalidNaturalNumber(int number) {
     return number <= 0;
   }
-
 }

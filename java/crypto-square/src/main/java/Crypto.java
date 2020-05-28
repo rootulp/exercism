@@ -1,5 +1,5 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Crypto {
 
@@ -49,7 +49,9 @@ public class Crypto {
     StringBuilder sb = new StringBuilder();
 
     for (int i = 0, n = cipherText.length(); i < n; i++) {
-      if (i != 0 && i % height == 0) { sb.append(" "); }
+      if (i != 0 && i % height == 0) {
+        sb.append(" ");
+      }
       sb.append(cipherText.charAt(i));
     }
 
@@ -72,8 +74,7 @@ public class Crypto {
     char[][] m = new char[squareSize][squareSize];
 
     for (int i = 0; i < normalizedPlaintext.length(); i++) {
-      m[(int) Math.floor(i / squareSize)][i % squareSize] =
-        normalizedPlaintext.charAt(i);
+      m[(int) Math.floor(i / squareSize)][i % squareSize] = normalizedPlaintext.charAt(i);
     }
 
     return m;
@@ -98,10 +99,11 @@ public class Crypto {
 
     for (int i = 0; i < m.length; i++) {
       String segment = new String(m[i]).trim();
-      if (!segment.isEmpty()) { segments.add(segment); }
+      if (!segment.isEmpty()) {
+        segments.add(segment);
+      }
     }
 
     return segments;
   }
-
 }

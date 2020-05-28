@@ -19,7 +19,7 @@ public class RotationalCipher {
   public String rotate(String text) {
     StringBuilder encrypted = new StringBuilder(text.length());
 
-    for(char c: text.toCharArray()) {
+    for (char c : text.toCharArray()) {
       encrypted.append(encryptChar(c));
     }
 
@@ -40,5 +40,4 @@ public class RotationalCipher {
       cipher.put(alphabet[i], alphabet[(i + shift) % alphabet.length]);
     }
   }
-
 }

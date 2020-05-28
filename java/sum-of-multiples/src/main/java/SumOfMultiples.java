@@ -12,14 +12,15 @@ class SumOfMultiples {
   }
 
   int getSum() {
-    Set<Integer>  multiplesOfSetOfNumbersUpToMaxNumber = multiplesOfSetOfNumbersUpToMaxNumber(number, set);
+    Set<Integer> multiplesOfSetOfNumbersUpToMaxNumber =
+        multiplesOfSetOfNumbersUpToMaxNumber(number, set);
     return multiplesOfSetOfNumbersUpToMaxNumber.stream().mapToInt(Integer::intValue).sum();
   }
 
   private Set<Integer> multiplesOfSetOfNumbersUpToMaxNumber(int maxNumber, int[] set) {
     Set<Integer> multiples = new HashSet<>();
 
-    for(int number : set) {
+    for (int number : set) {
       multiples.addAll(multiplesOfNumberUpToMaxNumber(maxNumber, number));
     }
 
@@ -37,5 +38,4 @@ class SumOfMultiples {
 
     return multiples;
   }
-
 }

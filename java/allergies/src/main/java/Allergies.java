@@ -1,5 +1,5 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Allergies {
 
@@ -17,10 +17,11 @@ public class Allergies {
     List<Allergen> results = new ArrayList<Allergen>();
 
     for (Allergen a : Allergen.values()) {
-      if ((score & a.getScore()) != 0) { results.add(a); }
+      if ((score & a.getScore()) != 0) {
+        results.add(a);
+      }
     }
 
     return results;
   }
-
 }

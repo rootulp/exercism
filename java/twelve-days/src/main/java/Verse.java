@@ -13,13 +13,12 @@ class Verse {
   }
 
   private static String prefix(int verseIndex) {
-    return String.format("On the %s day of Christmas my true love gave to me, ", ordinal(verseIndex));
+    return String.format(
+        "On the %s day of Christmas my true love gave to me, ", ordinal(verseIndex));
   }
 
   private static String body(int verseIndex) {
-    return revRangeClosed(1, verseIndex)
-            .mapToObj(Verse::gifts)
-            .collect(Collectors.joining(", "));
+    return revRangeClosed(1, verseIndex).mapToObj(Verse::gifts).collect(Collectors.joining(", "));
   }
 
   private static String suffix(int verseIndex) {
@@ -71,8 +70,6 @@ class Verse {
   }
 
   private static IntStream revRangeClosed(int from, int to) {
-    return IntStream.range(from, to)
-            .map(i -> to - i + from);
+    return IntStream.range(from, to).map(i -> to - i + from);
   }
-
 }

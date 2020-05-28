@@ -3,6 +3,7 @@ import java.util.*;
 final class HandshakeCalculator {
 
   private static Map<Integer, Signal> BINARY_TO_ACTION = new HashMap<>();
+
   static {
     BINARY_TO_ACTION.put(1, Signal.WINK);
     BINARY_TO_ACTION.put(2, Signal.DOUBLE_BLINK);
@@ -34,5 +35,4 @@ final class HandshakeCalculator {
     Collections.reverse(handshake);
     return handshake;
   }
-
 }

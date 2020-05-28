@@ -17,5 +17,4 @@ public class Gigasecond {
   public LocalDateTime getDate() {
     return now.plusSeconds(GIGASECONDS);
   }
-
 }

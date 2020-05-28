@@ -19,8 +19,12 @@ public class Robot {
   private String generateName() {
     StringBuilder sb = new StringBuilder();
 
-    for (int i = 0; i < 2; i++) { sb.append(randChar()); }
-    for (int i = 0; i < 3; i++) { sb.append(randDigit()); }
+    for (int i = 0; i < 2; i++) {
+      sb.append(randChar());
+    }
+    for (int i = 0; i < 3; i++) {
+      sb.append(randDigit());
+    }
 
     return sb.toString();
   }
@@ -38,5 +42,4 @@ public class Robot {
     char randDigit = (char) (n + 48);
     return randDigit;
   }
-
 }

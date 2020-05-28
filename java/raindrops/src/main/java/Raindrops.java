@@ -1,5 +1,5 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Raindrops {
 
@@ -7,10 +7,18 @@ public class Raindrops {
     List<Integer> factors = getForNumber(input);
 
     StringBuilder sb = new StringBuilder();
-    if (factors.contains(3)) { sb.append("Pling"); }
-    if (factors.contains(5)) { sb.append("Plang"); }
-    if (factors.contains(7)) { sb.append("Plong"); }
-    if (sb.toString().isEmpty()) { sb.append(Integer.toString(input)); }
+    if (factors.contains(3)) {
+      sb.append("Pling");
+    }
+    if (factors.contains(5)) {
+      sb.append("Plang");
+    }
+    if (factors.contains(7)) {
+      sb.append("Plong");
+    }
+    if (sb.toString().isEmpty()) {
+      sb.append(Integer.toString(input));
+    }
 
     return sb.toString();
   }
@@ -29,5 +37,4 @@ public class Raindrops {
 
     return factors;
   }
-
 }

@@ -1,5 +1,5 @@
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 public final class WordCount {
 
@@ -11,9 +11,7 @@ public final class WordCount {
     Map<String, Integer> wordCounts = new HashMap<String, Integer>();
 
     /* Not a huge fan of the regex on the following line */
-    String[] wordsArr = words.replaceAll("[^\\w\\s\\d]", "")
-                              .toLowerCase()
-                              .split("\\s+");
+    String[] wordsArr = words.replaceAll("[^\\w\\s\\d]", "").toLowerCase().split("\\s+");
 
     for (String word : wordsArr) {
       if (wordCounts.containsKey(word)) {

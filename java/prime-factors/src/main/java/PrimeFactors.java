@@ -1,5 +1,5 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PrimeFactors {
 
@@ -17,5 +17,4 @@ public class PrimeFactors {
 
     return factors;
   }
-
 }

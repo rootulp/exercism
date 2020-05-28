@@ -28,5 +28,4 @@ public class School {
     }
     return db;
   }
-
 }

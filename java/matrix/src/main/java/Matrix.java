@@ -63,7 +63,7 @@ public class Matrix {
   }
 
   private String firstRow(String matrixAsString) {
-    return matrixAsString.split( "\n")[0];
+    return matrixAsString.split("\n")[0];
   }
 
   private void print(int[][] matrix) {
@@ -75,5 +75,4 @@ public class Matrix {
     }
     System.out.println("-----");
   }
-
 }

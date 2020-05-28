@@ -1,5 +1,5 @@
 enum Classification {
-
-    DEFICIENT, PERFECT, ABUNDANT
-
+  DEFICIENT,
+  PERFECT,
+  ABUNDANT
 }

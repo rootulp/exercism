@@ -39,7 +39,7 @@ public class Hexadecimal {
     int decimal = 0;
     for (int i = 0; i < str.length(); i++) {
       int multiplier = multiplier(i, str.length());
-      int digit =  digitToDecimal(str.charAt(i));
+      int digit = digitToDecimal(str.charAt(i));
       decimal += digit * multiplier;
     }
     return decimal;

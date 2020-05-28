@@ -1,6 +1,6 @@
-import java.util.List;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Anagram {
 
@@ -19,8 +19,7 @@ public class Anagram {
     for (String potentialAnagram : potentialAnagrams) {
       String sortedPotentialAnagram = sort(potentialAnagram);
 
-      if (sorted.equals(sortedPotentialAnagram) &&
-          !word.equals(potentialAnagram.toLowerCase())) {
+      if (sorted.equals(sortedPotentialAnagram) && !word.equals(potentialAnagram.toLowerCase())) {
         anagrams.add(potentialAnagram);
       }
     }

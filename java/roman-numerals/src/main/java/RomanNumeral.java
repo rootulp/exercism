@@ -1,10 +1,11 @@
-import java.util.Map;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class RomanNumeral {
 
   private final int num;
   private static final Map<Integer, String> ROMAN = populateRoman();
+
   private static final Map<Integer, String> populateRoman() {
     Map<Integer, String> roman = new LinkedHashMap<Integer, String>();
     roman.put(1000, "M");
@@ -31,7 +32,7 @@ public class RomanNumeral {
     int currVal = this.num;
     String currRoman = "";
 
-    for (Map.Entry<Integer, String > entry : ROMAN.entrySet()) {
+    for (Map.Entry<Integer, String> entry : ROMAN.entrySet()) {
       Integer key = entry.getKey();
       String val = entry.getValue();
 
@@ -43,5 +44,4 @@ public class RomanNumeral {
 
     return currRoman;
   }
-
 }

@@ -1,4 +1,3 @@
-import java.lang.Math;
 
 public final class Octal {
 
@@ -16,11 +15,13 @@ public final class Octal {
 
   private int calculateDecimal() {
     int decimal = 0;
-    if (!input.matches("[0-7]+")) { return decimal; }
+    if (!input.matches("[0-7]+")) {
+      return decimal;
+    }
 
     for (int i = 0; i < input.length(); i++) {
       int curr = Character.getNumericValue(input.charAt(i));
-      int mult =  (int) Math.pow(8, input.length() - 1 - i);
+      int mult = (int) Math.pow(8, input.length() - 1 - i);
       decimal += (curr * mult);
     }
     return decimal;

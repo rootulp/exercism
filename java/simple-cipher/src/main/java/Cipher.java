@@ -50,7 +50,6 @@ public final class Cipher {
     return ALPHABET.charAt(wrapAlphaI(alphaI));
   }
 
-
   private char decodeChar(Character c, Integer i) {
     int alphaI = ALPHABET.indexOf(c) - ALPHABET.indexOf(key.charAt(i));
     return ALPHABET.charAt(wrapAlphaI(alphaI));
@@ -59,11 +58,11 @@ public final class Cipher {
   private Integer wrapAlphaI(Integer alphaI) {
 
     while (alphaI < 0) {
-        alphaI += ALPHABET.length();
+      alphaI += ALPHABET.length();
     }
 
     while (alphaI >= ALPHABET.length()) {
-        alphaI -= ALPHABET.length();
+      alphaI -= ALPHABET.length();
     }
 
     return alphaI;
@@ -81,7 +80,6 @@ public final class Cipher {
 
   private char randomChar() {
     Random r = new Random();
-    return (char)(r.nextInt(26) + 'a');
+    return (char) (r.nextInt(26) + 'a');
   }
-
 }

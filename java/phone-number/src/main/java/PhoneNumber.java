@@ -8,9 +8,13 @@ public class PhoneNumber {
   }
 
   private String clean(String dirtyNum) {
-    String num = dirtyNum.replaceAll("[^0-9]","");
-    if (num.length() == 10) { return num; }
-    if (num.length() == 11 && num.charAt(0) == '1') { return num.substring(1); }
+    String num = dirtyNum.replaceAll("[^0-9]", "");
+    if (num.length() == 10) {
+      return num;
+    }
+    if (num.length() == 11 && num.charAt(0) == '1') {
+      return num.substring(1);
+    }
     return invalid;
   }
 
@@ -33,5 +37,4 @@ public class PhoneNumber {
   private String getLineNum() {
     return this.number.substring(6);
   }
-
 }

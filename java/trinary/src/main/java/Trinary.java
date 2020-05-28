@@ -3,9 +3,10 @@ public class Trinary {
   private static int RADIX = 3;
 
   public static int toDecimal(String input) {
-    if (!input.matches("[012]+")) { return 0; }
+    if (!input.matches("[012]+")) {
+      return 0;
+    }
     return computeTrinary(input);
-
   }
 
   private static int computeTrinary(String input) {
