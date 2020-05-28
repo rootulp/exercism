@@ -1,6 +1,10 @@
 class IsbnVerifier {
 
 	static boolean isValidIsbn(String stringToVerify) {
+		if(!isValidCheckDigit(stringToVerify)) {
+			return false;
+		}
+
 		String parsed = removeHyphens(stringToVerify);
 		Integer value = computeValueForIsbn(parsed);
 		return value % 11 == 0;
@@ -25,6 +29,11 @@ class IsbnVerifier {
 
 	static String removeHyphens(String s) {
 		return s.replaceAll("-", "");
+	}
+
+	static boolean isValidCheckDigit(String s) {
+		char c = s.charAt((s.length() - 1));
+		return Character.isDigit(c) || c == 'X';
 	}
 
     boolean isValid(String stringToVerify) {
