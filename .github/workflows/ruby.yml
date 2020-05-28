@@ -27,9 +27,7 @@ jobs:
       uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
       with:
         ruby-version: 2.6
-    - name: cd ruby directory
-      run: cd ruby
     - name: Install dependencies
-      run: bundle install
+      run: bundle install --gemfile ruby/Gemfile
     - name: Run tests
-      run: bundle exec rake
+      run: cd ruby && bundle exec rake
