@@ -18,7 +18,6 @@ public class IsbnVerifierTest {
         assertTrue(isbnVerifier.isValid("3-598-21508-8"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void invalidIsbnCheckDigit() {
         assertFalse(isbnVerifier.isValid("3-598-21508-9"));
