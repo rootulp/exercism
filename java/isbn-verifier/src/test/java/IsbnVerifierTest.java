@@ -73,7 +73,6 @@ public class IsbnVerifierTest {
         assertFalse(isbnVerifier.isValid("3-598-21507"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void checkDigitOfXShouldNotBeUsedForZero() {
         assertFalse(isbnVerifier.isValid("3-598-21515-X"));
@@ -85,19 +84,16 @@ public class IsbnVerifierTest {
         assertFalse(isbnVerifier.isValid(""));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void inputIsNineCharacters() {
         assertFalse(isbnVerifier.isValid("134456729"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void invalidCharactersAreNotIgnored() {
         assertFalse(isbnVerifier.isValid("3132P34035"));
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void inputIsTooLongButContainsAValidIsbn() {
         assertFalse(isbnVerifier.isValid("98245726788"));
