@@ -1,5 +1,7 @@
 class IsbnVerifier {
 
+	static final char VALID_CHECK_DIGIT = 'X';
+
 	static boolean isValidIsbn(String stringToVerify) {
 		if(!isValidCheckDigit(stringToVerify)) {
 			return false;
@@ -32,8 +34,8 @@ class IsbnVerifier {
 	}
 
 	static boolean isValidCheckDigit(String s) {
-		char c = s.charAt((s.length() - 1));
-		return Character.isDigit(c) || c == 'X';
+		char checkDigit = s.charAt((s.length() - 1));
+		return Character.isDigit(checkDigit) || checkDigit == VALID_CHECK_DIGIT;
 	}
 
     boolean isValid(String stringToVerify) {
