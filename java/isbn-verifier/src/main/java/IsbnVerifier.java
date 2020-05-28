@@ -12,18 +12,17 @@ class IsbnVerifier {
 			return false;
 		}
 
-		Integer value = computeValueForIsbn(removeHyphens(stringToVerify));
-		return value % 11 == 0;
+		return computeValueForIsbn(parsed) % 11 == 0;
 	}
 
 	static Integer computeValueForIsbn(String isbn) {
 		String reversed = new StringBuilder(isbn).reverse().toString();
-		int value = 0;
+		int result = 0;
 		for (int i = 0; i < isbn.length(); i++) {
 			char c = reversed.charAt(i);
-			value += getValueFrom(c, i);
+			result += getValueFrom(c, i);
 		}
-		return value;
+		return result;
 	}
 
 	static Integer getValueFrom(char c, int i) {
@@ -38,11 +37,15 @@ class IsbnVerifier {
 	}
 
 	static boolean isValidParsed(String parsed) {
-		return isValidCheckDigit(parsed.charAt((parsed.length() - 1))) && doesContainOnlyDigits(parsed.substring(0, parsed.length() - 1));
+		return isValidCheckDigit(parsed.charAt((parsed.length() - 1))) && doesContainOnlyDigits(parsed.substring(0, parsed.length() - 1)) && isValidLength(parsed);
 	}
 
 	static boolean isValidCheckDigit(char checkDigit) {
 		return Character.isDigit(checkDigit) || checkDigit == VALID_CHECK_DIGIT;
+	}
+
+	static boolean isValidLength(String s) {
+		return s.length() == 10;
 	}
 
 	static boolean doesContainOnlyDigits(String s) {
