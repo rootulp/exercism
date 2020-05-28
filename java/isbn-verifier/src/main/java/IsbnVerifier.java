@@ -8,7 +8,7 @@ class IsbnVerifier {
 	 */
 	static boolean isValidIsbn(String stringToVerify) {
 		String parsed = removeHyphens(stringToVerify);
-		if(!isValidCheckDigit(parsed.charAt((parsed.length() - 1))) || !doesContainOnlyDigits(parsed.substring(0, parsed.length() - 1))) {
+		if(!isValidParsed(parsed)) {
 			return false;
 		}
 
@@ -35,6 +35,10 @@ class IsbnVerifier {
 
 	static String removeHyphens(String s) {
 		return s.replaceAll("-", "");
+	}
+
+	static boolean isValidParsed(String parsed) {
+		return isValidCheckDigit(parsed.charAt((parsed.length() - 1))) && doesContainOnlyDigits(parsed.substring(0, parsed.length() - 1));
 	}
 
 	static boolean isValidCheckDigit(char checkDigit) {
