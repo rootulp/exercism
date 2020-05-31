@@ -7,6 +7,8 @@ import (
 
 // Hey returns a string with Bob's response.
 func Hey(remark string) string {
+	remark = strings.TrimSpace(remark)
+
 	if isEmpty(remark) {
 		return "Fine. Be that way!"
 	} else if isYellingQuestion(remark) {
@@ -34,7 +36,7 @@ func isYellingQuestion(remark string) bool {
 }
 
 func isYelling(s string) bool {
-	if removeNonLetters(s) == s {
+	if removeNonLetters(s) == "" {
 		return false
 	}
 
@@ -51,5 +53,5 @@ func isQuestion(s string) bool {
 }
 
 func isEmpty(s string) bool {
-	return strings.TrimSpace(s) == ""
+	return s == ""
 }
