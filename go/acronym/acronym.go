@@ -8,13 +8,16 @@ import (
 // Abbreviate should return an abbreviated string based on s.
 func Abbreviate(s string) string {
 	parsed := replaceNonLettersWithWhitespace(s)
+	acronym := generateAcronym(parsed)
+	return strings.ToUpper(acronym)
+}
 
-	fields := strings.Fields(parsed)
+func generateAcronym(s string) string {
 	result := ""
-	for _, v := range fields {
+	for _, v := range strings.Fields(s) {
 		result += v[:1]
 	}
-	return strings.ToUpper(result)
+	return result
 }
 
 func replaceNonLettersWithWhitespace(s string) string {
