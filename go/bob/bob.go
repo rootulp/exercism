@@ -7,15 +7,15 @@ import (
 
 // Hey returns a string with Bob's response.
 func Hey(remark string) string {
-	remark = strings.TrimSpace(remark)
+	parsed := strings.TrimSpace(remark)
 
-	if isEmpty(remark) {
+	if isEmpty(parsed) {
 		return "Fine. Be that way!"
-	} else if isYellingQuestion(remark) {
+	} else if isYellingQuestion(parsed) {
 		return "Calm down, I know what I'm doing!"
-	} else if isQuestion(remark) {
+	} else if isQuestion(parsed) {
 		return "Sure."
-	} else if isYelling(remark) {
+	} else if isYelling(parsed) {
 		return "Whoa, chill out!"
 	} else {
 		return "Whatever."
