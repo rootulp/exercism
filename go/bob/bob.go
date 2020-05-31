@@ -22,17 +22,8 @@ func Hey(remark string) string {
 	}
 }
 
-func removeNonLetters(remark string) string {
-	return strings.Map(func(r rune) rune {
-		if unicode.IsLetter(r) {
-			return r
-		}
-		return -1
-	}, remark)
-}
-
-func isYellingQuestion(remark string) bool {
-	return isYelling(remark) && isQuestion(remark)
+func isYellingQuestion(s string) bool {
+	return isYelling(s) && isQuestion(s)
 }
 
 func isYelling(s string) bool {
@@ -54,4 +45,13 @@ func isQuestion(s string) bool {
 
 func isEmpty(s string) bool {
 	return s == ""
+}
+
+func removeNonLetters(s string) string {
+	return strings.Map(func(r rune) rune {
+		if unicode.IsLetter(r) {
+			return r
+		}
+		return -1
+	}, s)
 }
