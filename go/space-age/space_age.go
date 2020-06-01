@@ -7,6 +7,8 @@ type Planet string
 func Age(ageInSeconds float64, planet Planet) float64 {
 	if planet == "Earth" {
 		return ageInSeconds / 31557600
+	} else if planet == "Mercury" {
+		return ageInSeconds / 31557600 / 0.2408467
 	}
 	return 0
 }
