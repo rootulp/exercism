@@ -9,14 +9,7 @@ import (
 // In other words, whether the string does not contain any duplicate characters.
 func IsIsogram(s string) bool {
 	parsed := strings.ToLower(preserveOnlyLetters(s))
-	seen := make(map[rune]bool)
-	for _, c := range parsed {
-		if (seen[c]) == true {
-			return false
-		}
-		seen[c] = true
-	}
-	return true
+	return doesContainUniqueLetters(parsed)
 }
 
 func preserveOnlyLetters(s string) string {
@@ -26,4 +19,16 @@ func preserveOnlyLetters(s string) string {
 		}
 		return -1
 	}, s)
+}
+
+func doesContainUniqueLetters(s string) bool {
+	seen := make(map[rune]bool)
+
+	for _, c := range s {
+		if (seen[c]) == true {
+			return false
+		}
+		seen[c] = true
+	}
+	return true
 }
