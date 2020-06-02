@@ -1,8 +1,4 @@
 # exercism
-
-![Ruby](https://github.com/rootulp/exercism/workflows/Ruby/badge.svg?branch=master)
-![Python](https://github.com/rootulp/exercism/workflows/Python/badge.svg?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/0587c23c2c8a70f35d37/maintainability)](https://codeclimate.com/github/rootulp/exercism/maintainability)
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://rootulp.mit-license.org)
 
 > [Exercism](http://exercism.io/rootulp) solutions
@@ -14,6 +10,8 @@ I'd appreciate any feedback via [issues](https://github.com/rootulp/exercism/iss
 ## Getting Started
 
 If you are new to exercism, you can get started with this [intro](http://exercism.io/how-it-works/newbie).
+
+
 
 ## Code Style
 
@@ -29,6 +27,13 @@ If you are new to exercism, you can get started with this [intro](http://exercis
 | ruby         | [![Code Style](https://img.shields.io/badge/code_style-rubocop-red.svg)](https://github.com/bbatsov/rubocop)                           | `rubocop .`                                                                      |
 | typescript   | [![Linter](https://img.shields.io/badge/linter-tslint-lightgrey.svg)](https://github.com/palantir/tslint)                              | `cd <exercise> && yarn lint`                                                     |
 
+## Tests
+
+| language | status                                                                                  |
+|----------|-----------------------------------------------------------------------------------------|
+| go       | ![Go](https://github.com/rootulp/exercism/workflows/Go/badge.svg)                       |
+| ruby     | ![Ruby](https://github.com/rootulp/exercism/workflows/Ruby/badge.svg?branch=master)     |
+| python   | ![Python](https://github.com/rootulp/exercism/workflows/Python/badge.svg?branch=master) |
 
 ## License
 
