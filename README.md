@@ -29,11 +29,9 @@ If you are new to exercism, you can get started with this [intro](http://exercis
 
 ## Tests
 
-| language | status                                                                                  |
-|----------|-----------------------------------------------------------------------------------------|
-| go       | ![Go](https://github.com/rootulp/exercism/workflows/Go/badge.svg)                       |
-| ruby     | ![Ruby](https://github.com/rootulp/exercism/workflows/Ruby/badge.svg?branch=master)     |
-| python   | ![Python](https://github.com/rootulp/exercism/workflows/Python/badge.svg?branch=master) |
+![Go](https://github.com/rootulp/exercism/workflows/Go/badge.svg)
+![Ruby](https://github.com/rootulp/exercism/workflows/Ruby/badge.svg?branch=master)
+![Python](https://github.com/rootulp/exercism/workflows/Python/badge.svg?branch=master)
 
 ## License
 
