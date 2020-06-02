@@ -1,11 +1,14 @@
 package isogram
 
-import "strings"
+import (
+	"strings"
+	"unicode"
+)
 
 // IsIsogram returns whether the provided string is an isogram.
 // In other words, whether the string does not contain any duplicate characters.
 func IsIsogram(s string) bool {
-	parsed := strings.ToLower(removeWhitespaceAndHyphens(s))
+	parsed := strings.ToLower(preserveOnlyLetters(s))
 	seen := make(map[rune]bool)
 	for _, c := range parsed {
 		if (seen[c]) == true {
@@ -16,11 +19,11 @@ func IsIsogram(s string) bool {
 	return true
 }
 
-func removeWhitespaceAndHyphens(s string) string {
+func preserveOnlyLetters(s string) string {
 	return strings.Map(func(r rune) rune {
-		if r == ' ' || r == '-' {
-			return -1
+		if unicode.IsLetter(r) {
+			return r
 		}
-		return r
+		return -1
 	}, s)
 }
