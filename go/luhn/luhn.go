@@ -21,13 +21,14 @@ func checkSum(s string) int {
 		digit, err := strconv.Atoi(string(v))
 
 		if err != nil {
-			return 0
+			return 0 // stop if we failed to convert this digit.
 		}
 
 		if (i % 2) == 0 {
-			return digit
+			return digit // if this is an even indexed digit, add it to the sum directly.
 		}
 
+		// double the digit and subtract 9 if it surpasses 9.
 		product := digit * 2
 		if product > 9 {
 			product -= 9
