@@ -23,6 +23,8 @@ func ConcurrentFrequency(texts []string) FreqMap {
 	}
 
 	result := make(FreqMap)
+
+	// Merge freqMaps into result
 	for range texts {
 		freqMap := <-freqMaps
 		for r, frequency := range freqMap {
