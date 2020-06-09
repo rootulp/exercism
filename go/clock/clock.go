@@ -1,6 +1,7 @@
 package clock
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -20,12 +21,12 @@ func (c Clock) String() string {
 
 // Add moves the clock forward by the provided number of minutes.
 func (c Clock) Add(minutes int) Clock {
-	// TODO
-	return c
+	d, _ := time.ParseDuration(fmt.Sprintf("%dm", minutes)) // WARNING: Ignoring errors
+	return Clock{time: c.time.Add(d)}
 }
 
 // Subtract moves the clock forward by the provided number of minutes.
 func (c Clock) Subtract(minutes int) Clock {
-	// TODO
-	return c
+	d, _ := time.ParseDuration(fmt.Sprintf("%dm", minutes)) // WARNING: Ignoring errors
+	return Clock{time: c.time.Add(-d)}
 }
