@@ -26,9 +26,17 @@ func (c Clock) Add(minutes int) Clock {
 	return New(new.Hour(), new.Minute())
 }
 
-// Subtract moves the clock forward by the provided number of minutes.
+// Subtract moves the clock backward by the provided number of minutes.
 func (c Clock) Subtract(minutes int) Clock {
 	d, _ := time.ParseDuration(fmt.Sprintf("%dm", minutes)) // WARNING: Ignoring errors
 	new := c.time.Add(-d)
 	return New(new.Hour(), new.Minute())
+}
+
+// It seems strange Go does not include a default implementation of absolute value for ints
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
 }
