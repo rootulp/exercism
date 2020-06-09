@@ -22,11 +22,13 @@ func (c Clock) String() string {
 // Add moves the clock forward by the provided number of minutes.
 func (c Clock) Add(minutes int) Clock {
 	d, _ := time.ParseDuration(fmt.Sprintf("%dm", minutes)) // WARNING: Ignoring errors
-	return Clock{time: c.time.Add(d)}
+	new := c.time.Add(d)
+	return New(new.Hour(), new.Minute())
 }
 
 // Subtract moves the clock forward by the provided number of minutes.
 func (c Clock) Subtract(minutes int) Clock {
 	d, _ := time.ParseDuration(fmt.Sprintf("%dm", minutes)) // WARNING: Ignoring errors
-	return Clock{time: c.time.Add(-d)}
+	new := c.time.Add(-d)
+	return New(new.Hour(), new.Minute())
 }
