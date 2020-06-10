@@ -13,7 +13,19 @@ type Clock struct {
 
 // New is a constructor to create instances of Clock.
 func New(hour, min int) Clock {
-	t := asTime(hour, min)
+	t := time.Date(0, 0, 0, hour, min, 0, 0, time.UTC)
+	return Clock{hour: t.Hour(), min: t.Minute()}
+}
+
+// Add moves the clock forward by the provided number of minutes.
+func (clock Clock) Add(minutes int) Clock {
+	t := clock.time().Add(durationFromMinutes(minutes))
+	return Clock{hour: t.Hour(), min: t.Minute()}
+}
+
+// Subtract moves the clock backward by the provided number of minutes.
+func (clock Clock) Subtract(minutes int) Clock {
+	t := clock.time().Add(-durationFromMinutes(minutes))
 	return Clock{hour: t.Hour(), min: t.Minute()}
 }
 
@@ -21,25 +33,9 @@ func (clock Clock) String() string {
 	return clock.time().Format("15:04")
 }
 
-// Add moves the clock forward by the provided number of minutes.
-func (clock Clock) Add(minutes int) Clock {
-	new := clock.time().Add(durationFromMinutes(minutes))
-	return New(new.Hour(), new.Minute())
-}
-
-// Subtract moves the clock backward by the provided number of minutes.
-func (clock Clock) Subtract(minutes int) Clock {
-	new := clock.time().Add(-durationFromMinutes(minutes))
-	return New(new.Hour(), new.Minute())
-}
-
 // time converts the clock to a time.Time instance.
 func (clock Clock) time() time.Time {
-	return asTime(clock.hour, clock.min)
-}
-
-func asTime(hour, min int) time.Time {
-	return time.Date(0, 0, 0, hour, min, 0, 0, time.UTC)
+	return time.Date(0, 0, 0, clock.hour, clock.min, 0, 0, time.UTC)
 }
 
 func durationFromMinutes(minutes int) time.Duration {
