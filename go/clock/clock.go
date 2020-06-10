@@ -13,7 +13,7 @@ type Clock struct {
 
 // New is a constructor to create instances of Clock.
 func New(hour, min int) Clock {
-	t := time.Date(0, 0, 0, hour, min, 0, 0, time.UTC)
+	t := asTime(hour, min)
 	return Clock{hour: t.Hour(), min: t.Minute()}
 }
 
@@ -37,5 +37,9 @@ func (c Clock) Subtract(minutes int) Clock {
 
 // time converts the clock to a time.Time instance.
 func (c Clock) time() time.Time {
-	return time.Date(0, 0, 0, c.hour, c.min, 0, 0, time.UTC)
+	return asTime(c.hour, c.min)
+}
+
+func asTime(hour, min int) time.Time {
+	return time.Date(0, 0, 0, hour, min, 0, 0, time.UTC)
 }
