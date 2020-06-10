@@ -17,25 +17,25 @@ func New(hour, min int) Clock {
 	return Clock{hour: t.Hour(), min: t.Minute()}
 }
 
-func (c Clock) String() string {
-	return c.time().Format("15:04")
+func (clock Clock) String() string {
+	return clock.time().Format("15:04")
 }
 
 // Add moves the clock forward by the provided number of minutes.
-func (c Clock) Add(minutes int) Clock {
-	new := c.time().Add(durationFromMinutes(minutes))
+func (clock Clock) Add(minutes int) Clock {
+	new := clock.time().Add(durationFromMinutes(minutes))
 	return New(new.Hour(), new.Minute())
 }
 
 // Subtract moves the clock backward by the provided number of minutes.
-func (c Clock) Subtract(minutes int) Clock {
-	new := c.time().Add(-durationFromMinutes(minutes))
+func (clock Clock) Subtract(minutes int) Clock {
+	new := clock.time().Add(-durationFromMinutes(minutes))
 	return New(new.Hour(), new.Minute())
 }
 
 // time converts the clock to a time.Time instance.
-func (c Clock) time() time.Time {
-	return asTime(c.hour, c.min)
+func (clock Clock) time() time.Time {
+	return asTime(clock.hour, clock.min)
 }
 
 func asTime(hour, min int) time.Time {
