@@ -23,15 +23,13 @@ func (c Clock) String() string {
 
 // Add moves the clock forward by the provided number of minutes.
 func (c Clock) Add(minutes int) Clock {
-	duration := durationFromMinutes(minutes)
-	new := c.time().Add(duration)
+	new := c.time().Add(durationFromMinutes(minutes))
 	return New(new.Hour(), new.Minute())
 }
 
 // Subtract moves the clock backward by the provided number of minutes.
 func (c Clock) Subtract(minutes int) Clock {
-	duration := durationFromMinutes(minutes)
-	new := c.time().Add(-duration)
+	new := c.time().Add(-durationFromMinutes(minutes))
 	return New(new.Hour(), new.Minute())
 }
 
