@@ -1,42 +1,50 @@
 package luhn
 
 import (
+	"errors"
 	"strconv"
 	"strings"
 )
 
 // Valid returns whether the provided string represents a number that satisfies the Luhn algorithm.
 func Valid(s string) bool {
+	s = strings.ReplaceAll(s, " ", "")
 	if len(s) <= 1 {
 		return false
 	}
-	s = strings.ReplaceAll(s, " ", "")
-	return checkSum(s)%10 == 0
+	checkDigit, err := checkSum(s)
+
+	if err != nil {
+		return false
+	}
+
+	return checkDigit%10 == 0
 }
 
 // checkSum returns the Luhn check sum of the provided string.
-func checkSum(s string) int {
+func checkSum(s string) (int, error) {
 	sum := 0
 	for i, v := range reverse(s) {
 		digit, err := strconv.Atoi(string(v))
 
 		if err != nil {
-			return 0 // stop if we failed to convert this digit.
+			// stop if we failed to convert this digit
+			return 0, errors.New("Invalid digit")
 		}
 
 		if (i % 2) == 0 {
-			return digit // if this is an even indexed digit, add it to the sum directly.
+			// if this is an even indexed digit, add it to the sum directly
+			sum += digit
+		} else {
+			// double the digit and subtract 9 if it surpasses 9
+			product := digit * 2
+			if product > 9 {
+				product -= 9
+			}
+			sum += product
 		}
-
-		// double the digit and subtract 9 if it surpasses 9.
-		product := digit * 2
-		if product > 9 {
-			product -= 9
-		}
-		sum += product
 	}
-
-	return sum
+	return sum, nil
 }
 
 // reverse returns a string with characters in reversed order.
