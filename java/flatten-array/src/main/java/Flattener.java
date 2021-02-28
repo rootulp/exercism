@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 public class Flattener {
 
-    List<?> flatten(List<?> nestedList) {
+    public List<?> flatten(List<?> nestedList) {
         return flattenStream(nestedList.stream())
                 .collect(Collectors.toList());
     }
