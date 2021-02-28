@@ -1,11 +1,21 @@
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Flattener {
-    public Flattener() {
 
+    List<?> flatten(List<?> nestedList) {
+        return flattenStream(nestedList.stream())
+                .collect(Collectors.toList());
     }
 
-    public <T> List<T> flatten(List<T> list) {
-        return list;
+    private Stream<?> flattenStream(Stream<?> stream) {
+        return stream.filter(Objects::nonNull)
+                .flatMap(item -> item instanceof Collection ?
+                    flattenStream(((Collection<?>) item).stream()) :
+                    Stream.of(item)
+                );
     }
 }
