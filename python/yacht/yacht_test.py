@@ -15,8 +15,8 @@ class YachtTest(unittest.TestCase):
     def test_ones(self):
         self.assertEqual(yacht.score([1, 1, 1, 3, 5], yacht.ONES), 3)
 
-    # def test_ones_out_of_order(self):
-    #     self.assertEqual(yacht.score([3, 1, 1, 5, 1], yacht.ONES), 3)
+    def test_ones_out_of_order(self):
+        self.assertEqual(yacht.score([3, 1, 1, 5, 1], yacht.ONES), 3)
 
     # def test_no_ones(self):
     #     self.assertEqual(yacht.score([4, 3, 6, 5, 5], yacht.ONES), 0)
