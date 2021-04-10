@@ -14,8 +14,8 @@ You can learn more here: https://en.wikipedia.org/wiki/Enumerated_type
 
 # Score categories.
 # Change the values as you see fit.
-YACHT = None
-ONES = None
+YACHT = 50
+ONES = 1
 TWOS = None
 THREES = None
 FOURS = None
@@ -27,16 +27,22 @@ LITTLE_STRAIGHT = None
 BIG_STRAIGHT = None
 CHOICE = None
 
-scores = {
-    YACHT: 50
-}
+# scores = {
+#     YACHT: 50,
+#     ONES: 1
+# }
 
 def score_yacht(dice):
     if len(set(dice)) == 1:
-        return scores.YACHT
+        return YACHT
     else:
         return 0
+
+def score_ones(dice):
+    return ONES * dice.count(1)
 
 def score(dice, category):
     if (category == YACHT):
         return score_yacht(dice)
+    if (category == ONES):
+        return score_ones(dice)
