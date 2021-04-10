@@ -27,6 +27,16 @@ LITTLE_STRAIGHT = None
 BIG_STRAIGHT = None
 CHOICE = None
 
+scores = {
+    YACHT: 50
+}
+
+def score_yacht(dice):
+    if len(set(dice)) == 1:
+        return scores.YACHT
+    else:
+        return 0
 
 def score(dice, category):
-    pass
+    if (category == YACHT):
+        return score_yacht(dice)
