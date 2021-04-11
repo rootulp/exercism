@@ -13,7 +13,7 @@ FOUR_OF_A_KIND = "FOUR_OF_A_KIND"
 STRAIGHT = 30
 LITTLE_STRAIGHT = "LITTLE_STRAIGHT"
 BIG_STRAIGHT = "BIG_STRAIGHT"
-CHOICE = None
+CHOICE = "CHOICE"
 
 def score_ones(dice):
     return ONES * dice.count(1)
@@ -52,6 +52,9 @@ def score_little_straight(dice):
 def score_big_straight(dice):
     return STRAIGHT if sorted(dice) == [2, 3, 4, 5, 6] else 0
 
+def score_choice(dice):
+    return sum(dice)
+
 def score_yacht(dice):
     return YACHT if len(set(dice)) == 1 else 0
 
@@ -76,5 +79,7 @@ def score(dice, category):
         return score_little_straight(dice)
     if (category == BIG_STRAIGHT):
         return score_big_straight(dice)
+    if (category == CHOICE):
+        return score_choice(dice)
     if (category == YACHT):
         return score_yacht(dice)
