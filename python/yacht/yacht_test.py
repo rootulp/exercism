@@ -63,8 +63,8 @@ class YachtTest(unittest.TestCase):
     def test_little_straight(self):
         self.assertEqual(yacht.score([3, 5, 4, 1, 2], yacht.LITTLE_STRAIGHT), 30)
 
-    # def test_little_straight_as_big_straight(self):
-    #     self.assertEqual(yacht.score([1, 2, 3, 4, 5], yacht.BIG_STRAIGHT), 0)
+    def test_little_straight_as_big_straight(self):
+        self.assertEqual(yacht.score([1, 2, 3, 4, 5], yacht.BIG_STRAIGHT), 0)
 
     # def test_four_in_order_but_not_a_little_straight(self):
     #     self.assertEqual(yacht.score([1, 1, 2, 3, 4], yacht.LITTLE_STRAIGHT), 0)

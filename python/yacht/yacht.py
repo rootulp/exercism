@@ -47,12 +47,10 @@ def score_four_of_a_kind(dice):
     return 0
 
 def score_little_straight(dice):
-    if sorted(dice) == [1, 2, 3, 4, 5]:
-        return STRAIGHT
+    return STRAIGHT if sorted(dice) == [1, 2, 3, 4, 5] else 0
 
 def score_big_straight(dice):
-    if sorted(dice) == [2, 3, 4, 5, 6]:
-        return STRAIGHT
+    return STRAIGHT if sorted(dice) == [2, 3, 4, 5, 6] else 0
 
 def score_yacht(dice):
     return YACHT if len(set(dice)) == 1 else 0
