@@ -8,8 +8,8 @@ THREES = 3
 FOURS = 4
 FIVES = 5
 SIXES = 6
-FULL_HOUSE = None
-FOUR_OF_A_KIND = None
+FULL_HOUSE = "FULL_HOUSE"
+FOUR_OF_A_KIND = "FOUR_OF_A_KIND"
 LITTLE_STRAIGHT = None
 BIG_STRAIGHT = None
 CHOICE = None
@@ -35,6 +35,15 @@ def score_sixes(dice):
 def score_full_house(dice):
     return sum(dice) if sorted(set(Counter(dice).values())) == [2, 3] else 0
 
+def score_four_of_a_kind(dice):
+    counter = Counter(dice)
+    if sorted(set(counter.values())) == [1, 4]:
+        for k, v in counter.items():
+            if v == 4:
+                return k * 4
+    return 0
+
+
 def score_yacht(dice):
     return YACHT if len(set(dice)) == 1 else 0
 
@@ -53,5 +62,7 @@ def score(dice, category):
         return score_sixes(dice)
     if (category == FULL_HOUSE):
         return score_full_house(dice)
+    if (category == FOUR_OF_A_KIND):
+        return score_four_of_a_kind(dice)
     if (category == YACHT):
         return score_yacht(dice)
