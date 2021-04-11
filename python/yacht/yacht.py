@@ -10,8 +10,9 @@ FIVES = 5
 SIXES = 6
 FULL_HOUSE = "FULL_HOUSE"
 FOUR_OF_A_KIND = "FOUR_OF_A_KIND"
-LITTLE_STRAIGHT = None
-BIG_STRAIGHT = None
+STRAIGHT = 30
+LITTLE_STRAIGHT = "LITTLE_STRAIGHT"
+BIG_STRAIGHT = "BIG_STRAIGHT"
 CHOICE = None
 
 def score_ones(dice):
@@ -45,6 +46,13 @@ def score_four_of_a_kind(dice):
         return dice[0] * 4
     return 0
 
+def score_little_straight(dice):
+    if sorted(dice) == [1, 2, 3, 4, 5]:
+        return STRAIGHT
+
+def score_big_straight(dice):
+    if sorted(dice) == [2, 3, 4, 5, 6]:
+        return STRAIGHT
 
 def score_yacht(dice):
     return YACHT if len(set(dice)) == 1 else 0
@@ -66,5 +74,9 @@ def score(dice, category):
         return score_full_house(dice)
     if (category == FOUR_OF_A_KIND):
         return score_four_of_a_kind(dice)
+    if (category == LITTLE_STRAIGHT):
+        return score_little_straight(dice)
+    if (category == BIG_STRAIGHT):
+        return score_big_straight(dice)
     if (category == YACHT):
         return score_yacht(dice)
