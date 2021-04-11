@@ -36,8 +36,8 @@ class YachtTest(unittest.TestCase):
     def test_sixes(self):
         self.assertEqual(yacht.score([2, 3, 4, 5, 6], yacht.SIXES), 6)
 
-    # def test_full_house_two_small_three_big(self):
-    #     self.assertEqual(yacht.score([2, 2, 4, 4, 4], yacht.FULL_HOUSE), 16)
+    def test_full_house_two_small_three_big(self):
+        self.assertEqual(yacht.score([2, 2, 4, 4, 4], yacht.FULL_HOUSE), 16)
 
     # def test_full_house_three_small_two_big(self):
     #     self.assertEqual(yacht.score([5, 3, 3, 5, 3], yacht.FULL_HOUSE), 19)

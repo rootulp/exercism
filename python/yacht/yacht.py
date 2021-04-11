@@ -1,19 +1,6 @@
-"""
-This exercise stub and the test suite contain several enumerated constants.
+from collections import Counter
 
-Since Python 2 does not have the enum module, the idiomatic way to write
-enumerated constants has traditionally been a NAME assigned to an arbitrary,
-but unique value. An integer is traditionally used because it’s memory
-efficient.
-It is a common practice to export both constants and functions that work with
-those constants (ex. the constants in the os, subprocess and re modules).
-
-You can learn more here: https://en.wikipedia.org/wiki/Enumerated_type
-"""
-
-
-# Score categories.
-# Change the values as you see fit.
+# Score categories
 YACHT = 50
 ONES = 1
 TWOS = 2
@@ -45,6 +32,9 @@ def score_fives(dice):
 def score_sixes(dice):
     return SIXES * dice.count(6)
 
+def score_full_house(dice):
+    return sum(dice) if sorted(set(Counter(dice).values())) == [2, 3] else 0
+
 def score_yacht(dice):
     return YACHT if len(set(dice)) == 1 else 0
 
@@ -61,5 +51,7 @@ def score(dice, category):
         return score_fives(dice)
     if (category == SIXES):
         return score_sixes(dice)
+    if (category == FULL_HOUSE):
+        return score_full_house(dice)
     if (category == YACHT):
         return score_yacht(dice)
