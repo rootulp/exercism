@@ -39,17 +39,17 @@ class YachtTest(unittest.TestCase):
     def test_full_house_two_small_three_big(self):
         self.assertEqual(yacht.score([2, 2, 4, 4, 4], yacht.FULL_HOUSE), 16)
 
-    # def test_full_house_three_small_two_big(self):
-    #     self.assertEqual(yacht.score([5, 3, 3, 5, 3], yacht.FULL_HOUSE), 19)
+    def test_full_house_three_small_two_big(self):
+        self.assertEqual(yacht.score([5, 3, 3, 5, 3], yacht.FULL_HOUSE), 19)
 
-    # def test_two_pair_is_not_a_full_house(self):
-    #     self.assertEqual(yacht.score([2, 2, 4, 4, 5], yacht.FULL_HOUSE), 0)
+    def test_two_pair_is_not_a_full_house(self):
+        self.assertEqual(yacht.score([2, 2, 4, 4, 5], yacht.FULL_HOUSE), 0)
 
-    # def test_four_of_a_kind_is_not_a_full_house(self):
-    #     self.assertEqual(yacht.score([1, 4, 4, 4, 4], yacht.FULL_HOUSE), 0)
+    def test_four_of_a_kind_is_not_a_full_house(self):
+        self.assertEqual(yacht.score([1, 4, 4, 4, 4], yacht.FULL_HOUSE), 0)
 
-    # def test_yacht_is_not_a_full_house(self):
-    #     self.assertEqual(yacht.score([2, 2, 2, 2, 2], yacht.FULL_HOUSE), 0)
+    def test_yacht_is_not_a_full_house(self):
+        self.assertEqual(yacht.score([2, 2, 2, 2, 2], yacht.FULL_HOUSE), 0)
 
     # def test_four_of_a_kind(self):
     #     self.assertEqual(yacht.score([6, 6, 4, 6, 6], yacht.FOUR_OF_A_KIND), 24)
