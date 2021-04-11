@@ -27,12 +27,6 @@ LITTLE_STRAIGHT = None
 BIG_STRAIGHT = None
 CHOICE = None
 
-def score_yacht(dice):
-    if len(set(dice)) == 1:
-        return YACHT
-    else:
-        return 0
-
 def score_ones(dice):
     return ONES * dice.count(1)
 
@@ -51,9 +45,10 @@ def score_fives(dice):
 def score_sixes(dice):
     return SIXES * dice.count(6)
 
+def score_yacht(dice):
+    return YACHT if len(set(dice)) == 1 else 0
+
 def score(dice, category):
-    if (category == YACHT):
-        return score_yacht(dice)
     if (category == ONES):
         return score_ones(dice)
     if (category == TWOS):
@@ -66,3 +61,5 @@ def score(dice, category):
         return score_fives(dice)
     if (category == SIXES):
         return score_sixes(dice)
+    if (category == YACHT):
+        return score_yacht(dice)
