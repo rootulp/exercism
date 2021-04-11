@@ -54,11 +54,11 @@ class YachtTest(unittest.TestCase):
     def test_four_of_a_kind(self):
         self.assertEqual(yacht.score([6, 6, 4, 6, 6], yacht.FOUR_OF_A_KIND), 24)
 
-    # def test_yacht_can_be_scored_as_four_of_a_kind(self):
-    #     self.assertEqual(yacht.score([3, 3, 3, 3, 3], yacht.FOUR_OF_A_KIND), 12)
+    def test_yacht_can_be_scored_as_four_of_a_kind(self):
+        self.assertEqual(yacht.score([3, 3, 3, 3, 3], yacht.FOUR_OF_A_KIND), 12)
 
-    # def test_full_house_is_not_four_of_a_kind(self):
-    #     self.assertEqual(yacht.score([3, 3, 3, 5, 5], yacht.FOUR_OF_A_KIND), 0)
+    def test_full_house_is_not_four_of_a_kind(self):
+        self.assertEqual(yacht.score([3, 3, 3, 5, 5], yacht.FOUR_OF_A_KIND), 0)
 
     # def test_little_straight(self):
     #     self.assertEqual(yacht.score([3, 5, 4, 1, 2], yacht.LITTLE_STRAIGHT), 30)

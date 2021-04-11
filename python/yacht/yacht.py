@@ -37,10 +37,12 @@ def score_full_house(dice):
 
 def score_four_of_a_kind(dice):
     counter = Counter(dice)
-    if sorted(set(counter.values())) == [1, 4]:
+    if 4 in set(counter.values()):
         for k, v in counter.items():
             if v == 4:
                 return k * 4
+    if 5 in set(counter.values()):
+        return dice[0] * 4
     return 0
 
 
