@@ -84,11 +84,11 @@ class YachtTest(unittest.TestCase):
     def test_no_pairs_but_not_a_big_straight(self):
         self.assertEqual(yacht.score([6, 5, 4, 3, 1], yacht.BIG_STRAIGHT), 0)
 
-    # def test_choice(self):
-    #     self.assertEqual(yacht.score([3, 3, 5, 6, 6], yacht.CHOICE), 23)
+    def test_choice(self):
+        self.assertEqual(yacht.score([3, 3, 5, 6, 6], yacht.CHOICE), 23)
 
-    # def test_yacht_as_choice(self):
-    #     self.assertEqual(yacht.score([2, 2, 2, 2, 2], yacht.CHOICE), 10)
+    def test_yacht_as_choice(self):
+        self.assertEqual(yacht.score([2, 2, 2, 2, 2], yacht.CHOICE), 10)
 
 
 if __name__ == "__main__":

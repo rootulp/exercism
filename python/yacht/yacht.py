@@ -1,37 +1,49 @@
 from collections import Counter
 
 # Score categories
-YACHT = 50
-ONES = 1
-TWOS = 2
-THREES = 3
-FOURS = 4
-FIVES = 5
-SIXES = 6
+ONES = "ONES"
+TWOS = "TWOS"
+THREES = "THREES"
+FOURS = "FOURS"
+FIVES = "FIVES"
+SIXES = "SIXES"
 FULL_HOUSE = "FULL_HOUSE"
 FOUR_OF_A_KIND = "FOUR_OF_A_KIND"
-STRAIGHT = 30
+STRAIGHT = "STRAIGHT"
 LITTLE_STRAIGHT = "LITTLE_STRAIGHT"
 BIG_STRAIGHT = "BIG_STRAIGHT"
 CHOICE = "CHOICE"
+YACHT = "YACHT"
+
+# Score per category
+scores = {
+    ONES: 1,
+    TWOS: 2,
+    THREES: 3,
+    FOURS: 4,
+    FIVES: 5,
+    SIXES: 6,
+    STRAIGHT: 30,
+    YACHT: 50,
+}
 
 def score_ones(dice):
-    return ONES * dice.count(1)
+    return scores[ONES] * dice.count(1)
 
 def score_twos(dice):
-    return TWOS * dice.count(2)
+    return scores[TWOS] * dice.count(2)
 
 def score_threes(dice):
-    return THREES * dice.count(3)
+    return scores[THREES] * dice.count(3)
 
 def score_fours(dice):
-    return FOURS * dice.count(4)
+    return scores[FOURS] * dice.count(4)
 
 def score_fives(dice):
-    return FIVES * dice.count(5)
+    return scores[FIVES] * dice.count(5)
 
 def score_sixes(dice):
-    return SIXES * dice.count(6)
+    return scores[SIXES] * dice.count(6)
 
 def score_full_house(dice):
     return sum(dice) if sorted(set(Counter(dice).values())) == [2, 3] else 0
@@ -47,16 +59,16 @@ def score_four_of_a_kind(dice):
     return 0
 
 def score_little_straight(dice):
-    return STRAIGHT if sorted(dice) == [1, 2, 3, 4, 5] else 0
+    return scores[STRAIGHT] if sorted(dice) == [1, 2, 3, 4, 5] else 0
 
 def score_big_straight(dice):
-    return STRAIGHT if sorted(dice) == [2, 3, 4, 5, 6] else 0
+    return scores[STRAIGHT] if sorted(dice) == [2, 3, 4, 5, 6] else 0
 
 def score_choice(dice):
     return sum(dice)
 
 def score_yacht(dice):
-    return YACHT if len(set(dice)) == 1 else 0
+    return scores[YACHT] if len(set(dice)) == 1 else 0
 
 def score(dice, category):
     if (category == ONES):
