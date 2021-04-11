@@ -21,20 +21,20 @@ class YachtTest(unittest.TestCase):
     def test_no_ones(self):
         self.assertEqual(yacht.score([4, 3, 6, 5, 5], yacht.ONES), 0)
 
-    # def test_twos(self):
-    #     self.assertEqual(yacht.score([2, 3, 4, 5, 6], yacht.TWOS), 2)
+    def test_twos(self):
+        self.assertEqual(yacht.score([2, 3, 4, 5, 6], yacht.TWOS), 2)
 
-    # def test_fours(self):
-    #     self.assertEqual(yacht.score([1, 4, 1, 4, 1], yacht.FOURS), 8)
+    def test_fours(self):
+        self.assertEqual(yacht.score([1, 4, 1, 4, 1], yacht.FOURS), 8)
 
-    # def test_yacht_counted_as_threes(self):
-    #     self.assertEqual(yacht.score([3, 3, 3, 3, 3], yacht.THREES), 15)
+    def test_yacht_counted_as_threes(self):
+        self.assertEqual(yacht.score([3, 3, 3, 3, 3], yacht.THREES), 15)
 
-    # def test_yacht_of_3s_counted_as_fives(self):
-    #     self.assertEqual(yacht.score([3, 3, 3, 3, 3], yacht.FIVES), 0)
+    def test_yacht_of_3s_counted_as_fives(self):
+        self.assertEqual(yacht.score([3, 3, 3, 3, 3], yacht.FIVES), 0)
 
-    # def test_sixes(self):
-    #     self.assertEqual(yacht.score([2, 3, 4, 5, 6], yacht.SIXES), 6)
+    def test_sixes(self):
+        self.assertEqual(yacht.score([2, 3, 4, 5, 6], yacht.SIXES), 6)
 
     # def test_full_house_two_small_three_big(self):
     #     self.assertEqual(yacht.score([2, 2, 4, 4, 4], yacht.FULL_HOUSE), 16)
