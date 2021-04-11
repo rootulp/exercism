@@ -66,23 +66,23 @@ class YachtTest(unittest.TestCase):
     def test_little_straight_as_big_straight(self):
         self.assertEqual(yacht.score([1, 2, 3, 4, 5], yacht.BIG_STRAIGHT), 0)
 
-    # def test_four_in_order_but_not_a_little_straight(self):
-    #     self.assertEqual(yacht.score([1, 1, 2, 3, 4], yacht.LITTLE_STRAIGHT), 0)
+    def test_four_in_order_but_not_a_little_straight(self):
+        self.assertEqual(yacht.score([1, 1, 2, 3, 4], yacht.LITTLE_STRAIGHT), 0)
 
-    # def test_no_pairs_but_not_a_little_straight(self):
-    #     self.assertEqual(yacht.score([1, 2, 3, 4, 6], yacht.LITTLE_STRAIGHT), 0)
+    def test_no_pairs_but_not_a_little_straight(self):
+        self.assertEqual(yacht.score([1, 2, 3, 4, 6], yacht.LITTLE_STRAIGHT), 0)
 
-    # def test_minimum_is_1_maximum_is_5_but_not_a_little_straight(self):
-    #     self.assertEqual(yacht.score([1, 1, 3, 4, 5], yacht.LITTLE_STRAIGHT), 0)
+    def test_minimum_is_1_maximum_is_5_but_not_a_little_straight(self):
+        self.assertEqual(yacht.score([1, 1, 3, 4, 5], yacht.LITTLE_STRAIGHT), 0)
 
-    # def test_big_straight(self):
-    #     self.assertEqual(yacht.score([4, 6, 2, 5, 3], yacht.BIG_STRAIGHT), 30)
+    def test_big_straight(self):
+        self.assertEqual(yacht.score([4, 6, 2, 5, 3], yacht.BIG_STRAIGHT), 30)
 
-    # def test_big_straight_as_little_straight(self):
-    #     self.assertEqual(yacht.score([6, 5, 4, 3, 2], yacht.LITTLE_STRAIGHT), 0)
+    def test_big_straight_as_little_straight(self):
+        self.assertEqual(yacht.score([6, 5, 4, 3, 2], yacht.LITTLE_STRAIGHT), 0)
 
-    # def test_no_pairs_but_not_a_big_straight(self):
-    #     self.assertEqual(yacht.score([6, 5, 4, 3, 1], yacht.BIG_STRAIGHT), 0)
+    def test_no_pairs_but_not_a_big_straight(self):
+        self.assertEqual(yacht.score([6, 5, 4, 3, 1], yacht.BIG_STRAIGHT), 0)
 
     # def test_choice(self):
     #     self.assertEqual(yacht.score([3, 3, 5, 6, 6], yacht.CHOICE), 23)
