@@ -6,7 +6,9 @@ export class ResistorColor {
     if (colors.length < 2) {
       throw Error('At least two colors need to be present');
     }
-    this.colors = colors;
+
+    // Ignore additional colors
+    this.colors = colors.splice(0, 2);
   }
   public value(): number {
     let result = ""
