@@ -1,6 +1,12 @@
 export class ResistorColor {
 
-  constructor (private readonly colors: string[]) {
+  private colors: string[];
+
+  constructor (colors: string[]) {
+    if (colors.length < 2) {
+      throw Error('At least two colors need to be present');
+    }
+    this.colors = colors;
   }
   public value(): number {
     let result = ""
