@@ -6,17 +6,17 @@ describe('Matrix', () => {
     expect(new Matrix('1').rows[0]).toEqual(expected)
   })
 
-  xit('can extract row', () => {
+  it('can extract row', () => {
     const expected = [3, 4]
     expect(new Matrix('1 2\n3 4').rows[1]).toEqual(expected)
   })
 
-  xit('extract row where numbers have different widths', () => {
+  it('extract row where numbers have different widths', () => {
     const expected = [10, 20]
     expect(new Matrix('1 2\n10 20').rows[1]).toEqual(expected)
   })
 
-  xit('can extract row from non-square matrix', () => {
+  it('can extract row from non-square matrix', () => {
     const expected = [7, 8, 9]
     expect(new Matrix('1 2 3\n4 5 6\n7 8 9\n8 7 6').rows[2]).toEqual(expected)
   })
