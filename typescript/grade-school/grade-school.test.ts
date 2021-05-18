@@ -83,7 +83,7 @@ describe('School', () => {
     expect(gradeSchool.studentRoster()).toEqual(expectedDb)
   })
 
-  xit('roster cannot be modified outside of module using studentsInGrade()', () => {
+  it('roster cannot be modified outside of module using studentsInGrade()', () => {
     gradeSchool.addStudent('Aimee', 2)
     gradeSchool.studentsInGrade(2).push('Oops.')
     const expectedDb = new Map(Object.entries({ 2: ['Aimee'] }))
