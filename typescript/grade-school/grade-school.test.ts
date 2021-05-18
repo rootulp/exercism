@@ -11,7 +11,7 @@ describe('School', () => {
     expect(gradeSchool.studentRoster().size === 0).toEqual(true)
   })
 
-  xit("A student can't be in two different grades", () => {
+  it("A student can't be in two different grades", () => {
     gradeSchool.addStudent('Aimee', 2)
     gradeSchool.addStudent('Aimee', 1)
 
