@@ -10,24 +10,22 @@ export default class GradeSchool {
     public studentRoster(): ReadonlyMap<string, string[]> {
         const result = new Map<string, string[]>();
         this.roster.forEach((students, grade) => {
-            // Use array.slice() to prevent modifications of roster outside this
-            // module
-            result.set(grade.toString(), students.slice())
+            result.set(grade.toString(), [...students])
         })
         return result;
     }
 
     public addStudent(name: string, grade: number): void {
         this.removeStudentIfAlreadyExists(name);
-        const currentStudentsInGrade = this.roster.get(grade) || []
-        const newStudentsInGrade = [...currentStudentsInGrade, name].sort()
-        this.roster.set(grade, newStudentsInGrade)
+        const students = this.studentsInGrade(grade);
+        const newStudents = [...students, name].sort()
+        this.roster.set(grade, newStudents)
     }
 
     public studentsInGrade(grade: number): string[] {
-        const currentStudentsInGrade = this.roster.get(grade)
-        if (currentStudentsInGrade) {
-            return [...currentStudentsInGrade]
+        const students = this.roster.get(grade)
+        if (students) {
+            return [...students]
         }
         return []
     }
