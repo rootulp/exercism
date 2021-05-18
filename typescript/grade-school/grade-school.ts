@@ -1,7 +1,7 @@
 
 export default class GradeSchool {
 
-    roster: Map<number, string[]>
+    private roster: Map<number, string[]>
 
     constructor() {
         this.roster = new Map<number, string[]>()
@@ -10,7 +10,9 @@ export default class GradeSchool {
     public studentRoster(): ReadonlyMap<string, string[]> {
         const result = new Map<string, string[]>();
         this.roster.forEach((students, grade) => {
-            result.set(grade.toString(), students)
+            // Use array.slice() to prevent modifications of roster outside this
+            // module
+            result.set(grade.toString(), students.slice())
         })
         return result;
     }
