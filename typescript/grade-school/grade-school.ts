@@ -8,8 +8,11 @@ export default class GradeSchool {
     }
 
     public studentRoster(): ReadonlyMap<string, string[]> {
-        const roster = Array.from(this.roster).map( ([key, value]) => [key.toString(), value] )
-        return new Map(roster)
+        const result = new Map<string, string[]>();
+        this.roster.forEach((value, key) => {
+            result.set(key.toString(), value)
+        })
+        return result;
     }
 
     public addStudent(name: string, grade: number): void {
