@@ -36,6 +36,7 @@ export default class LinkedList<T> {
             const lastNode = secondToLastNode.next;
 
             if (lastNode == null) {
+                // We don't expect this to happen
                 throw new Error("Last node is null")
             } else {
                 secondToLastNode.next = null;
@@ -44,7 +45,17 @@ export default class LinkedList<T> {
         }
     }
     public shift(): T {
-        return 0 as any;
+        if (this.head == null) {
+            throw new Error("Cannot call shift on an empty linked list")
+        } else if (this.head.next == null) {
+            const node = this.head;
+            this.head = null;
+            return node.data;
+        } else {
+            const node = this.head;
+            this.head = node.next;
+            return node.data;
+        }
     }
     public unshift(element: T): void {
         console.log(`Unshifting ${element}`);

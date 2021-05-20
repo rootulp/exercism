@@ -9,7 +9,7 @@ describe('LinkedList', () => {
     expect(list.pop()).toBe(10)
   })
 
-  xit('extract elements from the beginning of the list with shift', () => {
+  it('extract elements from the beginning of the list with shift', () => {
     const list = new LinkedList<number>()
     list.push(10)
     list.push(20)
