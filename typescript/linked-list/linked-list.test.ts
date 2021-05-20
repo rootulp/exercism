@@ -25,7 +25,7 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(10)
   })
 
-  xit('unshift/pop', () => {
+  it('unshift/pop', () => {
     const list = new LinkedList<number>()
     list.unshift(10)
     list.unshift(20)
@@ -33,7 +33,7 @@ describe('LinkedList', () => {
     expect(list.pop()).toBe(20)
   })
 
-  xit('example', () => {
+  it('example', () => {
     const list = new LinkedList<number>()
     list.push(10)
     list.push(20)
