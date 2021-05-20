@@ -57,11 +57,18 @@ export default class LinkedList<T> {
             return node.data;
         }
     }
-    public unshift(element: T): void {
-        console.log(`Unshifting ${element}`);
+    public unshift(data: T): void {
+        const newNode = new Node(data)
+
+        if (this.head == null) {
+            this.head = newNode;
+        } else {
+            newNode.next = this.head
+            this.head = newNode
+        }
     }
-    public delete(element: T): void {
-        console.log(`Deleting ${element}`);
+    public delete(data: T): void {
+        console.log(`Deleting ${data}`);
     }
     public count(): number {
         return 0;
