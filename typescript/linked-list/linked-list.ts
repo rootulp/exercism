@@ -68,7 +68,14 @@ export default class LinkedList<T> {
         }
     }
     public delete(data: T): void {
-        console.log(`Deleting ${data}`);
+        if (this.head == null){
+            return;
+        } else if (this.head.data == data) {
+            this.shift()
+            this.delete(data)
+        } else {
+            // TODO implement
+        }
     }
     public count(): number {
         if (this.head == null){
