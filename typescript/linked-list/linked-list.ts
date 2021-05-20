@@ -71,7 +71,17 @@ export default class LinkedList<T> {
         console.log(`Deleting ${data}`);
     }
     public count(): number {
-        return 0;
+        if (this.head == null){
+            return 0;
+        } else {
+            let result = 1;
+            let current = this.head;
+            while (current.next != null) {
+                current = current.next;
+                result += 1;
+            }
+            return result;
+        }
     }
 
     private getLastNode(node: Node<T>): Node<T> {

@@ -47,7 +47,7 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(30)
   })
 
-  xit('can count its elements', () => {
+  it('can count its elements', () => {
     const list = new LinkedList<number>()
     expect(list.count()).toBe(0)
     list.push(10)
