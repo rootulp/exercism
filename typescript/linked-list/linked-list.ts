@@ -16,6 +16,7 @@ export default class LinkedList<T> {
 
     public push(data: T): void {
         const newNode = new Node(data)
+
         if (this.head == null) {
             this.head = newNode;
         } else {
@@ -25,23 +26,21 @@ export default class LinkedList<T> {
     }
     public pop(): T {
         if (this.head == null) {
-            throw new Error("Cannot call pop on an empty Linked List")
+            throw new Error("Cannot call pop on an empty linked list")
         } else if (this.head.next == null) {
             const node = this.head;
             this.head = null;
             return node.data;
         } else {
-            console.log(this.head);
-            let current = this.head
-            while (current.next != null && current.next.next != null) {
-                current = current.next;
+            const secondToLastNode = this.getSecondToLastNode(this.head);
+            const lastNode = secondToLastNode.next;
+
+            if (lastNode == null) {
+                throw new Error("Last node is null")
+            } else {
+                secondToLastNode.next = null;
+                return lastNode.data;
             }
-            const node = current.next;
-            if (node == null) {
-                throw new Error("Null node")
-            }
-            current.next = null;
-            return node.data;
         }
     }
     public shift(): T {
@@ -60,6 +59,14 @@ export default class LinkedList<T> {
     private getLastNode(node: Node<T>): Node<T> {
         let current = node;
         while (current.next != null) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    private getSecondToLastNode(node: Node<T>): Node<T> {
+        let current = node;
+        while (current.next != null && current.next.next != null) {
             current = current.next;
         }
         return current;
