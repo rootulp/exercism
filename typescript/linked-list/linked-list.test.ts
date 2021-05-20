@@ -56,7 +56,7 @@ describe('LinkedList', () => {
     expect(list.count()).toBe(2)
   })
 
-  xit('sets head/tail after popping last element', () => {
+  it('sets head/tail after popping last element', () => {
     const list = new LinkedList<number>()
     list.push(10)
     list.pop()
@@ -65,7 +65,7 @@ describe('LinkedList', () => {
     expect(list.pop()).toBe(20)
   })
 
-  xit('sets head/tail after shifting last element', () => {
+  it('sets head/tail after shifting last element', () => {
     const list = new LinkedList<number>()
     list.unshift(10)
     list.shift()
