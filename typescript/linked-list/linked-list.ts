@@ -19,11 +19,8 @@ export default class LinkedList<T> {
         if (this.head == null) {
             this.head = newNode;
         } else {
-            let current = this.head
-            while (current.next != null) {
-                current = current.next;
-            }
-            current.next = newNode;
+            const lastNode = this.getLastNode(this.head);
+            lastNode.next = newNode;
         }
     }
     public pop(): T {
@@ -58,5 +55,13 @@ export default class LinkedList<T> {
     }
     public count(): number {
         return 0;
+    }
+
+    private getLastNode(node: Node<T>): Node<T> {
+        let current = node;
+        while (current.next != null) {
+            current = current.next;
+        }
+        return current;
     }
 }
