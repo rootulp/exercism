@@ -74,7 +74,7 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(20)
   })
 
-  xit('deletes the element with the specified value from the list', () => {
+  it('deletes the element with the specified value from the list', () => {
     const list = new LinkedList<number>()
     list.push(10)
     list.push(20)
@@ -85,14 +85,14 @@ describe('LinkedList', () => {
     expect(list.shift()).toBe(10)
   })
 
-  xit('deletes the only element', () => {
+  it('deletes the only element', () => {
     const list = new LinkedList<number>()
     list.push(10)
     list.delete(10)
     expect(list.count()).toBe(0)
   })
 
-  xit('delete does not modify the list if the element is not found', () => {
+  it('delete does not modify the list if the element is not found', () => {
     const list = new LinkedList<number>()
     list.push(10)
     list.delete(20)

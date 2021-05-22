@@ -74,7 +74,17 @@ export default class LinkedList<T> {
             this.shift()
             this.delete(data)
         } else {
-            // TODO implement
+            let current = this.head;
+            while (current.next != null) {
+                if (current.next.data == data) {
+                    current.next = current.next.next;
+                }
+                if (current.next != null) {
+                    current = current.next;
+                } else {
+                    break;
+                }
+            }
         }
     }
     public count(): number {
