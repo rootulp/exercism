@@ -36,7 +36,6 @@ export default class LinkedList<T> {
             const lastNode = secondToLastNode.next;
 
             if (lastNode == null) {
-                // We don't expect this to happen
                 throw new Error("Last node is null")
             } else {
                 secondToLastNode.next = null;
