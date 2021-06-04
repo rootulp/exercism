@@ -11,9 +11,13 @@ export default class Robot {
   }
 
   public resetName(): void {
-    Robot.existingNames.delete(this._name);
-    this._name = this.generateName();
-    Robot.existingNames.add(this._name);
+    const name = this.generateName();
+    if (Robot.existingNames.has(name)) {
+      this.resetName();
+    } else {
+      this._name = name;
+      Robot.existingNames.add(this._name);
+    }
   }
 
   public static releaseNames(): void {
