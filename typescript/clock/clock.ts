@@ -5,7 +5,8 @@ export default class Clock {
 
     constructor(hours: number, minutes?: number) {
         this.minutes = minutes ? minutes % 60 : 0;
-        this.hours = hours % 24;
+        const additionalHours = minutes ? Math.floor(minutes / 60) : 0;
+        this.hours = (hours + additionalHours) % 24;
     }
 
     public toString() {

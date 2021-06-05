@@ -14,15 +14,15 @@ describe('Clock', () => {
       expect(new Clock(24, 0).toString()).toEqual('00:00')
     })
 
-    test.skip('hour rolls over', () => {
+    test('hour rolls over', () => {
       expect(new Clock(25, 0).toString()).toEqual('01:00')
     })
 
-    test.skip('hour rolls over continuously', () => {
+    test('hour rolls over continuously', () => {
       expect(new Clock(100, 0).toString()).toEqual('04:00')
     })
 
-    test.skip('sixty minutes is next hour', () => {
+    test('sixty minutes is next hour', () => {
       expect(new Clock(1, 60).toString()).toEqual('02:00')
     })
 
