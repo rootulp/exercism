@@ -6,7 +6,7 @@ describe('Clock', () => {
       expect(new Clock(8).toString()).toEqual('08:00')
     })
 
-    test.skip('past the hour', () => {
+    test('past the hour', () => {
       expect(new Clock(11, 9).toString()).toEqual('11:09')
     })
 

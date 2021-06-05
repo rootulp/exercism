@@ -3,7 +3,9 @@ export default class Clock {
     constructor(private readonly hours: number, private readonly minutes?: number) {}
 
     public toString() {
-        return '08:00'
+        const formattedHours = this.hours.toString().padStart(2, '0')
+        const formattedMinutes = this.minutes ? this.minutes.toString().padStart(2, '0') : '00'
+        return [formattedHours, formattedMinutes].join(':')
     }
 
     public plus(minutes: number): Clock {
