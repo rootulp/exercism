@@ -79,23 +79,23 @@ describe('Clock', () => {
     })
 
     describe('Adding and subtracting minutes', () => {
-      test.skip('add minutes', () => {
+      test('add minutes', () => {
         expect(new Clock(10, 0).plus(3).toString()).toEqual('10:03')
       })
 
-      test.skip('add no minutes', () => {
+      test('add no minutes', () => {
         expect(new Clock(6, 41).plus(0).toString()).toEqual('06:41')
       })
 
-      test.skip('add to next hour', () => {
+      test('add to next hour', () => {
         expect(new Clock(0, 45).plus(40).toString()).toEqual('01:25')
       })
 
-      test.skip('add more than one hour', () => {
+      test('add more than one hour', () => {
         expect(new Clock(10, 0).plus(61).toString()).toEqual('11:01')
       })
 
-      test.skip('add more than two hours with carry', () => {
+      test('add more than two hours with carry', () => {
         expect(new Clock(0, 45).plus(160).toString()).toEqual('03:25')
       })
 

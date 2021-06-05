@@ -1,7 +1,7 @@
 
 export default class Clock {
     private hours: number;
-    private minutes?: number;
+    private minutes: number;
 
     constructor(hours: number, minutes?: number) {
         this.minutes = minutes ? Clock.mod(minutes, 60) : 0;
@@ -16,12 +16,13 @@ export default class Clock {
     }
 
     public plus(minutes: number): Clock {
-        console.log(`Plus ${minutes}`)
+        this.minutes = Clock.mod(this.minutes + minutes, 60);
+        const additionalHours =  Math.floor((this.minutes + minutes) / 60);
+        this.hours = Clock.mod(this.hours + additionalHours, 24);
         return this;
     }
 
     public minus(minutes: number): Clock {
-        console.log(`Minus ${minutes}`)
         return this;
     }
 
