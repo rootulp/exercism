@@ -103,11 +103,11 @@ describe('Clock', () => {
         expect(new Clock(23, 59).plus(2).toString()).toEqual('00:01')
       })
 
-      test.skip('add more than one day (1500 min = 25 hrs)', () => {
+      test('add more than one day (1500 min = 25 hrs)', () => {
         expect(new Clock(5, 32).plus(1500).toString()).toEqual('06:32')
       })
 
-      test.skip('add more than two days', () => {
+      test('add more than two days', () => {
         expect(new Clock(1, 1).plus(3500).toString()).toEqual('11:21')
       })
 
