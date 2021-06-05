@@ -99,7 +99,7 @@ describe('Clock', () => {
         expect(new Clock(0, 45).plus(160).toString()).toEqual('03:25')
       })
 
-      test.skip('add across midnight', () => {
+      test('add across midnight', () => {
         expect(new Clock(23, 59).plus(2).toString()).toEqual('00:01')
       })
 

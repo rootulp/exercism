@@ -16,8 +16,9 @@ export default class Clock {
     }
 
     public plus(minutes: number): Clock {
-        this.minutes = Clock.mod(this.minutes + minutes, 60);
-        const additionalHours =  Math.floor((this.minutes + minutes) / 60);
+        const newMins = this.minutes + minutes;
+        this.minutes = Clock.mod(newMins, 60);
+        const additionalHours =  Math.floor(newMins / 60);
         this.hours = Clock.mod(this.hours + additionalHours, 24);
         return this;
     }
