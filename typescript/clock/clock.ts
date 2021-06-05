@@ -1,6 +1,12 @@
 
 export default class Clock {
-    constructor(private readonly hours: number, private readonly minutes?: number) {}
+    private hours: number;
+    private minutes?: number;
+
+    constructor(hours: number, minutes?: number) {
+        this.minutes = minutes ? minutes % 60 : 0;
+        this.hours = hours % 24;
+    }
 
     public toString() {
         const formattedHours = this.hours.toString().padStart(2, '0')
