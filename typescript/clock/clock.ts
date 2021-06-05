@@ -1,4 +1,3 @@
-
 export default class Clock {
     private hours: number;
     private minutes: number;
