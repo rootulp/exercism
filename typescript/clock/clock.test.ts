@@ -145,63 +145,63 @@ describe('Clock', () => {
     })
 
     describe('Construct two separate clocks, set times, test.skip if they are equal', () => {
-      test.skip('clocks with same time', () => {
+      test('clocks with same time', () => {
         expect(new Clock(15, 37).equals(new Clock(15, 37))).toBeTruthy()
       })
 
-      test.skip('clocks a minute apart', () => {
+      test('clocks a minute apart', () => {
         expect(new Clock(15, 36).equals(new Clock(15, 37))).toBeFalsy()
       })
 
-      test.skip('clocks an hour apart', () => {
+      test('clocks an hour apart', () => {
         expect(new Clock(14, 37).equals(new Clock(15, 37))).toBeFalsy()
       })
 
-      test.skip('clocks with hour overflow', () => {
+      test('clocks with hour overflow', () => {
         expect(new Clock(10, 37).equals(new Clock(34, 37))).toBeTruthy()
       })
 
-      test.skip('clocks with hour overflow by several days', () => {
+      test('clocks with hour overflow by several days', () => {
         expect(new Clock(3, 11).equals(new Clock(99, 11))).toBeTruthy()
       })
 
-      test.skip('clocks with negative hour', () => {
+      test('clocks with negative hour', () => {
         expect(new Clock(22, 40).equals(new Clock(-2, 40))).toBeTruthy()
       })
 
-      test.skip('clocks with negative hour that wraps', () => {
+      test('clocks with negative hour that wraps', () => {
         expect(new Clock(17, 3).equals(new Clock(-31, 3))).toBeTruthy()
       })
 
-      test.skip('clocks with negative hour that wraps multiple times', () => {
+      test('clocks with negative hour that wraps multiple times', () => {
         expect(new Clock(13, 49).equals(new Clock(-83, 49))).toBeTruthy()
       })
 
-      test.skip('clocks with minute overflow', () => {
+      test('clocks with minute overflow', () => {
         expect(new Clock(0, 1).equals(new Clock(0, 1441))).toBeTruthy()
       })
 
-      test.skip('clocks with minute overflow by several days', () => {
+      test('clocks with minute overflow by several days', () => {
         expect(new Clock(2, 2).equals(new Clock(2, 4322))).toBeTruthy()
       })
 
-      test.skip('clocks with negative minute', () => {
+      test('clocks with negative minute', () => {
         expect(new Clock(2, 40).equals(new Clock(3, -20))).toBeTruthy()
       })
 
-      test.skip('clocks with negative minute that wraps', () => {
+      test('clocks with negative minute that wraps', () => {
         expect(new Clock(4, 10).equals(new Clock(5, -1490))).toBeTruthy()
       })
 
-      test.skip('clocks with negative minute that wraps multiple times', () => {
+      test('clocks with negative minute that wraps multiple times', () => {
         expect(new Clock(6, 15).equals(new Clock(6, -4305))).toBeTruthy()
       })
 
-      test.skip('clocks with negative hours and minutes', () => {
+      test('clocks with negative hours and minutes', () => {
         expect(new Clock(7, 32).equals(new Clock(-12, -268))).toBeTruthy()
       })
 
-      test.skip('clocks with negative hours and minutes that wrap', () => {
+      test('clocks with negative hours and minutes that wrap', () => {
         expect(new Clock(18, 7).equals(new Clock(-54, -11513))).toBeTruthy()
       })
     })
