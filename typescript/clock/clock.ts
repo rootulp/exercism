@@ -4,7 +4,7 @@ export default class Clock {
     private minutes?: number;
 
     constructor(hours: number, minutes?: number) {
-        this.minutes = minutes ? minutes % 60 : 0;
+        this.minutes = minutes ? Clock.mod(minutes, 60) : 0;
         const additionalHours = minutes ? Math.floor(minutes / 60) : 0;
         this.hours = Clock.mod((hours + additionalHours), 24);
     }

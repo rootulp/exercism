@@ -58,23 +58,23 @@ describe('Clock', () => {
       expect(new Clock(-91, 0).toString()).toEqual('05:00')
     })
 
-    test.skip('negative minutes', () => {
+    test('negative minutes', () => {
       expect(new Clock(1, -40).toString()).toEqual('00:20')
     })
 
-    test.skip('negative minutes rolls over', () => {
+    test('negative minutes rolls over', () => {
       expect(new Clock(1, -160).toString()).toEqual('22:20')
     })
 
-    test.skip('negative minutes rolls over continuously', () => {
+    test('negative minutes rolls over continuously', () => {
       expect(new Clock(1, -4820).toString()).toEqual('16:40')
     })
 
-    test.skip('negative hour and minutes both roll over', () => {
+    test('negative hour and minutes both roll over', () => {
       expect(new Clock(-25, -160).toString()).toEqual('20:20')
     })
 
-    test.skip('negative hour and minutes both roll over continuously', () => {
+    test('negative hour and minutes both roll over continuously', () => {
       expect(new Clock(-121, -5810).toString()).toEqual('22:10')
     })
 
