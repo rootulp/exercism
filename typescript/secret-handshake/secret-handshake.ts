@@ -1,32 +1,33 @@
 interface Event {
-    decimal: number;
+    binary: number;
     action: string;
 }
+
 export default class HandShake {
-    private REVERSE_EVENT: Event = { decimal: 10000, action: '' }
+
+    private static REVERSE_EVENT: Event = { binary: 10000, action: '' }
     private static EVENTS: Event[] = [
-        { decimal: 1000, action: 'jump' },
-        { decimal: 100, action: 'close your eyes' },
-        { decimal: 10, action: 'double blink' },
-        { decimal: 1, action: 'wink' }
+        { binary: 1000, action: 'jump' },
+        { binary: 100, action: 'close your eyes' },
+        { binary: 10, action: 'double blink' },
+        { binary: 1, action: 'wink' }
     ]
+
     constructor(private readonly number: number) {}
-    private binary(): number {
-        return parseInt(this.number.toString(2));
-    }
+
     public commands(): string[] {
-        let total = this.binary();
+        let result: string[] = []
+        let binary = this.binary();
         let shouldReverse: boolean = false;
 
-        if (total >= this.REVERSE_EVENT.decimal) {
+        if (binary >= HandShake.REVERSE_EVENT.binary) {
             shouldReverse = true;
-            total -= this.REVERSE_EVENT.decimal
+            binary -= HandShake.REVERSE_EVENT.binary
         }
 
-        const result: string[] = []
         HandShake.EVENTS.forEach(event => {
-            if (total >= event.decimal) {
-                total -= event.decimal
+            if (binary >= event.binary) {
+                binary -= event.binary
                 result.unshift(event.action);
             }
         })
@@ -35,5 +36,9 @@ export default class HandShake {
             return result.reverse();
         }
         return result;
+    }
+
+    private binary(): number {
+        return parseInt(this.number.toString(2));
     }
 }
