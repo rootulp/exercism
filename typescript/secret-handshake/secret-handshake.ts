@@ -3,6 +3,7 @@ interface Event {
     action: string;
 }
 export default class HandShake {
+    private REVERSE_EVENT: Event = { decimal: 10000, action: '' }
     private static EVENTS: Event[] = [
         { decimal: 1000, action: 'jump' },
         { decimal: 100, action: 'close your eyes' },
@@ -15,7 +16,13 @@ export default class HandShake {
     }
     public commands(): string[] {
         let total = this.binary();
-        console.log(`total: ${total}, number: ${this.number}`);
+        let shouldReverse: boolean = false;
+
+        if (total >= this.REVERSE_EVENT.decimal) {
+            shouldReverse = true;
+            total -= this.REVERSE_EVENT.decimal
+        }
+
         const result: string[] = []
         HandShake.EVENTS.forEach(event => {
             if (total >= event.decimal) {
@@ -23,6 +30,10 @@ export default class HandShake {
                 result.unshift(event.action);
             }
         })
+
+        if (shouldReverse) {
+            return result.reverse();
+        }
         return result;
     }
 }

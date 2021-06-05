@@ -31,19 +31,19 @@ describe('Create a handshake for a number', () => {
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('reverse two actions', () => {
+  it('reverse two actions', () => {
     const handshake = new HandShake(19)
     const expected = ['double blink', 'wink']
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('reversing one action gives the same action', () => {
+  it('reversing one action gives the same action', () => {
     const handshake = new HandShake(24)
     const expected = ['jump']
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('reversing no actions still gives no actions', () => {
+  it('reversing no actions still gives no actions', () => {
     const handshake = new HandShake(16)
     const expected: string[] = []
     expect(handshake.commands()).toEqual(expected)
@@ -55,7 +55,7 @@ describe('Create a handshake for a number', () => {
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('reverse all possible actions', () => {
+  it('reverse all possible actions', () => {
     const handshake = new HandShake(31)
     const expected = ['jump', 'close your eyes', 'double blink', 'wink']
     expect(handshake.commands()).toEqual(expected)
