@@ -26,23 +26,23 @@ describe('Clock', () => {
       expect(new Clock(1, 60).toString()).toEqual('02:00')
     })
 
-    test.skip('minutes roll over', () => {
+    test('minutes roll over', () => {
       expect(new Clock(0, 160).toString()).toEqual('02:40')
     })
 
-    test.skip('minutes roll over continuously', () => {
+    test('minutes roll over continuously', () => {
       expect(new Clock(0, 1723).toString()).toEqual('04:43')
     })
 
-    test.skip('hour and minutes roll over', () => {
+    test('hour and minutes roll over', () => {
       expect(new Clock(25, 160).toString()).toEqual('03:40')
     })
 
-    test.skip('hour and minutes roll over continuously', () => {
+    test('hour and minutes roll over continuously', () => {
       expect(new Clock(201, 3001).toString()).toEqual('11:01')
     })
 
-    test.skip('hour and minutes roll over to exactly midnight', () => {
+    test('hour and minutes roll over to exactly midnight', () => {
       expect(new Clock(72, 8640).toString()).toEqual('00:00')
     })
 
