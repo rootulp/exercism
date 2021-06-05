@@ -111,35 +111,35 @@ describe('Clock', () => {
         expect(new Clock(1, 1).plus(3500).toString()).toEqual('11:21')
       })
 
-      test.skip('subtract minutes', () => {
+      test('subtract minutes', () => {
         expect(new Clock(10, 3).minus(3).toString()).toEqual('10:00')
       })
 
-      test.skip('subtract to previous hour', () => {
+      test('subtract to previous hour', () => {
         expect(new Clock(10, 3).minus(30).toString()).toEqual('09:33')
       })
 
-      test.skip('subtract more than an hour', () => {
+      test('subtract more than an hour', () => {
         expect(new Clock(10, 3).minus(70).toString()).toEqual('08:53')
       })
 
-      test.skip('subtract across midnight', () => {
+      test('subtract across midnight', () => {
         expect(new Clock(0, 3).minus(4).toString()).toEqual('23:59')
       })
 
-      test.skip('subtract more than two hours', () => {
+      test('subtract more than two hours', () => {
         expect(new Clock(0, 0).minus(160).toString()).toEqual('21:20')
       })
 
-      test.skip('subtract more than two hours with borrow', () => {
+      test('subtract more than two hours with borrow', () => {
         expect(new Clock(6, 15).minus(160).toString()).toEqual('03:35')
       })
 
-      test.skip('subtract more than one day (1500 min = 25 hrs)', () => {
+      test('subtract more than one day (1500 min = 25 hrs)', () => {
         expect(new Clock(5, 32).minus(1500).toString()).toEqual('04:32')
       })
 
-      test.skip('subtract more than two days', () => {
+      test('subtract more than two days', () => {
         expect(new Clock(2, 20).minus(3000).toString()).toEqual('00:20')
       })
     })

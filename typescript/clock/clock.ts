@@ -24,6 +24,10 @@ export default class Clock {
     }
 
     public minus(minutes: number): Clock {
+        const newMins = this.minutes - minutes;
+        this.minutes = Clock.mod(newMins, 60);
+        const removedHours = Math.floor(newMins / 60);
+        this.hours = Clock.mod(this.hours + removedHours, 24);
         return this;
     }
 
