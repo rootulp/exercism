@@ -7,25 +7,25 @@ describe('Create a handshake for a number', () => {
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('double blink for 10', () => {
+  it('double blink for 10', () => {
     const handshake = new HandShake(2)
     const expected = ['double blink']
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('close your eyes for 100', () => {
+  it('close your eyes for 100', () => {
     const handshake = new HandShake(4)
     const expected = ['close your eyes']
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('jump for 1000', () => {
+  it('jump for 1000', () => {
     const handshake = new HandShake(8)
     const expected = ['jump']
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('combine two actions', () => {
+  it('combine two actions', () => {
     const handshake = new HandShake(3)
     const expected = ['wink', 'double blink']
     expect(handshake.commands()).toEqual(expected)
@@ -49,7 +49,7 @@ describe('Create a handshake for a number', () => {
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('all possible actions', () => {
+  it('all possible actions', () => {
     const handshake = new HandShake(15)
     const expected = ['wink', 'double blink', 'close your eyes', 'jump']
     expect(handshake.commands()).toEqual(expected)
@@ -61,7 +61,7 @@ describe('Create a handshake for a number', () => {
     expect(handshake.commands()).toEqual(expected)
   })
 
-  xit('do nothing for zero', () => {
+  it('do nothing for zero', () => {
     const handshake = new HandShake(0)
     const expected: string[] = []
     expect(handshake.commands()).toEqual(expected)
