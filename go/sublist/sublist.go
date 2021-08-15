@@ -22,16 +22,15 @@ func Sublist(a []int, b []int) Relation {
 
 // isSublist returns true if a is a sublist of b
 func isSublist(a []int, b []int) bool {
-	stringA := getString(a)
-	stringB := getString(b)
-	return strings.Contains(stringB, stringA)
+	return strings.Contains(getString(b), getString(a))
 }
 
-func getString(a []int) string {
-	result := []string{}
-	for _, val := range a {
+// getString returns a string representation of the slice provided
+func getString(slice []int) string {
+	strs := []string{}
+	for _, val := range slice {
 		str := strconv.Itoa(val)
-		result = append(result, str)
+		strs = append(strs, str)
 	}
-	return strings.Join(result, ",")
+	return strings.Join(strs, ",")
 }
