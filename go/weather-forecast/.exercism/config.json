@@ -1,0 +1,18 @@
+{
+  "blurb": "Learn about comments by helping a weather station manage their weather forecasting program.",
+  "authors": [
+    "nikimanoledaki",
+    "micuffaro"
+  ],
+  "files": {
+    "solution": [
+      "weather.go"
+    ],
+    "test": [
+      "weather_test.go"
+    ],
+    "exemplar": [
+      ".meta/exemplar.go"
+    ]
+  }
+}
