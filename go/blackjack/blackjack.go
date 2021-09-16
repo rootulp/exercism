@@ -40,7 +40,13 @@ func IsBlackjack(card1, card2 string) bool {
 
 // LargeHand implements the decision tree for hand scores larger than 20 points.
 func LargeHand(isBlackjack bool, dealerScore int) string {
-	panic("Please implement the LargeHand function")
+	if isBlackjack && dealerScore < 10 {
+		return "W"
+	} else if isBlackjack {
+		return "S"
+	} else {
+		return "P"
+	}
 }
 
 // SmallHand implements the decision tree for hand scores with less than 21 points.
