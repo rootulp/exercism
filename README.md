@@ -7,6 +7,12 @@
 
 If you are new to exercism, you can get started with this [intro](http://exercism.io/how-it-works/newbie).
 
+## Tests
+
+![Go](https://github.com/rootulp/exercism/workflows/Go/badge.svg)
+![Ruby](https://github.com/rootulp/exercism/workflows/Ruby/badge.svg?branch=master)
+![Python](https://github.com/rootulp/exercism/workflows/Python/badge.svg?branch=master)
+
 ## Code Style
 
 | language     | code style & linter                                                                                                                    | command                                                                          |
@@ -20,12 +26,6 @@ If you are new to exercism, you can get started with this [intro](http://exercis
 | python       | [![Code Style](https://img.shields.io/badge/code_style-pep8-blue.svg)](https://www.python.org/dev/peps/pep-0008/)                      | `pycodestyle .` or `autopep8 --in-place --aggressive --aggressive --recursive .` |
 | ruby         | [![Code Style](https://img.shields.io/badge/code_style-rubocop-red.svg)](https://github.com/bbatsov/rubocop)                           | `rubocop .`                                                                      |
 | typescript   | [![Linter](https://img.shields.io/badge/linter-tslint-lightgrey.svg)](https://github.com/palantir/tslint)                              | `cd <exercise> && yarn lint`                                                     |
-
-## Tests
-
-![Go](https://github.com/rootulp/exercism/workflows/Go/badge.svg)
-![Ruby](https://github.com/rootulp/exercism/workflows/Ruby/badge.svg?branch=master)
-![Python](https://github.com/rootulp/exercism/workflows/Python/badge.svg?branch=master)
 
 ## Contribute
 
