@@ -16,5 +16,6 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
 
+    # https://stackoverflow.com/questions/61163306/running-go-test-in-parent-directory-of-multiple-go-modules
     - name: Test
-      run: go test -v ./...
+      run: find . -name go.mod -execdir go test ./... \; 
