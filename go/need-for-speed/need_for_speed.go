@@ -51,5 +51,4 @@ func CanFinish(car Car, track Track) bool {
 	numDrives := car.battery / car.batteryDrain
 	possibleDistance := numDrives * car.speed
 	return car.distance+possibleDistance >= track.distance
-
 }
