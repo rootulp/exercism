@@ -1,6 +1,9 @@
 package logs
 
-import "strings"
+import (
+	"strings"
+	"unicode/utf8"
+)
 
 // Message extracts the message from the provided log line.
 func Message(line string) string {
@@ -10,7 +13,7 @@ func Message(line string) string {
 
 // MessageLen counts the amount of characters (runes) in the message of the log line.
 func MessageLen(line string) int {
-	panic("Please implement the MessageLen() function")
+	return utf8.RuneCountInString(Message(line))
 }
 
 // LogLevel extracts the log level string from the provided log line.
