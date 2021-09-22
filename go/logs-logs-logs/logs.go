@@ -1,8 +1,11 @@
 package logs
 
+import "strings"
+
 // Message extracts the message from the provided log line.
 func Message(line string) string {
-	panic("Please implement the Message() function")
+	parts := strings.Split(line, ":")
+	return strings.TrimSpace(parts[1])
 }
 
 // MessageLen counts the amount of characters (runes) in the message of the log line.
