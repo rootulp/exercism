@@ -1,5 +1,7 @@
 package elon
 
+import "fmt"
+
 const FULL_BATTERY = 100
 
 // Car implements a remote controlled car.
@@ -40,15 +42,16 @@ func (car *Car) Drive() {
 
 // CanFinish checks if a car is able to finish a certain track.
 func (car *Car) CanFinish(track Track) bool {
-	panic("Please implement CanFinish() method")
+	numDrives := car.battery / car.batteryDrain
+	return (numDrives*car.speed)+car.distance > track.distance
 }
 
 // DisplayDistance displays the distance the car is driven.
 func (car *Car) DisplayDistance() string {
-	panic("Please implement DisplayDistance() method")
+	return fmt.Sprintf("Driven %d meters", car.distance)
 }
 
 // DisplayBattery displays the battery level.
 func (car *Car) DisplayBattery() string {
-	panic("Please implement DisplayBattery() method")
+	return fmt.Sprintf("Battery at %d%%", car.battery)
 }
