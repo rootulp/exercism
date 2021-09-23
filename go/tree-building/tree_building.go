@@ -15,5 +15,9 @@ type Node struct {
 }
 
 func Build(records []Record) (*Node, error) {
-	panic("Implement me")
+	if len(records) == 0 {
+		return nil, nil
+	}
+	root := Node{ID: 0}
+	return &root, nil
 }
