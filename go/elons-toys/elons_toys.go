@@ -27,12 +27,15 @@ func CreateCar(speed, batteryDrain int) *Car {
 
 // CreateTrack creates a new track with given distance.
 func CreateTrack(distance int) Track {
-	panic("Please implement CreateTrack() method")
+	return Track{
+		distance: distance,
+	}
 }
 
 // Drive drives the car one time.
 func (car *Car) Drive() {
-	panic("Please implement Drive() method")
+	car.battery -= car.batteryDrain
+	car.distance += car.speed
 }
 
 // CanFinish checks if a car is able to finish a certain track.
