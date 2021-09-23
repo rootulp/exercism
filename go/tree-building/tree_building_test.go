@@ -7,10 +7,6 @@ import (
 	"testing"
 )
 
-// Define a function Build(records []Record) (*Node, error)
-// where Record is a struct containing int fields ID and Parent
-// and Node is a struct containing int field ID and []*Node field Children.
-
 var successTestCases = []struct {
 	name     string
 	input    []Record
