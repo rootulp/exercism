@@ -1,7 +1,5 @@
 package tree
 
-import "reflect"
-
 // Define a function Build(records []Record) (*Node, error)
 // where Record is a struct containing int fields ID and Parent
 // and Node is a struct containing int field ID and []*Node field Children.
@@ -45,7 +43,7 @@ func Build(records []Record) (*Node, error) {
 
 func contains(slice []*Node, node *Node) bool {
 	for _, v := range slice {
-		if reflect.DeepEqual(v, node) {
+		if v.ID == node.ID {
 			return true
 		}
 	}
