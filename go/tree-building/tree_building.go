@@ -30,7 +30,7 @@ func Build(records []Record) (*Node, error) {
 		if _, ok := nodes[record.Parent]; !ok {
 			nodes[record.Parent] = &Node{ID: record.Parent}
 		}
-		// Skip if this is the root node
+		// Continue if this is the root node
 		if record.ID == 0 {
 			continue
 		}
