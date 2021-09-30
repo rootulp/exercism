@@ -1,5 +1,7 @@
 package tree
 
+import "sort"
+
 // Define a function Build(records []Record) (*Node, error)
 // where Record is a struct containing int fields ID and Parent
 // and Node is a struct containing int field ID and []*Node field Children.
@@ -12,6 +14,21 @@ type Record struct {
 type Node struct {
 	ID       int
 	Children []*Node
+}
+
+// ByID implements sort.Interface based on the ID field.
+type ByID []*Node
+
+func (c ByID) Len() int {
+	return len(c)
+}
+
+func (c ByID) Swap(a int, b int) {
+	c[a], c[b] = c[b], c[a]
+}
+
+func (c ByID) Less(a int, b int) bool {
+	return c[a].ID < c[b].ID
 }
 
 func Build(records []Record) (*Node, error) {
@@ -39,6 +56,7 @@ func Build(records []Record) (*Node, error) {
 		node := nodes[record.ID]
 		if !contains(children, node) {
 			children = append(children, node)
+			sort.Sort(ByID(children))
 			nodes[record.Parent].Children = children
 		}
 	}
