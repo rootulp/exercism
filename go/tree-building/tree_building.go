@@ -1,6 +1,9 @@
 package tree
 
-import "sort"
+import (
+	"errors"
+	"sort"
+)
 
 // Define a function Build(records []Record) (*Node, error)
 // where Record is a struct containing int fields ID and Parent
@@ -49,7 +52,11 @@ func Build(records []Record) (*Node, error) {
 		}
 		// Continue if this is the root node
 		if record.ID == 0 {
-			continue
+			if record.Parent == 0 {
+				continue
+			} else {
+				return &Node{}, errors.New("root node cannot have a parent")
+			}
 		}
 		// Populate children for parent
 		children := nodes[record.Parent].Children
