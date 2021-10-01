@@ -44,6 +44,12 @@ func Build(records []Record) (*Node, error) {
 	if rootNodeHasParent(records) {
 		return &Node{}, errors.New("error root node has a parent")
 	}
+	if noRootNode(records) {
+		return &Node{}, errors.New("error no root node")
+	}
+	if duplicateNode(records) {
+		return &Node{}, errors.New("error duplicate node")
+	}
 
 	for _, record := range records {
 		// Initialize node if it doesn't exist
@@ -75,6 +81,26 @@ func rootNodeHasParent(records []Record) bool {
 		if record.ID == 0 && record.Parent != 0 {
 			return true
 		}
+	}
+	return false
+}
+
+func noRootNode(records []Record) bool {
+	for _, record := range records {
+		if record.ID == 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func duplicateNode(records []Record) bool {
+	seen := map[int]bool{}
+	for _, record := range records {
+		if _, hasSeen := seen[record.ID]; hasSeen {
+			return true
+		}
+		seen[record.ID] = true
 	}
 	return false
 }
