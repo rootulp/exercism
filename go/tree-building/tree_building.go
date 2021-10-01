@@ -50,6 +50,12 @@ func Build(records []Record) (*Node, error) {
 	if duplicateNode(records) {
 		return &Node{}, errors.New("error duplicate node")
 	}
+	if nonContinuous(records) {
+		return &Node{}, errors.New("error non-continuous node")
+	}
+	if directCycle(records) {
+		return &Node{}, errors.New("error direct cycle")
+	}
 
 	for _, record := range records {
 		// Initialize node if it doesn't exist
@@ -101,6 +107,25 @@ func duplicateNode(records []Record) bool {
 			return true
 		}
 		seen[record.ID] = true
+	}
+	return false
+}
+
+func nonContinuous(records []Record) bool {
+	length := len(records)
+	for _, record := range records {
+		if record.ID > length-1 {
+			return true
+		}
+	}
+	return false
+}
+
+func directCycle(records []Record) bool {
+	for _, record := range records {
+		if record.ID == record.Parent && record.ID != 0 {
+			return true
+		}
 	}
 	return false
 }
