@@ -41,6 +41,10 @@ func Build(records []Record) (*Node, error) {
 	nodes := map[int]*Node{}
 	nodes[0] = &Node{ID: 0}
 
+	if rootNodeHasParent(records) {
+		return &Node{}, errors.New("error root node has a parent")
+	}
+
 	for _, record := range records {
 		// Initialize node if it doesn't exist
 		if _, ok := nodes[record.ID]; !ok {
@@ -52,11 +56,7 @@ func Build(records []Record) (*Node, error) {
 		}
 		// Continue if this is the root node
 		if record.ID == 0 {
-			if record.Parent == 0 {
-				continue
-			} else {
-				return &Node{}, errors.New("root node cannot have a parent")
-			}
+			continue
 		}
 		// Populate children for parent
 		children := nodes[record.Parent].Children
@@ -68,6 +68,15 @@ func Build(records []Record) (*Node, error) {
 		}
 	}
 	return nodes[0], nil
+}
+
+func rootNodeHasParent(records []Record) bool {
+	for _, record := range records {
+		if record.ID == 0 && record.Parent != 0 {
+			return true
+		}
+	}
+	return false
 }
 
 func contains(slice []*Node, node *Node) bool {
