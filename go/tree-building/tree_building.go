@@ -41,19 +41,19 @@ func Build(records []Record) (*Node, error) {
 	nodes := map[int]*Node{}
 	nodes[0] = &Node{ID: 0}
 
-	if rootNodeHasParent(records) {
+	if isRootNodeHasParentError(records) {
 		return &Node{}, errors.New("error root node has a parent")
 	}
-	if noRootNode(records) {
+	if isNoRootNodeError(records) {
 		return &Node{}, errors.New("error no root node")
 	}
-	if duplicateNode(records) {
+	if isDuplicateNodeError(records) {
 		return &Node{}, errors.New("error duplicate node")
 	}
-	if nonContinuous(records) {
+	if isNonContinuousError(records) {
 		return &Node{}, errors.New("error non-continuous node")
 	}
-	if directCycle(records) {
+	if isDirectCycleError(records) {
 		return &Node{}, errors.New("error direct cycle")
 	}
 	if isChildLowerThanParentError(records) {
@@ -85,7 +85,7 @@ func Build(records []Record) (*Node, error) {
 	return nodes[0], nil
 }
 
-func rootNodeHasParent(records []Record) bool {
+func isRootNodeHasParentError(records []Record) bool {
 	for _, record := range records {
 		if record.ID == 0 && record.Parent != 0 {
 			return true
@@ -94,7 +94,7 @@ func rootNodeHasParent(records []Record) bool {
 	return false
 }
 
-func noRootNode(records []Record) bool {
+func isNoRootNodeError(records []Record) bool {
 	for _, record := range records {
 		if record.ID == 0 {
 			return false
@@ -103,7 +103,7 @@ func noRootNode(records []Record) bool {
 	return true
 }
 
-func duplicateNode(records []Record) bool {
+func isDuplicateNodeError(records []Record) bool {
 	seen := map[int]bool{}
 	for _, record := range records {
 		if _, hasSeen := seen[record.ID]; hasSeen {
@@ -114,7 +114,7 @@ func duplicateNode(records []Record) bool {
 	return false
 }
 
-func nonContinuous(records []Record) bool {
+func isNonContinuousError(records []Record) bool {
 	length := len(records)
 	for _, record := range records {
 		if record.ID > length-1 {
@@ -124,7 +124,7 @@ func nonContinuous(records []Record) bool {
 	return false
 }
 
-func directCycle(records []Record) bool {
+func isDirectCycleError(records []Record) bool {
 	for _, record := range records {
 		if record.ID == record.Parent && record.ID != 0 {
 			return true
