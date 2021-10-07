@@ -56,6 +56,9 @@ func Build(records []Record) (*Node, error) {
 	if directCycle(records) {
 		return &Node{}, errors.New("error direct cycle")
 	}
+	if isChildLowerThanParentError(records) {
+		return &Node{}, errors.New("error child can not have id lower than parent")
+	}
 
 	for _, record := range records {
 		// Initialize node if it doesn't exist
@@ -124,6 +127,15 @@ func nonContinuous(records []Record) bool {
 func directCycle(records []Record) bool {
 	for _, record := range records {
 		if record.ID == record.Parent && record.ID != 0 {
+			return true
+		}
+	}
+	return false
+}
+
+func isChildLowerThanParentError(records []Record) bool {
+	for _, record := range records {
+		if record.ID < record.Parent {
 			return true
 		}
 	}
