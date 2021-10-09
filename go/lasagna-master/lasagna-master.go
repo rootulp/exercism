@@ -25,6 +25,10 @@ func count(s []string, item string) (result int) {
 	return result
 }
 
-// TODO: define the 'AddSecretIngredient()' function
+func AddSecretIngredient(friendsList []string, myList []string) []string {
+	lastItem := friendsList[len(friendsList)]
+	result := append(myList, lastItem)
+	return result
+}
 
 // TODO: define the 'ScaleRecipe()' function
