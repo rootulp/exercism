@@ -26,9 +26,16 @@ func count(s []string, item string) (result int) {
 }
 
 func AddSecretIngredient(friendsList []string, myList []string) []string {
-	lastItem := friendsList[len(friendsList)]
+	lastItem := friendsList[len(friendsList)-1]
 	result := append(myList, lastItem)
 	return result
 }
 
-// TODO: define the 'ScaleRecipe()' function
+func ScaleRecipe(quantities []float64, desiredNumPortions int) []float64 {
+	result := make([]float64, len(quantities))
+	for i, quantity := range quantities {
+		quantityForOnePortion := quantity / 2.0
+		result[i] = quantityForOnePortion * float64(desiredNumPortions)
+	}
+	return result
+}
