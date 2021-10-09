@@ -9,7 +9,21 @@ func PreparationTime(layers []string, avgPrepTimePerLayer int) int {
 	return len(layers) * avgPrepTimePerLayer
 }
 
-// TODO: define the 'Quantities()' function
+func Quantities(layers []string) (quantityNoodles int, quantitySauce float64) {
+	numNoodles := count(layers, "noodles")
+	numSauce := count(layers, "sauce")
+	return numNoodles * 50, float64(numSauce) * 0.2
+}
+
+// count returns the number of times item occurs in s
+func count(s []string, item string) (result int) {
+	for _, v := range s {
+		if v == item {
+			result += 1
+		}
+	}
+	return result
+}
 
 // TODO: define the 'AddSecretIngredient()' function
 
