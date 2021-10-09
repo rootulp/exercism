@@ -15,16 +15,6 @@ func Quantities(layers []string) (quantityNoodles int, quantitySauce float64) {
 	return numNoodles * 50, float64(numSauce) * 0.2
 }
 
-// count returns the number of times item occurs in s
-func count(s []string, item string) (result int) {
-	for _, v := range s {
-		if v == item {
-			result += 1
-		}
-	}
-	return result
-}
-
 func AddSecretIngredient(friendsList []string, myList []string) []string {
 	lastItem := friendsList[len(friendsList)-1]
 	result := append(myList, lastItem)
@@ -36,6 +26,16 @@ func ScaleRecipe(quantities []float64, desiredNumPortions int) []float64 {
 	for i, quantity := range quantities {
 		quantityForOnePortion := quantity / 2.0
 		result[i] = quantityForOnePortion * float64(desiredNumPortions)
+	}
+	return result
+}
+
+// count returns the number of times item occurs in s
+func count(s []string, item string) (result int) {
+	for _, v := range s {
+		if v == item {
+			result += 1
+		}
 	}
 	return result
 }
