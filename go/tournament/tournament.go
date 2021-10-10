@@ -27,13 +27,10 @@ func Tally(r io.Reader, w io.Writer) error {
 		if isComment(line) || isEmptyLine(line) {
 			continue
 		}
-		// fmt.Printf("line: %s", line)
 		parts := strings.Split(line, ";")
 		if len(parts) < 3 {
-			// continue
 			return fmt.Errorf("unexpected number of parts in line. Expected 3 parts delimited by semicolon. Got %d parts", len(parts))
 		}
-		// fmt.Printf("parts: %s", parts)
 		a := parts[0]
 		b := parts[1]
 		outcome := parts[2]
