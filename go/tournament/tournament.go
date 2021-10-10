@@ -46,7 +46,7 @@ func Tally(r io.Reader, w io.Writer) error {
 		teamsToScores[b].MatchesPlayed += 1
 	}
 
-	fmt.Println(teamsToScores)
+	io.WriteString(w, getTable(teamsToScores))
 	return nil
 }
 
@@ -61,4 +61,14 @@ func getLines(r io.Reader) ([]string, error) {
 	}
 	lines := strings.Split(string(input), "\n")
 	return lines, nil
+}
+
+func getTable(teamsToScores map[string]*stat) (result string) {
+	// const header = "Team                           | MP |  W |  D |  L |  P"
+	var header = fmt.Sprintf("%-30s |%3s |%3s |%3s |%3s |%3s\n", "Team", "MP", "W", "D", "L", "P")
+	result += header
+	for team, stat := range teamsToScores {
+		result += fmt.Sprintf("%-30s |%3d |%3d |%3d |%3d |%3d\n", team, stat.MatchesPlayed, stat.Wins, stat.Draws, stat.Loses, stat.Points)
+	}
+	return result
 }
