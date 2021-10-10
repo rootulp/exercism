@@ -16,7 +16,6 @@ type stat struct {
 	Points        int
 }
 
-// Define a function Tally(io.Reader, io.Writer) error.
 func Tally(r io.Reader, w io.Writer) error {
 	lines, err := getLines(r)
 	if err != nil {
@@ -36,9 +35,6 @@ func Tally(r io.Reader, w io.Writer) error {
 
 		teamsToScores = initializeTeamIfNotExists(teamsToScores, a)
 		teamsToScores = initializeTeamIfNotExists(teamsToScores, b)
-
-		incrementMatchesPlayed(teamsToScores, a)
-		incrementMatchesPlayed(teamsToScores, b)
 
 		switch outcome {
 		case "win":
@@ -97,10 +93,6 @@ func getLines(r io.Reader) ([]string, error) {
 	return lines, nil
 }
 
-func incrementMatchesPlayed(teamsToScores map[string]*stat, team string) {
-	teamsToScores[team].MatchesPlayed += 1
-}
-
 func initializeTeamIfNotExists(teamsToScores map[string]*stat, team string) map[string]*stat {
 	if _, ok := teamsToScores[team]; !ok {
 		teamsToScores[team] = &stat{
@@ -122,6 +114,8 @@ func handleWin(teamsToScores map[string]*stat, winner string, loser string) {
 	teamsToScores[winner].Wins += 1
 	teamsToScores[winner].Points += 3
 	teamsToScores[loser].Loses += 1
+	teamsToScores[winner].MatchesPlayed += 1
+	teamsToScores[loser].MatchesPlayed += 1
 }
 
 func handleDraw(teamsToScores map[string]*stat, a string, b string) {
@@ -129,4 +123,6 @@ func handleDraw(teamsToScores map[string]*stat, a string, b string) {
 	teamsToScores[b].Draws += 1
 	teamsToScores[a].Points += 1
 	teamsToScores[b].Points += 1
+	teamsToScores[a].MatchesPlayed += 1
+	teamsToScores[b].MatchesPlayed += 1
 }
