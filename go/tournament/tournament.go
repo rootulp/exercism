@@ -46,10 +46,7 @@ func Tally(r io.Reader, w io.Writer) error {
 		case "loss":
 			handleWin(teamsToScores, b, a)
 		case "draw":
-			teamsToScores[a].Draws += 1
-			teamsToScores[b].Draws += 1
-			teamsToScores[a].Points += 1
-			teamsToScores[b].Points += 1
+			handleDraw(teamsToScores, a, b)
 		default:
 			return fmt.Errorf("unexpected outcome %s", outcome)
 		}
@@ -125,4 +122,11 @@ func handleWin(teamsToScores map[string]*stat, winner string, loser string) {
 	teamsToScores[winner].Wins += 1
 	teamsToScores[winner].Points += 3
 	teamsToScores[loser].Loses += 1
+}
+
+func handleDraw(teamsToScores map[string]*stat, a string, b string) {
+	teamsToScores[a].Draws += 1
+	teamsToScores[b].Draws += 1
+	teamsToScores[a].Points += 1
+	teamsToScores[b].Points += 1
 }
