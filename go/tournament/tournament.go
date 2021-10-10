@@ -22,6 +22,7 @@ func Tally(r io.Reader, w io.Writer) error {
 	if err != nil {
 		return err
 	}
+
 	teamsToScores := map[string]*stat{}
 	for _, line := range lines {
 		if isComment(line) || isEmptyLine(line) {
@@ -35,16 +36,8 @@ func Tally(r io.Reader, w io.Writer) error {
 		b := parts[1]
 		outcome := parts[2]
 
-		if _, ok := teamsToScores[a]; !ok {
-			teamsToScores[a] = &stat{
-				Name: a,
-			}
-		}
-		if _, ok := teamsToScores[b]; !ok {
-			teamsToScores[b] = &stat{
-				Name: b,
-			}
-		}
+		teamsToScores = initializeTeamIfNotExists(teamsToScores, a)
+		teamsToScores = initializeTeamIfNotExists(teamsToScores, b)
 
 		incrementMatchesPlayed(teamsToScores, a)
 		incrementMatchesPlayed(teamsToScores, b)
@@ -115,4 +108,13 @@ func getLines(r io.Reader) ([]string, error) {
 
 func incrementMatchesPlayed(teamsToScores map[string]*stat, team string) {
 	teamsToScores[team].MatchesPlayed += 1
+}
+
+func initializeTeamIfNotExists(teamsToScores map[string]*stat, team string) map[string]*stat {
+	if _, ok := teamsToScores[team]; !ok {
+		teamsToScores[team] = &stat{
+			Name: team,
+		}
+	}
+	return teamsToScores
 }
