@@ -28,13 +28,10 @@ func Tally(r io.Reader, w io.Writer) error {
 		if isComment(line) || isEmptyLine(line) {
 			continue
 		}
-		parts := strings.Split(line, ";")
-		if len(parts) < 3 {
-			return fmt.Errorf("unexpected number of parts in line. Expected 3 parts delimited by semicolon. Got %d parts", len(parts))
+		a, b, outcome, err := parseLine(line)
+		if err != nil {
+			return err
 		}
-		a := parts[0]
-		b := parts[1]
-		outcome := parts[2]
 
 		teamsToScores = initializeTeamIfNotExists(teamsToScores, a)
 		teamsToScores = initializeTeamIfNotExists(teamsToScores, b)
@@ -117,4 +114,12 @@ func initializeTeamIfNotExists(teamsToScores map[string]*stat, team string) map[
 		}
 	}
 	return teamsToScores
+}
+
+func parseLine(line string) (a string, b string, outcome string, err error) {
+	parts := strings.Split(line, ";")
+	if len(parts) < 3 {
+		return "", "", "", fmt.Errorf("unexpected number of parts in line. Expected 3 parts delimited by semicolon. Got %d parts", len(parts))
+	}
+	return parts[0], parts[1], parts[2], nil
 }
