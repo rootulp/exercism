@@ -24,13 +24,14 @@ func Tally(r io.Reader, w io.Writer) error {
 	}
 	teamsToScores := map[string]*stat{}
 	for _, line := range lines {
-		if isComment(line) {
+		if isComment(line) || isEmptyLine(line) {
 			continue
 		}
 		// fmt.Printf("line: %s", line)
 		parts := strings.Split(line, ";")
 		if len(parts) < 3 {
-			continue
+			// continue
+			return fmt.Errorf("unexpected number of parts in line. Expected 3 parts delimited by semicolon. Got %d parts", len(parts))
 		}
 		// fmt.Printf("parts: %s", parts)
 		a := parts[0]
@@ -100,6 +101,10 @@ func sortTeamsByPointsThenAlphabetically(teamsToScores map[string]*stat) (result
 
 func isComment(line string) bool {
 	return strings.HasPrefix(line, "#")
+}
+
+func isEmptyLine(line string) bool {
+	return strings.TrimSpace(line) == ""
 }
 
 func getLines(r io.Reader) ([]string, error) {
