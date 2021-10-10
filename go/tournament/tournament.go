@@ -28,6 +28,7 @@ func Tally(r io.Reader, w io.Writer) error {
 		if isComment(line) || isEmptyLine(line) {
 			continue
 		}
+
 		a, b, outcome, err := parseLine(line)
 		if err != nil {
 			return err
@@ -41,13 +42,9 @@ func Tally(r io.Reader, w io.Writer) error {
 
 		switch outcome {
 		case "win":
-			teamsToScores[a].Wins += 1
-			teamsToScores[a].Points += 3
-			teamsToScores[b].Loses += 1
+			handleWin(teamsToScores, a, b)
 		case "loss":
-			teamsToScores[a].Loses += 1
-			teamsToScores[b].Wins += 1
-			teamsToScores[b].Points += 3
+			handleWin(teamsToScores, b, a)
 		case "draw":
 			teamsToScores[a].Draws += 1
 			teamsToScores[b].Draws += 1
@@ -122,4 +119,10 @@ func parseLine(line string) (a string, b string, outcome string, err error) {
 		return "", "", "", fmt.Errorf("unexpected number of parts in line. Expected 3 parts delimited by semicolon. Got %d parts", len(parts))
 	}
 	return parts[0], parts[1], parts[2], nil
+}
+
+func handleWin(teamsToScores map[string]*stat, winner string, loser string) {
+	teamsToScores[winner].Wins += 1
+	teamsToScores[winner].Points += 3
+	teamsToScores[loser].Loses += 1
 }
