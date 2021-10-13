@@ -1,7 +1,6 @@
 package erratum
 
 import (
-	"errors"
 	"fmt"
 )
 
@@ -18,8 +17,12 @@ func Use(open opener, s string) (err error) {
 	defer func(resource Resource) {
 		if r := recover(); r != nil {
 			fmt.Printf("recovered from %v\n", r)
-			if errors.Is(r.(error), FrobError{}) {
-				resource.Defrob(fmt.Sprintf("%v", r.(FrobError).defrobTag))
+			switch e := r.(type) {
+			case FrobError:
+				resource.Defrob(e.defrobTag)
+				err = e
+			case error:
+				err = e
 			}
 			err = fmt.Errorf("%v", r)
 		}
