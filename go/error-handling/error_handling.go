@@ -24,7 +24,6 @@ func Use(open opener, s string) (err error) {
 			case error:
 				err = e
 			}
-			err = fmt.Errorf("%v", r)
 		}
 	}(resource)
 	resource.Frob(s)
