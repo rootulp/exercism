@@ -44,7 +44,6 @@ func (m Matrix) Cols() [][]int {
 }
 
 func (m Matrix) Rows() [][]int {
-	// return m.grid
 	duplicate := make([][]int, len(m.grid))
 	for i := range m.grid {
 		duplicate[i] = make([]int, len(m.grid[i]))
