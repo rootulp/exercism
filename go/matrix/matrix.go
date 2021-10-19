@@ -34,7 +34,13 @@ func New(s string) (*Matrix, error) {
 }
 
 func (m Matrix) Cols() [][]int {
-	return [][]int{}
+	result := initializeMatrix(len(m.grid[0]), len(m.grid))
+	for x, row := range m.grid {
+		for y, val := range row {
+			result[y][x] = val
+		}
+	}
+	return result
 }
 
 func (m Matrix) Rows() [][]int {
@@ -42,6 +48,12 @@ func (m Matrix) Rows() [][]int {
 }
 
 func (m Matrix) Set(row int, column int, value int) bool {
+	if row >= len(m.grid) || row < 0 {
+		return false
+	}
+	if column >= len(m.grid[0]) || column < 0 {
+		return false
+	}
 	m.grid[row][column] = value
 	return true
 }
@@ -54,4 +66,12 @@ func isUnevenRows(s string) bool {
 		rowLengths[len(cols)] = true
 	}
 	return len(rowLengths) != 1
+}
+
+func initializeMatrix(dy int, dx int) [][]int {
+	a := make([][]int, dy)
+	for i := range a {
+		a[i] = make([]int, dx)
+	}
+	return a
 }
