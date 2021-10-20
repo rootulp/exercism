@@ -1,8 +1,11 @@
 package account
 
+import "sync"
+
 type Account struct {
 	balance  int64
 	isClosed bool
+	sync.Mutex
 }
 
 func Open(initialDeposit int64) *Account {
@@ -15,6 +18,11 @@ func Open(initialDeposit int64) *Account {
 }
 
 func (a *Account) Close() (payout int64, ok bool) {
+	a.Lock()
+	defer a.Unlock()
+	if a.isClosed {
+		return 0, false
+	}
 	a.isClosed = true
 	return a.balance, true
 }
@@ -27,6 +35,8 @@ func (a *Account) Balance() (balance int64, ok bool) {
 }
 
 func (a *Account) Deposit(amount int64) (newBalance int64, ok bool) {
+	a.Lock()
+	defer a.Unlock()
 	if a.isClosed {
 		return 0, false
 	}
