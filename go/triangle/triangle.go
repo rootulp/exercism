@@ -1,28 +1,48 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package triangle should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
 package triangle
 
+import "math"
 
 // Notice KindFromSides() returns this type. Pick a suitable data type.
-type Kind
+type Kind string
 
 const (
-    // Pick values for the following identifiers used by the test program.
-    NaT // not a triangle
-    Equ // equilateral
-    Iso // isosceles
-    Sca // scalene
+	NaT Kind = "Not a triangle"
+	Equ Kind = "Equilateral"
+	Iso Kind = "Isosceles"
+	Sca Kind = "Scalene"
 )
 
-// KindFromSides should have a comment documenting it.
 func KindFromSides(a, b, c float64) Kind {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	var k Kind
-	return k
+	if !isTriangle(a, b, c) {
+		return NaT
+	}
+	if a == b && b == c {
+		return Equ
+	}
+	if a == b || a == c || b == c {
+		return Iso
+	}
+	return Sca
+}
+
+func isTriangle(a, b, c float64) bool {
+	if !isValidSideLength(a) ||
+		!isValidSideLength(b) ||
+		!isValidSideLength(c) {
+		return false
+	}
+	if !isSumOfTwoSidesGreaterThanThirdSide(a, b, c) ||
+		!isSumOfTwoSidesGreaterThanThirdSide(a, c, b) ||
+		!isSumOfTwoSidesGreaterThanThirdSide(c, b, a) {
+		return false
+	}
+	return true
+}
+
+func isSumOfTwoSidesGreaterThanThirdSide(x, y, z float64) bool {
+	return x+y >= z
+}
+
+func isValidSideLength(x float64) bool {
+	return x > 0 && !math.IsNaN(x) && !math.IsInf(x, 1)
 }
