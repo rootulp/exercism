@@ -27,9 +27,7 @@ func (d DNA) Counts() (Histogram, error) {
 
 func (d DNA) isValid() bool {
 	for _, r := range d {
-		if r == 'A' || r == 'C' || r == 'G' || r == 'T' {
-			continue
-		} else {
+		if r != 'A' && r != 'C' && r != 'G' && r != 'T' {
 			return false
 		}
 	}
