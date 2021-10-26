@@ -7,10 +7,9 @@ var dnaToRna = map[rune]rune{
 	'A': 'U',
 }
 
-func ToRNA(dna string) string {
-	result := ""
+func ToRNA(dna string) (rna string) {
 	for _, r := range dna {
-		result += string(dnaToRna[r])
+		rna += string(dnaToRna[r])
 	}
-	return result
+	return rna
 }
