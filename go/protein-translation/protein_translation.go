@@ -1,6 +1,8 @@
 package protein
 
-import "errors"
+import (
+	"errors"
+)
 
 // ErrStop represents a STOP codon
 var ErrStop error = errors.New("stop codon")
@@ -52,6 +54,19 @@ func FromCodon(codon string) (protein string, e error) {
 	return codonToProtein[codon], nil
 }
 
-func FromRNA(codons string) (proteins string, e error) {
-	return "bar", nil
+const CODON_LENGTH = 3
+
+func FromRNA(codons string) (proteins []string, e error) {
+	for i := 0; i <= len(codons)-CODON_LENGTH; i += CODON_LENGTH {
+		codon := codons[i : i+CODON_LENGTH]
+		codon, err := FromCodon(codon)
+		if errors.Is(err, ErrStop) {
+			return proteins, nil
+		}
+		if errors.Is(err, ErrInvalidBase) {
+			return proteins, ErrInvalidBase
+		}
+		proteins = append(proteins, codon)
+	}
+	return proteins, nil
 }
