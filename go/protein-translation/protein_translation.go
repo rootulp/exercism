@@ -4,22 +4,11 @@ import (
 	"errors"
 )
 
-// ErrStop represents a STOP codon
+// ErrStop represents a stop codon
 var ErrStop error = errors.New("stop codon")
 
 // ErrInvalidBase represents an invalid base that cannot me mapped to an amino acid.
 var ErrInvalidBase error = errors.New("invalid base")
-
-// Codon                 | Protein
-// :---                  | :---
-// AUG                   | Methionine
-// UUU, UUC              | Phenylalanine
-// UUA, UUG              | Leucine
-// UCU, UCC, UCA, UCG    | Serine
-// UAU, UAC              | Tyrosine
-// UGU, UGC              | Cysteine
-// UGG                   | Tryptophan
-// UAA, UAG, UGA         | STOP
 
 var stopCodons = map[string]bool{
 	"UAA": true,
