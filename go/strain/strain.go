@@ -31,7 +31,14 @@ func (l Lists) Keep(filter func([]int) bool) Lists {
 	if l == nil {
 		return nil
 	}
-	panic("Please implement the Keep function")
+	result := [][]int{}
+	for _, v := range l {
+		if filter(v) {
+			result = append(result, v)
+		}
+	}
+	l = result
+	return l
 }
 
 func (s Strings) Keep(filter func(string) bool) Strings {
