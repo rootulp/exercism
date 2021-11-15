@@ -8,13 +8,13 @@ func (i Ints) Keep(filter func(int) bool) Ints {
 	if i == nil {
 		return nil
 	}
-	result := []int{}
+	filtered := []int{}
 	for _, v := range i {
 		if filter(v) {
-			result = append(result, v)
+			filtered = append(filtered, v)
 		}
 	}
-	i = result
+	i = filtered
 	return i
 }
 
@@ -31,13 +31,13 @@ func (l Lists) Keep(filter func([]int) bool) Lists {
 	if l == nil {
 		return nil
 	}
-	result := [][]int{}
+	filtered := [][]int{}
 	for _, v := range l {
 		if filter(v) {
-			result = append(result, v)
+			filtered = append(filtered, v)
 		}
 	}
-	l = result
+	l = filtered
 	return l
 }
 
@@ -45,12 +45,12 @@ func (s Strings) Keep(filter func(string) bool) Strings {
 	if s == nil {
 		return nil
 	}
-	result := []string{}
+	filtered := []string{}
 	for _, v := range s {
 		if filter(v) {
-			result = append(result, v)
+			filtered = append(filtered, v)
 		}
 	}
-	s = result
+	s = filtered
 	return s
 }
