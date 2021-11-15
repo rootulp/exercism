@@ -22,7 +22,9 @@ func (i Ints) Discard(filter func(int) bool) Ints {
 	if i == nil {
 		return nil
 	}
-	panic("Please implement the Discard function")
+	return i.Keep(func(i int) bool {
+		return !filter(i)
+	})
 }
 
 func (l Lists) Keep(filter func([]int) bool) Lists {
