@@ -8,7 +8,14 @@ func (i Ints) Keep(filter func(int) bool) Ints {
 	if i == nil {
 		return nil
 	}
-	panic("Please implement the Keep function")
+	result := []int{}
+	for _, v := range i {
+		if filter(v) {
+			result = append(result, v)
+		}
+	}
+	i = result
+	return i
 }
 
 func (i Ints) Discard(filter func(int) bool) Ints {
