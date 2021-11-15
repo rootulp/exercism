@@ -45,5 +45,12 @@ func (s Strings) Keep(filter func(string) bool) Strings {
 	if s == nil {
 		return nil
 	}
-	panic("Please implement the Keep function")
+	result := []string{}
+	for _, v := range s {
+		if filter(v) {
+			result = append(result, v)
+		}
+	}
+	s = result
+	return s
 }
