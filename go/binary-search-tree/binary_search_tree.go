@@ -14,10 +14,15 @@ func NewBst(i int) SearchTreeData {
 // Insert inserts an int into the SearchTreeData.
 // Inserts happen based on the rules of a BinarySearchTree
 func (std *SearchTreeData) Insert(i int) {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
+	if i <= std.data && std.left == nil {
+		std.left = &SearchTreeData{data: i}
+	} else if i > std.data && std.right == nil {
+		std.right = &SearchTreeData{data: i}
+	} else if i <= std.data && std.left != nil {
+		std.left.Insert(i)
+	} else if i > std.data && std.right != nil {
+		std.right.Insert(i)
+	}
 }
 
 // MapString returns the ordered contents of SearchTreeData as a []string.
