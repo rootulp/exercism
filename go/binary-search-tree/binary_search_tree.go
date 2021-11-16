@@ -1,8 +1,3 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package binarysearchtree should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
 package binarysearchtree
 
 type SearchTreeData struct {
@@ -13,11 +8,7 @@ type SearchTreeData struct {
 
 // NewBst creates and returns a new SearchTreeData.
 func NewBst(i int) SearchTreeData {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return SearchTreeData{}
+	return SearchTreeData{data: i}
 }
 
 // Insert inserts an int into the SearchTreeData.
