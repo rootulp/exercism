@@ -1,5 +1,7 @@
 package binarysearchtree
 
+import "strconv"
+
 type SearchTreeData struct {
 	left  *SearchTreeData
 	data  int
@@ -30,11 +32,10 @@ func (std *SearchTreeData) Insert(i int) {
 // SearchTreeData that has the numbers [1,3,7,5] added will return the
 // []string ["1", "3", "5", "7"].
 func (std *SearchTreeData) MapString(func(int) string) (result []string) {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return []string{}
+	for _, v := range visitInt(std) {
+		result = append(result, strconv.Itoa(v))
+	}
+	return result
 }
 
 // MapInt returns the ordered contents of SearchTreeData as an []int.
