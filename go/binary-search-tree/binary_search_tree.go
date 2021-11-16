@@ -42,9 +42,15 @@ func (std *SearchTreeData) MapString(func(int) string) (result []string) {
 // SearchTreeData that has the numbers [1,3,7,5] added will return the
 // []int [1,3,5,7].
 func (std *SearchTreeData) MapInt(func(int) int) (result []int) {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return []int{}
+	return visitInt(std)
+}
+
+func visitInt(std *SearchTreeData) (result []int) {
+	if std == nil {
+		return []int{}
+	}
+	result = append(result, visitInt(std.left)...)
+	result = append(result, std.data)
+	result = append(result, visitInt(std.right)...)
+	return result
 }
