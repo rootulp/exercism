@@ -1,6 +1,14 @@
 package linkedlist
 
 // Define List and Node types here.
+type List struct {
+	head Node
+	tail Node
+}
+
+type Node struct {
+	Val interface{}
+}
 
 func NewList(args ...interface{}) *List {
 	panic("Please implement the NewList function")
