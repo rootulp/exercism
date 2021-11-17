@@ -97,7 +97,16 @@ func (l *List) PopBack() (interface{}, error) {
 }
 
 func (l *List) Reverse() {
-	panic("Please implement the Reverse function")
+	data := []interface{}{}
+	d, err := l.PopBack()
+	for err != ErrEmptyList {
+		data = append(data, d)
+		d, err = l.PopBack()
+	}
+	newList := NewList(data...)
+	l.head = newList.head
+	l.tail = newList.tail
+	l.size = newList.size
 }
 
 func (l *List) First() *Node {
