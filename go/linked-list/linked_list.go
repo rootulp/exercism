@@ -2,24 +2,32 @@ package linkedlist
 
 // Define List and Node types here.
 type List struct {
-	head Node
-	tail Node
+	head *Node
+	tail *Node
 }
 
 type Node struct {
-	Val interface{}
+	Val  interface{}
+	next *Node
+	prev *Node
 }
 
+var ErrEmptyList error
+
 func NewList(args ...interface{}) *List {
-	panic("Please implement the NewList function")
+	list := &List{}
+	for _, v := range args {
+		list.PushBack(v)
+	}
+	return list
 }
 
 func (n *Node) Next() *Node {
-	panic("Please implement the Next function")
+	return n.next
 }
 
 func (n *Node) Prev() *Node {
-	panic("Please implement the Prev function")
+	return n.prev
 }
 
 func (l *List) PushFront(v interface{}) {
@@ -27,7 +35,17 @@ func (l *List) PushFront(v interface{}) {
 }
 
 func (l *List) PushBack(v interface{}) {
-	panic("Please implement the PushBack function")
+	new := Node{Val: v}
+	if l.head == nil {
+		l.head = &new
+	}
+	if l.tail == nil {
+		l.tail = &new
+	} else {
+		l.tail.next = &new
+		new.prev = l.tail
+		l.tail = &new
+	}
 }
 
 func (l *List) PopFront() (interface{}, error) {
@@ -43,9 +61,9 @@ func (l *List) Reverse() {
 }
 
 func (l *List) First() *Node {
-	panic("Please implement the First function")
+	return l.head
 }
 
 func (l *List) Last() *Node {
-	panic("Please implement the Last function")
+	return l.tail
 }
