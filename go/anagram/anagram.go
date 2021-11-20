@@ -9,7 +9,7 @@ func Detect(subject string, candidates []string) (anagrams []string) {
 	occurences := getOccurences(strings.ToLower(subject))
 	for _, c := range candidates {
 		candidate := getOccurences(strings.ToLower(c))
-		if reflect.DeepEqual(occurences, candidate) && strings.ToLower(subject) != strings.ToLower(c) {
+		if reflect.DeepEqual(occurences, candidate) && !strings.EqualFold(subject, c) {
 			anagrams = append(anagrams, c)
 		}
 	}
