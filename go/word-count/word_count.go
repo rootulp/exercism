@@ -12,8 +12,7 @@ func WordCount(phrase string) (result Frequency) {
 	words := splitStringOnWhitespaceAndPunctuation(phrase)
 	for _, word := range words {
 		if doesContainsLetterOrNumber(word) {
-			w := strings.Trim(strings.ToLower(word), "'")
-			result[strings.ToLower(w)] += 1
+			result[strings.Trim(strings.ToLower(word), "'")] += 1
 		}
 	}
 	return result
