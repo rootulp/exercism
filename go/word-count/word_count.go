@@ -9,17 +9,21 @@ type Frequency map[string]int
 
 func WordCount(phrase string) (result Frequency) {
 	result = Frequency{}
-	splitter := func(c rune) bool {
-		return unicode.IsSpace(c) || (unicode.IsPunct(c) && c != '\'')
-	}
-	fields := strings.FieldsFunc(phrase, splitter)
-	for _, word := range fields {
+	words := splitStringOnWhitespaceAndPunctuation(phrase)
+	for _, word := range words {
 		if doesContainsLetterOrNumber(word) {
 			w := strings.Trim(strings.ToLower(word), "'")
 			result[strings.ToLower(w)] += 1
 		}
 	}
 	return result
+}
+
+func splitStringOnWhitespaceAndPunctuation(phrase string) []string {
+	splitter := func(c rune) bool {
+		return unicode.IsSpace(c) || (unicode.IsPunct(c) && c != '\'')
+	}
+	return strings.FieldsFunc(phrase, splitter)
 }
 
 func doesContainsLetterOrNumber(word string) bool {
