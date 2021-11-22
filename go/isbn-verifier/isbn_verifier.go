@@ -8,20 +8,20 @@ import (
 )
 
 func IsValidISBN(isbn string) bool {
-	if !isValidISBN(isbn) {
+	isbnWithoutDashes := strings.ReplaceAll(isbn, "-", "")
+	if !isValidISBN(isbnWithoutDashes) {
 		return false
 	}
-	return isbnSum(isbn)%11 == 0
+	return isbnSum(isbnWithoutDashes)%11 == 0
 }
 
 func isbnSum(isbn string) (sum int) {
-	isbnWithoutDashes := strings.ReplaceAll(isbn, "-", "")
-	for i, r := range isbnWithoutDashes {
+	for i, r := range isbn {
 		value := valueForCheckDigit(string(r))
 		multiplier := 10 - i
 		sum += value * multiplier
 	}
-	log.Printf("isbnSum(%s)= %d\n", isbn, sum)
+	log.Printf("isbnSum(%s): %d\n", isbn, sum)
 	return sum
 }
 
@@ -37,7 +37,7 @@ func valueForCheckDigit(r string) int {
 }
 
 func isValidISBN(isbn string) bool {
-	return isValidCheckDigit(rune(isbn[len(isbn)-1])) && isValidPrefix(isbn)
+	return isValidCheckDigit(rune(isbn[len(isbn)-1])) && isValidPrefix(isbn) && isValidLength(isbn)
 }
 
 func isValidCheckDigit(checkDigit rune) bool {
@@ -52,4 +52,8 @@ func isValidPrefix(isbn string) bool {
 		}
 	}
 	return true
+}
+
+func isValidLength(isbn string) bool {
+	return len(isbn) == 10
 }
