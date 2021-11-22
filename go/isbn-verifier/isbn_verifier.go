@@ -1,23 +1,43 @@
 package isbn
 
-import "unicode"
+import (
+	"log"
+	"strconv"
+	"strings"
+	"unicode"
+)
 
 func IsValidISBN(isbn string) bool {
 	if !isValidISBN(isbn) {
 		return false
 	}
-	return false
+	return isbnSum(isbn)%11 == 0
+}
+
+func isbnSum(isbn string) (sum int) {
+	isbnWithoutDashes := strings.ReplaceAll(isbn, "-", "")
+	for i, r := range isbnWithoutDashes {
+		value := valueForCheckDigit(string(r))
+		multiplier := 10 - i
+		sum += value * multiplier
+	}
+	log.Printf("isbnSum(%s)= %d\n", isbn, sum)
+	return sum
+}
+
+func valueForCheckDigit(r string) int {
+	if r == "X" || r == "x" {
+		return 10
+	}
+	value, err := strconv.Atoi(r)
+	if err != nil {
+		log.Fatalf("failed to convert %v to int", r)
+	}
+	return value
 }
 
 func isValidISBN(isbn string) bool {
-	if !isValidCheckDigit(rune(isbn[len(isbn)-1])) {
-		return false
-	}
-	if !isValidPrefix(isbn) {
-		return false
-	}
-	return true
-
+	return isValidCheckDigit(rune(isbn[len(isbn)-1])) && isValidPrefix(isbn)
 }
 
 func isValidCheckDigit(checkDigit rune) bool {
@@ -27,7 +47,7 @@ func isValidCheckDigit(checkDigit rune) bool {
 // Prefix in this context is the entire ISBN excluding the check digit
 func isValidPrefix(isbn string) bool {
 	for _, c := range isbn[0 : len(isbn)-1] {
-		if c != '-' || unicode.IsDigit(c) {
+		if c != '-' && !unicode.IsDigit(c) {
 			return false
 		}
 	}
