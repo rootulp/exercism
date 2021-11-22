@@ -37,11 +37,15 @@ func valueForCheckDigit(r string) int {
 }
 
 func isValidISBN(isbn string) bool {
-	return isValidCheckDigit(rune(isbn[len(isbn)-1])) && isValidPrefix(isbn) && isValidLength(isbn)
+	return isValidLength(isbn) && isValidCheckDigit(isbn) && isValidPrefix(isbn)
 }
 
-func isValidCheckDigit(checkDigit rune) bool {
-	return unicode.IsDigit(checkDigit) || checkDigit == 'X'
+func isValidCheckDigit(isbn string) bool {
+	if len(isbn) < 1 {
+		return false
+	}
+	r := rune(isbn[len(isbn)-1])
+	return unicode.IsDigit(r) || r == 'X'
 }
 
 // Prefix in this context is the entire ISBN excluding the check digit
