@@ -8,36 +8,39 @@ import (
 )
 
 func IsValidISBN(isbn string) bool {
-	isbnWithoutDashes := strings.ReplaceAll(isbn, "-", "")
-	if !isValidISBN(isbnWithoutDashes) {
+	withoutDashes := strings.ReplaceAll(isbn, "-", "")
+	if !isValidISBN(withoutDashes) {
 		return false
 	}
-	return isbnSum(isbnWithoutDashes)%11 == 0
+	return sum(withoutDashes)%11 == 0
 }
 
-func isbnSum(isbn string) (sum int) {
-	for i, r := range isbn {
-		value := valueForCheckDigit(string(r))
-		multiplier := 10 - i
+func sum(isbn string) (sum int) {
+	for index, digit := range isbn {
+		value := valueForDigit(digit)
+		multiplier := 10 - index
 		sum += value * multiplier
 	}
-	log.Printf("isbnSum(%s): %d\n", isbn, sum)
 	return sum
 }
 
-func valueForCheckDigit(r string) int {
-	if r == "X" || r == "x" {
+func valueForDigit(digit rune) int {
+	if digit == 'X' {
 		return 10
 	}
-	value, err := strconv.Atoi(r)
+	value, err := strconv.Atoi(string(digit))
 	if err != nil {
-		log.Fatalf("failed to convert %v to int", r)
+		log.Fatalf("failed to convert %v to int", digit)
 	}
 	return value
 }
 
 func isValidISBN(isbn string) bool {
 	return isValidLength(isbn) && isValidCheckDigit(isbn) && isValidPrefix(isbn)
+}
+
+func isValidLength(isbn string) bool {
+	return len(isbn) == 10
 }
 
 func isValidCheckDigit(isbn string) bool {
@@ -56,8 +59,4 @@ func isValidPrefix(isbn string) bool {
 		}
 	}
 	return true
-}
-
-func isValidLength(isbn string) bool {
-	return len(isbn) == 10
 }
