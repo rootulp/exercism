@@ -30,7 +30,7 @@ func getProduct(digits string) (product int64, e error) {
 	for _, digit := range digits {
 		d, err := strconv.Atoi(string(digit))
 		if err != nil {
-			return -1, fmt.Errorf("cannot conver %v to int", digit)
+			return -1, fmt.Errorf("cannot convert %v to int", digit)
 		}
 		product *= int64(d)
 	}
