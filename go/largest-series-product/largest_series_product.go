@@ -11,9 +11,8 @@ func LargestSeriesProduct(digits string, span int) (largestProduct int64, e erro
 		return -1, errors.New("span must not be negative")
 	}
 	if span > len(digits) {
-		return -1, errors.New("error span can not be larger than the number of digits provided")
+		return -1, errors.New("span must be larger than digits length")
 	}
-	fmt.Printf("LargestSeriesProduct(%v, %v)\n", digits, span)
 	for i := 0; i <= len(digits)-span; i++ {
 		product, err := getProduct(digits[i : i+span])
 		if err != nil {
@@ -35,6 +34,5 @@ func getProduct(digits string) (product int64, e error) {
 		}
 		product *= int64(d)
 	}
-	fmt.Printf("getProduct(%v)=%v\n", digits, product)
 	return product, nil
 }
