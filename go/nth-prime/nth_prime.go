@@ -1,5 +1,25 @@
 package prime
 
 func Nth(n int) (int, bool) {
-	panic("Implement the func for it to return Nth prime number")
+	if n <= 0 {
+		return 0, false
+	}
+	primes := []int{}
+	candidate := 2
+	for len(primes) != n {
+		if isPrime(candidate) {
+			primes = append(primes, candidate)
+		}
+		candidate += 1
+	}
+	return primes[n-1], true
+}
+
+func isPrime(x int) bool {
+	for i := 2; i < x; i++ {
+		if x%i == 0 {
+			return false
+		}
+	}
+	return true
 }
