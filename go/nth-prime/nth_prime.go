@@ -4,7 +4,11 @@ func Nth(n int) (int, bool) {
 	if n <= 0 {
 		return 0, false
 	}
-	primes := []int{}
+	primes := getPrimesUpTo(n)
+	return primes[n-1], true
+}
+
+func getPrimesUpTo(n int) (primes []int) {
 	candidate := 2
 	for len(primes) != n {
 		if isPrime(candidate) {
@@ -12,7 +16,7 @@ func Nth(n int) (int, bool) {
 		}
 		candidate += 1
 	}
-	return primes[n-1], true
+	return primes
 }
 
 func isPrime(x int) bool {
