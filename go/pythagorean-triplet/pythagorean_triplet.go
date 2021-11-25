@@ -7,8 +7,8 @@ type Triplet [3]int
 // Range returns a list of all Pythagorean triplets with sides in the
 // range min to max inclusive.
 func Range(min, max int) (result []Triplet) {
-	for i := min; i <= max; i++ {
-		for j := i + 1; j <= max; j++ {
+	for i := min; i <= max-2; i++ {
+		for j := i + 1; j <= max-1; j++ {
 			for k := j + 1; k <= max; k++ {
 				if isTriplet(i, j, k) {
 					result = append(result, Triplet{i, j, k})
