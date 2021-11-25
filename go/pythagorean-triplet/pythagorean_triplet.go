@@ -32,7 +32,3 @@ func Sum(p int) (result []Triplet) {
 	}
 	return result
 }
-
-func isTriplet(a int, b int, c int) bool {
-	return math.Pow(float64(a), 2)+math.Pow(float64(b), 2) == math.Pow(float64(c), 2)
-}
