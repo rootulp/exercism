@@ -19,15 +19,21 @@ func Range(min, max int) (result []Triplet) {
 	return result
 }
 
-func isTriplet(a int, b int, c int) bool {
-	return math.Pow(float64(a), 2)+math.Pow(float64(b), 2) == math.Pow(float64(c), 2)
-}
-
 // Sum returns a list of all Pythagorean triplets where the sum a+b+c
 // (the perimeter) is equal to p.
 // The three elements of each returned triplet must be in order,
 // t[0] <= t[1] <= t[2], and the list of triplets must be in lexicographic
 // order.
-func Sum(p int) []Triplet {
-	panic("Please implement the Sum function")
+func Sum(p int) (result []Triplet) {
+	candidates := Range(0, p)
+	for _, candidate := range candidates {
+		if candidate[0]+candidate[1]+candidate[2] == p {
+			result = append(result, candidate)
+		}
+	}
+	return result
+}
+
+func isTriplet(a int, b int, c int) bool {
+	return math.Pow(float64(a), 2)+math.Pow(float64(b), 2) == math.Pow(float64(c), 2)
 }
