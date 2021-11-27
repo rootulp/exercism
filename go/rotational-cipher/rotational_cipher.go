@@ -16,9 +16,6 @@ func RotationalCipher(plain string, shiftKey int) (cipherText string) {
 }
 
 func rotate(r rune, shiftKey int) (result rune) {
-	if unicode.IsPunct(r) {
-		return r
-	}
 	if unicode.IsLower(r) {
 		return rotateLower(r, shiftKey)
 	} else if unicode.IsUpper(r) {
