@@ -1,9 +1,12 @@
 package rotationalcipher
 
 import (
-	"log"
 	"unicode"
 )
+
+const LETTERS_IN_ALPHABET = 26
+const UPPERCASE_A = 65
+const LOWERCASE_A = 97
 
 func RotationalCipher(plain string, shiftKey int) (cipherText string) {
 	for _, r := range plain {
@@ -25,17 +28,11 @@ func rotate(r rune, shiftKey int) (result rune) {
 }
 
 func rotateLower(r rune, shiftKey int) rune {
-	// 'a' is 97
-	// 'z' is 122
-	v := (int(r)-97+shiftKey)%26 + 97
-	// log.Printf("rotateLower(%d, %d) = %d", r, shiftKey, v)
+	v := (int(r)-LOWERCASE_A+shiftKey)%LETTERS_IN_ALPHABET + LOWERCASE_A
 	return rune(v)
 }
 
 func rotateUpper(r rune, shiftKey int) rune {
-	// 'A' is 65
-	// 'Z' is 90
-	v := (int(r)-65+shiftKey)%26 + 65
-	log.Printf("rotateUpper(%d, %d) = %d", r, shiftKey, v)
+	v := (int(r)-UPPERCASE_A+shiftKey)%LETTERS_IN_ALPHABET + UPPERCASE_A
 	return rune(v)
 }
