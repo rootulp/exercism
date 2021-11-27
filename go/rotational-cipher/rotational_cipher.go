@@ -27,12 +27,14 @@ func rotate(r rune, shiftKey int) (result rune) {
 	return r
 }
 
-func rotateLower(r rune, shiftKey int) rune {
-	v := (int(r)-LOWERCASE_A+shiftKey)%LETTERS_IN_ALPHABET + LOWERCASE_A
-	return rune(v)
+func rotateUpper(r rune, shiftKey int) rune {
+	return rotateLetter(r, shiftKey, UPPERCASE_A)
 }
 
-func rotateUpper(r rune, shiftKey int) rune {
-	v := (int(r)-UPPERCASE_A+shiftKey)%LETTERS_IN_ALPHABET + UPPERCASE_A
-	return rune(v)
+func rotateLower(r rune, shiftKey int) rune {
+	return rotateLetter(r, shiftKey, LOWERCASE_A)
+}
+
+func rotateLetter(r rune, shiftKey int, offset int) rune {
+	return rune((int(r)-offset+shiftKey)%LETTERS_IN_ALPHABET + offset)
 }
