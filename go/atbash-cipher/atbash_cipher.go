@@ -41,11 +41,11 @@ func Atbash(message string) (ciphertext string) {
 	for _, r := range removeNonAlphanumeric(strings.ToLower(message)) {
 		if unicode.IsDigit(r) {
 			ciphertext += string(r)
-		} else {
+		} else if unicode.IsLetter(r) {
 			ciphertext += string(atbash[r])
 		}
 	}
-	return splitEveryN(ciphertext, 5)
+	return strings.Join(splitEveryN(ciphertext, 5), " ")
 }
 
 func removeNonAlphanumeric(s string) (result string) {
@@ -57,11 +57,11 @@ func removeNonAlphanumeric(s string) (result string) {
 	return result
 }
 
-func splitEveryN(message string, n int) (result string) {
-	arr := []string{}
+func splitEveryN(message string, n int) (groups []string) {
 	for i := 0; i < len(message); i += n {
 		upperBound := math.Min(float64(len(message)), float64(i+n))
-		arr = append(arr, message[i:int(upperBound)])
+		group := message[i:int(upperBound)]
+		groups = append(groups, group)
 	}
-	return strings.Join(arr, " ")
+	return groups
 }
