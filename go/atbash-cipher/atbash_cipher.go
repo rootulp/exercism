@@ -39,11 +39,7 @@ var atbash = map[rune]rune{
 
 func Atbash(message string) (ciphertext string) {
 	for _, r := range removeNonAlphanumeric(strings.ToLower(message)) {
-		if unicode.IsDigit(r) {
-			ciphertext += string(r)
-		} else if unicode.IsLetter(r) {
-			ciphertext += string(atbash[r])
-		}
+		ciphertext += string(encode(r))
 	}
 	return strings.Join(splitEveryN(ciphertext, 5), " ")
 }
@@ -64,4 +60,11 @@ func splitEveryN(message string, n int) (groups []string) {
 		groups = append(groups, group)
 	}
 	return groups
+}
+
+func encode(r rune) rune {
+	if unicode.IsLetter(r) {
+		return atbash[r]
+	}
+	return r
 }
