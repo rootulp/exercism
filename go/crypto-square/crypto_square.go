@@ -7,21 +7,20 @@ import (
 )
 
 func Encode(plainText string) (cipherText string) {
-	formatted := removeFormating(plainText)
-	numCols, numRows := getRectangleDimensions(len(formatted))
-	rectangle := getRectangle(formatted, numCols, numRows)
+	stripped := stripFormatting(plainText)
+	numCols, numRows := getRectangleDimensions(len(stripped))
+	rectangle := getRectangle(stripped, numCols, numRows)
 	encoded := getEncoded(rectangle, numCols, numRows)
-	cipherText = strings.Join(splitEveryN(encoded, numRows), " ")
-	return cipherText
+	return strings.Join(splitEveryN(encoded, numRows), " ")
 }
 
-func removeFormating(plainText string) (result string) {
+func stripFormatting(plainText string) (stripped string) {
 	for _, r := range strings.ToLower(plainText) {
 		if unicode.IsLetter(r) || unicode.IsDigit(r) {
-			result += string(r)
+			stripped += string(r)
 		}
 	}
-	return result
+	return stripped
 }
 
 func getRectangleDimensions(messageLength int) (numCols int, numRows int) {
