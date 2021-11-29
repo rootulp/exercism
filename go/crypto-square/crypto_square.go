@@ -18,7 +18,7 @@ func Encode(plainText string) (cipherText string) {
 
 func removeFormating(plainText string) (result string) {
 	for _, r := range strings.ToLower(plainText) {
-		if unicode.IsLetter(r) {
+		if unicode.IsLetter(r) || unicode.IsDigit(r) {
 			result += string(r)
 		}
 	}
