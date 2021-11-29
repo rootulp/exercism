@@ -1,7 +1,6 @@
 package cryptosquare
 
 import (
-	"fmt"
 	"math"
 	"strings"
 	"unicode"
@@ -49,7 +48,6 @@ func getRectangle(message string, numCols int, numRows int) (rectangle [][]rune)
 			}
 		}
 	}
-	fmt.Printf("rectangle %v\n", rectangle)
 	return rectangle
 }
 
@@ -67,7 +65,6 @@ func getEncoded(rectangle [][]rune, numCols int, numRows int) (encoded string) {
 			encoded += string(rectangle[row][col])
 		}
 	}
-	fmt.Printf("encoded %v\n", encoded)
 	return encoded
 }
 
@@ -76,6 +73,5 @@ func splitEveryN(message string, n int) (chunked []string) {
 		upperBound := int(math.Min(float64(len(message)), float64(i+n)))
 		chunked = append(chunked, message[i:upperBound])
 	}
-	fmt.Printf("chunked %v\n", chunked)
 	return chunked
 }
