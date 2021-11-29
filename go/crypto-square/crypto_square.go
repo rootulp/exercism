@@ -11,8 +11,9 @@ func Encode(plainText string) (cipherText string) {
 	formatted := removeFormating(plainText)
 	numCols, numRows := getRectangleDimensions(len(formatted))
 	rectangle := getRectangle(formatted, numCols, numRows)
-	fmt.Printf("rectangle %v\n", rectangle)
-	return formatted
+	encoded := getEncoded(rectangle)
+	cipherText = strings.Join(splitEveryN(encoded, numRows), " ")
+	return cipherText
 }
 
 func removeFormating(plainText string) (result string) {
@@ -31,7 +32,7 @@ func getRectangleDimensions(messageLength int) (numCols int, numRows int) {
 	} else if (x+1)*x >= float64(messageLength) {
 		return int(x + 1), int(x)
 	} else {
-		return int(x + 1), int(x)
+		return int(x + 1), int(x + 1)
 	}
 }
 
@@ -40,10 +41,15 @@ func getRectangle(message string, numCols int, numRows int) (rectangle [][]rune)
 	index := 0
 	for row := 0; row < numRows; row++ {
 		for col := 0; col < numCols; col++ {
-			rectangle[row][col] = []rune(message)[index]
-			index += 1
+			if index >= len(message) {
+				rectangle[row][col] = ' '
+			} else {
+				rectangle[row][col] = []rune(message)[index]
+				index += 1
+			}
 		}
 	}
+	fmt.Printf("rectangle %v\n", rectangle)
 	return rectangle
 }
 
@@ -53,4 +59,26 @@ func initializeRectangle(numCols int, numRows int) (rectangle [][]rune) {
 		rectangle[i] = make([]rune, numCols)
 	}
 	return rectangle
+}
+
+func getEncoded(rectangle [][]rune) (encoded string) {
+	numRows := len(rectangle)
+	numCols := len(rectangle[0])
+
+	for col := 0; col < numCols; col++ {
+		for row := 0; row < numRows; row++ {
+			encoded += string(rectangle[row][col])
+		}
+	}
+	fmt.Printf("encoded %v\n", encoded)
+	return encoded
+}
+
+func splitEveryN(message string, n int) (chunked []string) {
+	for i := 0; i < len(message); i += n {
+		upperBound := int(math.Min(float64(len(message)), float64(i+n)))
+		chunked = append(chunked, message[i:upperBound])
+	}
+	fmt.Printf("chunked %v\n", chunked)
+	return chunked
 }
