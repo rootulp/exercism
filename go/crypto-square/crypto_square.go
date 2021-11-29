@@ -11,7 +11,7 @@ func Encode(plainText string) (cipherText string) {
 	formatted := removeFormating(plainText)
 	numCols, numRows := getRectangleDimensions(len(formatted))
 	rectangle := getRectangle(formatted, numCols, numRows)
-	encoded := getEncoded(rectangle)
+	encoded := getEncoded(rectangle, numCols, numRows)
 	cipherText = strings.Join(splitEveryN(encoded, numRows), " ")
 	return cipherText
 }
@@ -61,10 +61,7 @@ func initializeRectangle(numCols int, numRows int) (rectangle [][]rune) {
 	return rectangle
 }
 
-func getEncoded(rectangle [][]rune) (encoded string) {
-	numRows := len(rectangle)
-	numCols := len(rectangle[0])
-
+func getEncoded(rectangle [][]rune, numCols int, numRows int) (encoded string) {
 	for col := 0; col < numCols; col++ {
 		for row := 0; row < numRows; row++ {
 			encoded += string(rectangle[row][col])
