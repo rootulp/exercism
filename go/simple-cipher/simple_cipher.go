@@ -46,8 +46,7 @@ func NewShift(distance int) Cipher {
 func (c shift) Encode(input string) (encoded string) {
 	for _, r := range strings.ToLower(input) {
 		if unicode.IsLetter(r) {
-			encodedR := rune(int(r-97)+c.distance)%26 + 97
-			encoded += string(encodedR)
+			encoded += string(shiftRune(r, c.distance))
 		}
 	}
 	return encoded
@@ -56,8 +55,7 @@ func (c shift) Encode(input string) (encoded string) {
 func (c shift) Decode(input string) (decoded string) {
 	for _, r := range strings.ToLower(input) {
 		if unicode.IsLetter(r) {
-			d := rune(((int(r-97)-c.distance)%26)+26)%26 + 97
-			decoded += string(d)
+			decoded += string(shiftRune(r, -c.distance))
 		}
 	}
 	return decoded
@@ -75,4 +73,9 @@ func (v vigenere) Encode(input string) string {
 
 func (v vigenere) Decode(input string) string {
 	panic("Please implement the Decode function")
+}
+
+func shiftRune(r rune, shift int) (shiftedRune rune) {
+	d := rune(((int(r-97)+shift)%26)+26)%26 + 97
+	return rune(d)
 }
