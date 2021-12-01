@@ -1,10 +1,32 @@
 package cipher
 
+import (
+	"strings"
+	"unicode"
+)
+
 // Define the shift and vigenere types here.
 // Both types should satisfy the Cipher interface.
+type shift struct{}
+type vigenere struct{}
+type Caesar struct{}
 
 func NewCaesar() Cipher {
-	panic("Please implement the NewCaesar function")
+	return Caesar{}
+}
+
+func (c Caesar) Encode(s string) (encoded string) {
+	for _, r := range strings.ToLower(s) {
+		if unicode.IsLetter(r) {
+			encodedR := ((r-97)+3)%26 + 97
+			encoded += string(encodedR)
+		}
+	}
+	return encoded
+}
+
+func (c Caesar) Decode(s string) (decoded string) {
+	return s
 }
 
 func NewShift(distance int) Cipher {
