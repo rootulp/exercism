@@ -40,13 +40,16 @@ func (c caesar) Decode(s string) (decoded string) {
 }
 
 func NewShift(distance int) Cipher {
+	if distance >= 26 || distance == 0 || distance <= -26 {
+		return nil
+	}
 	return shift{distance: distance}
 }
 
 func (c shift) Encode(input string) (encoded string) {
 	for _, r := range strings.ToLower(input) {
 		if unicode.IsLetter(r) {
-			encoded += string(shiftRune(r, c.distance))
+			encoded += string(shiftLetter(r, c.distance))
 		}
 	}
 	return encoded
@@ -55,7 +58,7 @@ func (c shift) Encode(input string) (encoded string) {
 func (c shift) Decode(input string) (decoded string) {
 	for _, r := range strings.ToLower(input) {
 		if unicode.IsLetter(r) {
-			decoded += string(shiftRune(r, -c.distance))
+			decoded += string(shiftLetter(r, -c.distance))
 		}
 	}
 	return decoded
@@ -75,7 +78,7 @@ func (v vigenere) Decode(input string) string {
 	panic("Please implement the Decode function")
 }
 
-func shiftRune(r rune, shift int) (shiftedRune rune) {
-	d := rune(((int(r-97)+shift)%26)+26)%26 + 97
+func shiftLetter(letter rune, distance int) (shifted rune) {
+	d := rune(((int(letter-97)+distance)%26)+26)%26 + 97
 	return rune(d)
 }
