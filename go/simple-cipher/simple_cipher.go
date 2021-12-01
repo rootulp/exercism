@@ -1,6 +1,7 @@
 package cipher
 
 import (
+	"fmt"
 	"strings"
 	"unicode"
 )
@@ -60,12 +61,25 @@ func NewVigenere(key string) Cipher {
 	}
 }
 
-func (v vigenere) Encode(input string) string {
-	panic("Please implement the Encode function")
+func (v vigenere) Encode(input string) (encoded string) {
+	for i, r := range stripFormatting(input) {
+		distance := getDistance(v.key, i)
+		if unicode.IsLetter(r) {
+			fmt.Printf("r: %v, distance: %v, shifted: %v\n", string(r), distance, string(shiftLetter(r, distance)))
+			encoded += string(shiftLetter(r, distance))
+		}
+	}
+	return encoded
 }
 
-func (v vigenere) Decode(input string) string {
-	panic("Please implement the Decode function")
+func (v vigenere) Decode(input string) (decoded string) {
+	for i, r := range stripFormatting(input) {
+		distance := getDistance(v.key, i)
+		if unicode.IsLetter(r) {
+			decoded += string(shiftLetter(r, -distance))
+		}
+	}
+	return decoded
 }
 
 func shiftLetter(letter rune, distance int) (shifted rune) {
@@ -73,4 +87,20 @@ func shiftLetter(letter rune, distance int) (shifted rune) {
 	// https://stackoverflow.com/questions/43018206/modulo-of-negative-integers-in-go
 	d := rune(((int(letter-97)+distance)%26)+26)%26 + 97
 	return rune(d)
+}
+
+func getDistance(key string, index int) (distance int) {
+	position := index % len(key)
+	distance = int([]rune(key)[position] - 97)
+	fmt.Printf("key %v, position %v, distance %v\n", key, position, distance)
+	return distance
+}
+
+func stripFormatting(input string) (stripped string) {
+	for _, c := range strings.ToLower(input) {
+		if unicode.IsLetter(c) {
+			stripped += string(c)
+		}
+	}
+	return stripped
 }
