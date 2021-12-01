@@ -68,7 +68,6 @@ func (v vigenere) Encode(input string) (encoded string) {
 	for i, r := range stripFormatting(input) {
 		distance := getDistance(v.key, i)
 		if unicode.IsLetter(r) {
-			fmt.Printf("r: %v, distance: %v, shifted: %v\n", string(r), distance, string(shiftLetter(r, distance)))
 			encoded += string(shiftLetter(r, distance))
 		}
 	}
