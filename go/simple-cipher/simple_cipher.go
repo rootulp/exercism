@@ -20,8 +20,7 @@ func NewCaesar() Cipher {
 func (c caesar) Encode(s string) (encoded string) {
 	for _, r := range strings.ToLower(s) {
 		if unicode.IsLetter(r) {
-			encodedR := ((r-97)+3)%26 + 97
-			encoded += string(encodedR)
+			encoded += string(shiftLetter(r, 3))
 		}
 	}
 	return encoded
@@ -30,10 +29,7 @@ func (c caesar) Encode(s string) (encoded string) {
 func (c caesar) Decode(s string) (decoded string) {
 	for _, r := range strings.ToLower(s) {
 		if unicode.IsLetter(r) {
-			// HACKHACK go % operator returns a negative number for -2 % 26 so add 26 then modulo 26
-			// https://stackoverflow.com/questions/43018206/modulo-of-negative-integers-in-go
-			decodedR := (((r-97)-3)%26+26)%26 + 97
-			decoded += string(decodedR)
+			decoded += string(shiftLetter(r, -3))
 		}
 	}
 	return decoded
@@ -79,6 +75,8 @@ func (v vigenere) Decode(input string) string {
 }
 
 func shiftLetter(letter rune, distance int) (shifted rune) {
+	// HACKHACK go % operator returns a negative number for -2 % 26 so add 26 then modulo 26
+	// https://stackoverflow.com/questions/43018206/modulo-of-negative-integers-in-go
 	d := rune(((int(letter-97)+distance)%26)+26)%26 + 97
 	return rune(d)
 }
