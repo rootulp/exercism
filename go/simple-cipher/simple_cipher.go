@@ -5,19 +5,19 @@ import (
 	"unicode"
 )
 
-// Define the shift and vigenere types here.
-// Both types should satisfy the Cipher interface.
+type caesar struct{}
 type shift struct {
 	distance int
 }
-type vigenere struct{}
-type Caesar struct{}
-
-func NewCaesar() Cipher {
-	return Caesar{}
+type vigenere struct {
+	key string
 }
 
-func (c Caesar) Encode(s string) (encoded string) {
+func NewCaesar() Cipher {
+	return caesar{}
+}
+
+func (c caesar) Encode(s string) (encoded string) {
 	for _, r := range strings.ToLower(s) {
 		if unicode.IsLetter(r) {
 			encodedR := ((r-97)+3)%26 + 97
@@ -27,7 +27,7 @@ func (c Caesar) Encode(s string) (encoded string) {
 	return encoded
 }
 
-func (c Caesar) Decode(s string) (decoded string) {
+func (c caesar) Decode(s string) (decoded string) {
 	for _, r := range strings.ToLower(s) {
 		if unicode.IsLetter(r) {
 			// HACKHACK go % operator returns a negative number for -2 % 26 so add 26 then modulo 26
@@ -56,7 +56,7 @@ func (c shift) Encode(input string) (encoded string) {
 func (c shift) Decode(input string) (decoded string) {
 	for _, r := range strings.ToLower(input) {
 		if unicode.IsLetter(r) {
-			d := rune(int(r-rune(c.distance))+c.distance)%26 + 97
+			d := rune(((int(r-97)-c.distance)%26)+26)%26 + 97
 			decoded += string(d)
 		}
 	}
@@ -64,7 +64,9 @@ func (c shift) Decode(input string) (decoded string) {
 }
 
 func NewVigenere(key string) Cipher {
-	panic("Please implement the NewVigenere function")
+	return vigenere{
+		key: key,
+	}
 }
 
 func (v vigenere) Encode(input string) string {
