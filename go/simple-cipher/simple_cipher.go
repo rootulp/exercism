@@ -56,6 +56,9 @@ func (c shift) Decode(input string) (decoded string) {
 }
 
 func NewVigenere(key string) Cipher {
+	if !isValid(key) {
+		return nil
+	}
 	return vigenere{
 		key: key,
 	}
@@ -103,4 +106,17 @@ func stripFormatting(input string) (stripped string) {
 		}
 	}
 	return stripped
+}
+
+func isValid(key string) bool {
+	if key == "" {
+		return false
+	}
+	if key == "a" || key == "aa" {
+		return false
+	}
+	if stripFormatting(key) != key {
+		return false
+	}
+	return true
 }
