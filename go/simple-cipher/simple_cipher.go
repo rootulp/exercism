@@ -18,21 +18,11 @@ func NewCaesar() Cipher {
 }
 
 func (c caesar) Encode(s string) (encoded string) {
-	for _, r := range strings.ToLower(s) {
-		if unicode.IsLetter(r) {
-			encoded += string(shiftLetter(r, 3))
-		}
-	}
-	return encoded
+	return NewShift(3).Encode(s)
 }
 
 func (c caesar) Decode(s string) (decoded string) {
-	for _, r := range strings.ToLower(s) {
-		if unicode.IsLetter(r) {
-			decoded += string(shiftLetter(r, -3))
-		}
-	}
-	return decoded
+	return NewShift(-3).Encode(s)
 }
 
 func NewShift(distance int) Cipher {
