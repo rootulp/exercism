@@ -5,7 +5,9 @@ import (
 	"unicode"
 )
 
-type caesar struct{}
+type caesar struct {
+	distance int
+}
 type shift struct {
 	distance int
 }
@@ -14,15 +16,17 @@ type vigenere struct {
 }
 
 func NewCaesar() Cipher {
-	return caesar{}
+	return caesar{
+		distance: 3,
+	}
 }
 
 func (c caesar) Encode(s string) (encoded string) {
-	return NewShift(3).Encode(s)
+	return NewShift(c.distance).Encode(s)
 }
 
 func (c caesar) Decode(s string) (decoded string) {
-	return NewShift(-3).Encode(s)
+	return NewShift(-c.distance).Encode(s)
 }
 
 func NewShift(distance int) Cipher {
