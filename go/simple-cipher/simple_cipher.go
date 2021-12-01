@@ -1,14 +1,15 @@
 package cipher
 
 import (
-	"fmt"
 	"strings"
 	"unicode"
 )
 
 // Define the shift and vigenere types here.
 // Both types should satisfy the Cipher interface.
-type shift struct{}
+type shift struct {
+	distance int
+}
 type vigenere struct{}
 type Caesar struct{}
 
@@ -32,7 +33,6 @@ func (c Caesar) Decode(s string) (decoded string) {
 			// HACKHACK go % operator returns a negative number for -2 % 26 so add 26 then modulo 26
 			// https://stackoverflow.com/questions/43018206/modulo-of-negative-integers-in-go
 			decodedR := (((r-97)-3)%26+26)%26 + 97
-			fmt.Printf("r %v, decodedR %v\n", string(r), string(decodedR))
 			decoded += string(decodedR)
 		}
 	}
@@ -40,11 +40,17 @@ func (c Caesar) Decode(s string) (decoded string) {
 }
 
 func NewShift(distance int) Cipher {
-	panic("Please implement the NewShift function")
+	return shift{distance: distance}
 }
 
-func (c shift) Encode(input string) string {
-	panic("Please implement the Encode function")
+func (c shift) Encode(input string) (encoded string) {
+	for _, r := range strings.ToLower(input) {
+		if unicode.IsLetter(r) {
+			encodedR := rune(int(r-97)+c.distance)%26 + 97
+			encoded += string(encodedR)
+		}
+	}
+	return encoded
 }
 
 func (c shift) Decode(input string) string {
