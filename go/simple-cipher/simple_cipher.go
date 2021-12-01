@@ -53,8 +53,14 @@ func (c shift) Encode(input string) (encoded string) {
 	return encoded
 }
 
-func (c shift) Decode(input string) string {
-	panic("Please implement the Decode function")
+func (c shift) Decode(input string) (decoded string) {
+	for _, r := range strings.ToLower(input) {
+		if unicode.IsLetter(r) {
+			d := rune(int(r-rune(c.distance))+c.distance)%26 + 97
+			decoded += string(d)
+		}
+	}
+	return decoded
 }
 
 func NewVigenere(key string) Cipher {
