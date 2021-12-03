@@ -10,6 +10,9 @@ func ConvertToBase(inputBase int, inputDigits []int, outputBase int) (outputDigi
 	if inputBase < 2 {
 		return []int{}, errors.New("input base must be >= 2")
 	}
+	if negativeDigit(inputDigits) {
+		return []int{}, errors.New("all digits must satisfy 0 <= d < input base")
+	}
 	base10 := getBase10Input(inputBase, inputDigits)
 	if base10 == 0 {
 		return []int{0}, nil
@@ -28,6 +31,15 @@ func getBase10Input(inputBase int, inputDigits []int) (base10Input int) {
 	}
 	fmt.Printf("getBase10Input(%d, %v)=%d\n", inputBase, inputDigits, base10Input)
 	return base10Input
+}
+
+func negativeDigit(input []int) bool {
+	for _, digit := range input {
+		if digit < 0 {
+			return true
+		}
+	}
+	return false
 }
 
 func reverse(input []int) (reversed []int) {
