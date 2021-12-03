@@ -1,11 +1,15 @@
 package allyourbase
 
 import (
+	"errors"
 	"fmt"
 	"math"
 )
 
 func ConvertToBase(inputBase int, inputDigits []int, outputBase int) (outputDigits []int, e error) {
+	if inputBase < 2 {
+		return []int{}, errors.New("input base must be >= 2")
+	}
 	base10 := getBase10Input(inputBase, inputDigits)
 	if base10 == 0 {
 		return []int{0}, nil
