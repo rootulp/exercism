@@ -6,6 +6,9 @@ import (
 )
 
 func ConvertToBase(inputBase int, inputDigits []int, outputBase int) (outputDigits []int, e error) {
+	if len(inputDigits) == 0 {
+		return []int{0}, nil
+	}
 	base10 := getBase10Input(inputBase, inputDigits)
 	for base10 > 0 {
 		digit := base10 % outputBase
