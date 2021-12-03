@@ -2,7 +2,6 @@ package allyourbase
 
 import (
 	"errors"
-	"fmt"
 	"math"
 )
 
@@ -32,16 +31,12 @@ func getBase10Input(inputBase int, inputDigits []int) (base10Input int) {
 	for i, digit := range reverse(inputDigits) {
 		base10Input += powInt(inputBase, i) * digit
 	}
-	fmt.Printf("getBase10Input(%d, %v)=%d\n", inputBase, inputDigits, base10Input)
 	return base10Input
 }
 
 func invalidDigit(inputBase int, input []int) bool {
 	for _, digit := range input {
-		if digit < 0 {
-			return true
-		}
-		if digit >= inputBase {
+		if digit < 0 || digit >= inputBase {
 			return true
 		}
 	}
