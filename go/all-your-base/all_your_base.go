@@ -9,7 +9,7 @@ func ConvertToBase(inputBase int, inputDigits []int, outputBase int) (outputDigi
 	base10 := getBase10Input(inputBase, inputDigits)
 	for base10 > 0 {
 		digit := base10 % outputBase
-		outputDigits = append(outputDigits, digit)
+		outputDigits = append([]int{digit}, outputDigits...)
 		base10 = base10 / outputBase
 	}
 	return outputDigits, nil
