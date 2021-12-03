@@ -3,24 +3,16 @@ package allyourbase
 import (
 	"fmt"
 	"math"
-	"strconv"
 )
 
 func ConvertToBase(inputBase int, inputDigits []int, outputBase int) (outputDigits []int, e error) {
 	base10 := getBase10Input(inputBase, inputDigits)
-	for i, d := range reverse(getDigits(base10)) {
-		digit := powInt(outputBase, i) * d
+	for base10 > 0 {
+		digit := base10 % outputBase
 		outputDigits = append(outputDigits, digit)
+		base10 = base10 / outputBase
 	}
 	return outputDigits, nil
-}
-
-func getDigits(input int) (digits []int) {
-	for _, d := range strconv.Itoa(input) {
-		digits = append([]int{int(d - '0')}, digits...)
-	}
-	fmt.Printf("digits(%d)=%v\n", input, digits)
-	return digits
 }
 
 func getBase10Input(inputBase int, inputDigits []int) (base10Input int) {
