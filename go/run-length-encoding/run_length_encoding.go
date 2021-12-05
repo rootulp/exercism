@@ -1,9 +1,9 @@
 package encode
 
-func RunLengthEncode(input string) string {
-	panic("Please implement the RunLengthEncode function")
+func RunLengthEncode(input string) (encoded string) {
+	return input
 }
 
-func RunLengthDecode(input string) string {
+func RunLengthDecode(input string) (decoded string) {
 	panic("Please implement the RunLengthDecode function")
 }
