@@ -1,6 +1,10 @@
 package encode
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+	"unicode"
+)
 
 func RunLengthEncode(input string) (encoded string) {
 	if input == "" {
@@ -32,5 +36,29 @@ func encodeSegment(char rune, occurences int) string {
 }
 
 func RunLengthDecode(input string) (decoded string) {
-	panic("Please implement the RunLengthDecode function")
+	if input == "" {
+		return input
+	}
+
+	runes := []rune(input)
+	for i := 0; i < len(runes); i += 1 {
+		if unicode.IsLetter(runes[i]) {
+			decoded += string(runes[i])
+		} else if unicode.IsDigit(runes[i]) {
+			occurences, err := strconv.Atoi(string(runes[i]))
+			if err != nil {
+				panic(err)
+			}
+			decoded += decodeSegment(runes[i+1], occurences)
+			i += 1
+		}
+	}
+	return decoded
+}
+
+func decodeSegment(character rune, occurences int) (segment string) {
+	for i := 0; i < occurences; i++ {
+		segment += string(character)
+	}
+	return segment
 }
