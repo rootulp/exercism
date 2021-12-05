@@ -46,10 +46,10 @@ func RunLengthDecode(input string) (decoded string) {
 			decoded += string(runes[i])
 		} else if unicode.IsDigit(runes[i]) {
 			occurences := getOccurences(runes, i)
-			characterLengthOfOccurences := len(fmt.Sprint(occurences))
-			character := runes[i+characterLengthOfOccurences]
+			lenDigits := len(fmt.Sprint(occurences))
+			character := runes[i+lenDigits]
 			decoded += decodeSegment(character, occurences)
-			i += characterLengthOfOccurences
+			i += lenDigits
 		}
 	}
 	return decoded
