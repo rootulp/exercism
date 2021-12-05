@@ -16,12 +16,12 @@ func RunLengthEncode(input string) (encoded string) {
 		if prevChar == 0 { // an uninitizlied rune is 0
 			prevChar = char
 			prevOccurences += 1
+		} else if char == prevChar {
+			prevOccurences += 1
 		} else if char != prevChar {
 			encoded += encodeSegment(prevChar, prevOccurences)
 			prevChar = char
 			prevOccurences = 1
-		} else if char == prevChar {
-			prevOccurences += 1
 		}
 	}
 	encoded += encodeSegment(prevChar, prevOccurences)
