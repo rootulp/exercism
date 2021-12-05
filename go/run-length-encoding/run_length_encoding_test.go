@@ -22,12 +22,12 @@ func TestRunLengthDecode(t *testing.T) {
 	}
 }
 
-// func TestRunLengthEncodeDecode(t *testing.T) {
-// 	for _, test := range encodeDecodeTests {
-// 		if actual := RunLengthDecode(RunLengthEncode(test.input)); actual != test.expected {
-// 			t.Errorf("FAIL %s - RunLengthDecode(RunLengthEncode(%s)) = %q, expected %q.",
-// 				test.description, test.input, actual, test.expected)
-// 		}
-// 		t.Logf("PASS %s", test.description)
-// 	}
-// }
+func TestRunLengthEncodeDecode(t *testing.T) {
+	for _, test := range encodeDecodeTests {
+		if actual := RunLengthDecode(RunLengthEncode(test.input)); actual != test.expected {
+			t.Errorf("FAIL %s - RunLengthDecode(RunLengthEncode(%s)) = %q, expected %q.",
+				test.description, test.input, actual, test.expected)
+		}
+		t.Logf("PASS %s", test.description)
+	}
+}
