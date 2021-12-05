@@ -58,7 +58,7 @@ func decodeSegment(character rune, occurences int) (segment string) {
 	return segment
 }
 
-func getOccurences(runes []rune, startIndex int) int {
+func getOccurences(runes []rune, startIndex int) (occurences int) {
 	endIndex := startIndex
 	for unicode.IsNumber(runes[endIndex]) {
 		endIndex++
@@ -67,6 +67,5 @@ func getOccurences(runes []rune, startIndex int) int {
 	if err != nil {
 		panic(err)
 	}
-	// fmt.Printf("getOccurences(%v, %v) = %v\n", runes, startIndex, occurences)
 	return occurences
 }
