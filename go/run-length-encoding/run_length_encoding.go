@@ -36,10 +36,6 @@ func encodeSegment(char rune, occurences int) string {
 }
 
 func RunLengthDecode(input string) (decoded string) {
-	if input == "" {
-		return input
-	}
-
 	runes := []rune(input)
 	for i := 0; i < len(runes); i += 1 {
 		if unicode.IsLetter(runes[i]) || unicode.IsSpace(runes[i]) {
