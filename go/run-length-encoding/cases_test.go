@@ -24,12 +24,12 @@ var decodeTests = []struct {
 	expected    string
 	description string
 }{
-	{"", "", "empty string"},
-	{"XYZ", "XYZ", "single characters only"},
-	{"2A3B4C", "AABBBCCCC", "string with no single characters"},
+	// {"", "", "empty string"},
+	// {"XYZ", "XYZ", "single characters only"},
+	// {"2A3B4C", "AABBBCCCC", "string with no single characters"},
 	{"12WB12W3B24WB", "WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB", "single characters with repeated characters"},
-	{"2 hs2q q2w2 ", "  hsqq qww  ", "multiple whitespace mixed in string"},
-	{"2a3b4c", "aabbbcccc", "lower case string"},
+	// {"2 hs2q q2w2 ", "  hsqq qww  ", "multiple whitespace mixed in string"},
+	// {"2a3b4c", "aabbbcccc", "lower case string"},
 }
 
 // encode and then decode

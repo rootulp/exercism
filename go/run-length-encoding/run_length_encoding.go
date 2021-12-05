@@ -45,12 +45,11 @@ func RunLengthDecode(input string) (decoded string) {
 		if unicode.IsLetter(runes[i]) {
 			decoded += string(runes[i])
 		} else if unicode.IsDigit(runes[i]) {
-			occurences, err := strconv.Atoi(string(runes[i]))
-			if err != nil {
-				panic(err)
-			}
-			decoded += decodeSegment(runes[i+1], occurences)
-			i += 1
+			occurences := getOccurences(runes, i)
+			characterLengthOfOccurences := len(fmt.Sprint(occurences))
+			character := runes[i+characterLengthOfOccurences]
+			decoded += decodeSegment(character, occurences)
+			i += characterLengthOfOccurences
 		}
 	}
 	return decoded
@@ -61,4 +60,17 @@ func decodeSegment(character rune, occurences int) (segment string) {
 		segment += string(character)
 	}
 	return segment
+}
+
+func getOccurences(runes []rune, startIndex int) int {
+	endIndex := startIndex
+	for unicode.IsNumber(runes[endIndex]) {
+		endIndex++
+	}
+	occurences, err := strconv.Atoi(string(runes[startIndex:endIndex]))
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("getOccurences(%v, %v) = %v\n", runes, startIndex, occurences)
+	return occurences
 }
