@@ -42,7 +42,7 @@ func RunLengthDecode(input string) (decoded string) {
 
 	runes := []rune(input)
 	for i := 0; i < len(runes); i += 1 {
-		if unicode.IsLetter(runes[i]) {
+		if unicode.IsLetter(runes[i]) || unicode.IsSpace(runes[i]) {
 			decoded += string(runes[i])
 		} else if unicode.IsDigit(runes[i]) {
 			occurences := getOccurences(runes, i)
@@ -71,6 +71,6 @@ func getOccurences(runes []rune, startIndex int) int {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("getOccurences(%v, %v) = %v\n", runes, startIndex, occurences)
+	// fmt.Printf("getOccurences(%v, %v) = %v\n", runes, startIndex, occurences)
 	return occurences
 }
