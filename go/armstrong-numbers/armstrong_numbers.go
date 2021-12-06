@@ -7,7 +7,10 @@ import (
 )
 
 func IsNumber(n int) bool {
-	sum := 0
+	return n == armstrongSum(n)
+}
+
+func armstrongSum(n int) (sum int) {
 	digits := fmt.Sprint(n)
 	for _, digit := range digits {
 		d, err := strconv.Atoi(string(digit))
@@ -16,7 +19,7 @@ func IsNumber(n int) bool {
 		}
 		sum += intPow(d, len(digits))
 	}
-	return sum == n
+	return sum
 }
 
 func intPow(n int, power int) int {
