@@ -14,6 +14,22 @@ func AreaCode(phoneNumber string) (areaCode string, e error) {
 	return number[0:3], nil
 }
 
+func ExchangeCode(phoneNumber string) (exchangeCode string, e error) {
+	number, err := Number(phoneNumber)
+	if err != nil {
+		return "", err
+	}
+	return number[3:6], nil
+}
+
+func SubscriberNumber(phoneNumber string) (subscriberNumber string, e error) {
+	number, err := Number(phoneNumber)
+	if err != nil {
+		return "", err
+	}
+	return number[6:], nil
+}
+
 func Number(phoneNumber string) (number string, e error) {
 	number, err := clean(phoneNumber)
 	if err != nil {
@@ -47,5 +63,17 @@ func clean(phoneNumber string) (number string, e error) {
 }
 
 func Format(phoneNumber string) (string, error) {
-	panic("Please implement the Format function")
+	areaCode, err := AreaCode(phoneNumber)
+	if err != nil {
+		return "", err
+	}
+	exchangeCode, err := ExchangeCode(phoneNumber)
+	if err != nil {
+		return "", err
+	}
+	subscriberNumber, err := SubscriberNumber(phoneNumber)
+	if err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("(%v) %v-%v", areaCode, exchangeCode, subscriberNumber), nil
 }
