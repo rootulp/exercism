@@ -6,7 +6,7 @@ import (
 	"unicode"
 )
 
-func AreaCode(phoneNumber string) (areaCode string, e error) {
+func AreaCode(phoneNumber string) (string, error) {
 	number, err := Number(phoneNumber)
 	if err != nil {
 		return "", err
@@ -14,7 +14,7 @@ func AreaCode(phoneNumber string) (areaCode string, e error) {
 	return number[0:3], nil
 }
 
-func ExchangeCode(phoneNumber string) (exchangeCode string, e error) {
+func ExchangeCode(phoneNumber string) (string, error) {
 	number, err := Number(phoneNumber)
 	if err != nil {
 		return "", err
@@ -22,7 +22,7 @@ func ExchangeCode(phoneNumber string) (exchangeCode string, e error) {
 	return number[3:6], nil
 }
 
-func SubscriberNumber(phoneNumber string) (subscriberNumber string, e error) {
+func SubscriberNumber(phoneNumber string) (string, error) {
 	number, err := Number(phoneNumber)
 	if err != nil {
 		return "", err
@@ -30,7 +30,7 @@ func SubscriberNumber(phoneNumber string) (subscriberNumber string, e error) {
 	return number[6:], nil
 }
 
-func Number(phoneNumber string) (number string, e error) {
+func Number(phoneNumber string) (string, error) {
 	number, err := clean(phoneNumber)
 	if err != nil {
 		return "", err
@@ -46,20 +46,20 @@ func Number(phoneNumber string) (number string, e error) {
 	return number, nil
 }
 
-func clean(phoneNumber string) (number string, e error) {
+func clean(phoneNumber string) (cleaned string, err error) {
 	for _, character := range phoneNumber {
 		if unicode.IsDigit(character) {
-			number += string(character)
+			cleaned += string(character)
 		}
 	}
-	if len(number) == 11 && number[0] == '1' {
+	if len(cleaned) == 11 && cleaned[0] == '1' {
 		// trim leading 1
-		number = number[1:]
+		cleaned = cleaned[1:]
 	}
-	if len(number) != 10 {
-		return "", fmt.Errorf("phone number %v must have 10 digits", number)
+	if len(cleaned) != 10 {
+		return "", fmt.Errorf("phone number %v must have 10 digits", cleaned)
 	}
-	return number, e
+	return cleaned, err
 }
 
 func Format(phoneNumber string) (string, error) {
