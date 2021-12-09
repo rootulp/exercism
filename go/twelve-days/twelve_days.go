@@ -18,7 +18,7 @@ func ordinal(day int) string {
 		5:  "fifth",
 		6:  "sixth",
 		7:  "seventh",
-		8:  "eigth",
+		8:  "eighth",
 		9:  "ninth",
 		10: "tenth",
 		11: "eleventh",
@@ -42,8 +42,18 @@ func clause(day int) (result string) {
 
 func gift(day int) string {
 	dayToGift := map[int]string{
-		1: "a Partridge in a Pear Tree",
-		2: "two Turtle Doves",
+		12: "twelve Drummers Drumming",
+		11: "eleven Pipers Piping",
+		10: "ten Lords-a-Leaping",
+		9:  "nine Ladies Dancing",
+		8:  "eight Maids-a-Milking",
+		7:  "seven Swans-a-Swimming",
+		6:  "six Geese-a-Laying",
+		5:  "five Gold Rings",
+		4:  "four Calling Birds",
+		3:  "three French Hens",
+		2:  "two Turtle Doves",
+		1:  "a Partridge in a Pear Tree",
 	}
 	return dayToGift[day]
 }
