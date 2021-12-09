@@ -58,6 +58,10 @@ func gift(day int) string {
 	return dayToGift[day]
 }
 
-func Song() string {
-	panic("Please implement the Song function")
+func Song() (song string) {
+	verses := []string{}
+	for day := 1; day <= 12; day++ {
+		verses = append(verses, Verse(day))
+	}
+	return strings.Join(verses, "\n")
 }
