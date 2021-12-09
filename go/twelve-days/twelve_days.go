@@ -1,13 +1,16 @@
 package twelve
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func Verse(i int) string {
-	return fmt.Sprintf("On the %v day of Christmas my true love gave to me: a Partridge in a Pear Tree.", ordinal(i))
+func Verse(day int) string {
+	return fmt.Sprintf("On the %v day of Christmas my true love gave to me: %s.", ordinal(day), clause(day))
 }
 
-func ordinal(i int) string {
-	intToOrdinal := map[int]string{
+func ordinal(day int) string {
+	dayToOrdinal := map[int]string{
 		1:  "first",
 		2:  "second",
 		3:  "third",
@@ -21,7 +24,28 @@ func ordinal(i int) string {
 		11: "eleventh",
 		12: "twelfth",
 	}
-	return intToOrdinal[i]
+	return dayToOrdinal[day]
+}
+
+func clause(day int) (result string) {
+	clauses := []string{}
+	for i := day; i >= 1; i-- {
+		if day > 1 && i == 1 {
+			clauses = append(clauses, fmt.Sprintf("and %s", gift(i)))
+		} else {
+			clauses = append(clauses, gift(i))
+		}
+	}
+	result = strings.Join(clauses, ", ")
+	return result
+}
+
+func gift(day int) string {
+	dayToGift := map[int]string{
+		1: "a Partridge in a Pear Tree",
+		2: "two Turtle Doves",
+	}
+	return dayToGift[day]
 }
 
 func Song() string {
