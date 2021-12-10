@@ -18,15 +18,18 @@ const (
 
 func Day(week WeekSchedule, weekday time.Weekday, month time.Month, year int) int {
 	time := time.Date(year, month, 1, 0, 0, 0, 0, time.UTC)
-	fmt.Printf("weekday %v and week %v so weekSchedule(%v) %v\n", weekday, week, time, weekSchedule(time))
+	fmt.Printf("Want weekday %v and week %v so weekSchedule(%v) %v\n", weekday, week, time, weekSchedule(time))
+
 	for time.Weekday() != weekday || weekSchedule(time) != week {
-		fmt.Printf("weekSchedule(%v) %v\n", time, weekSchedule(time))
+		fmt.Printf("time.Weekday()=%v and weekSchedule(%v)=%v\n", time.Weekday(), time, weekSchedule(time))
 		time = time.AddDate(0, 0, 1) // move forward one day
 	}
 	fmt.Printf("%v\n", time)
 	return time.Day()
 }
 
+// TODO this weekSchedule is incorrect.
+// This should be based on the # of mondays in a month.
 func weekSchedule(t time.Time) WeekSchedule {
 	if t.Day() == 1 {
 		return First
@@ -44,9 +47,7 @@ func weekSchedule(t time.Time) WeekSchedule {
 		return Teenth
 	}
 	lastDay := time.Date(t.Year(), t.Month()+1, 0, 0, 0, 0, 0, time.UTC).Day()
-	fmt.Printf("Last day in month %v is %v\n", t, lastDay)
 	if t.Day() == lastDay {
-		fmt.Printf("t.Day() = %v and lastDay %v", t.Day(), lastDay)
 		return Last
 	}
 	return "none"
