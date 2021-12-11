@@ -49,47 +49,47 @@ var testCases = []struct {
 	{2013, 3, First, time.Sunday, 3},      // first Sunday of March 2013
 	{2013, 4, First, time.Sunday, 7},      // first Sunday of April 2013
 	{2013, 3, Second, time.Monday, 11},    // second Monday of March 2013
-	// {2013, 4, Second, time.Monday, 8},     // second Monday of April 2013
-	// {2013, 5, Second, time.Tuesday, 14},   // second Tuesday of May 2013
-	// {2013, 6, Second, time.Tuesday, 11},   // second Tuesday of June 2013
-	// {2013, 7, Second, time.Wednesday, 10}, // second Wednesday of July 2013
-	// {2013, 8, Second, time.Wednesday, 14}, // second Wednesday of August 2013
-	// {2013, 9, Second, time.Thursday, 12},  // second Thursday of September 2013
-	// {2013, 10, Second, time.Thursday, 10}, // second Thursday of October 2013
-	// {2013, 11, Second, time.Friday, 8},    // second Friday of November 2013
-	// {2013, 12, Second, time.Friday, 13},   // second Friday of December 2013
-	// {2013, 1, Second, time.Saturday, 12},  // second Saturday of January 2013
-	// {2013, 2, Second, time.Saturday, 9},   // second Saturday of February 2013
-	// {2013, 3, Second, time.Sunday, 10},    // second Sunday of March 2013
-	// {2013, 4, Second, time.Sunday, 14},    // second Sunday of April 2013
-	// {2013, 3, Third, time.Monday, 18},     // third Monday of March 2013
-	// {2013, 4, Third, time.Monday, 15},     // third Monday of April 2013
-	// {2013, 5, Third, time.Tuesday, 21},    // third Tuesday of May 2013
-	// {2013, 6, Third, time.Tuesday, 18},    // third Tuesday of June 2013
-	// {2013, 7, Third, time.Wednesday, 17},  // third Wednesday of July 2013
-	// {2013, 8, Third, time.Wednesday, 21},  // third Wednesday of August 2013
-	// {2013, 9, Third, time.Thursday, 19},   // third Thursday of September 2013
-	// {2013, 10, Third, time.Thursday, 17},  // third Thursday of October 2013
-	// {2013, 11, Third, time.Friday, 15},    // third Friday of November 2013
-	// {2013, 12, Third, time.Friday, 20},    // third Friday of December 2013
-	// {2013, 1, Third, time.Saturday, 19},   // third Saturday of January 2013
-	// {2013, 2, Third, time.Saturday, 16},   // third Saturday of February 2013
-	// {2013, 3, Third, time.Sunday, 17},     // third Sunday of March 2013
-	// {2013, 4, Third, time.Sunday, 21},     // third Sunday of April 2013
-	// {2013, 3, Fourth, time.Monday, 25},    // fourth Monday of March 2013
-	// {2013, 4, Fourth, time.Monday, 22},    // fourth Monday of April 2013
-	// {2013, 5, Fourth, time.Tuesday, 28},   // fourth Tuesday of May 2013
-	// {2013, 6, Fourth, time.Tuesday, 25},   // fourth Tuesday of June 2013
-	// {2013, 7, Fourth, time.Wednesday, 24}, // fourth Wednesday of July 2013
-	// {2013, 8, Fourth, time.Wednesday, 28}, // fourth Wednesday of August 2013
-	// {2013, 9, Fourth, time.Thursday, 26},  // fourth Thursday of September 2013
-	// {2013, 10, Fourth, time.Thursday, 24}, // fourth Thursday of October 2013
-	// {2013, 11, Fourth, time.Friday, 22},   // fourth Friday of November 2013
-	// {2013, 12, Fourth, time.Friday, 27},   // fourth Friday of December 2013
-	// {2013, 1, Fourth, time.Saturday, 26},  // fourth Saturday of January 2013
-	// {2013, 2, Fourth, time.Saturday, 23},  // fourth Saturday of February 2013
-	// {2013, 3, Fourth, time.Sunday, 24},    // fourth Sunday of March 2013
-	// {2013, 4, Fourth, time.Sunday, 28},    // fourth Sunday of April 2013
+	{2013, 4, Second, time.Monday, 8},     // second Monday of April 2013
+	{2013, 5, Second, time.Tuesday, 14},   // second Tuesday of May 2013
+	{2013, 6, Second, time.Tuesday, 11},   // second Tuesday of June 2013
+	{2013, 7, Second, time.Wednesday, 10}, // second Wednesday of July 2013
+	{2013, 8, Second, time.Wednesday, 14}, // second Wednesday of August 2013
+	{2013, 9, Second, time.Thursday, 12},  // second Thursday of September 2013
+	{2013, 10, Second, time.Thursday, 10}, // second Thursday of October 2013
+	{2013, 11, Second, time.Friday, 8},    // second Friday of November 2013
+	{2013, 12, Second, time.Friday, 13},   // second Friday of December 2013
+	{2013, 1, Second, time.Saturday, 12},  // second Saturday of January 2013
+	{2013, 2, Second, time.Saturday, 9},   // second Saturday of February 2013
+	{2013, 3, Second, time.Sunday, 10},    // second Sunday of March 2013
+	{2013, 4, Second, time.Sunday, 14},    // second Sunday of April 2013
+	{2013, 3, Third, time.Monday, 18},     // third Monday of March 2013
+	{2013, 4, Third, time.Monday, 15},     // third Monday of April 2013
+	{2013, 5, Third, time.Tuesday, 21},    // third Tuesday of May 2013
+	{2013, 6, Third, time.Tuesday, 18},    // third Tuesday of June 2013
+	{2013, 7, Third, time.Wednesday, 17},  // third Wednesday of July 2013
+	{2013, 8, Third, time.Wednesday, 21},  // third Wednesday of August 2013
+	{2013, 9, Third, time.Thursday, 19},   // third Thursday of September 2013
+	{2013, 10, Third, time.Thursday, 17},  // third Thursday of October 2013
+	{2013, 11, Third, time.Friday, 15},    // third Friday of November 2013
+	{2013, 12, Third, time.Friday, 20},    // third Friday of December 2013
+	{2013, 1, Third, time.Saturday, 19},   // third Saturday of January 2013
+	{2013, 2, Third, time.Saturday, 16},   // third Saturday of February 2013
+	{2013, 3, Third, time.Sunday, 17},     // third Sunday of March 2013
+	{2013, 4, Third, time.Sunday, 21},     // third Sunday of April 2013
+	{2013, 3, Fourth, time.Monday, 25},    // fourth Monday of March 2013
+	{2013, 4, Fourth, time.Monday, 22},    // fourth Monday of April 2013
+	{2013, 5, Fourth, time.Tuesday, 28},   // fourth Tuesday of May 2013
+	{2013, 6, Fourth, time.Tuesday, 25},   // fourth Tuesday of June 2013
+	{2013, 7, Fourth, time.Wednesday, 24}, // fourth Wednesday of July 2013
+	{2013, 8, Fourth, time.Wednesday, 28}, // fourth Wednesday of August 2013
+	{2013, 9, Fourth, time.Thursday, 26},  // fourth Thursday of September 2013
+	{2013, 10, Fourth, time.Thursday, 24}, // fourth Thursday of October 2013
+	{2013, 11, Fourth, time.Friday, 22},   // fourth Friday of November 2013
+	{2013, 12, Fourth, time.Friday, 27},   // fourth Friday of December 2013
+	{2013, 1, Fourth, time.Saturday, 26},  // fourth Saturday of January 2013
+	{2013, 2, Fourth, time.Saturday, 23},  // fourth Saturday of February 2013
+	{2013, 3, Fourth, time.Sunday, 24},    // fourth Sunday of March 2013
+	{2013, 4, Fourth, time.Sunday, 28},    // fourth Sunday of April 2013
 	// {2013, 3, Last, time.Monday, 25},      // last Monday of March 2013
 	// {2013, 4, Last, time.Monday, 29},      // last Monday of April 2013
 	// {2013, 5, Last, time.Tuesday, 28},     // last Tuesday of May 2013
