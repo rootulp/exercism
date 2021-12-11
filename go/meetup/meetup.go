@@ -17,38 +17,44 @@ const (
 )
 
 func Day(week WeekSchedule, weekday time.Weekday, month time.Month, year int) int {
-	time := time.Date(year, month, 1, 0, 0, 0, 0, time.UTC)
-	fmt.Printf("Want weekday %v and week %v so weekSchedule(%v) %v\n", weekday, week, time, weekSchedule(time))
+	fmt.Printf("Want weekday %v and week %v\n", weekday, week)
 
-	for time.Weekday() != weekday || weekSchedule(time) != week {
-		fmt.Printf("time.Weekday()=%v and weekSchedule(%v)=%v\n", time.Weekday(), time, weekSchedule(time))
-		time = time.AddDate(0, 0, 1) // move forward one day
+	for day := 0; day <= 31; day++ {
+		candidate := time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
+		fmt.Printf("candidate.Weekday()=%v", candidate.Weekday())
+		if candidate.Weekday() == weekday && isMatchingWeekSchedule(week, candidate) {
+			return candidate.Day()
+		}
 	}
-	fmt.Printf("%v\n", time)
-	return time.Day()
+	panic("no solution found")
 }
 
-// TODO this weekSchedule is incorrect.
-// This should be based on the # of mondays in a month.
-func weekSchedule(t time.Time) WeekSchedule {
-	if t.Day() == 1 {
-		return First
+func isMatchingWeekSchedule(week WeekSchedule, candidate time.Time) bool {
+	switch week {
+	case Last:
+		return isLast(candidate)
+	case Teenth:
+		return isTeenth(candidate)
+	case First:
+		return candidate.Day() <= 7
+	case Second:
+		return candidate.Day() <= 14
+	case Third:
+		return candidate.Day() <= 21
+	case Fourth:
+		return candidate.Day() <= 28
 	}
-	if t.Day() == 2 {
-		return Second
-	}
-	if t.Day() == 3 {
-		return Third
-	}
-	if t.Day() == 4 {
-		return Fourth
-	}
-	if t.Day() > 12 && t.Day() < 20 {
-		return Teenth
-	}
-	lastDay := time.Date(t.Year(), t.Month()+1, 0, 0, 0, 0, 0, time.UTC).Day()
-	if t.Day() == lastDay {
-		return Last
-	}
-	return "none"
+	return false
+}
+
+func isTeenth(candidate time.Time) bool {
+	return candidate.Day() > 12 && candidate.Day() < 20
+}
+
+func isLast(candidate time.Time) bool {
+	// lastDay := time.Date(t.Year(), t.Month()+1, 0, 0, 0, 0, 0, time.UTC).Day()
+	// if t.Day() == lastDay {
+	// 	return Last
+	// }
+	return false
 }
