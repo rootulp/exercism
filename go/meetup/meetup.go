@@ -7,21 +7,17 @@ import (
 
 type WeekSchedule string
 
-const (
-	First  WeekSchedule = "first"
-	Second              = "second"
-	Third               = "third"
-	Fourth              = "fourth"
-	Teenth              = "teenth"
-	Last                = "last"
-)
+const First WeekSchedule = "first"
+const Second WeekSchedule = "second"
+const Third WeekSchedule = "third"
+const Fourth WeekSchedule = "fourth"
+const Teenth WeekSchedule = "teenth"
+const Last WeekSchedule = "last"
 
 func Day(week WeekSchedule, weekday time.Weekday, month time.Month, year int) int {
-	fmt.Printf("Want %v %v of %v\n", week, weekday, month)
-
 	for day := 1; day <= 31; day++ {
 		candidate := time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
-		fmt.Printf("%v %d is a %v\n", month, candidate.Day(), candidate.Weekday())
+		// fmt.Printf("%v %d is a %v\n", month, candidate.Day(), candidate.Weekday())
 		if candidate.Weekday() == weekday && isMatchingWeekSchedule(week, candidate) {
 			return candidate.Day()
 		}
@@ -42,9 +38,8 @@ func isMatchingWeekSchedule(week WeekSchedule, candidate time.Time) bool {
 	case Teenth:
 		return candidate.Day() > 12 && candidate.Day() < 20
 	case Last:
-		lastDay := time.Date(candidate.Year(), candidate.Month()+1, 0, 0, 0, 0, 0, time.UTC)
-		fmt.Printf("lastDay of month is %v\n", lastDay.Day())
-		return candidate.Day() > lastDay.Day()-7
+		lastDayOfMonth := time.Date(candidate.Year(), candidate.Month()+1, 0, 0, 0, 0, 0, time.UTC)
+		return candidate.Day() > lastDayOfMonth.Day()-7
 	}
-	return false
+	panic(fmt.Sprintf("%v did not match a WeekSchedule", week))
 }
