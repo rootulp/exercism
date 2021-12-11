@@ -17,11 +17,11 @@ const (
 )
 
 func Day(week WeekSchedule, weekday time.Weekday, month time.Month, year int) int {
-	fmt.Printf("Want weekday %v and week %v\n", weekday, week)
+	fmt.Printf("Want %v %v of %v\n", week, weekday, month)
 
-	for day := 0; day <= 31; day++ {
+	for day := 1; day <= 31; day++ {
 		candidate := time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
-		fmt.Printf("candidate.Weekday()=%v\n", candidate.Weekday())
+		fmt.Printf("%v %d is a %v\n", month, candidate.Day(), candidate.Weekday())
 		if candidate.Weekday() == weekday && isMatchingWeekSchedule(week, candidate) {
 			return candidate.Day()
 		}
@@ -42,7 +42,9 @@ func isMatchingWeekSchedule(week WeekSchedule, candidate time.Time) bool {
 	case Teenth:
 		return candidate.Day() > 12 && candidate.Day() < 20
 	case Last:
-		return candidate.Day() >= 22
+		lastDay := time.Date(candidate.Year(), candidate.Month()+1, 0, 0, 0, 0, 0, time.UTC)
+		fmt.Printf("lastDay of month is %v\n", lastDay.Day())
+		return candidate.Day() >= lastDay.Day()-7
 	}
 	return false
 }
