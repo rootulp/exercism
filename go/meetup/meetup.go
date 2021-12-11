@@ -31,10 +31,6 @@ func Day(week WeekSchedule, weekday time.Weekday, month time.Month, year int) in
 
 func isMatchingWeekSchedule(week WeekSchedule, candidate time.Time) bool {
 	switch week {
-	case Last:
-		return isLast(candidate)
-	case Teenth:
-		return isTeenth(candidate)
 	case First:
 		return candidate.Day() <= 7
 	case Second:
@@ -43,18 +39,10 @@ func isMatchingWeekSchedule(week WeekSchedule, candidate time.Time) bool {
 		return candidate.Day() >= 15 && candidate.Day() <= 21
 	case Fourth:
 		return candidate.Day() >= 22 && candidate.Day() <= 28
+	case Teenth:
+		return candidate.Day() > 12 && candidate.Day() < 20
+	case Last:
+		return candidate.Day() >= 22
 	}
-	return false
-}
-
-func isTeenth(candidate time.Time) bool {
-	return candidate.Day() > 12 && candidate.Day() < 20
-}
-
-func isLast(candidate time.Time) bool {
-	// lastDay := time.Date(t.Year(), t.Month()+1, 0, 0, 0, 0, 0, time.UTC).Day()
-	// if t.Day() == lastDay {
-	// 	return Last
-	// }
 	return false
 }

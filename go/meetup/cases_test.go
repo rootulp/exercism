@@ -90,7 +90,7 @@ var testCases = []struct {
 	{2013, 2, Fourth, time.Saturday, 23},  // fourth Saturday of February 2013
 	{2013, 3, Fourth, time.Sunday, 24},    // fourth Sunday of March 2013
 	{2013, 4, Fourth, time.Sunday, 28},    // fourth Sunday of April 2013
-	// {2013, 3, Last, time.Monday, 25},      // last Monday of March 2013
+	{2013, 3, Last, time.Monday, 25},      // last Monday of March 2013
 	// {2013, 4, Last, time.Monday, 29},      // last Monday of April 2013
 	// {2013, 5, Last, time.Tuesday, 28},     // last Tuesday of May 2013
 	// {2013, 6, Last, time.Tuesday, 25},     // last Tuesday of June 2013
@@ -107,5 +107,5 @@ var testCases = []struct {
 	// {2012, 2, Last, time.Wednesday, 29},   // last Wednesday of February 2012
 	// {2014, 12, Last, time.Wednesday, 31},  // last Wednesday of December 2014
 	// {2015, 2, Last, time.Sunday, 22},      // last Sunday of February 2015
-	// {2012, 12, First, time.Friday, 7},     // first Friday of December 2012
+	{2012, 12, First, time.Friday, 7}, // first Friday of December 2012
 }
