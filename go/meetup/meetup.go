@@ -21,7 +21,7 @@ func Day(week WeekSchedule, weekday time.Weekday, month time.Month, year int) in
 
 	for day := 0; day <= 31; day++ {
 		candidate := time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
-		fmt.Printf("candidate.Weekday()=%v", candidate.Weekday())
+		fmt.Printf("candidate.Weekday()=%v\n", candidate.Weekday())
 		if candidate.Weekday() == weekday && isMatchingWeekSchedule(week, candidate) {
 			return candidate.Day()
 		}
@@ -38,11 +38,11 @@ func isMatchingWeekSchedule(week WeekSchedule, candidate time.Time) bool {
 	case First:
 		return candidate.Day() <= 7
 	case Second:
-		return candidate.Day() <= 14
+		return candidate.Day() >= 8 && candidate.Day() <= 14
 	case Third:
-		return candidate.Day() <= 21
+		return candidate.Day() >= 15 && candidate.Day() <= 21
 	case Fourth:
-		return candidate.Day() <= 28
+		return candidate.Day() >= 22 && candidate.Day() <= 28
 	}
 	return false
 }

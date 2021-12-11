@@ -35,20 +35,20 @@ var testCases = []struct {
 	{2013, 6, Teenth, time.Sunday, 16},    // sunteenth of June 2013
 	{2013, 10, Teenth, time.Sunday, 13},   // sunteenth of October 2013
 	{2013, 3, First, time.Monday, 4},      // first Monday of March 2013
-	// {2013, 4, First, time.Monday, 1},      // first Monday of April 2013
-	// {2013, 5, First, time.Tuesday, 7},     // first Tuesday of May 2013
-	// {2013, 6, First, time.Tuesday, 4},     // first Tuesday of June 2013
-	// {2013, 7, First, time.Wednesday, 3},   // first Wednesday of July 2013
-	// {2013, 8, First, time.Wednesday, 7},   // first Wednesday of August 2013
-	// {2013, 9, First, time.Thursday, 5},    // first Thursday of September 2013
-	// {2013, 10, First, time.Thursday, 3},   // first Thursday of October 2013
-	// {2013, 11, First, time.Friday, 1},     // first Friday of November 2013
-	// {2013, 12, First, time.Friday, 6},     // first Friday of December 2013
-	// {2013, 1, First, time.Saturday, 5},    // first Saturday of January 2013
-	// {2013, 2, First, time.Saturday, 2},    // first Saturday of February 2013
-	// {2013, 3, First, time.Sunday, 3},      // first Sunday of March 2013
-	// {2013, 4, First, time.Sunday, 7},      // first Sunday of April 2013
-	// {2013, 3, Second, time.Monday, 11},    // second Monday of March 2013
+	{2013, 4, First, time.Monday, 1},      // first Monday of April 2013
+	{2013, 5, First, time.Tuesday, 7},     // first Tuesday of May 2013
+	{2013, 6, First, time.Tuesday, 4},     // first Tuesday of June 2013
+	{2013, 7, First, time.Wednesday, 3},   // first Wednesday of July 2013
+	{2013, 8, First, time.Wednesday, 7},   // first Wednesday of August 2013
+	{2013, 9, First, time.Thursday, 5},    // first Thursday of September 2013
+	{2013, 10, First, time.Thursday, 3},   // first Thursday of October 2013
+	{2013, 11, First, time.Friday, 1},     // first Friday of November 2013
+	{2013, 12, First, time.Friday, 6},     // first Friday of December 2013
+	{2013, 1, First, time.Saturday, 5},    // first Saturday of January 2013
+	{2013, 2, First, time.Saturday, 2},    // first Saturday of February 2013
+	{2013, 3, First, time.Sunday, 3},      // first Sunday of March 2013
+	{2013, 4, First, time.Sunday, 7},      // first Sunday of April 2013
+	{2013, 3, Second, time.Monday, 11},    // second Monday of March 2013
 	// {2013, 4, Second, time.Monday, 8},     // second Monday of April 2013
 	// {2013, 5, Second, time.Tuesday, 14},   // second Tuesday of May 2013
 	// {2013, 6, Second, time.Tuesday, 11},   // second Tuesday of June 2013
