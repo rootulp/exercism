@@ -44,7 +44,7 @@ func isMatchingWeekSchedule(week WeekSchedule, candidate time.Time) bool {
 	case Last:
 		lastDay := time.Date(candidate.Year(), candidate.Month()+1, 0, 0, 0, 0, 0, time.UTC)
 		fmt.Printf("lastDay of month is %v\n", lastDay.Day())
-		return candidate.Day() >= lastDay.Day()-7
+		return candidate.Day() > lastDay.Day()-7
 	}
 	return false
 }

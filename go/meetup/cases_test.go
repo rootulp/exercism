@@ -93,19 +93,19 @@ var testCases = []struct {
 	{2013, 3, Last, time.Monday, 25},      // last Monday of March 2013
 	{2013, 4, Last, time.Monday, 29},      // last Monday of April 2013
 	{2013, 5, Last, time.Tuesday, 28},     // last Tuesday of May 2013
-	// {2013, 6, Last, time.Tuesday, 25},     // last Tuesday of June 2013
-	// {2013, 7, Last, time.Wednesday, 31},   // last Wednesday of July 2013
-	// {2013, 8, Last, time.Wednesday, 28},   // last Wednesday of August 2013
-	// {2013, 9, Last, time.Thursday, 26},    // last Thursday of September 2013
-	// {2013, 10, Last, time.Thursday, 31},   // last Thursday of October 2013
-	// {2013, 11, Last, time.Friday, 29},     // last Friday of November 2013
-	// {2013, 12, Last, time.Friday, 27},     // last Friday of December 2013
-	// {2013, 1, Last, time.Saturday, 26},    // last Saturday of January 2013
-	// {2013, 2, Last, time.Saturday, 23},    // last Saturday of February 2013
-	// {2013, 3, Last, time.Sunday, 31},      // last Sunday of March 2013
-	// {2013, 4, Last, time.Sunday, 28},      // last Sunday of April 2013
-	// {2012, 2, Last, time.Wednesday, 29},   // last Wednesday of February 2012
-	// {2014, 12, Last, time.Wednesday, 31},  // last Wednesday of December 2014
-	// {2015, 2, Last, time.Sunday, 22},      // last Sunday of February 2015
-	// {2012, 12, First, time.Friday, 7}, // first Friday of December 2012
+	{2013, 6, Last, time.Tuesday, 25},     // last Tuesday of June 2013
+	{2013, 7, Last, time.Wednesday, 31},   // last Wednesday of July 2013
+	{2013, 8, Last, time.Wednesday, 28},   // last Wednesday of August 2013
+	{2013, 9, Last, time.Thursday, 26},    // last Thursday of September 2013
+	{2013, 10, Last, time.Thursday, 31},   // last Thursday of October 2013
+	{2013, 11, Last, time.Friday, 29},     // last Friday of November 2013
+	{2013, 12, Last, time.Friday, 27},     // last Friday of December 2013
+	{2013, 1, Last, time.Saturday, 26},    // last Saturday of January 2013
+	{2013, 2, Last, time.Saturday, 23},    // last Saturday of February 2013
+	{2013, 3, Last, time.Sunday, 31},      // last Sunday of March 2013
+	{2013, 4, Last, time.Sunday, 28},      // last Sunday of April 2013
+	{2012, 2, Last, time.Wednesday, 29},   // last Wednesday of February 2012
+	{2014, 12, Last, time.Wednesday, 31},  // last Wednesday of December 2014
+	{2015, 2, Last, time.Sunday, 22},      // last Sunday of February 2015
+	{2012, 12, First, time.Friday, 7},     // first Friday of December 2012
 }
