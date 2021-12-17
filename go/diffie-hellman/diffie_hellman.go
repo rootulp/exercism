@@ -16,7 +16,7 @@ func PrivateKey(p *big.Int) *big.Int {
 	if err != nil {
 		panic(err)
 	}
-	return two.Add(two, n)
+	return new(big.Int).Add(two, n)
 }
 
 func PublicKey(a *big.Int, p *big.Int, g int64) *big.Int {
