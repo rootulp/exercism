@@ -24,8 +24,8 @@ func PublicKey(a *big.Int, p *big.Int, g int64) *big.Int {
 	return temp.Exp(temp, a, p)
 }
 
-func SecretKey(a *big.Int, B *big.Int, p *big.Int) *big.Int {
-	return B.Exp(B, a, p)
+func SecretKey(private1 *big.Int, public2 *big.Int, p *big.Int) *big.Int {
+	return new(big.Int).Exp(public2, private1, p)
 
 }
 
