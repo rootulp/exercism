@@ -19,8 +19,9 @@ func PrivateKey(p *big.Int) *big.Int {
 	return two.Add(two, n)
 }
 
-func PublicKey(private, p *big.Int, g int64) *big.Int {
-	panic("Please implement the PublicKey function")
+func PublicKey(a *big.Int, p *big.Int, g int64) *big.Int {
+	temp := big.NewInt(g)
+	return temp.Exp(temp, a, p)
 }
 
 func NewPair(p *big.Int, g int64) (*big.Int, *big.Int) {
