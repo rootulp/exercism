@@ -29,6 +29,8 @@ func SecretKey(a *big.Int, B *big.Int, p *big.Int) *big.Int {
 
 }
 
-func NewPair(p *big.Int, g int64) (*big.Int, *big.Int) {
-	panic("Please implement the NewPair function")
+func NewPair(p *big.Int, g int64) (private *big.Int, public *big.Int) {
+	private = PrivateKey(p)
+	public = PublicKey(private, p, g)
+	return private, public
 }

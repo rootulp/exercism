@@ -143,7 +143,7 @@ func TestNewPair(t *testing.T) {
 		sa := SecretKey(a, B, p)
 		sb := SecretKey(b, A, p)
 		if sa.Cmp(sb) != 0 {
-			t.Fatalf("NewPair() produced non-working keys.")
+			t.Fatalf("SecretKey(%d, %d, %d) != SecretKey(%d, %d, %d)", a, B, p, b, A, p)
 		}
 		a, A = b, B
 	}
