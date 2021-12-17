@@ -1,12 +1,22 @@
 package diffiehellman
 
-import "math/big"
+import (
+	"crypto/rand"
+	"math/big"
+)
 
 // Diffie-Hellman-Merkle key exchange
 // Private keys should be generated randomly.
 
 func PrivateKey(p *big.Int) *big.Int {
-	panic("Please implement the PrivateKey function")
+	max := big.NewInt(0)
+	two := big.NewInt(2)
+	max.Sub(p, two)
+	n, err := rand.Int(rand.Reader, max)
+	if err != nil {
+		panic(err)
+	}
+	return two.Add(two, n)
 }
 
 func PublicKey(private, p *big.Int, g int64) *big.Int {
