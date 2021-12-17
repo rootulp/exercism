@@ -24,10 +24,11 @@ func PublicKey(a *big.Int, p *big.Int, g int64) *big.Int {
 	return temp.Exp(temp, a, p)
 }
 
-func NewPair(p *big.Int, g int64) (*big.Int, *big.Int) {
-	panic("Please implement the NewPair function")
+func SecretKey(a *big.Int, B *big.Int, p *big.Int) *big.Int {
+	return B.Exp(B, a, p)
+
 }
 
-func SecretKey(private1, public2, p *big.Int) *big.Int {
-	panic("Please implement the SecretKey function")
+func NewPair(p *big.Int, g int64) (*big.Int, *big.Int) {
+	panic("Please implement the NewPair function")
 }
