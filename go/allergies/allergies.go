@@ -1,7 +1,6 @@
 package allergies
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -17,18 +16,14 @@ var scoreToAllergen = map[int]string{
 }
 
 func Allergies(score uint) (allergies []string) {
-
 	if score >= 256 {
 		score = score % 256
 	}
 
 	for _, k := range descendingKeys(scoreToAllergen) {
 		v := scoreToAllergen[k]
-		fmt.Printf("%d/uint(%d)=%d\n", score, k, score/uint(k))
 		if score/uint(k) == 1 {
 			allergies = append(allergies, v)
-			fmt.Printf("setting score to %v\n", score%uint(k))
-
 			score = score % uint(k)
 		}
 	}
@@ -37,7 +32,6 @@ func Allergies(score uint) (allergies []string) {
 
 func AllergicTo(score uint, allergen string) bool {
 	allergies := Allergies(score)
-	fmt.Printf("score(%d) is allergic to %v\n", score, allergies)
 	for _, candidate := range allergies {
 		if candidate == allergen {
 			return true
