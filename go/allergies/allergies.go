@@ -17,20 +17,12 @@ var scoreToAllergen = map[int]string{
 }
 
 func Allergies(score uint) (allergies []string) {
-	keys := make([]int, 0)
-	for k := range scoreToAllergen {
-		keys = append(keys, k)
-	}
-	sort.Ints(keys)
-	sort.Slice(keys, func(a, b int) bool {
-		return keys[b] < keys[a]
-	})
 
 	if score >= 256 {
 		score = score % 256
 	}
 
-	for _, k := range keys {
+	for _, k := range descendingKeys(scoreToAllergen) {
 		v := scoreToAllergen[k]
 		fmt.Printf("%d/uint(%d)=%d\n", score, k, score/uint(k))
 		if score/uint(k) == 1 {
@@ -52,4 +44,15 @@ func AllergicTo(score uint, allergen string) bool {
 		}
 	}
 	return false
+}
+
+func descendingKeys(m map[int]string) (keys []int) {
+	for k := range scoreToAllergen {
+		keys = append(keys, k)
+	}
+	sort.Ints(keys)
+	sort.Slice(keys, func(a, b int) bool {
+		return keys[b] < keys[a]
+	})
+	return keys
 }
