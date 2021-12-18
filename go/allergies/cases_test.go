@@ -66,5 +66,5 @@ var listTests = []struct {
 	{"allergic to more than eggs but not peanuts", 5, []string{"eggs", "shellfish"}},
 	{"allergic to lots of stuff", 248, []string{"strawberries", "tomatoes", "chocolate", "pollen", "cats"}},
 	{"allergic to everything", 255, []string{"eggs", "peanuts", "shellfish", "strawberries", "tomatoes", "chocolate", "pollen", "cats"}},
-	// {"ignore non allergen score parts", 509, []string{"eggs", "shellfish", "strawberries", "tomatoes", "chocolate", "pollen", "cats"}},
+	{"ignore non allergen score parts", 509, []string{"eggs", "shellfish", "strawberries", "tomatoes", "chocolate", "pollen", "cats"}},
 }

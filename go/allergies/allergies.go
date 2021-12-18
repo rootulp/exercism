@@ -26,6 +26,10 @@ func Allergies(score uint) (allergies []string) {
 		return keys[b] < keys[a]
 	})
 
+	if score >= 256 {
+		score = score % 256
+	}
+
 	for _, k := range keys {
 		v := scoreToAllergen[k]
 		fmt.Printf("%d/uint(%d)=%d\n", score, k, score/uint(k))
