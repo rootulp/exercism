@@ -20,11 +20,11 @@ func Allergies(score uint) (allergies []string) {
 		score = score % 256
 	}
 
-	for _, k := range descendingKeys(scoreToAllergen) {
-		v := scoreToAllergen[k]
-		if score/uint(k) == 1 {
-			allergies = append(allergies, v)
-			score = score % uint(k)
+	for _, key := range descendingKeys(scoreToAllergen) {
+		allergen := scoreToAllergen[key]
+		if score/uint(key) == 1 {
+			allergies = append(allergies, allergen)
+			score = score % uint(key)
 		}
 	}
 	return allergies
