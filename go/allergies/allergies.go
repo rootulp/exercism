@@ -5,18 +5,18 @@ import (
 	"sort"
 )
 
-func Allergies(score uint) (allergies []string) {
-	scoreToAllergen := map[int]string{
-		128: "cats",
-		64:  "pollen",
-		32:  "chocolate",
-		16:  "tomatoes",
-		8:   "strawberries",
-		4:   "shellfish",
-		2:   "peanuts",
-		1:   "eggs",
-	}
+var scoreToAllergen = map[int]string{
+	128: "cats",
+	64:  "pollen",
+	32:  "chocolate",
+	16:  "tomatoes",
+	8:   "strawberries",
+	4:   "shellfish",
+	2:   "peanuts",
+	1:   "eggs",
+}
 
+func Allergies(score uint) (allergies []string) {
 	keys := make([]int, 0)
 	for k := range scoreToAllergen {
 		keys = append(keys, k)
