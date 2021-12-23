@@ -1,5 +1,7 @@
 package variablelengthquantity
 
+import "errors"
+
 func EncodeVarint(input []uint32) (encoded []byte) {
 	var remainder uint32
 
@@ -28,6 +30,19 @@ func EncodeVarint(input []uint32) (encoded []byte) {
 	return encoded
 }
 
-func DecodeVarint(input []byte) ([]uint32, error) {
-	panic("Please implement the EncodeVarint function")
+func DecodeVarint(input []byte) (decoded []uint32, e error) {
+	var decodedInt uint32
+
+	if input[len(input)-1]&128 != 0 {
+		return nil, errors.New("incomplete sequence")
+	}
+
+	for _, val := range input {
+		decodedInt = 128*decodedInt + uint32(127&val)
+		if 128&val == 0 {
+			decoded = append(decoded, decodedInt)
+			decodedInt = 0
+		}
+	}
+	return decoded, nil
 }
