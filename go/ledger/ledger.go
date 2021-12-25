@@ -67,17 +67,33 @@ func formatEntry(locale string, currency string, entry Entry) (formatted string)
 	}
 }
 
-func getCurrencySymbol(currency string) (symbol string) {
-	if currency == "EUR" {
-		return "€"
-	} else if currency == "USD" {
-		return "$"
+func header(locale string) (output string) {
+	if locale == "nl-NL" {
+		return fmt.Sprintf("%-10s | %-25s | %s\n", "Datum", "Omschrijving", "Verandering")
+	} else if locale == "en-US" {
+		return fmt.Sprintf("%-10s | %-25s | %s\n", "Date", "Description", "Change")
 	}
-	panic("invalid currency")
+	panic("invalid locale")
 }
 
-func isNegative(cents int) bool {
-	return cents < 0
+func formatDate(locale string, date string) string {
+	year, month, day := date[0:4], date[5:7], date[8:10]
+
+	if locale == "nl-NL" {
+		return fmt.Sprintf("%v-%v-%v", day, month, year)
+	} else if locale == "en-US" {
+		return fmt.Sprintf("%v/%v/%v", month, day, year)
+	}
+	panic("invalid locale")
+}
+
+// formatDescription will ellipsize the description if it is longer than 25
+// characters
+func formatDescription(description string) string {
+	if len(description) > 25 {
+		return description[:22] + "..."
+	}
+	return description
 }
 
 func formatChange(locale string, currency string, cents int) (change string) {
@@ -132,6 +148,15 @@ func formatChange(locale string, currency string, cents int) (change string) {
 	return change
 }
 
+func getCurrencySymbol(currency string) (symbol string) {
+	if currency == "EUR" {
+		return "€"
+	} else if currency == "USD" {
+		return "$"
+	}
+	panic("invalid currency")
+}
+
 func isValidCurrency(currency string) bool {
 	return currency == "USD" || currency == "EUR"
 }
@@ -153,29 +178,6 @@ func isValidDate(entries []Entry) bool {
 	return true
 }
 
-func formatDescription(description string) string {
-	if len(description) > 25 {
-		return description[:22] + "..."
-	}
-	return description
-}
-
-func formatDate(locale string, date string) string {
-	year, month, day := date[0:4], date[5:7], date[8:10]
-
-	if locale == "nl-NL" {
-		return fmt.Sprintf("%v-%v-%v", day, month, year)
-	} else if locale == "en-US" {
-		return fmt.Sprintf("%v/%v/%v", month, day, year)
-	}
-	panic("invalid locale")
-}
-
-func header(locale string) (output string) {
-	if locale == "nl-NL" {
-		return fmt.Sprintf("%-10s | %-25s | %s\n", "Datum", "Omschrijving", "Verandering")
-	} else if locale == "en-US" {
-		return fmt.Sprintf("%-10s | %-25s | %s\n", "Date", "Description", "Change")
-	}
-	panic("invalid locale")
+func isNegative(cents int) bool {
+	return cents < 0
 }
