@@ -2,6 +2,7 @@ package ledger
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -40,12 +41,12 @@ func formatDescription(description string) string {
 	return description + strings.Repeat(" ", 25-len(description))
 }
 func formatDate(locale string, date string) string {
-	d1, _, d3, _, d5 := date[0:4], date[4], date[5:7], date[7], date[8:10]
+	year, month, day := date[0:4], date[5:7], date[8:10]
 
 	if locale == "nl-NL" {
-		return d5 + "-" + d3 + "-" + d1
+		return fmt.Sprintf("%v-%v-%v", day, month, year)
 	} else if locale == "en-US" {
-		return d3 + "/" + d5 + "/" + d1
+		return fmt.Sprintf("%v/%v/%v", month, day, year)
 	}
 	return ""
 }
