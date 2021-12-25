@@ -107,7 +107,6 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 	co := make(chan struct {
 		i int
 		s string
-		e error
 	})
 	for i, et := range entriesCopy {
 		go func(i int, entry Entry) {
@@ -162,12 +161,6 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 					a += "€"
 				} else if currency == "USD" {
 					a += "$"
-				} else {
-					co <- struct {
-						i int
-						s string
-						e error
-					}{e: errors.New("")}
 				}
 				centsStr := strconv.Itoa(cents)
 				switch len(centsStr) {
@@ -200,7 +193,6 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 			co <- struct {
 				i int
 				s string
-				e error
 			}{i: i, s: d + strings.Repeat(" ", 10-len(d)) + " | " + de + " | " +
 				strings.Repeat(" ", 13-len(a)) + a + "\n"}
 		}(i, et)
@@ -208,9 +200,6 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 	temp := make([]string, len(entriesCopy))
 	for range entriesCopy {
 		v := <-co
-		if v.e != nil {
-			return "", v.e
-		}
 		temp[v.i] = v.s
 	}
 	for i := 0; i < len(entriesCopy); i++ {
