@@ -130,14 +130,17 @@ func formatChange(locale string, currency string, cents int) (change string) {
 	absoluteValueCents := int(math.Abs(float64(cents)))
 	paddedChange := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
 	change += formatCurrencySymbol(locale, currency)
-	integralPart := formatIntegralPart(paddedChange, locale)
-	decimalPart := paddedChange[len(paddedChange)-2:]
-	numericPart := strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
-	change += numericPart
+	change += formatNumber(locale, paddedChange)
 	if isNegative {
 		change = formatNegative(locale, change)
 	}
 	return change
+}
+
+func formatNumber(locale string, paddedChange string) (formatted string) {
+	integralPart := formatIntegralPart(paddedChange, locale)
+	decimalPart := paddedChange[len(paddedChange)-2:]
+	return strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
 }
 
 func formatCurrencySymbol(locale string, currency string) (formatted string) {
