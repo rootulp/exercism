@@ -39,6 +39,16 @@ func formatDescription(description string) string {
 	}
 	return description + strings.Repeat(" ", 25-len(description))
 }
+func formatDate(locale string, date string) string {
+	d1, _, d3, _, d5 := date[0:4], date[4], date[5:7], date[7], date[8:10]
+
+	if locale == "nl-NL" {
+		return d5 + "-" + d3 + "-" + d1
+	} else if locale == "en-US" {
+		return d3 + "/" + d5 + "/" + d1
+	}
+	return ""
+}
 
 func header(locale string) (output string) {
 	if locale == "nl-NL" {
@@ -100,14 +110,8 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 	})
 	for i, et := range entriesCopy {
 		go func(i int, entry Entry) {
-			d1, _, d3, _, d5 := entry.Date[0:4], entry.Date[4], entry.Date[5:7], entry.Date[7], entry.Date[8:10]
 			de := formatDescription(entry.Description)
-			var d string
-			if locale == "nl-NL" {
-				d = d5 + "-" + d3 + "-" + d1
-			} else if locale == "en-US" {
-				d = d3 + "/" + d5 + "/" + d1
-			}
+			d := formatDate(locale, entry.Date)
 			negative := false
 			cents := entry.Change
 			if cents < 0 {
