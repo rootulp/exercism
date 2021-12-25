@@ -20,6 +20,19 @@ func isValidLocale(locale string) bool {
 	return locale == "en-US" || locale == "nl-NL"
 }
 
+func isValidDate(entries []Entry) bool {
+	for _, entry := range entries {
+		if len(entry.Date) != 10 {
+			return false
+		}
+		_, d2, _, d4, _ := entry.Date[0:4], entry.Date[4], entry.Date[5:7], entry.Date[7], entry.Date[8:10]
+		if d2 != '-' || d4 != '-' {
+			return false
+		}
+	}
+	return true
+}
+
 func header(locale string) (output string) {
 	if locale == "nl-NL" {
 		return "Datum" +
@@ -43,9 +56,11 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 	if !isValidCurrency(currency) {
 		return "", errors.New("invalid currency")
 	}
-
 	if !isValidLocale(locale) {
 		return "", errors.New("invalid locale")
+	}
+	if !isValidDate(entries) {
+		return "", errors.New("invalid date")
 	}
 
 	entriesCopy := append([]Entry{}, entries...)
@@ -71,7 +86,6 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 	}
 
 	output += header(locale)
-	// Parallelism, always a great idea
 	co := make(chan struct {
 		i int
 		s string
@@ -221,16 +235,16 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 				strings.Repeat(" ", 13-al) + a + "\n"}
 		}(i, et)
 	}
-	ss := make([]string, len(entriesCopy))
+	temp := make([]string, len(entriesCopy))
 	for range entriesCopy {
 		v := <-co
 		if v.e != nil {
 			return "", v.e
 		}
-		ss[v.i] = v.s
+		temp[v.i] = v.s
 	}
 	for i := 0; i < len(entriesCopy); i++ {
-		output += ss[i]
+		output += temp[i]
 	}
 	return output, nil
 }
