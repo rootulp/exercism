@@ -33,6 +33,13 @@ func isValidDate(entries []Entry) bool {
 	return true
 }
 
+func formatDescription(description string) string {
+	if len(description) > 25 {
+		return description[:22] + "..."
+	}
+	return description + strings.Repeat(" ", 25-len(description))
+}
+
 func header(locale string) (output string) {
 	if locale == "nl-NL" {
 		return "Datum" +
@@ -93,34 +100,8 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 	})
 	for i, et := range entriesCopy {
 		go func(i int, entry Entry) {
-			if len(entry.Date) != 10 {
-				co <- struct {
-					i int
-					s string
-					e error
-				}{e: errors.New("")}
-			}
-			d1, d2, d3, d4, d5 := entry.Date[0:4], entry.Date[4], entry.Date[5:7], entry.Date[7], entry.Date[8:10]
-			if d2 != '-' {
-				co <- struct {
-					i int
-					s string
-					e error
-				}{e: errors.New("")}
-			}
-			if d4 != '-' {
-				co <- struct {
-					i int
-					s string
-					e error
-				}{e: errors.New("")}
-			}
-			de := entry.Description
-			if len(de) > 25 {
-				de = de[:22] + "..."
-			} else {
-				de = de + strings.Repeat(" ", 25-len(de))
-			}
+			d1, _, d3, _, d5 := entry.Date[0:4], entry.Date[4], entry.Date[5:7], entry.Date[7], entry.Date[8:10]
+			de := formatDescription(entry.Description)
 			var d string
 			if locale == "nl-NL" {
 				d = d5 + "-" + d3 + "-" + d1
