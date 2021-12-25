@@ -129,23 +129,24 @@ func formatChange(locale string, currency string, cents int) (change string) {
 	isNegative := isNegative(cents)
 	absoluteValueCents := int(math.Abs(float64(cents)))
 	paddedChange := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
-	change += currencyToSymbol[currency]
-	if locale == "nl-NL" {
-		change += " "
-		integralPart := formatIntegralPart(paddedChange, locale)
-		decimalPart := paddedChange[len(paddedChange)-2:]
-		numericPart := strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
-		change += numericPart
-	} else if locale == "en-US" {
-		integralPart := formatIntegralPart(paddedChange, locale)
-		decimalPart := paddedChange[len(paddedChange)-2:]
-		numericPart := strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
-		change += numericPart
-	}
+	change += formatCurrencySymbol(locale, currency)
+	integralPart := formatIntegralPart(paddedChange, locale)
+	decimalPart := paddedChange[len(paddedChange)-2:]
+	numericPart := strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
+	change += numericPart
 	if isNegative {
 		change = formatNegative(locale, change)
 	}
 	return change
+}
+
+func formatCurrencySymbol(locale string, currency string) (formatted string) {
+	if locale == "en-US" {
+		return currencyToSymbol[currency]
+	} else if locale == "nl-NL" {
+		return currencyToSymbol[currency] + " "
+	}
+	panic("invalid locale")
 }
 
 func formatNegative(locale string, change string) (formatted string) {
