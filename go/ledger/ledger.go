@@ -20,6 +20,25 @@ func isValidLocale(locale string) bool {
 	return locale == "en-US" || locale == "nl-NL"
 }
 
+func header(locale string) (output string) {
+	if locale == "nl-NL" {
+		return "Datum" +
+			strings.Repeat(" ", 10-len("Datum")) +
+			" | " +
+			"Omschrijving" +
+			strings.Repeat(" ", 25-len("Omschrijving")) +
+			" | " + "Verandering" + "\n"
+	} else if locale == "en-US" {
+		return "Date" +
+			strings.Repeat(" ", 10-len("Date")) +
+			" | " +
+			"Description" +
+			strings.Repeat(" ", 25-len("Description")) +
+			" | " + "Change" + "\n"
+	}
+	return ""
+}
+
 func FormatLedger(currency string, locale string, entries []Entry) (output string, e error) {
 	if !isValidCurrency(currency) {
 		return "", errors.New("invalid currency")
@@ -51,21 +70,7 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 		es = es[1:]
 	}
 
-	if locale == "nl-NL" {
-		output = "Datum" +
-			strings.Repeat(" ", 10-len("Datum")) +
-			" | " +
-			"Omschrijving" +
-			strings.Repeat(" ", 25-len("Omschrijving")) +
-			" | " + "Verandering" + "\n"
-	} else if locale == "en-US" {
-		output = "Date" +
-			strings.Repeat(" ", 10-len("Date")) +
-			" | " +
-			"Description" +
-			strings.Repeat(" ", 25-len("Description")) +
-			" | " + "Change" + "\n"
-	}
+	output += header(locale)
 	// Parallelism, always a great idea
 	co := make(chan struct {
 		i int
