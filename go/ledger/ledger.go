@@ -128,12 +128,12 @@ func formatDescription(description string) string {
 func formatChange(locale string, currency string, cents int) (change string) {
 	isNegative := isNegative(cents)
 	absoluteValueCents := int(math.Abs(float64(cents)))
+	paddedChange := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
 	change += currencyToSymbol[currency]
 	if locale == "nl-NL" {
 		change += " "
-		centsStr := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
-		integralPart := formatIntegralPart(centsStr, locale)
-		decimalPart := centsStr[len(centsStr)-2:]
+		integralPart := formatIntegralPart(paddedChange, locale)
+		decimalPart := paddedChange[len(paddedChange)-2:]
 		numericPart := strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
 		change += numericPart
 		if isNegative {
@@ -141,8 +141,7 @@ func formatChange(locale string, currency string, cents int) (change string) {
 			change = fmt.Sprintf("%s-", change)
 		}
 	} else if locale == "en-US" {
-		centsStr := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
-		rest := centsStr[:len(centsStr)-2]
+		rest := paddedChange[:len(paddedChange)-2]
 		var parts []string
 		for len(rest) > 3 {
 			parts = append(parts, rest[len(rest)-3:])
@@ -156,7 +155,7 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		}
 		change = change[:len(change)-1]
 		change += locales[locale].DecimalPoint
-		change += centsStr[len(centsStr)-2:]
+		change += paddedChange[len(paddedChange)-2:]
 		if isNegative {
 			// Surround with parenthesis
 			change = fmt.Sprintf("(%s)", change)
