@@ -105,11 +105,10 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 
 	output += header(locale)
 	co := make(chan struct {
-		i int
 		s string
 	})
-	for i, et := range entriesCopy {
-		go func(i int, entry Entry) {
+	for _, et := range entriesCopy {
+		go func(entry Entry) {
 			de := formatDescription(entry.Description)
 			d := formatDate(locale, entry.Date)
 			negative := false
@@ -191,19 +190,14 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 				}
 			}
 			co <- struct {
-				i int
 				s string
-			}{i: i, s: d + strings.Repeat(" ", 10-len(d)) + " | " + de + " | " +
+			}{s: d + strings.Repeat(" ", 10-len(d)) + " | " + de + " | " +
 				strings.Repeat(" ", 13-len(a)) + a + "\n"}
-		}(i, et)
+		}(et)
 	}
-	temp := make([]string, len(entriesCopy))
 	for range entriesCopy {
 		v := <-co
-		temp[v.i] = v.s
-	}
-	for i := 0; i < len(entriesCopy); i++ {
-		output += temp[i]
+		output += v.s
 	}
 	return output, nil
 }
