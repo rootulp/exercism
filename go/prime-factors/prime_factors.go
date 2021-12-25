@@ -1,9 +1,7 @@
 package prime
 
 func Factors(n int64) (factors []int64) {
-	if n < 2 {
-		return []int64{}
-	}
+	factors = []int64{}
 	current := n
 	divisor := int64(2)
 	for current != 1 {
