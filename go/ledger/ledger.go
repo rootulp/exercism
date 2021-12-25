@@ -165,6 +165,7 @@ func formatDescription(description string) string {
 	}
 	return description + strings.Repeat(" ", 25-len(description))
 }
+
 func formatDate(locale string, date string) string {
 	year, month, day := date[0:4], date[5:7], date[8:10]
 
@@ -178,19 +179,9 @@ func formatDate(locale string, date string) string {
 
 func header(locale string) (output string) {
 	if locale == "nl-NL" {
-		return "Datum" +
-			strings.Repeat(" ", 10-len("Datum")) +
-			" | " +
-			"Omschrijving" +
-			strings.Repeat(" ", 25-len("Omschrijving")) +
-			" | " + "Verandering" + "\n"
+		return fmt.Sprintf("%-10s | %-25s | %s\n", "Datum", "Omschrijving", "Verandering")
 	} else if locale == "en-US" {
-		return "Date" +
-			strings.Repeat(" ", 10-len("Date")) +
-			" | " +
-			"Description" +
-			strings.Repeat(" ", 25-len("Description")) +
-			" | " + "Change" + "\n"
+		return fmt.Sprintf("%-10s | %-25s | %s\n", "Date", "Description", "Change")
 	}
 	panic("invalid locale")
 }
