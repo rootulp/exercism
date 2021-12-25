@@ -15,24 +15,30 @@ type Entry struct {
 }
 
 type Locale struct {
-	Date          string
-	Description   string
-	Change        string
-	DateSeperator string
+	Date              string
+	Description       string
+	Change            string
+	DateSeperator     string
+	DecimalPoint      string
+	IntegralSeperator string
 }
 
 var locales = map[string]Locale{
 	"en-US": {
-		Date:          "Date",
-		Description:   "Description",
-		Change:        "Change",
-		DateSeperator: "/",
+		Date:              "Date",
+		Description:       "Description",
+		Change:            "Change",
+		DateSeperator:     "/",
+		DecimalPoint:      ".",
+		IntegralSeperator: ",",
 	},
 	"nl-NL": {
-		Date:          "Datum",
-		Description:   "Omschrijving",
-		Change:        "Verandering",
-		DateSeperator: "-",
+		Date:              "Datum",
+		Description:       "Omschrijving",
+		Change:            "Verandering",
+		DateSeperator:     "-",
+		DecimalPoint:      ",",
+		IntegralSeperator: ".",
 	},
 }
 
@@ -97,11 +103,10 @@ func header(locale string) (output string) {
 func formatDate(locale string, date string) string {
 	year, month, day := date[0:4], date[5:7], date[8:10]
 
-	seperator := locales[locale].DateSeperator
 	if locale == "nl-NL" {
-		return strings.Join([]string{day, month, year}, seperator)
+		return strings.Join([]string{day, month, year}, locales[locale].DateSeperator)
 	} else if locale == "en-US" {
-		return strings.Join([]string{month, day, year}, seperator)
+		return strings.Join([]string{month, day, year}, locales[locale].DateSeperator)
 	}
 	panic("invalid locale")
 }
@@ -132,10 +137,10 @@ func formatChange(locale string, currency string, cents int) (change string) {
 			parts = append(parts, rest)
 		}
 		for i := len(parts) - 1; i >= 0; i-- {
-			change += parts[i] + "."
+			change += parts[i] + locales[locale].IntegralSeperator
 		}
 		change = change[:len(change)-1]
-		change += ","
+		change += locales[locale].DecimalPoint
 		change += centsStr[len(centsStr)-2:]
 		if isNegative {
 			// Append `-`
@@ -153,10 +158,10 @@ func formatChange(locale string, currency string, cents int) (change string) {
 			parts = append(parts, rest)
 		}
 		for i := len(parts) - 1; i >= 0; i-- {
-			change += parts[i] + ","
+			change += parts[i] + locales[locale].IntegralSeperator
 		}
 		change = change[:len(change)-1]
-		change += "."
+		change += locales[locale].DecimalPoint
 		change += centsStr[len(centsStr)-2:]
 		if isNegative {
 			// Surround with parenthesis
