@@ -125,12 +125,6 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 					a += "€"
 				} else if currency == "USD" {
 					a += "$"
-				} else {
-					co <- struct {
-						i int
-						s string
-						e error
-					}{e: errors.New("")}
 				}
 				a += " "
 				centsStr := strconv.Itoa(cents)
@@ -202,12 +196,6 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 				} else {
 					a += " "
 				}
-			} else {
-				co <- struct {
-					i int
-					s string
-					e error
-				}{e: errors.New("")}
 			}
 			var al int
 			for range a {
