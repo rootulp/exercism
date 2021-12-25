@@ -84,13 +84,7 @@ func formatChange(locale string, currency string, cents int) (change string) {
 	if locale == "nl-NL" {
 		change += getCurrencySymbol(currency)
 		change += " "
-		centsStr := strconv.Itoa(absoluteValueCents)
-		switch len(centsStr) {
-		case 1:
-			centsStr = "00" + centsStr
-		case 2:
-			centsStr = "0" + centsStr
-		}
+		centsStr := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
 		rest := centsStr[:len(centsStr)-2]
 		var parts []string
 		for len(rest) > 3 {
@@ -111,13 +105,7 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		}
 	} else if locale == "en-US" {
 		change += getCurrencySymbol(currency)
-		centsStr := strconv.Itoa(absoluteValueCents)
-		switch len(centsStr) {
-		case 1:
-			centsStr = "00" + centsStr
-		case 2:
-			centsStr = "0" + centsStr
-		}
+		centsStr := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
 		rest := centsStr[:len(centsStr)-2]
 		var parts []string
 		for len(rest) > 3 {
