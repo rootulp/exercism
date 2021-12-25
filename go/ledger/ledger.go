@@ -59,9 +59,17 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 		return "", errors.New("invalid date")
 	}
 
-	entriesCopy := make([]Entry, len(entries))
-	copy(entriesCopy, entries)
-	sort.Slice(entriesCopy, func(i int, j int) bool {
+	output += header(locale)
+	for _, entry := range sortEntries(entries) {
+		output += formatEntry(locale, currency, entry)
+	}
+	return output, nil
+}
+
+func sortEntries(entries []Entry) (sorted []Entry) {
+	sorted = make([]Entry, len(entries))
+	copy(sorted, entries)
+	sort.Slice(sorted, func(i int, j int) bool {
 		a := entries[i]
 		b := entries[j]
 		if a.Date != b.Date {
@@ -72,12 +80,7 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 			return a.Change < b.Change
 		}
 	})
-
-	output += header(locale)
-	for _, entry := range entriesCopy {
-		output += formatEntry(locale, currency, entry)
-	}
-	return output, nil
+	return sorted
 }
 
 func formatEntry(locale string, currency string, entry Entry) (formatted string) {
