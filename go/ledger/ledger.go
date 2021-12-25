@@ -14,63 +14,6 @@ type Entry struct {
 	Change      int // in cents
 }
 
-func isValidCurrency(currency string) bool {
-	return currency == "USD" || currency == "EUR"
-}
-
-func isValidLocale(locale string) bool {
-	return locale == "en-US" || locale == "nl-NL"
-}
-
-func isValidDate(entries []Entry) bool {
-	for _, entry := range entries {
-		if len(entry.Date) != 10 {
-			return false
-		}
-		_, d2, _, d4, _ := entry.Date[0:4], entry.Date[4], entry.Date[5:7], entry.Date[7], entry.Date[8:10]
-		if d2 != '-' || d4 != '-' {
-			return false
-		}
-	}
-	return true
-}
-
-func formatDescription(description string) string {
-	if len(description) > 25 {
-		return description[:22] + "..."
-	}
-	return description + strings.Repeat(" ", 25-len(description))
-}
-func formatDate(locale string, date string) string {
-	year, month, day := date[0:4], date[5:7], date[8:10]
-
-	if locale == "nl-NL" {
-		return fmt.Sprintf("%v-%v-%v", day, month, year)
-	} else if locale == "en-US" {
-		return fmt.Sprintf("%v/%v/%v", month, day, year)
-	}
-	panic("invalid locale")
-}
-
-func header(locale string) (output string) {
-	if locale == "nl-NL" {
-		return "Datum" +
-			strings.Repeat(" ", 10-len("Datum")) +
-			" | " +
-			"Omschrijving" +
-			strings.Repeat(" ", 25-len("Omschrijving")) +
-			" | " + "Verandering" + "\n"
-	} else if locale == "en-US" {
-		return "Date" +
-			strings.Repeat(" ", 10-len("Date")) +
-			" | " +
-			"Description" +
-			strings.Repeat(" ", 25-len("Description")) +
-			" | " + "Change" + "\n"
-	}
-	panic("invalid locale")
-}
-
 func FormatLedger(currency string, locale string, entries []Entry) (output string, e error) {
 	if !isValidCurrency(currency) {
 		return "", errors.New("invalid currency")
@@ -106,13 +49,17 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 
 	output += header(locale)
 	for _, entry := range entriesCopy {
-		description := formatDescription(entry.Description)
-		date := formatDate(locale, entry.Date)
-		change := formatChange(locale, currency, entry.Change)
-		output += date + strings.Repeat(" ", 10-len(date)) + " | " + description + " | " +
-			strings.Repeat(" ", 13-len(change)) + change + "\n"
+		output += formatEntry(entry, locale, currency)
 	}
 	return output, nil
+}
+
+func formatEntry(entry Entry, locale string, currency string) (formatted string) {
+	description := formatDescription(entry.Description)
+	date := formatDate(locale, entry.Date)
+	change := formatChange(locale, currency, entry.Change)
+	return date + strings.Repeat(" ", 10-len(date)) + " | " + description + " | " +
+		strings.Repeat(" ", 13-len(change)) + change + "\n"
 }
 
 func getCurrencySymbol(currency string) (symbol string) {
@@ -190,4 +137,61 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		}
 	}
 	return change
+}
+
+func isValidCurrency(currency string) bool {
+	return currency == "USD" || currency == "EUR"
+}
+
+func isValidLocale(locale string) bool {
+	return locale == "en-US" || locale == "nl-NL"
+}
+
+func isValidDate(entries []Entry) bool {
+	for _, entry := range entries {
+		if len(entry.Date) != 10 {
+			return false
+		}
+		_, d2, _, d4, _ := entry.Date[0:4], entry.Date[4], entry.Date[5:7], entry.Date[7], entry.Date[8:10]
+		if d2 != '-' || d4 != '-' {
+			return false
+		}
+	}
+	return true
+}
+
+func formatDescription(description string) string {
+	if len(description) > 25 {
+		return description[:22] + "..."
+	}
+	return description + strings.Repeat(" ", 25-len(description))
+}
+func formatDate(locale string, date string) string {
+	year, month, day := date[0:4], date[5:7], date[8:10]
+
+	if locale == "nl-NL" {
+		return fmt.Sprintf("%v-%v-%v", day, month, year)
+	} else if locale == "en-US" {
+		return fmt.Sprintf("%v/%v/%v", month, day, year)
+	}
+	panic("invalid locale")
+}
+
+func header(locale string) (output string) {
+	if locale == "nl-NL" {
+		return "Datum" +
+			strings.Repeat(" ", 10-len("Datum")) +
+			" | " +
+			"Omschrijving" +
+			strings.Repeat(" ", 25-len("Omschrijving")) +
+			" | " + "Verandering" + "\n"
+	} else if locale == "en-US" {
+		return "Date" +
+			strings.Repeat(" ", 10-len("Date")) +
+			" | " +
+			"Description" +
+			strings.Repeat(" ", 25-len("Description")) +
+			" | " + "Change" + "\n"
+	}
+	panic("invalid locale")
 }
