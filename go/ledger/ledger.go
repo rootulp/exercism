@@ -105,13 +105,11 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 
 	output += header(locale)
 	for _, entry := range entriesCopy {
-		de := formatDescription(entry.Description)
-		d := formatDate(locale, entry.Date)
-		negative := false
+		description := formatDescription(entry.Description)
+		date := formatDate(locale, entry.Date)
 		cents := entry.Change
 		if cents < 0 {
 			cents = cents * -1
-			negative = true
 		}
 		var a string
 		if locale == "nl-NL" {
@@ -143,13 +141,13 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 			a = a[:len(a)-1]
 			a += ","
 			a += centsStr[len(centsStr)-2:]
-			if negative {
+			if cents < 0 {
 				a += "-"
 			} else {
 				a += " "
 			}
 		} else if locale == "en-US" {
-			if negative {
+			if cents < 0 {
 				a += "("
 			}
 			if currency == "EUR" {
@@ -179,13 +177,13 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 			a = a[:len(a)-1]
 			a += "."
 			a += centsStr[len(centsStr)-2:]
-			if negative {
+			if cents < 0 {
 				a += ")"
 			} else {
 				a += " "
 			}
 		}
-		output += d + strings.Repeat(" ", 10-len(d)) + " | " + de + " | " +
+		output += date + strings.Repeat(" ", 10-len(date)) + " | " + description + " | " +
 			strings.Repeat(" ", 13-len(a)) + a + "\n"
 	}
 	return output, nil
