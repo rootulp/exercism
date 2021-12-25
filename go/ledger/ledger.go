@@ -58,8 +58,7 @@ func formatEntry(entry Entry, locale string, currency string) (formatted string)
 	description := formatDescription(entry.Description)
 	date := formatDate(locale, entry.Date)
 	change := formatChange(locale, currency, entry.Change)
-	return date + strings.Repeat(" ", 10-len(date)) + " | " + description + " | " +
-		strings.Repeat(" ", 13-len(change)) + change + "\n"
+	return fmt.Sprintf("%s | %s | %13s\n", date, description, change)
 }
 
 func getCurrencySymbol(currency string) (symbol string) {
