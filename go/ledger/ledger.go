@@ -49,14 +49,14 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 
 	output += header(locale)
 	for _, entry := range entriesCopy {
-		output += formatEntry(entry, locale, currency)
+		output += formatEntry(locale, currency, entry)
 	}
 	return output, nil
 }
 
-func formatEntry(entry Entry, locale string, currency string) (formatted string) {
-	description := formatDescription(entry.Description)
+func formatEntry(locale string, currency string, entry Entry) (formatted string) {
 	date := formatDate(locale, entry.Date)
+	description := formatDescription(entry.Description)
 	change := formatChange(locale, currency, entry.Change)
 	return fmt.Sprintf("%s | %s | %13s\n", date, description, change)
 }
