@@ -197,16 +197,12 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 					a += " "
 				}
 			}
-			var al int
-			for range a {
-				al++
-			}
 			co <- struct {
 				i int
 				s string
 				e error
 			}{i: i, s: d + strings.Repeat(" ", 10-len(d)) + " | " + de + " | " +
-				strings.Repeat(" ", 13-al) + a + "\n"}
+				strings.Repeat(" ", 13-len(a)) + a + "\n"}
 		}(i, et)
 	}
 	temp := make([]string, len(entriesCopy))
