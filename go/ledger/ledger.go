@@ -122,18 +122,17 @@ func formatDescription(description string) string {
 }
 
 func formatChange(locale string, currency string, cents int) (change string) {
-	isNegative := isNegative(cents)
 	paddedChange := fmt.Sprintf("%03s", strconv.Itoa(absoluteValue(cents)))
 	change += formatCurrencySymbol(locale, currency)
 	change += formatNumber(locale, paddedChange)
-	if isNegative {
+	if isNegative(cents) {
 		change = formatNegative(locale, change)
 	}
 	return change
 }
 
 func formatNumber(locale string, paddedChange string) (formatted string) {
-	integralPart := formatIntegralPart(paddedChange, locale)
+	integralPart := formatIntegralPart(locale, paddedChange)
 	decimalPart := paddedChange[len(paddedChange)-2:]
 	return strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
 }
@@ -156,9 +155,9 @@ func formatNegative(locale string, change string) (formatted string) {
 	panic("invalid locale")
 }
 
-func formatIntegralPart(centsStr string, locale string) (formatted string) {
+func formatIntegralPart(locale string, paddedChange string) (formatted string) {
 	var parts []string
-	remainder := centsStr[:len(centsStr)-2]
+	remainder := paddedChange[:len(paddedChange)-2]
 	for len(remainder) > 3 {
 		parts = append([]string{remainder[len(remainder)-3:]}, parts...)
 		remainder = remainder[:len(remainder)-3]
@@ -184,8 +183,8 @@ func isValidDate(entries []Entry) bool {
 		if len(entry.Date) != 10 {
 			return false
 		}
-		_, d2, _, d4, _ := entry.Date[0:4], entry.Date[4], entry.Date[5:7], entry.Date[7], entry.Date[8:10]
-		if d2 != '-' || d4 != '-' {
+		seperatorA, seperatorB := entry.Date[4], entry.Date[7]
+		if seperatorA != '-' || seperatorB != '-' {
 			return false
 		}
 	}
