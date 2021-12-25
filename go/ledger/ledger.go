@@ -3,6 +3,7 @@ package ledger
 import (
 	"errors"
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -124,9 +125,7 @@ func getCurrencySymbol(currency string) (symbol string) {
 }
 
 func formatChange(locale string, currency string, cents int) (change string) {
-	if cents < 0 {
-		cents = cents * -1
-	}
+	cents = int(math.Abs(float64(cents)))
 	if locale == "nl-NL" {
 		change += getCurrencySymbol(currency)
 		change += " "
