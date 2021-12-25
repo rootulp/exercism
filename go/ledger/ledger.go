@@ -141,21 +141,10 @@ func formatChange(locale string, currency string, cents int) (change string) {
 			change = fmt.Sprintf("%s-", change)
 		}
 	} else if locale == "en-US" {
-		rest := paddedChange[:len(paddedChange)-2]
-		var parts []string
-		for len(rest) > 3 {
-			parts = append(parts, rest[len(rest)-3:])
-			rest = rest[:len(rest)-3]
-		}
-		if len(rest) > 0 {
-			parts = append(parts, rest)
-		}
-		for i := len(parts) - 1; i >= 0; i-- {
-			change += parts[i] + locales[locale].IntegralSeperator
-		}
-		change = change[:len(change)-1]
-		change += locales[locale].DecimalPoint
-		change += paddedChange[len(paddedChange)-2:]
+		integralPart := formatIntegralPart(paddedChange, locale)
+		decimalPart := paddedChange[len(paddedChange)-2:]
+		numericPart := strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
+		change += numericPart
 		if isNegative {
 			// Surround with parenthesis
 			change = fmt.Sprintf("(%s)", change)
