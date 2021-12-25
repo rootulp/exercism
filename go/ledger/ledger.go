@@ -104,100 +104,89 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 	}
 
 	output += header(locale)
-	co := make(chan struct {
-		s string
-	})
-	for _, et := range entriesCopy {
-		go func(entry Entry) {
-			de := formatDescription(entry.Description)
-			d := formatDate(locale, entry.Date)
-			negative := false
-			cents := entry.Change
-			if cents < 0 {
-				cents = cents * -1
-				negative = true
+	for _, entry := range entriesCopy {
+		de := formatDescription(entry.Description)
+		d := formatDate(locale, entry.Date)
+		negative := false
+		cents := entry.Change
+		if cents < 0 {
+			cents = cents * -1
+			negative = true
+		}
+		var a string
+		if locale == "nl-NL" {
+			if currency == "EUR" {
+				a += "€"
+			} else if currency == "USD" {
+				a += "$"
 			}
-			var a string
-			if locale == "nl-NL" {
-				if currency == "EUR" {
-					a += "€"
-				} else if currency == "USD" {
-					a += "$"
-				}
+			a += " "
+			centsStr := strconv.Itoa(cents)
+			switch len(centsStr) {
+			case 1:
+				centsStr = "00" + centsStr
+			case 2:
+				centsStr = "0" + centsStr
+			}
+			rest := centsStr[:len(centsStr)-2]
+			var parts []string
+			for len(rest) > 3 {
+				parts = append(parts, rest[len(rest)-3:])
+				rest = rest[:len(rest)-3]
+			}
+			if len(rest) > 0 {
+				parts = append(parts, rest)
+			}
+			for i := len(parts) - 1; i >= 0; i-- {
+				a += parts[i] + "."
+			}
+			a = a[:len(a)-1]
+			a += ","
+			a += centsStr[len(centsStr)-2:]
+			if negative {
+				a += "-"
+			} else {
 				a += " "
-				centsStr := strconv.Itoa(cents)
-				switch len(centsStr) {
-				case 1:
-					centsStr = "00" + centsStr
-				case 2:
-					centsStr = "0" + centsStr
-				}
-				rest := centsStr[:len(centsStr)-2]
-				var parts []string
-				for len(rest) > 3 {
-					parts = append(parts, rest[len(rest)-3:])
-					rest = rest[:len(rest)-3]
-				}
-				if len(rest) > 0 {
-					parts = append(parts, rest)
-				}
-				for i := len(parts) - 1; i >= 0; i-- {
-					a += parts[i] + "."
-				}
-				a = a[:len(a)-1]
-				a += ","
-				a += centsStr[len(centsStr)-2:]
-				if negative {
-					a += "-"
-				} else {
-					a += " "
-				}
-			} else if locale == "en-US" {
-				if negative {
-					a += "("
-				}
-				if currency == "EUR" {
-					a += "€"
-				} else if currency == "USD" {
-					a += "$"
-				}
-				centsStr := strconv.Itoa(cents)
-				switch len(centsStr) {
-				case 1:
-					centsStr = "00" + centsStr
-				case 2:
-					centsStr = "0" + centsStr
-				}
-				rest := centsStr[:len(centsStr)-2]
-				var parts []string
-				for len(rest) > 3 {
-					parts = append(parts, rest[len(rest)-3:])
-					rest = rest[:len(rest)-3]
-				}
-				if len(rest) > 0 {
-					parts = append(parts, rest)
-				}
-				for i := len(parts) - 1; i >= 0; i-- {
-					a += parts[i] + ","
-				}
-				a = a[:len(a)-1]
-				a += "."
-				a += centsStr[len(centsStr)-2:]
-				if negative {
-					a += ")"
-				} else {
-					a += " "
-				}
 			}
-			co <- struct {
-				s string
-			}{s: d + strings.Repeat(" ", 10-len(d)) + " | " + de + " | " +
-				strings.Repeat(" ", 13-len(a)) + a + "\n"}
-		}(et)
-	}
-	for range entriesCopy {
-		v := <-co
-		output += v.s
+		} else if locale == "en-US" {
+			if negative {
+				a += "("
+			}
+			if currency == "EUR" {
+				a += "€"
+			} else if currency == "USD" {
+				a += "$"
+			}
+			centsStr := strconv.Itoa(cents)
+			switch len(centsStr) {
+			case 1:
+				centsStr = "00" + centsStr
+			case 2:
+				centsStr = "0" + centsStr
+			}
+			rest := centsStr[:len(centsStr)-2]
+			var parts []string
+			for len(rest) > 3 {
+				parts = append(parts, rest[len(rest)-3:])
+				rest = rest[:len(rest)-3]
+			}
+			if len(rest) > 0 {
+				parts = append(parts, rest)
+			}
+			for i := len(parts) - 1; i >= 0; i-- {
+				a += parts[i] + ","
+			}
+			a = a[:len(a)-1]
+			a += "."
+			a += centsStr[len(centsStr)-2:]
+			if negative {
+				a += ")"
+			} else {
+				a += " "
+			}
+		}
+		output += d + strings.Repeat(" ", 10-len(d)) + " | " + de + " | " +
+			strings.Repeat(" ", 13-len(a)) + a + "\n"
 	}
 	return output, nil
 }
