@@ -136,34 +136,38 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		decimalPart := paddedChange[len(paddedChange)-2:]
 		numericPart := strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
 		change += numericPart
-		if isNegative {
-			// Append `-`
-			change = fmt.Sprintf("%s-", change)
-		}
 	} else if locale == "en-US" {
 		integralPart := formatIntegralPart(paddedChange, locale)
 		decimalPart := paddedChange[len(paddedChange)-2:]
 		numericPart := strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
 		change += numericPart
-		if isNegative {
-			// Surround with parenthesis
-			change = fmt.Sprintf("(%s)", change)
-		}
+	}
+	if isNegative {
+		change = formatNegative(locale, change)
 	}
 	return change
 }
 
+func formatNegative(locale string, change string) (formatted string) {
+	if locale == "en-US" {
+		return fmt.Sprintf("(%s)", change)
+	} else if locale == "nl-NL" {
+		return fmt.Sprintf("%s-", change)
+	}
+	panic("invalid locale")
+}
+
 func formatIntegralPart(centsStr string, locale string) (formatted string) {
-	integralRemainder := centsStr[:len(centsStr)-2]
-	var integralParts []string
-	for len(integralRemainder) > 3 {
-		integralParts = append([]string{integralRemainder[len(integralRemainder)-3:]}, integralParts...)
-		integralRemainder = integralRemainder[:len(integralRemainder)-3]
+	var parts []string
+	remainder := centsStr[:len(centsStr)-2]
+	for len(remainder) > 3 {
+		parts = append([]string{remainder[len(remainder)-3:]}, parts...)
+		remainder = remainder[:len(remainder)-3]
 	}
-	if len(integralRemainder) > 0 {
-		integralParts = append([]string{integralRemainder}, integralParts...)
+	if len(remainder) > 0 {
+		parts = append([]string{remainder}, parts...)
 	}
-	return strings.Join(integralParts, locales[locale].IntegralSeperator)
+	return strings.Join(parts, locales[locale].IntegralSeperator)
 }
 
 func isValidCurrency(currency string) bool {
