@@ -15,14 +15,23 @@ type Entry struct {
 }
 
 type Locale struct {
+	Date          string
+	Description   string
+	Change        string
 	DateSeperator string
 }
 
 var locales = map[string]Locale{
 	"en-US": {
+		Date:          "Date",
+		Description:   "Description",
+		Change:        "Change",
 		DateSeperator: "/",
 	},
 	"nl-NL": {
+		Date:          "Datum",
+		Description:   "Omschrijving",
+		Change:        "Verandering",
 		DateSeperator: "-",
 	},
 }
@@ -82,12 +91,7 @@ func formatEntry(locale string, currency string, entry Entry) (formatted string)
 }
 
 func header(locale string) (output string) {
-	if locale == "nl-NL" {
-		return fmt.Sprintf("%-10s | %-25s | %s\n", "Datum", "Omschrijving", "Verandering")
-	} else if locale == "en-US" {
-		return fmt.Sprintf("%-10s | %-25s | %s\n", "Date", "Description", "Change")
-	}
-	panic("invalid locale")
+	return fmt.Sprintf("%-10s | %-25s | %s\n", locales[locale].Date, locales[locale].Description, locales[locale].Change)
 }
 
 func formatDate(locale string, date string) string {
