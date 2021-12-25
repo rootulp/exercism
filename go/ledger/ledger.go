@@ -114,18 +114,22 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 	return output, nil
 }
 
-func formatChange(locale string, currency string, cents int) string {
+func getCurrencySymbol(currency string) (symbol string) {
+	if currency == "EUR" {
+		return "€"
+	} else if currency == "USD" {
+		return "$"
+	}
+	panic("invalid currency")
+}
+
+func formatChange(locale string, currency string, cents int) (change string) {
 	if cents < 0 {
 		cents = cents * -1
 	}
-	var a string
 	if locale == "nl-NL" {
-		if currency == "EUR" {
-			a += "€"
-		} else if currency == "USD" {
-			a += "$"
-		}
-		a += " "
+		change += getCurrencySymbol(currency)
+		change += " "
 		centsStr := strconv.Itoa(cents)
 		switch len(centsStr) {
 		case 1:
@@ -143,25 +147,21 @@ func formatChange(locale string, currency string, cents int) string {
 			parts = append(parts, rest)
 		}
 		for i := len(parts) - 1; i >= 0; i-- {
-			a += parts[i] + "."
+			change += parts[i] + "."
 		}
-		a = a[:len(a)-1]
-		a += ","
-		a += centsStr[len(centsStr)-2:]
+		change = change[:len(change)-1]
+		change += ","
+		change += centsStr[len(centsStr)-2:]
 		if cents < 0 {
-			a += "-"
+			change += "-"
 		} else {
-			a += " "
+			change += " "
 		}
 	} else if locale == "en-US" {
 		if cents < 0 {
-			a += "("
+			change += "("
 		}
-		if currency == "EUR" {
-			a += "€"
-		} else if currency == "USD" {
-			a += "$"
-		}
+		change += getCurrencySymbol(currency)
 		centsStr := strconv.Itoa(cents)
 		switch len(centsStr) {
 		case 1:
@@ -179,16 +179,16 @@ func formatChange(locale string, currency string, cents int) string {
 			parts = append(parts, rest)
 		}
 		for i := len(parts) - 1; i >= 0; i-- {
-			a += parts[i] + ","
+			change += parts[i] + ","
 		}
-		a = a[:len(a)-1]
-		a += "."
-		a += centsStr[len(centsStr)-2:]
+		change = change[:len(change)-1]
+		change += "."
+		change += centsStr[len(centsStr)-2:]
 		if cents < 0 {
-			a += ")"
+			change += ")"
 		} else {
-			a += " "
+			change += " "
 		}
 	}
-	return a
+	return change
 }
