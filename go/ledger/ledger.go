@@ -107,15 +107,14 @@ func FormatLedger(currency string, locale string, entries []Entry) (output strin
 	for _, entry := range entriesCopy {
 		description := formatDescription(entry.Description)
 		date := formatDate(locale, entry.Date)
-		change := formatChange(entry, locale, currency)
+		change := formatChange(locale, currency, entry.Change)
 		output += date + strings.Repeat(" ", 10-len(date)) + " | " + description + " | " +
 			strings.Repeat(" ", 13-len(change)) + change + "\n"
 	}
 	return output, nil
 }
 
-func formatChange(entry Entry, locale string, currency string) string {
-	cents := entry.Change
+func formatChange(locale string, currency string, cents int) string {
 	if cents < 0 {
 		cents = cents * -1
 	}
