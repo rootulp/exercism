@@ -48,7 +48,7 @@ func formatDate(locale string, date string) string {
 	} else if locale == "en-US" {
 		return fmt.Sprintf("%v/%v/%v", month, day, year)
 	}
-	return ""
+	panic("invalid locale")
 }
 
 func header(locale string) (output string) {
@@ -67,7 +67,7 @@ func header(locale string) (output string) {
 			strings.Repeat(" ", 25-len("Description")) +
 			" | " + "Change" + "\n"
 	}
-	return ""
+	panic("invalid locale")
 }
 
 func FormatLedger(currency string, locale string, entries []Entry) (output string, e error) {
