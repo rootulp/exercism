@@ -132,17 +132,7 @@ func formatChange(locale string, currency string, cents int) (change string) {
 	if locale == "nl-NL" {
 		change += " "
 		centsStr := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
-		integralRemainder := centsStr[:len(centsStr)-2]
-		var integralParts []string
-		for len(integralRemainder) > 3 {
-			integralParts = append([]string{integralRemainder[len(integralRemainder)-3:]}, integralParts...)
-			integralRemainder = integralRemainder[:len(integralRemainder)-3]
-		}
-		if len(integralRemainder) > 0 {
-			integralParts = append([]string{integralRemainder}, integralParts...)
-		}
-		fmt.Printf("%v\n", integralParts)
-		change += strings.Join(integralParts, locales[locale].IntegralSeperator)
+		change += formatIntegralPart(centsStr, locale)
 		change += locales[locale].DecimalPoint
 		change += centsStr[len(centsStr)-2:]
 		if isNegative {
@@ -172,6 +162,19 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		}
 	}
 	return change
+}
+
+func formatIntegralPart(centsStr string, locale string) (formatted string) {
+	integralRemainder := centsStr[:len(centsStr)-2]
+	var integralParts []string
+	for len(integralRemainder) > 3 {
+		integralParts = append([]string{integralRemainder[len(integralRemainder)-3:]}, integralParts...)
+		integralRemainder = integralRemainder[:len(integralRemainder)-3]
+	}
+	if len(integralRemainder) > 0 {
+		integralParts = append([]string{integralRemainder}, integralParts...)
+	}
+	return strings.Join(integralParts, locales[locale].IntegralSeperator)
 }
 
 func isValidCurrency(currency string) bool {
