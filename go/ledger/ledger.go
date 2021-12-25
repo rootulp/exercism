@@ -42,6 +42,11 @@ var locales = map[string]Locale{
 	},
 }
 
+var currencyToSymbol = map[string]string{
+	"USD": "$",
+	"EUR": "€",
+}
+
 func FormatLedger(currency string, locale string, entries []Entry) (output string, e error) {
 	if !isValidCurrency(currency) {
 		return "", errors.New("invalid currency")
@@ -123,7 +128,7 @@ func formatDescription(description string) string {
 func formatChange(locale string, currency string, cents int) (change string) {
 	isNegative := isNegative(cents)
 	absoluteValueCents := int(math.Abs(float64(cents)))
-	change += getCurrencySymbol(currency)
+	change += currencyToSymbol[currency]
 	if locale == "nl-NL" {
 		change += " "
 		centsStr := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
@@ -171,17 +176,9 @@ func formatChange(locale string, currency string, cents int) (change string) {
 	return change
 }
 
-func getCurrencySymbol(currency string) (symbol string) {
-	if currency == "EUR" {
-		return "€"
-	} else if currency == "USD" {
-		return "$"
-	}
-	panic("invalid currency")
-}
-
 func isValidCurrency(currency string) bool {
-	return currency == "USD" || currency == "EUR"
+	_, ok := currencyToSymbol[currency]
+	return ok
 }
 
 func isValidLocale(locale string) bool {
