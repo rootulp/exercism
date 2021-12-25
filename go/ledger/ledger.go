@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math"
 	"strconv"
-	"strings"
 )
 
 type Entry struct {
@@ -62,9 +61,9 @@ func formatEntry(locale string, currency string, entry Entry) (formatted string)
 	// This conditional is necessary because expected output is aligned
 	// differently for negative vs. non-negative values
 	if isNegative(entry.Change) {
-		return fmt.Sprintf("%-10s | %s | %13s\n", date, description, change)
+		return fmt.Sprintf("%-10s | %-25s | %13s\n", date, description, change)
 	} else {
-		return fmt.Sprintf("%-10s | %s | %12s\n", date, description, change)
+		return fmt.Sprintf("%-10s | %-25s | %12s\n", date, description, change)
 	}
 }
 
@@ -158,7 +157,7 @@ func formatDescription(description string) string {
 	if len(description) > 25 {
 		return description[:22] + "..."
 	}
-	return description + strings.Repeat(" ", 25-len(description))
+	return description
 }
 
 func formatDate(locale string, date string) string {
