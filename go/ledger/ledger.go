@@ -20,7 +20,7 @@ func isValidLocale(locale string) bool {
 	return locale == "en-US" || locale == "nl-NL"
 }
 
-func FormatLedger(currency string, locale string, entries []Entry) (string, error) {
+func FormatLedger(currency string, locale string, entries []Entry) (output string, e error) {
 	if !isValidCurrency(currency) {
 		return "", errors.New("invalid currency")
 	}
@@ -51,16 +51,15 @@ func FormatLedger(currency string, locale string, entries []Entry) (string, erro
 		es = es[1:]
 	}
 
-	var s string
 	if locale == "nl-NL" {
-		s = "Datum" +
+		output = "Datum" +
 			strings.Repeat(" ", 10-len("Datum")) +
 			" | " +
 			"Omschrijving" +
 			strings.Repeat(" ", 25-len("Omschrijving")) +
 			" | " + "Verandering" + "\n"
 	} else if locale == "en-US" {
-		s = "Date" +
+		output = "Date" +
 			strings.Repeat(" ", 10-len("Date")) +
 			" | " +
 			"Description" +
@@ -226,7 +225,7 @@ func FormatLedger(currency string, locale string, entries []Entry) (string, erro
 		ss[v.i] = v.s
 	}
 	for i := 0; i < len(entriesCopy); i++ {
-		s += ss[i]
+		output += ss[i]
 	}
-	return s, nil
+	return output, nil
 }
