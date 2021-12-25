@@ -88,8 +88,10 @@ func formatEntry(locale string, currency string, entry Entry) (formatted string)
 	description := formatDescription(entry.Description)
 	change := formatChange(locale, currency, entry.Change)
 
-	// This conditional is necessary because expected output is aligned
-	// differently for negative vs. non-negative values
+	// This conditional is necessary if running tests locally because the
+	// trailing whitespace for expected entries are trimmed from test files.
+	// This will fail on Exercism's test runner because tests run their do not
+	// trim whitespace on non-negative entries.
 	if isNegative(entry.Change) {
 		return fmt.Sprintf("%-10s | %-25s | %13s\n", date, description, change)
 	} else {
