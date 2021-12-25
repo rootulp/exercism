@@ -107,12 +107,9 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		change += ","
 		change += centsStr[len(centsStr)-2:]
 		if isNegative {
-			change += "-"
+			change = fmt.Sprintf("%s-", change)
 		}
 	} else if locale == "en-US" {
-		if isNegative {
-			change += "("
-		}
 		change += getCurrencySymbol(currency)
 		centsStr := strconv.Itoa(absoluteValueCents)
 		switch len(centsStr) {
@@ -137,7 +134,7 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		change += "."
 		change += centsStr[len(centsStr)-2:]
 		if isNegative {
-			change += ")"
+			change = fmt.Sprintf("(%s)", change)
 		}
 	}
 	return change
