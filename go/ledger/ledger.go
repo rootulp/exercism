@@ -132,9 +132,10 @@ func formatChange(locale string, currency string, cents int) (change string) {
 	if locale == "nl-NL" {
 		change += " "
 		centsStr := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
-		change += formatIntegralPart(centsStr, locale)
-		change += locales[locale].DecimalPoint
-		change += centsStr[len(centsStr)-2:]
+		integralPart := formatIntegralPart(centsStr, locale)
+		decimalPart := centsStr[len(centsStr)-2:]
+		numericPart := strings.Join([]string{integralPart, decimalPart}, locales[locale].DecimalPoint)
+		change += numericPart
 		if isNegative {
 			// Append `-`
 			change = fmt.Sprintf("%s-", change)
