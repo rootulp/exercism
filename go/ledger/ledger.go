@@ -5,12 +5,26 @@ import (
 	"fmt"
 	"math"
 	"strconv"
+	"strings"
 )
 
 type Entry struct {
 	Date        string // "Y-m-d"
 	Description string
 	Change      int // in cents
+}
+
+type Locale struct {
+	DateSeperator string
+}
+
+var locales = map[string]Locale{
+	"en-US": {
+		DateSeperator: "/",
+	},
+	"nl-NL": {
+		DateSeperator: "-",
+	},
 }
 
 func FormatLedger(currency string, locale string, entries []Entry) (output string, e error) {
@@ -79,10 +93,11 @@ func header(locale string) (output string) {
 func formatDate(locale string, date string) string {
 	year, month, day := date[0:4], date[5:7], date[8:10]
 
+	seperator := locales[locale].DateSeperator
 	if locale == "nl-NL" {
-		return fmt.Sprintf("%v-%v-%v", day, month, year)
+		return strings.Join([]string{day, month, year}, seperator)
 	} else if locale == "en-US" {
-		return fmt.Sprintf("%v/%v/%v", month, day, year)
+		return strings.Join([]string{month, day, year}, seperator)
 	}
 	panic("invalid locale")
 }
@@ -99,8 +114,8 @@ func formatDescription(description string) string {
 func formatChange(locale string, currency string, cents int) (change string) {
 	isNegative := isNegative(cents)
 	absoluteValueCents := int(math.Abs(float64(cents)))
+	change += getCurrencySymbol(currency)
 	if locale == "nl-NL" {
-		change += getCurrencySymbol(currency)
 		change += " "
 		centsStr := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
 		rest := centsStr[:len(centsStr)-2]
@@ -123,7 +138,6 @@ func formatChange(locale string, currency string, cents int) (change string) {
 			change = fmt.Sprintf("%s-", change)
 		}
 	} else if locale == "en-US" {
-		change += getCurrencySymbol(currency)
 		centsStr := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
 		rest := centsStr[:len(centsStr)-2]
 		var parts []string
@@ -162,7 +176,8 @@ func isValidCurrency(currency string) bool {
 }
 
 func isValidLocale(locale string) bool {
-	return locale == "en-US" || locale == "nl-NL"
+	_, ok := locales[locale]
+	return ok
 }
 
 func isValidDate(entries []Entry) bool {
