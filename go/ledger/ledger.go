@@ -58,7 +58,7 @@ func formatEntry(locale string, currency string, entry Entry) (formatted string)
 	date := formatDate(locale, entry.Date)
 	description := formatDescription(entry.Description)
 	change := formatChange(locale, currency, entry.Change)
-	if change[len(change)-1] == ')' {
+	if isNegative(entry.Change) {
 		return fmt.Sprintf("%s | %s | %13s\n", date, description, change)
 	} else {
 		return fmt.Sprintf("%s | %s | %12s\n", date, description, change)
@@ -106,10 +106,8 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		change = change[:len(change)-1]
 		change += ","
 		change += centsStr[len(centsStr)-2:]
-		if absoluteValueCents < 0 {
+		if isNegative {
 			change += "-"
-		} else {
-			change += " "
 		}
 	} else if locale == "en-US" {
 		if isNegative {
