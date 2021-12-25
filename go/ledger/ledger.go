@@ -58,7 +58,11 @@ func formatEntry(locale string, currency string, entry Entry) (formatted string)
 	date := formatDate(locale, entry.Date)
 	description := formatDescription(entry.Description)
 	change := formatChange(locale, currency, entry.Change)
-	return fmt.Sprintf("%s | %s | %13s\n", date, description, change)
+	if change[len(change)-1] == ')' {
+		return fmt.Sprintf("%s | %s | %13s\n", date, description, change)
+	} else {
+		return fmt.Sprintf("%s | %s | %12s\n", date, description, change)
+	}
 }
 
 func getCurrencySymbol(currency string) (symbol string) {
@@ -70,12 +74,17 @@ func getCurrencySymbol(currency string) (symbol string) {
 	panic("invalid currency")
 }
 
+func isNegative(cents int) bool {
+	return cents < 0
+}
+
 func formatChange(locale string, currency string, cents int) (change string) {
-	cents = int(math.Abs(float64(cents)))
+	isNegative := isNegative(cents)
+	absoluteValueCents := int(math.Abs(float64(cents)))
 	if locale == "nl-NL" {
 		change += getCurrencySymbol(currency)
 		change += " "
-		centsStr := strconv.Itoa(cents)
+		centsStr := strconv.Itoa(absoluteValueCents)
 		switch len(centsStr) {
 		case 1:
 			centsStr = "00" + centsStr
@@ -97,17 +106,17 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		change = change[:len(change)-1]
 		change += ","
 		change += centsStr[len(centsStr)-2:]
-		if cents < 0 {
+		if absoluteValueCents < 0 {
 			change += "-"
 		} else {
 			change += " "
 		}
 	} else if locale == "en-US" {
-		if cents < 0 {
+		if isNegative {
 			change += "("
 		}
 		change += getCurrencySymbol(currency)
-		centsStr := strconv.Itoa(cents)
+		centsStr := strconv.Itoa(absoluteValueCents)
 		switch len(centsStr) {
 		case 1:
 			centsStr = "00" + centsStr
@@ -129,10 +138,8 @@ func formatChange(locale string, currency string, cents int) (change string) {
 		change = change[:len(change)-1]
 		change += "."
 		change += centsStr[len(centsStr)-2:]
-		if cents < 0 {
+		if isNegative {
 			change += ")"
-		} else {
-			change += " "
 		}
 	}
 	return change
