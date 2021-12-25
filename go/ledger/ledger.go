@@ -12,14 +12,17 @@ type Entry struct {
 	Change      int // in cents
 }
 
+func isValidCurrency(currency string) bool {
+	return currency == "USD" || currency == "EUR"
+}
+
 func FormatLedger(currency string, locale string, entries []Entry) (string, error) {
+	if !isValidCurrency(currency) {
+		return "", errors.New("invalid currency")
+	}
 	var entriesCopy []Entry
 	entriesCopy = append(entriesCopy, entries...)
-	if len(entries) == 0 {
-		if _, err := FormatLedger(currency, "en-US", []Entry{{Date: "2014-01-01", Description: "", Change: 0}}); err != nil {
-			return "", err
-		}
-	}
+
 	m1 := map[bool]int{true: 0, false: 1}
 	m2 := map[bool]int{true: -1, false: 1}
 	es := entriesCopy
