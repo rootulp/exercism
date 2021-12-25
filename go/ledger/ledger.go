@@ -16,12 +16,20 @@ func isValidCurrency(currency string) bool {
 	return currency == "USD" || currency == "EUR"
 }
 
+func isValidLocale(locale string) bool {
+	return locale == "en-US" || locale == "nl-NL"
+}
+
 func FormatLedger(currency string, locale string, entries []Entry) (string, error) {
 	if !isValidCurrency(currency) {
 		return "", errors.New("invalid currency")
 	}
-	var entriesCopy []Entry
-	entriesCopy = append(entriesCopy, entries...)
+
+	if !isValidLocale(locale) {
+		return "", errors.New("invalid locale")
+	}
+
+	entriesCopy := append([]Entry{}, entries...)
 
 	m1 := map[bool]int{true: 0, false: 1}
 	m2 := map[bool]int{true: -1, false: 1}
@@ -58,8 +66,6 @@ func FormatLedger(currency string, locale string, entries []Entry) (string, erro
 			"Description" +
 			strings.Repeat(" ", 25-len("Description")) +
 			" | " + "Change" + "\n"
-	} else {
-		return "", errors.New("")
 	}
 	// Parallelism, always a great idea
 	co := make(chan struct {
