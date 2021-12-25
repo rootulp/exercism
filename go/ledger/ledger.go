@@ -127,8 +127,7 @@ func formatDescription(description string) string {
 
 func formatChange(locale string, currency string, cents int) (change string) {
 	isNegative := isNegative(cents)
-	absoluteValueCents := int(math.Abs(float64(cents)))
-	paddedChange := fmt.Sprintf("%03s", strconv.Itoa(absoluteValueCents))
+	paddedChange := fmt.Sprintf("%03s", strconv.Itoa(absoluteValue(cents)))
 	change += formatCurrencySymbol(locale, currency)
 	change += formatNumber(locale, paddedChange)
 	if isNegative {
@@ -199,4 +198,8 @@ func isValidDate(entries []Entry) bool {
 
 func isNegative(cents int) bool {
 	return cents < 0
+}
+
+func absoluteValue(n int) int {
+	return int(math.Abs(float64(n)))
 }
