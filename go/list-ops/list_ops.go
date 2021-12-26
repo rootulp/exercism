@@ -17,12 +17,22 @@ func (s IntList) Foldr(fn func(int, int) int, initial int) int {
 	return initial
 }
 
-func (s IntList) Filter(fn func(int) bool) IntList {
-	panic("Please implement the Filter function")
+func (s IntList) Filter(fn func(int) bool) (filtered IntList) {
+	filtered = make(IntList, 0)
+	for _, v := range s {
+		if fn(v) {
+			filtered = append(filtered, v)
+		}
+	}
+	return filtered
 }
 
-func (s IntList) Length() int {
-	panic("Please implement the Length function")
+func (s IntList) Length() (length int) {
+	// Assume we can't call len(s)
+	for range s {
+		length++
+	}
+	return length
 }
 
 func (s IntList) Map(fn func(int) int) IntList {
