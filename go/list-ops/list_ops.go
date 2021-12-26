@@ -43,8 +43,12 @@ func (s IntList) Map(fn func(int) int) (mapped IntList) {
 	return mapped
 }
 
-func (s IntList) Reverse() IntList {
-	panic("Please implement the Reverse function")
+func (s IntList) Reverse() (reversed IntList) {
+	reversed = make(IntList, 0)
+	for i := len(s) - 1; i >= 0; i-- {
+		reversed = append(reversed, s[i])
+	}
+	return reversed
 }
 
 func (s IntList) Append(lst IntList) IntList {
