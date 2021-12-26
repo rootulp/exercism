@@ -35,8 +35,12 @@ func (s IntList) Length() (length int) {
 	return length
 }
 
-func (s IntList) Map(fn func(int) int) IntList {
-	panic("Please implement the Map function")
+func (s IntList) Map(fn func(int) int) (mapped IntList) {
+	mapped = make(IntList, len(s))
+	for i, v := range s {
+		mapped[i] = fn(v)
+	}
+	return mapped
 }
 
 func (s IntList) Reverse() IntList {
