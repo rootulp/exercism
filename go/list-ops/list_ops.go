@@ -51,8 +51,8 @@ func (s IntList) Reverse() (reversed IntList) {
 	return reversed
 }
 
-func (s IntList) Append(lst IntList) IntList {
-	panic("Please implement the Append function")
+func (s IntList) Append(toAppend IntList) (appended IntList) {
+	return append(s, toAppend...)
 }
 
 func (s IntList) Concat(lists []IntList) IntList {
