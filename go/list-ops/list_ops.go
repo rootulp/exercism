@@ -55,6 +55,11 @@ func (s IntList) Append(toAppend IntList) (appended IntList) {
 	return append(s, toAppend...)
 }
 
-func (s IntList) Concat(lists []IntList) IntList {
-	panic("Please implement the Concat function")
+func (s IntList) Concat(lists []IntList) (concatenated IntList) {
+	concatenated = make(IntList, 0)
+	concatenated = append(concatenated, s...)
+	for _, list := range lists {
+		concatenated = append(concatenated, list...)
+	}
+	return concatenated
 }
