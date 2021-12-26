@@ -2,27 +2,23 @@ package darts
 
 import "math"
 
+const innerRadius = 1
+const middleRadius = 5
+const outerRadius = 10
+
 func Score(x, y float64) int {
-	if isInnerCircle(x, y) {
+	if isInCircle(x, y, innerRadius) {
 		return 10
-	} else if isMiddleCircle(x, y) {
+	} else if isInCircle(x, y, middleRadius) {
 		return 5
-	} else if isOuterCircle(x, y) {
+	} else if isInCircle(x, y, outerRadius) {
 		return 1
 	}
 	return 0
 }
 
-func isInnerCircle(x float64, y float64) bool {
-	return distanceToCenter(x, y) <= 1
-}
-
-func isMiddleCircle(x float64, y float64) bool {
-	return distanceToCenter(x, y) <= 5
-}
-
-func isOuterCircle(x float64, y float64) bool {
-	return distanceToCenter(x, y) <= 10
+func isInCircle(x float64, y float64, radius int) bool {
+	return distanceToCenter(x, y) <= float64(radius)
 }
 
 func distanceToCenter(x float64, y float64) float64 {
