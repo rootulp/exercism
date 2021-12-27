@@ -8,5 +8,5 @@ func All(n int, s string) (result []string) {
 }
 
 func UnsafeFirst(n int, s string) string {
-	panic("Please implement the UnsafeFirst function")
+	return s[0:n]
 }
