@@ -30,30 +30,27 @@ func SpiralMatrix(size int) (result [][]int) {
 				result[topRow][column] = numToInsert
 				numToInsert++
 			}
-			direction = advanceClockwise(direction)
 			topRow += 1
 		case south:
 			for row := topRow; row <= bottomRow; row += 1 {
 				result[row][rightColumn] = numToInsert
 				numToInsert++
 			}
-			direction = advanceClockwise(direction)
 			rightColumn -= 1
 		case west:
 			for column := rightColumn; column >= leftColumn; column -= 1 {
 				result[bottomRow][column] = numToInsert
 				numToInsert++
 			}
-			direction = advanceClockwise(direction)
 			bottomRow -= 1
 		case north:
 			for row := bottomRow; row >= topRow; row -= 1 {
 				result[row][leftColumn] = numToInsert
 				numToInsert++
 			}
-			direction = advanceClockwise(direction)
 			leftColumn += 1
 		}
+		direction = advanceClockwise(direction)
 	}
 	return result
 }
