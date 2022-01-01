@@ -1,6 +1,9 @@
 package palindrome
 
-import "strconv"
+import (
+	"errors"
+	"strconv"
+)
 
 // Define Product type here.
 type Product struct {
@@ -9,9 +12,15 @@ type Product struct {
 }
 
 func Products(fmin, fmax int) (min Product, max Product, e error) {
+	if fmin > fmax {
+		return min, max, errors.New("fmin > fmax...")
+	}
 	products, e := getPalindromeProducts(fmin, fmax)
 	if e != nil {
 		return min, max, e
+	}
+	if len(products) == 0 {
+		return min, max, errors.New("no palindromes...")
 	}
 	min = getMin(products)
 	max = getMax(products)
@@ -47,9 +56,6 @@ func getPalindromeProducts(min int, max int) (products []Product, e error) {
 }
 
 func getMin(products []Product) (min Product) {
-	if len(products) == 0 {
-		return Product{}
-	}
 	min = products[0]
 	for _, product := range products {
 		if product.palindrome < min.palindrome {
@@ -60,9 +66,6 @@ func getMin(products []Product) (min Product) {
 }
 
 func getMax(products []Product) (max Product) {
-	if len(products) == 0 {
-		return Product{}
-	}
 	max = products[0]
 	for _, product := range products {
 		if product.palindrome > max.palindrome {
