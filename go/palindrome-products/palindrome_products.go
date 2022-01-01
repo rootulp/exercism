@@ -13,13 +13,12 @@ type Product struct {
 
 func Products(fmin, fmax int) (min Product, max Product, e error) {
 	if fmin > fmax {
+		// This error message doesn't conform to go-staticcheck but this problem expects this exact error string
 		return min, max, errors.New("fmin > fmax...")
 	}
-	products, e := getPalindromeProducts(fmin, fmax)
-	if e != nil {
-		return min, max, e
-	}
+	products := getPalindromeProducts(fmin, fmax)
 	if len(products) == 0 {
+		// This error message doesn't conform to go-staticcheck but this problem expects this exact error string
 		return min, max, errors.New("no palindromes...")
 	}
 	min = getMin(products)
@@ -27,7 +26,7 @@ func Products(fmin, fmax int) (min Product, max Product, e error) {
 	return min, max, nil
 }
 
-func getPalindromeProducts(min int, max int) (products []Product, e error) {
+func getPalindromeProducts(min int, max int) (products []Product) {
 	productToFactors := map[int][][2]int{}
 	products = make([]Product, 0)
 	for i := min; i <= max; i++ {
@@ -52,7 +51,7 @@ func getPalindromeProducts(min int, max int) (products []Product, e error) {
 		}
 		products = append(products, product)
 	}
-	return products, nil
+	return products
 }
 
 func getMin(products []Product) (min Product) {
