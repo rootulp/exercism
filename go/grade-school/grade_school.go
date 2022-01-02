@@ -1,5 +1,7 @@
 package school
 
+import "sort"
+
 // Define the Grade and School types here.
 type School struct {
 	grades map[int]Grade
@@ -8,6 +10,19 @@ type School struct {
 type Grade struct {
 	level    int
 	students []string
+}
+
+// ByLevel implements sort.Interface based on level field.
+type ByLevel []Grade
+
+func (l ByLevel) Len() int {
+	return len(l)
+}
+func (l ByLevel) Less(i, j int) bool {
+	return l[i].level < l[j].level
+}
+func (l ByLevel) Swap(i, j int) {
+	l[i], l[j] = l[j], l[i]
 }
 
 func New() *School {
@@ -20,6 +35,7 @@ func (s *School) Add(student string, level int) {
 		s.grades[level] = Grade{level, []string{student}}
 	} else {
 		grade.students = append(grade.students, student)
+		sort.Strings(grade.students)
 		s.grades[level] = grade
 	}
 }
@@ -37,5 +53,6 @@ func (s *School) Enrollment() (result []Grade) {
 	for _, grade := range s.grades {
 		result = append(result, grade)
 	}
+	sort.Sort(ByLevel(result))
 	return result
 }
