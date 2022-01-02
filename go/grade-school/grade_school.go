@@ -15,14 +15,14 @@ type Grade struct {
 // ByLevel implements sort.Interface based on level field.
 type ByLevel []Grade
 
-func (l ByLevel) Len() int {
-	return len(l)
+func (grades ByLevel) Len() int {
+	return len(grades)
 }
-func (l ByLevel) Less(i, j int) bool {
-	return l[i].level < l[j].level
+func (grades ByLevel) Less(i, j int) bool {
+	return grades[i].level < grades[j].level
 }
-func (l ByLevel) Swap(i, j int) {
-	l[i], l[j] = l[j], l[i]
+func (grades ByLevel) Swap(i, j int) {
+	grades[i], grades[j] = grades[j], grades[i]
 }
 
 func New() *School {
