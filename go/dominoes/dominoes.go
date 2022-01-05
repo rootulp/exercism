@@ -38,6 +38,7 @@ func makeChain(remaining []Domino, chain []Domino) (result []Domino, ok bool) {
 	return nil, false
 }
 
+// removeIndex removes the element at index from arr
 func removeIndex(arr []Domino, index int) (result []Domino) {
 	result = append([]Domino{}, arr...)
 	return append(result[:index], result[index+1:]...)
@@ -49,6 +50,8 @@ func isValid(chain []Domino) bool {
 	return isValid
 }
 
+// isValidEnds returns whether the left side of first domino == right side of
+// last domino
 func isValidEnds(chain []Domino) bool {
 	if len(chain) == 0 {
 		return true
@@ -59,6 +62,7 @@ func isValidEnds(chain []Domino) bool {
 	}
 }
 
+// isValidEnds returns whether the the connections between dominos are valid
 func isValidConnections(chain []Domino) bool {
 	if len(chain) == 0 || len(chain) == 1 {
 		return true
