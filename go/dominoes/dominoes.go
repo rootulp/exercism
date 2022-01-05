@@ -16,13 +16,18 @@ func makeChain(remaining []Domino, chain []Domino) (result []Domino, ok bool) {
 	if len(remaining) == 0 {
 		return chain, isValid(chain)
 	}
+	if len(chain) >= 2 && !isValidConnections(chain) {
+		return chain, false
+	}
 	for i, v := range remaining {
 		candidateRemaining := removeIndex(remaining, i)
+
 		candidateChain1 := append([]Domino{}, chain...)
 		candidateChain2 := append([]Domino{}, chain...)
 
 		candidateChain1 = append(candidateChain1, v)
 		candidateChain2 = append(candidateChain2, flip(v))
+
 		if result, ok := makeChain(candidateRemaining, candidateChain1); ok {
 			return result, ok
 		}
