@@ -43,28 +43,33 @@ func (l *List) Push(data int) {
 	element := &Element{
 		data: data,
 	}
+	l.size += 1
 	if l.head == nil {
 		l.head = element
-	} else {
-		current := l.head
-		for current.next != nil {
-			current = current.next
-		}
-		current.next = element
+		return
 	}
-	l.size += 1
+	current := l.head
+	for current.next != nil {
+		current = current.next
+	}
+	current.next = element
 }
 
-func (l *List) Pop() (int, error) {
+func (l *List) Pop() (result int, e error) {
 	if l.head == nil {
 		return 0, errors.New("attempted to pop from empty list")
+	}
+	if l.size == 1 {
+		result = l.head.data
+		l.head = nil
+		l.size -= 1
+		return result, nil
 	}
 	current := l.head
 	for current.next != nil && current.next.next != nil {
 		current = current.next
 	}
-	fmt.Printf("l %v and current %v\n", l, current)
-	result := current.next.data
+	result = current.next.data
 	current.next = nil
 	l.size -= 1
 	return result, nil
