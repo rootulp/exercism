@@ -1,40 +1,34 @@
 package transpose
 
 import (
-	"fmt"
 	"strings"
 )
 
 func Transpose(input []string) (result []string) {
-	if len(input) == 0 {
-		return []string{}
-	}
+	result = []string{}
 	transposed := make([][]string, maxLineLength(input))
-	paddedInput := padInput(input)
-	for _, v := range paddedInput {
-		for col, c := range v {
+	for _, row := range padInput(input) {
+		for col, v := range row {
 			if transposed[col] == nil {
 				transposed[col] = []string{}
 			}
-			fmt.Printf("transposed[%v]=append(%v, %v)\n", col, transposed[col], c)
-			transposed[col] = append(transposed[col], string(c))
+			transposed[col] = append(transposed[col], string(v))
 		}
 	}
-	fmt.Printf("transposed: %v\n", transposed)
 	for _, row := range transposed {
 		result = append(result, strings.Join(row, ""))
 	}
-	fmt.Printf("Transpose(%v)=%v\n", input, result)
 	return result
 }
 
+// padInput pads input so that each line has a length equal to the max line
+// length of all lines that follow
 func padInput(input []string) (padded []string) {
 	for i, line := range input {
 		lineLength := maxLineLength(input[i:])
 		paddedLine := pad(line, lineLength)
 		padded = append(padded, paddedLine)
 	}
-	fmt.Printf("pad(%v)=%v", input, padded)
 	return padded
 }
 
