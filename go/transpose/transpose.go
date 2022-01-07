@@ -6,8 +6,15 @@ import (
 
 func Transpose(input []string) (result []string) {
 	result = []string{}
-	transposed := make([][]string, maxLineLength(input))
-	for _, row := range padInput(input) {
+	for _, row := range transpose(padInput(input)) {
+		result = append(result, strings.Join(row, ""))
+	}
+	return result
+}
+
+func transpose(input []string) (transposed [][]string) {
+	transposed = make([][]string, maxLineLength(input))
+	for _, row := range input {
 		for col, v := range row {
 			if transposed[col] == nil {
 				transposed[col] = []string{}
@@ -15,10 +22,7 @@ func Transpose(input []string) (result []string) {
 			transposed[col] = append(transposed[col], string(v))
 		}
 	}
-	for _, row := range transposed {
-		result = append(result, strings.Join(row, ""))
-	}
-	return result
+	return transposed
 }
 
 // padInput pads input so that each line has a length equal to the max line
