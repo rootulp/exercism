@@ -1,29 +1,24 @@
 package markdown
 
-// implementation to refactor
-
 import (
 	"fmt"
 	"strings"
 )
 
 // Render translates markdown to HTML
-func Render(markdown string) string {
+func Render(markdown string) (html string) {
 	header := 0
-	markdown = strings.Replace(markdown, "__", "<strong>", 1)
-	markdown = strings.Replace(markdown, "__", "</strong>", 1)
-	markdown = strings.Replace(markdown, "_", "<em>", 1)
-	markdown = strings.Replace(markdown, "_", "</em>", 1)
+	temp := handleItalic(handleBold(markdown))
 	pos := 0
 	list := 0
-	html := ""
+	html = ""
 	for {
-		char := markdown[pos]
+		char := temp[pos]
 		if char == '#' {
 			for char == '#' {
 				header++
 				pos++
-				char = markdown[pos]
+				char = temp[pos]
 			}
 			html += fmt.Sprintf("<h%d>", header)
 			pos++
@@ -51,7 +46,7 @@ func Render(markdown string) string {
 		}
 		html += string(char)
 		pos++
-		if pos >= len(markdown) {
+		if pos >= len(temp) {
 			break
 		}
 	}
@@ -62,5 +57,16 @@ func Render(markdown string) string {
 		return html + "</li></ul>"
 	}
 	return "<p>" + html + "</p>"
+}
 
+func handleBold(markdown string) string {
+	markdown = strings.Replace(markdown, "__", "<strong>", 1)
+	markdown = strings.Replace(markdown, "__", "</strong>", 1)
+	return markdown
+}
+
+func handleItalic(markdown string) (result string) {
+	markdown = strings.Replace(markdown, "_", "<em>", 1)
+	markdown = strings.Replace(markdown, "_", "</em>", 1)
+	return markdown
 }
