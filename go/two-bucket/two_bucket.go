@@ -1,6 +1,9 @@
 package twobucket
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Bucket struct {
 	name     string
@@ -8,20 +11,17 @@ type Bucket struct {
 	level    int
 }
 
-func NewBucket(name string, capacity int, level int) *Bucket {
-	return &Bucket{name, capacity, level}
+func (b *Bucket) IsEmpty() bool {
+	return b.level == 0
+}
+func (b *Bucket) IsFull() bool {
+	return b.level == b.capacity
 }
 func (b *Bucket) Fill() {
 	b.level = b.capacity
 }
 func (b *Bucket) Empty() {
 	b.level = 0
-}
-func (b *Bucket) IsEmpty() bool {
-	return b.level == 0
-}
-func (b *Bucket) IsFull() bool {
-	return b.level == b.capacity
 }
 func (src *Bucket) Transfer(dst *Bucket) {
 	for src.level != 0 && dst.level != dst.capacity {
@@ -31,9 +31,11 @@ func (src *Bucket) Transfer(dst *Bucket) {
 }
 
 func Solve(bucketOneCapacity, bucketTwoCapacity, goalAmount int, startBucket string) (goalBucket string, moves int, otherBucketLevel int, e error) {
-
-	one := NewBucket("one", bucketOneCapacity, 0)
-	two := NewBucket("two", bucketTwoCapacity, 0)
+	if bucketOneCapacity < 1 || bucketTwoCapacity < 1 || goalAmount < 1 || (startBucket != "one" && startBucket != "two") {
+		return "", 0, 0, errors.New("invalid parameters")
+	}
+	one := &Bucket{"one", bucketOneCapacity, 0}
+	two := &Bucket{"two", bucketTwoCapacity, 0}
 	var first *Bucket
 	var second *Bucket
 
