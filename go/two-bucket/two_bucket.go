@@ -11,84 +11,62 @@ type Bucket struct {
 func NewBucket(name string, capacity int, level int) *Bucket {
 	return &Bucket{name, capacity, level}
 }
-func (b *Bucket) Clone(level int) *Bucket {
-	fmt.Printf("Cloning bucket %v with capacity %v and level %v\n", b.name, b.capacity, level)
-	return NewBucket(b.name, b.capacity, level)
+func (b *Bucket) Fill() {
+	b.level = b.capacity
 }
-func (b *Bucket) Fill() *Bucket {
-	return b.Clone(b.capacity)
+func (b *Bucket) Empty() {
+	b.level = 0
 }
-func (b *Bucket) Empty() *Bucket {
-	return b.Clone(0)
+func (b *Bucket) IsEmpty() bool {
+	return b.level == 0
 }
-func (b *Bucket) Transfer(destination *Bucket) (resultSrc *Bucket, resultDestination *Bucket) {
-	if b.level+destination.level > destination.capacity {
-		return b.Clone(destination.capacity - destination.level), destination.Clone(destination.capacity)
-	} else {
-		fmt.Printf("destination.level %v, b.level %v\n", destination.level, b.level)
-		return b.Clone(0), destination.Clone(destination.level + b.level)
+func (b *Bucket) IsFull() bool {
+	return b.level == b.capacity
+}
+func (src *Bucket) Transfer(dst *Bucket) {
+	for src.level != 0 && dst.level != dst.capacity {
+		src.level -= 1
+		dst.level += 1
 	}
-}
-
-type state struct {
-	a     *Bucket
-	b     *Bucket
-	moves int
-}
-
-func (s state) String() string {
-	return fmt.Sprintf("a %v, b %v, moves %v\n", s.a, s.b, s.moves)
 }
 
 func Solve(bucketOneCapacity, bucketTwoCapacity, goalAmount int, startBucket string) (goalBucket string, moves int, otherBucketLevel int, e error) {
 
 	one := NewBucket("one", bucketOneCapacity, 0)
 	two := NewBucket("two", bucketTwoCapacity, 0)
-	moves = 0
-	queue := []state{}
-	seen := map[state]bool{}
+	var first *Bucket
+	var second *Bucket
 
 	switch startBucket {
 	case "one":
-		one.Fill()
-		moves += 1
-		queue = append(queue, state{one, two, moves})
+		first, second = one, two
 	case "two":
-		two.Fill()
-		moves += 1
-		queue = append(queue, state{one, two, moves})
+		first, second = two, one
 	default:
 		return "", -1, -1, fmt.Errorf("start bucket invalid %s", startBucket)
 	}
 
-	for len(queue) > 0 {
-		item, queue := queue[0], queue[1:]
-		fmt.Printf("current item %v, queue length: %v\n", item, len(queue))
-
-		if _, ok := seen[item]; ok {
-			continue
-		} else {
-			seen[item] = true
+	moves = 0
+	for first.level != goalAmount && second.level != goalAmount {
+		switch {
+		case first.IsEmpty():
+			first.Fill()
+		case second.IsFull():
+			second.Empty()
+		case first.capacity == goalAmount:
+			first.Fill()
+		case second.capacity == goalAmount:
+			second.Fill()
+		default:
+			first.Transfer(second)
 		}
-		if item.a.level == goalAmount {
-			return "one", item.moves, item.b.level, nil
-		} else if item.b.level == goalAmount {
-			return "two", item.moves, item.a.level, nil
-		}
-
-		// Execute possible moves
-		// queue = append(queue, state{item.a.Fill(), item.b, moves + 1})
-		// queue = append(queue, state{item.a, item.b.Fill(), moves + 1})
-		// queue = append(queue, state{item.a.Empty(), item.b, moves + 1})
-		// queue = append(queue, state{item.a, item.b.Empty(), moves + 1})
-		// a, b := item.a.Transfer(item.b)
-		// queue = append(queue, state{a, b, moves + 1})
-		// a, b = item.b.Transfer(item.a)
-		// queue = append(queue, state{a, b, moves + 1})
-		// return ""
-		fmt.Printf("current item %v, queue length: %v\n", item, len(queue))
-		// return "", -1, -1, fmt.Errorf("could not find a solution")
+		moves += 1
 	}
-
-	return "", -1, -1, fmt.Errorf("could not find a solution")
+	if first.level == goalAmount {
+		return first.name, moves, second.level, nil
+	} else if second.level == goalAmount {
+		return second.name, moves, first.level, nil
+	} else {
+		return "", -1, -1, fmt.Errorf("could not find a solution")
+	}
 }
