@@ -31,7 +31,10 @@ func (src *Bucket) Transfer(dst *Bucket) {
 }
 
 func Solve(bucketOneCapacity, bucketTwoCapacity, goalAmount int, startBucket string) (goalBucket string, moves int, otherBucketLevel int, e error) {
-	if bucketOneCapacity < 1 || bucketTwoCapacity < 1 || goalAmount < 1 || (startBucket != "one" && startBucket != "two") {
+	if !isValidCapacity(bucketOneCapacity) ||
+		!isValidCapacity(bucketTwoCapacity) ||
+		!isValidStartBucket(startBucket) ||
+		goalAmount < 1 {
 		return "", 0, 0, errors.New("invalid parameters")
 	}
 	one := &Bucket{"one", bucketOneCapacity, 0}
@@ -71,4 +74,12 @@ func Solve(bucketOneCapacity, bucketTwoCapacity, goalAmount int, startBucket str
 	} else {
 		return "", -1, -1, fmt.Errorf("could not find a solution")
 	}
+}
+
+func isValidCapacity(capacity int) bool {
+	return capacity >= 1
+}
+
+func isValidStartBucket(startBucket string) bool {
+	return startBucket == "one" || startBucket == "two"
 }
