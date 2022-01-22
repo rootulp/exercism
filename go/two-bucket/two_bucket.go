@@ -2,7 +2,6 @@ package twobucket
 
 import (
 	"errors"
-	"fmt"
 )
 
 type Bucket struct {
@@ -37,18 +36,16 @@ func Solve(bucketOneCapacity, bucketTwoCapacity, goalAmount int, startBucket str
 		goalAmount < 1 {
 		return "", 0, 0, errors.New("invalid parameters")
 	}
+
 	one := &Bucket{"one", bucketOneCapacity, 0}
 	two := &Bucket{"two", bucketTwoCapacity, 0}
 	var first *Bucket
 	var second *Bucket
 
-	switch startBucket {
-	case "one":
+	if startBucket == "one" {
 		first, second = one, two
-	case "two":
+	} else {
 		first, second = two, one
-	default:
-		return "", -1, -1, fmt.Errorf("start bucket invalid %s", startBucket)
 	}
 
 	moves = 0
@@ -69,10 +66,8 @@ func Solve(bucketOneCapacity, bucketTwoCapacity, goalAmount int, startBucket str
 	}
 	if first.level == goalAmount {
 		return first.name, moves, second.level, nil
-	} else if second.level == goalAmount {
-		return second.name, moves, first.level, nil
 	} else {
-		return "", -1, -1, fmt.Errorf("could not find a solution")
+		return second.name, moves, first.level, nil
 	}
 }
 
