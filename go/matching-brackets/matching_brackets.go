@@ -17,8 +17,6 @@ func Bracket(input string) bool {
 			} else {
 				return false
 			}
-		} else {
-			continue
 		}
 	}
 	return stack.Len() == 0
