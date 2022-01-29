@@ -1,6 +1,6 @@
 package brackets
 
-var openBracketToCloseBracket = map[rune]rune{
+var openToCloseBracket = map[rune]rune{
 	'[': ']',
 	'{': '}',
 	'(': ')',
@@ -8,11 +8,12 @@ var openBracketToCloseBracket = map[rune]rune{
 
 func Bracket(input string) bool {
 	stack := Stack{}
-	for _, char := range input {
-		if isOpenBracket(char) {
-			stack.Push(char)
-		} else if isCloseBracket(char) {
-			if stack.Len() > 0 && isMatching(stack.Peek(), char) {
+	for _, token := range input {
+		if isOpenBracket(token) {
+			stack.Push(token)
+		}
+		if isCloseBracket(token) {
+			if stack.Len() > 0 && isMatching(stack.Peek(), token) {
 				stack.Pop()
 			} else {
 				return false
@@ -23,12 +24,12 @@ func Bracket(input string) bool {
 }
 
 func isOpenBracket(r rune) bool {
-	_, ok := openBracketToCloseBracket[r]
+	_, ok := openToCloseBracket[r]
 	return ok
 }
 
 func isCloseBracket(r rune) bool {
-	for _, v := range openBracketToCloseBracket {
+	for _, v := range openToCloseBracket {
 		if r == v {
 			return true
 		}
@@ -37,7 +38,7 @@ func isCloseBracket(r rune) bool {
 }
 
 func isMatching(open rune, close rune) bool {
-	return openBracketToCloseBracket[open] == close
+	return openToCloseBracket[open] == close
 }
 
 type Stack struct {
