@@ -24,7 +24,7 @@ func NewBuffer(capacity int) *Buffer {
 }
 
 func (b *Buffer) ReadByte() (byte, error) {
-	fmt.Printf("Reading %v", b)
+	// fmt.Printf("Reading %v", b)
 	if b.len() == 0 {
 		return 0, fmt.Errorf("error reading from empty buffer")
 	}
@@ -48,10 +48,11 @@ func (b *Buffer) WriteByte(c byte) error {
 func (b *Buffer) Overwrite(c byte) {
 	if b.store[b.insertIndex] == 0 {
 		b.length++
+	} else {
+		b.readIndex = nextIndex(b.readIndex, b.capacity)
 	}
 	b.store[b.insertIndex] = c
 	b.insertIndex = nextIndex(b.insertIndex, b.capacity)
-	b.readIndex = nextIndex(b.readIndex, b.capacity)
 }
 
 func (b *Buffer) Reset() {
