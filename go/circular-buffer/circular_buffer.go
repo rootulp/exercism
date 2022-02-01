@@ -35,8 +35,11 @@ func (b *Buffer) ReadByte() (byte, error) {
 }
 
 func (b *Buffer) WriteByte(c byte) error {
+	if b.len() == b.capacity {
+		return fmt.Errorf("error writing to full buffer")
+	}
 	b.store[b.insertIndex] = c
-	b.insertIndex++
+	b.insertIndex = nextIndex(b.insertIndex, b.capacity)
 	b.length++
 	return nil
 }
