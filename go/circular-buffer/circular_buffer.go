@@ -24,7 +24,6 @@ func NewBuffer(capacity int) *Buffer {
 }
 
 func (b *Buffer) ReadByte() (byte, error) {
-	// fmt.Printf("Reading %v", b)
 	if b.len() == 0 {
 		return 0, fmt.Errorf("error reading from empty buffer")
 	}
@@ -60,10 +59,6 @@ func (b *Buffer) Reset() {
 	b.length = 0
 	b.insertIndex = 0
 	b.readIndex = 0
-}
-
-func (b *Buffer) String() string {
-	return fmt.Sprintf("store %v, capacity %v, length %v, readIndex %v, writeIndex %v\n", b.store, b.capacity, b.length, b.readIndex, b.insertIndex)
 }
 
 func (b *Buffer) len() int {
