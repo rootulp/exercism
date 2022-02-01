@@ -1,5 +1,7 @@
 package circular
 
+import "fmt"
+
 // Implement a circular buffer of bytes supporting both overflow-checked writes
 // and unconditional, possibly overwriting, writes.
 //
@@ -8,17 +10,35 @@ package circular
 // replacement for anything using that interface.
 
 // Define the Buffer type here.
+type Buffer struct {
+	capacity    int
+	store       []byte
+	length      int // tracks the number of units in the buffer
+	insertIndex int
+	readIndex   int
+}
 
-func NewBuffer(size int) *Buffer {
-	panic("Please implement the NewBuffer function")
+func NewBuffer(capacity int) *Buffer {
+	store := make([]byte, capacity)
+	return &Buffer{capacity: capacity, store: store}
 }
 
 func (b *Buffer) ReadByte() (byte, error) {
-	panic("Please implement the ReadByte function")
+	if b.len() == 0 {
+		return 0, fmt.Errorf("error reading from empty buffer")
+	}
+	result := b.store[b.readIndex]
+	b.store[b.readIndex] = 0
+	b.readIndex = nextIndex(b.readIndex, b.capacity)
+	b.length--
+	return result, nil
 }
 
 func (b *Buffer) WriteByte(c byte) error {
-	panic("Please implement the WriteByte function")
+	b.store[b.insertIndex] = c
+	b.insertIndex++
+	b.length++
+	return nil
 }
 
 func (b *Buffer) Overwrite(c byte) {
@@ -26,5 +46,16 @@ func (b *Buffer) Overwrite(c byte) {
 }
 
 func (b *Buffer) Reset() {
-	panic("Please implement the Reset function")
+	b.store = make([]byte, b.capacity)
+	b.length = 0
+	b.insertIndex = 0
+	b.readIndex = 0
+}
+
+func (b *Buffer) len() int {
+	return b.length
+}
+
+func nextIndex(current int, capacity int) int {
+	return current + 1%capacity
 }
