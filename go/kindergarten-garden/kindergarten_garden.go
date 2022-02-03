@@ -28,6 +28,9 @@ var symbolToPlant = map[string]string{
 //     VVCCGG`
 
 func NewGarden(diagram string, children []string) (*Garden, error) {
+	if !isValidDiagram(diagram) {
+		return &Garden{}, fmt.Errorf("invalid diagram")
+	}
 	trimmed := strings.Trim(diagram, "\n")
 	rows := strings.Split(trimmed, "\n")
 	sort.Strings(children)
@@ -48,6 +51,10 @@ func (g *Garden) Plants(child string) (plants []string, ok bool) {
 		plants = append(plants, symbolToPlant[cup])
 	}
 	return plants, true
+}
+
+func isValidDiagram(diagram string) bool {
+	return strings.HasPrefix(diagram, "\n")
 }
 
 func indexOf(slice []string, element string) int {
