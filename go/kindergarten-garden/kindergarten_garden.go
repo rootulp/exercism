@@ -2,6 +2,7 @@ package kindergarten
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -29,6 +30,7 @@ var symbolToPlant = map[string]string{
 func NewGarden(diagram string, children []string) (*Garden, error) {
 	trimmed := strings.Trim(diagram, "\n")
 	rows := strings.Split(trimmed, "\n")
+	sort.Strings(children)
 	return &Garden{diagram: rows, children: children}, nil
 }
 
