@@ -27,16 +27,19 @@ var symbolToPlant = map[string]string{
 //     VVCCGG
 //     VVCCGG`
 
-func NewGarden(diagram string, children []string) (*Garden, error) {
+func NewGarden(diagram string, names []string) (*Garden, error) {
 	if !isValidDiagram(diagram) {
 		return &Garden{}, fmt.Errorf("invalid diagram")
 	}
-	sort.Strings(children)
-	return &Garden{diagram: getDiagramRows(diagram), children: children}, nil
+	if !isValidNames(names) {
+		return &Garden{}, fmt.Errorf("invalid names")
+	}
+	sort.Strings(names)
+	return &Garden{diagram: getDiagramRows(diagram), children: names}, nil
 }
 
 func (g *Garden) Plants(child string) (plants []string, ok bool) {
-	fmt.Printf("diagrams %v\n", g.diagram)
+	// fmt.Printf("diagrams %v\n", g.diagram)
 	index := indexOf(g.children, child)
 	column := index * 2
 	cups := []string{
@@ -49,6 +52,18 @@ func (g *Garden) Plants(child string) (plants []string, ok bool) {
 		plants = append(plants, symbolToPlant[cup])
 	}
 	return plants, true
+}
+
+func isValidNames(names []string) bool {
+	seen := map[string]bool{}
+	for _, name := range names {
+		_, ok := seen[name]
+		if ok {
+			return false // encountered duplicate name
+		}
+		seen[name] = true
+	}
+	return true
 }
 
 func isValidDiagram(diagram string) bool {
