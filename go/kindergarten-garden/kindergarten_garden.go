@@ -31,10 +31,8 @@ func NewGarden(diagram string, children []string) (*Garden, error) {
 	if !isValidDiagram(diagram) {
 		return &Garden{}, fmt.Errorf("invalid diagram")
 	}
-	trimmed := strings.Trim(diagram, "\n")
-	rows := strings.Split(trimmed, "\n")
 	sort.Strings(children)
-	return &Garden{diagram: rows, children: children}, nil
+	return &Garden{diagram: getDiagramRows(diagram), children: children}, nil
 }
 
 func (g *Garden) Plants(child string) (plants []string, ok bool) {
@@ -54,7 +52,17 @@ func (g *Garden) Plants(child string) (plants []string, ok bool) {
 }
 
 func isValidDiagram(diagram string) bool {
-	return strings.HasPrefix(diagram, "\n")
+	return strings.HasPrefix(diagram, "\n") && isEvenRows(diagram)
+}
+
+func isEvenRows(diagram string) bool {
+	rows := getDiagramRows(diagram)
+	return len(rows[0]) == len(rows[1])
+}
+
+func getDiagramRows(diagram string) (rows []string) {
+	trimmed := strings.Trim(diagram, "\n")
+	return strings.Split(trimmed, "\n")
 }
 
 func indexOf(slice []string, element string) int {
