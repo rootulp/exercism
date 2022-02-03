@@ -37,12 +37,10 @@ func NewGarden(diagram string, children []string) (*Garden, error) {
 	clone := make([]string, len(children))
 	copy(clone, children)
 	sort.Strings(clone)
-	fmt.Printf("clone %v\n", clone)
 	return &Garden{diagram: getDiagramRows(diagram), children: clone}, nil
 }
 
 func (g *Garden) Plants(child string) (plants []string, ok bool) {
-	// fmt.Printf("diagrams %v\n", g.diagram)
 	index := indexOf(g.children, child)
 	if index == -1 {
 		return []string{}, false
@@ -63,9 +61,9 @@ func (g *Garden) Plants(child string) (plants []string, ok bool) {
 func isValidNames(names []string) bool {
 	seen := map[string]bool{}
 	for _, name := range names {
-		_, ok := seen[name]
-		if ok {
-			return false // encountered duplicate name
+		if _, ok := seen[name]; ok {
+			// encountered duplicate name
+			return false
 		}
 		seen[name] = true
 	}
@@ -73,7 +71,10 @@ func isValidNames(names []string) bool {
 }
 
 func isValidDiagram(diagram string) bool {
-	return strings.HasPrefix(diagram, "\n") && isEvenRows(diagram) && isEvenCups(diagram) && isValidCupCodes(diagram)
+	return strings.HasPrefix(diagram, "\n") &&
+		isEvenRows(diagram) &&
+		isEvenCups(diagram) &&
+		isValidCupCodes(diagram)
 }
 
 func isEvenRows(diagram string) bool {
@@ -90,8 +91,7 @@ func isValidCupCodes(diagram string) bool {
 	rows := getDiagramRows(diagram)
 	for _, row := range rows {
 		for _, cupCode := range row {
-			_, ok := cupCodeToPlant[string(cupCode)]
-			if !ok {
+			if _, ok := cupCodeToPlant[string(cupCode)]; !ok {
 				return false
 			}
 		}
