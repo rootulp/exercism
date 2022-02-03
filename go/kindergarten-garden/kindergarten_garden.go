@@ -12,7 +12,7 @@ type Garden struct {
 	children []string
 }
 
-var symbolToPlant = map[string]string{
+var cupCodeToPlant = map[string]string{
 	"R": "radishes",
 	"C": "clover",
 	"G": "grass",
@@ -27,20 +27,26 @@ var symbolToPlant = map[string]string{
 //     VVCCGG
 //     VVCCGG`
 
-func NewGarden(diagram string, names []string) (*Garden, error) {
+func NewGarden(diagram string, children []string) (*Garden, error) {
 	if !isValidDiagram(diagram) {
 		return &Garden{}, fmt.Errorf("invalid diagram")
 	}
-	if !isValidNames(names) {
+	if !isValidNames(children) {
 		return &Garden{}, fmt.Errorf("invalid names")
 	}
-	sort.Strings(names)
-	return &Garden{diagram: getDiagramRows(diagram), children: names}, nil
+	clone := make([]string, len(children))
+	copy(clone, children)
+	sort.Strings(clone)
+	fmt.Printf("clone %v\n", clone)
+	return &Garden{diagram: getDiagramRows(diagram), children: clone}, nil
 }
 
 func (g *Garden) Plants(child string) (plants []string, ok bool) {
 	// fmt.Printf("diagrams %v\n", g.diagram)
 	index := indexOf(g.children, child)
+	if index == -1 {
+		return []string{}, false
+	}
 	column := index * 2
 	cups := []string{
 		string(g.diagram[0][column]),
@@ -49,7 +55,7 @@ func (g *Garden) Plants(child string) (plants []string, ok bool) {
 		string(g.diagram[1][column+1]),
 	}
 	for _, cup := range cups {
-		plants = append(plants, symbolToPlant[cup])
+		plants = append(plants, cupCodeToPlant[cup])
 	}
 	return plants, true
 }
@@ -67,7 +73,7 @@ func isValidNames(names []string) bool {
 }
 
 func isValidDiagram(diagram string) bool {
-	return strings.HasPrefix(diagram, "\n") && isEvenRows(diagram) && isEvenCups(diagram)
+	return strings.HasPrefix(diagram, "\n") && isEvenRows(diagram) && isEvenCups(diagram) && isValidCupCodes(diagram)
 }
 
 func isEvenRows(diagram string) bool {
@@ -78,6 +84,19 @@ func isEvenRows(diagram string) bool {
 func isEvenCups(diagram string) bool {
 	rows := getDiagramRows(diagram)
 	return len(rows[0])%2 == 0
+}
+
+func isValidCupCodes(diagram string) bool {
+	rows := getDiagramRows(diagram)
+	for _, row := range rows {
+		for _, cupCode := range row {
+			_, ok := cupCodeToPlant[string(cupCode)]
+			if !ok {
+				return false
+			}
+		}
+	}
+	return true
 }
 
 func getDiagramRows(diagram string) (rows []string) {
