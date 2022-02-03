@@ -52,12 +52,17 @@ func (g *Garden) Plants(child string) (plants []string, ok bool) {
 }
 
 func isValidDiagram(diagram string) bool {
-	return strings.HasPrefix(diagram, "\n") && isEvenRows(diagram)
+	return strings.HasPrefix(diagram, "\n") && isEvenRows(diagram) && isEvenCups(diagram)
 }
 
 func isEvenRows(diagram string) bool {
 	rows := getDiagramRows(diagram)
 	return len(rows[0]) == len(rows[1])
+}
+
+func isEvenCups(diagram string) bool {
+	rows := getDiagramRows(diagram)
+	return len(rows[0])%2 == 0
 }
 
 func getDiagramRows(diagram string) (rows []string) {
