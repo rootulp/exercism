@@ -1,7 +1,7 @@
-# exercism
+# Exercism
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://rootulp.mit-license.org)
 
-> [Exercism](http://exercism.io/rootulp) solutions
+[Exercism](http://exercism.io/rootulp) solutions
 
 ## Getting Started
 
@@ -30,7 +30,3 @@ If you are new to exercism, you can get started with this [intro](http://exercis
 ## Contribute
 
 I'd appreciate any feedback via [issues](https://github.com/rootulp/exercism/issues/new).
-
-## License
-
-[MIT](https://rootulp.mit-license.org/) © [Rootul Patel](https://rootulp.com)
