@@ -16,6 +16,11 @@ export function decodedResistorValue(bands: string[]): string {
   const number = decodeResistorDuo(bands.slice(0, 2))
   console.log(number)
   const result = number * 10 ** decode(bands[2])
+  if (isKiloohms(result)) {
+    const numKiloohms = Math.floor(result / 1000)
+    return `${numKiloohms} kiloohms`
+
+  }
   return `${result} ohms`
 }
 
@@ -27,4 +32,8 @@ function decodeResistorDuo(bands: string[]): number {
 
 function decode(band: string): number {
   return bandToNumber[band]
+}
+
+function isKiloohms(value: number): boolean {
+  return value > 1000
 }
