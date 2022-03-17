@@ -1,4 +1,3 @@
-
 const bandToNumber: {[key: string]: number} = {
   'black': 0,
   'brown': 1,
@@ -13,15 +12,9 @@ const bandToNumber: {[key: string]: number} = {
 }
 
 export function decodedResistorValue(bands: string[]): string {
-  const number = decodeResistorDuo(bands.slice(0, 2))
-  console.log(number)
-  const result = number * 10 ** decode(bands[2])
-  if (isKiloohms(result)) {
-    const numKiloohms = Math.floor(result / 1000)
-    return `${numKiloohms} kiloohms`
-
-  }
-  return `${result} ohms`
+  const duoValue = decodeResistorDuo(bands.slice(0, 2))
+  const value = duoValue * 10 ** decode(bands[2])
+  return format(value)
 }
 
 function decodeResistorDuo(bands: string[]): number {
@@ -32,6 +25,13 @@ function decodeResistorDuo(bands: string[]): number {
 
 function decode(band: string): number {
   return bandToNumber[band]
+}
+
+function format(value: number): string {
+  if (isKiloohms(value)) {
+    return `${Math.floor(value / 1000)} kiloohms`
+  }
+  return `${value} ohms`
 }
 
 function isKiloohms(value: number): boolean {
