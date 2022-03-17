@@ -22,7 +22,7 @@ export class DnDCharacter {
     this.intelligence = DnDCharacter.generateAbilityScore()
     this.wisdom = DnDCharacter.generateAbilityScore()
     this.charisma = DnDCharacter.generateAbilityScore()
-    this.hitpoints = 10 + DnDCharacter.getModifierFor(this.charisma)
+    this.hitpoints = 10 + DnDCharacter.getModifierFor(this.constitution)
   }
 
 
