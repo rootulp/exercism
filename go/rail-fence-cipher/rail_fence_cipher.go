@@ -26,7 +26,6 @@ func encodeRails(message string, numRails int) []string {
 		direction, railIndex = advance(direction, railIndex, numRails)
 	}
 
-	fmt.Printf("encodeRails: %v\n", rails)
 	return rails
 }
 
