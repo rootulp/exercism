@@ -8,6 +8,10 @@ func Sentence(sentence string) string {
 		strings.HasPrefix(sentence, "yt") {
 		return sentence + "ay"
 	}
+	if strings.HasPrefix(sentence, "p") {
+		return strings.TrimPrefix(sentence, "p") + "p" + "ay"
+	}
+
 	return sentence
 }
 
