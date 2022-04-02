@@ -1,6 +1,11 @@
 package piglatin
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
+
+var consonants = []string{"p", "k"}
 
 func Sentence(sentence string) string {
 	if startsWithVowel(sentence) ||
@@ -8,8 +13,8 @@ func Sentence(sentence string) string {
 		strings.HasPrefix(sentence, "yt") {
 		return sentence + "ay"
 	}
-	if strings.HasPrefix(sentence, "p") {
-		return strings.TrimPrefix(sentence, "p") + "p" + "ay"
+	if startsWithConsonant(sentence) {
+		return handleConsonant(sentence)
 	}
 
 	return sentence
@@ -21,4 +26,22 @@ func startsWithVowel(sentence string) bool {
 		strings.HasPrefix(sentence, "i") ||
 		strings.HasPrefix(sentence, "o") ||
 		strings.HasPrefix(sentence, "u")
+}
+
+func startsWithConsonant(sentence string) bool {
+	for _, consonant := range consonants {
+		if strings.HasPrefix(sentence, consonant) {
+			return true
+		}
+	}
+	return false
+}
+
+func handleConsonant(sentence string) string {
+	for _, consonant := range consonants {
+		if strings.HasPrefix(sentence, consonant) {
+			return strings.TrimPrefix(sentence, consonant) + consonant + "ay"
+		}
+	}
+	panic(fmt.Sprintf("could not find consonant prefix for sentence %v", sentence))
 }
