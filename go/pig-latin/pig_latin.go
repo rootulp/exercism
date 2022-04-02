@@ -6,19 +6,27 @@ import (
 )
 
 var vowels = []string{"a", "e", "i", "o", "u"}
-var consonantSounds = []string{"squ", "thr", "th", "sch", "qu", "ch", "rh", "p", "k", "x", "q", "y", "m"}
+var consonantSounds = []string{"squ", "thr", "th", "sch", "qu", "ch", "rh", "p", "k", "x", "q", "y", "m", "f", "r"}
 
 func Sentence(sentence string) string {
-	if startsWithVowel(sentence) ||
-		strings.HasPrefix(sentence, "xr") ||
-		strings.HasPrefix(sentence, "yt") {
-		return handleVowel(sentence)
+	words := strings.Split(sentence, " ")
+	translated := []string{}
+	for _, word := range words {
+		translated = append(translated, translate(word))
 	}
-	if startsWithConsonantSound(sentence) {
-		return handleConsonantSound(sentence)
-	}
+	return strings.Join(translated, " ")
+}
 
-	return sentence
+func translate(word string) string {
+	if startsWithVowel(word) ||
+		strings.HasPrefix(word, "xr") ||
+		strings.HasPrefix(word, "yt") {
+		return handleVowel(word)
+	}
+	if startsWithConsonantSound(word) {
+		return handleConsonantSound(word)
+	}
+	panic(fmt.Sprintf("unhandled word %v", word))
 }
 
 func startsWithVowel(sentence string) bool {
