@@ -1,5 +1,20 @@
 package piglatin
 
+import "strings"
+
 func Sentence(sentence string) string {
-	panic("Please implement the Sentence function")
+	if startsWithVowel(sentence) ||
+		strings.HasPrefix(sentence, "xr") ||
+		strings.HasPrefix(sentence, "yt") {
+		return sentence + "ay"
+	}
+	return sentence
+}
+
+func startsWithVowel(sentence string) bool {
+	return strings.HasPrefix(sentence, "a") ||
+		strings.HasPrefix(sentence, "e") ||
+		strings.HasPrefix(sentence, "i") ||
+		strings.HasPrefix(sentence, "o") ||
+		strings.HasPrefix(sentence, "u")
 }
