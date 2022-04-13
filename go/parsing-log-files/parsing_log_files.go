@@ -68,11 +68,9 @@ func TagWithUserName(lines []string) (result []string) {
 			match := regex.FindStringSubmatch(line)
 			user := match[1]
 			prefix := fmt.Sprintf(`[USR] %s`, user)
-			prefixedLine := prefix + " " + line
-			result = append(result, prefixedLine)
-		} else {
-			result = append(result, line)
+			line = prefix + " " + line
 		}
+		result = append(result, line)
 	}
 	return result
 }
