@@ -1,6 +1,7 @@
 package parsinglogfiles
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
 )
@@ -33,14 +34,45 @@ func SplitLogLine(text string) []string {
 	return strings.Split(tabSeperated, "\t")
 }
 
-func CountQuotedPasswords(lines []string) int {
-	panic("Please implement the CountQuotedPasswords function")
+func CountQuotedPasswords(lines []string) (count int) {
+	for _, line := range lines {
+		lowercase := strings.ToLower(line)
+		regex, err := regexp.Compile(`".*password.*"`)
+		if err != nil {
+			panic(err)
+		}
+		if regex.Match([]byte(lowercase)) {
+			count += 1
+		}
+	}
+	return count
 }
 
 func RemoveEndOfLineText(text string) string {
-	panic("Please implement the RemoveEndOfLineText function")
+	regex, err := regexp.Compile(`end-of-line\d*`)
+	if err != nil {
+		panic(err)
+	}
+
+	return regex.ReplaceAllString(text, "")
 }
 
-func TagWithUserName(lines []string) []string {
-	panic("Please implement the TagWithUserName function")
+func TagWithUserName(lines []string) (result []string) {
+	regex, err := regexp.Compile(`User\s+(\w*)`)
+	if err != nil {
+		panic(err)
+	}
+
+	for _, line := range lines {
+		if regex.MatchString(line) {
+			match := regex.FindStringSubmatch(line)
+			user := match[1]
+			prefix := fmt.Sprintf(`[USR] %s`, user)
+			prefixedLine := prefix + " " + line
+			result = append(result, prefixedLine)
+		} else {
+			result = append(result, line)
+		}
+	}
+	return result
 }
