@@ -1,24 +1,34 @@
 package pov
 
 type Tree struct {
-	// Add the needed fields here
+	root string
+	children []*Tree
 }
 
 // New creates and returns a new Tree with the given root value and children.
 func New(value string, children ...*Tree) *Tree {
-	panic("Please implement this function")
+	return &Tree{
+		root: value,
+		children: children,
+	}
 }
 
 // Value returns the value at the root of a tree.
 func (tr *Tree) Value() string {
-	panic("Please implement this function")
+	if tr == nil {
+		return ""
+	}
+	return tr.root
 }
 
 // Children returns a slice containing the children of a tree.
 // There is no need to sort the elements in the result slice,
 // they can be in any order.
 func (tr *Tree) Children() []*Tree {
-	panic("Please implement this function")
+	if tr == nil {
+		return []*Tree{}
+	}
+	return tr.children
 }
 
 // String describes a tree in a compact S-expression format.
