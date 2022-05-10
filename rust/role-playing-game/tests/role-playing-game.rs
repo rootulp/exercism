@@ -56,7 +56,6 @@ fn test_reviving_alive_player() {
 }
 
 #[test]
-#[ignore]
 fn test_cast_spell_with_enough_mana() {
     const HEALTH: u32 = 99;
     const MANA: u32 = 100;
@@ -76,7 +75,6 @@ fn test_cast_spell_with_enough_mana() {
 }
 
 #[test]
-#[ignore]
 fn test_cast_spell_with_insufficient_mana() {
     let mut no_mana_wizard = Player {
         health: 56,
@@ -95,7 +93,6 @@ fn test_cast_spell_with_insufficient_mana() {
 }
 
 #[test]
-#[ignore]
 fn test_cast_spell_with_no_mana_pool() {
     const MANA_COST: u32 = 10;
 
@@ -116,7 +113,6 @@ fn test_cast_spell_with_no_mana_pool() {
 }
 
 #[test]
-#[ignore]
 fn test_cast_large_spell_with_no_mana_pool() {
     const MANA_COST: u32 = 30;
 
