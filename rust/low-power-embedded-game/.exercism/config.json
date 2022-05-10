@@ -1,0 +1,18 @@
+{
+  "blurb": "Learn tuples while writing convenience functions for a low-power embedded game",
+  "authors": [
+    "coriolinus"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/low-power-embedded-game.rs"
+    ],
+    "exemplar": [
+      ".meta/exemplar.rs"
+    ]
+  }
+}

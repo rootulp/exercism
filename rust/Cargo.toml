@@ -5,6 +5,7 @@ members = [
   "health-statistics",
   "hello-world/",
   "leap/",
+  "low-power-embedded-game/",
   "lucians-luscious-lasagna/",
   "resistor-color",
   "semi-structured-logs/",
