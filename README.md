@@ -27,6 +27,7 @@ If you are new to exercism, you can get started with this [intro](http://exercis
 | javascript   | [![Code Style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)                     | `yarn lint`                                                                      |
 | python       | [![Code Style](https://img.shields.io/badge/code_style-pep8-blue.svg)](https://www.python.org/dev/peps/pep-0008/)                      | `pycodestyle .` or `autopep8 --in-place --aggressive --aggressive --recursive .` |
 | ruby         | [![Code Style](https://img.shields.io/badge/code_style-rubocop-red.svg)](https://github.com/bbatsov/rubocop)                           | `rubocop .`                                                                      |
+| rust         | [![Code Style](https://img.shields.io/badge/code_style-cargo%20fmt-orange.svg)](https://img.shields.io/badge/code_style-cargo%20fmt-orange.svg)                           | `cargo fmt --all`                                                                      |
 | typescript   | [![Linter](https://img.shields.io/badge/linter-tslint-lightgrey.svg)](https://github.com/palantir/tslint)                              | `cd <exercise> && yarn lint`                                                     |
 
 ## Contribute
