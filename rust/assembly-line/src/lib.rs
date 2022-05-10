@@ -2,7 +2,7 @@ pub fn production_rate_per_hour(speed: u8) -> f64 {
     const CARS_PER_HOUR: u32 = 221;
     let production = CARS_PER_HOUR * speed as u32;
     let success_rate = success_rate(speed);
-    return (success_rate * production as f64) as f64;
+    return success_rate * production as f64;
 }
 
 pub fn success_rate(speed: u8) -> f64 {
