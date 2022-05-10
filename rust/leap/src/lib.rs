@@ -3,5 +3,7 @@ pub fn is_leap_year(year: i32) -> bool {
         true
     } else if year % 100 == 0 {
         false
-    } else { year % 4 == 0 }
+    } else {
+        year % 4 == 0
+    }
 }
