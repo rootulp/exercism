@@ -1,5 +1,4 @@
 name: Go
-
 on: [push, pull_request]
 jobs:
   test:
@@ -18,4 +17,4 @@ jobs:
 
     # https://stackoverflow.com/questions/61163306/running-go-test-in-parent-directory-of-multiple-go-modules
     - name: Test
-      run: find . -name go.mod -execdir go test ./... \; 
+      run: find . -name go.mod -execdir go test ./... \;
