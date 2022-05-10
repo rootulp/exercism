@@ -6,19 +6,16 @@ fn emits_info() {
 }
 
 #[test]
-#[ignore]
 fn emits_warning() {
     assert_eq!(warn("Timezone not set"), "[WARNING]: Timezone not set");
 }
 
 #[test]
-#[ignore]
 fn emits_error() {
     assert_eq!(error("Disk full"), "[ERROR]: Disk full");
 }
 
 #[test]
-#[ignore]
 fn log_emits_info() {
     assert_eq!(
         log(LogLevel::Info, "Timezone changed"),
@@ -27,7 +24,6 @@ fn log_emits_info() {
 }
 
 #[test]
-#[ignore]
 fn log_emits_warning() {
     assert_eq!(
         log(LogLevel::Warning, "Timezone not set"),
@@ -36,7 +32,6 @@ fn log_emits_warning() {
 }
 
 #[test]
-#[ignore]
 fn log_emits_error() {
     assert_eq!(log(LogLevel::Error, "Disk full"), "[ERROR]: Disk full");
 }
