@@ -6,5 +6,6 @@ members = [
   "hello-world/",
   "leap/",
   "lucians-luscious-lasagna/",
+  "resistor-color",
   "semi-structured-logs/",
 ]
