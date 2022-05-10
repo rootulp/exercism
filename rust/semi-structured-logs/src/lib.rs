@@ -27,6 +27,6 @@ fn label(level: LogLevel) -> String {
         LogLevel::Info => "INFO".to_string(),
         LogLevel::Warning => "WARNING".to_string(),
         LogLevel::Error => "ERROR".to_string(),
-        LogLevel::Debug => "DEBUG".to_string()
+        LogLevel::Debug => "DEBUG".to_string(),
     }
 }
