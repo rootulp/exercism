@@ -15,7 +15,6 @@ fn test_buffer() {
 }
 
 #[test]
-#[ignore]
 fn test_fibonacci() {
     let fibb = fibonacci();
     assert_eq!(fibb.len(), 5);

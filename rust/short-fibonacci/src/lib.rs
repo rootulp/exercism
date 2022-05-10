@@ -20,5 +20,14 @@ pub fn create_buffer(count: usize) -> Vec<u8> {
 /// Fibonacci's sequence is the list of numbers where the next number is a sum of the previous two.
 /// Its first five elements are `1, 1, 2, 3, 5`.
 pub fn fibonacci() -> Vec<u8> {
-    unimplemented!()
+    let mut result = Vec::new();
+    for i in 0..5 {
+        if i == 0 || i == 1 {
+            result.push(1)
+        } else {
+            let second_to_last = result[result.len().checked_sub(2).unwrap()];
+            result.push(result.last().unwrap() + second_to_last);
+        }
+    }
+    return result;
 }
