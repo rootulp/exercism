@@ -8,6 +8,7 @@ members = [
   "low-power-embedded-game/",
   "lucians-luscious-lasagna/",
   "resistor-color",
+  "role-playing-game",
   "semi-structured-logs/",
   "short-fibonacci/",
 ]
