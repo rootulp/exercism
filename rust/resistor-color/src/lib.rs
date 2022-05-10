@@ -1,5 +1,3 @@
-use std::default;
-
 use enum_iterator::IntoEnumIterator;
 use int_enum::IntEnum;
 
