@@ -1,0 +1,19 @@
+{
+  "blurb": "Learn the `vec!` macro to build a short Fibonacci Sequence.",
+  "authors": [
+    "efx",
+    "coriolinus"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/short-fibonacci.rs"
+    ],
+    "exemplar": [
+      ".meta/exemplar.rs"
+    ]
+  }
+}

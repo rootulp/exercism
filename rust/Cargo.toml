@@ -8,4 +8,5 @@ members = [
   "lucians-luscious-lasagna/",
   "resistor-color",
   "semi-structured-logs/",
+  "short-fibonacci/",
 ]
