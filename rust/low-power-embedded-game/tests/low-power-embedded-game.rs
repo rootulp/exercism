@@ -65,37 +65,31 @@ mod manhattan {
     use low_power_embedded_game::Position;
 
     #[test]
-    #[ignore]
     fn origin() {
         assert_eq!(Position(0, 0).manhattan(), 0);
     }
 
     #[test]
-    #[ignore]
     fn q1_unit() {
         assert_eq!(Position(1, 1).manhattan(), 2);
     }
 
     #[test]
-    #[ignore]
     fn q2_unit() {
         assert_eq!(Position(1, -1).manhattan(), 2);
     }
 
     #[test]
-    #[ignore]
     fn q3_unit() {
         assert_eq!(Position(-1, -1).manhattan(), 2);
     }
 
     #[test]
-    #[ignore]
     fn q4_unit() {
         assert_eq!(Position(-1, 1).manhattan(), 2);
     }
 
     #[test]
-    #[ignore]
     fn relative_prime() {
         assert_eq!(Position(30, 70).manhattan(), 100);
     }
