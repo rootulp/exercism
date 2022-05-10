@@ -1,0 +1,18 @@
+{
+  "blurb": "Learn enums while building a logging utility.",
+  "authors": [
+    "efx"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/semi-structured-logs.rs"
+    ],
+    "exemplar": [
+      ".meta/exemplar.rs"
+    ]
+  }
+}
