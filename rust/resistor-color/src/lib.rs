@@ -17,7 +17,7 @@ pub enum ResistorColor {
 }
 
 pub fn color_to_value(_color: ResistorColor) -> usize {
-    return _color.int_value()
+    return _color.int_value();
 }
 
 pub fn value_to_color_string(value: usize) -> String {
@@ -32,7 +32,7 @@ pub fn value_to_color_string(value: usize) -> String {
         7 => "Violet".to_string(),
         8 => "Grey".to_string(),
         9 => "White".to_string(),
-        _ => "value out of range".to_string()
+        _ => "value out of range".to_string(),
     }
 }
 
