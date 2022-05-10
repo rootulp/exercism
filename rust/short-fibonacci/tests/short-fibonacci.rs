@@ -6,7 +6,6 @@ fn test_empty() {
 }
 
 #[test]
-#[ignore]
 fn test_buffer() {
     for n in 0..10 {
         let zeroized = create_buffer(n);
