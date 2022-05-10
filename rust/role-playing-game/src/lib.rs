@@ -9,10 +9,9 @@ impl Player {
         if self.health != 0_u32 {
             return None;
         }
-        let mana = if self.level >= 10 { 100 } else { 0 };
         return Some(Player {
             health: 100,
-            mana: Some(mana),
+            mana: if self.level >= 10 { Some(100) } else { None },
             level: self.level,
         });
     }

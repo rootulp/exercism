@@ -16,7 +16,6 @@ fn test_reviving_dead_player() {
 }
 
 #[test]
-#[ignore]
 fn test_reviving_dead_level9_player() {
     let dead_player = Player {
         health: 0,
@@ -32,7 +31,6 @@ fn test_reviving_dead_level9_player() {
 }
 
 #[test]
-#[ignore]
 fn test_reviving_dead_level10_player() {
     let dead_player = Player {
         health: 0,
@@ -48,7 +46,6 @@ fn test_reviving_dead_level10_player() {
 }
 
 #[test]
-#[ignore]
 fn test_reviving_alive_player() {
     let alive_player = Player {
         health: 1,
