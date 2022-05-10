@@ -13,13 +13,13 @@ pub fn log(level: LogLevel, message: &str) -> String {
     return format!("[{label}]: {message}");
 }
 pub fn info(message: &str) -> String {
-    return log(LogLevel::Info, message);
+    log(LogLevel::Info, message)
 }
 pub fn warn(message: &str) -> String {
-    return log(LogLevel::Warning, message);
+    log(LogLevel::Warning, message)
 }
 pub fn error(message: &str) -> String {
-    return log(LogLevel::Error, message);
+    log(LogLevel::Error, message)
 }
 
 fn label(level: LogLevel) -> String {

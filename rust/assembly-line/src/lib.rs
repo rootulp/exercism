@@ -2,23 +2,23 @@ pub fn production_rate_per_hour(speed: u8) -> f64 {
     const CARS_PER_HOUR: u32 = 221;
     let production = CARS_PER_HOUR * speed as u32;
     let success_rate = success_rate(speed);
-    return success_rate * production as f64;
+    success_rate * production as f64
 }
 
 pub fn success_rate(speed: u8) -> f64 {
-    if speed >= 1 && speed <= 4 {
+    if (1..=4).contains(&speed) {
         return 1.0;
     }
-    if speed >= 5 && speed <= 8 {
+    if (5..=8).contains(&speed) {
         return 0.90;
     }
-    if speed >= 9 && speed <= 10 {
+    if (9..=10).contains(&speed) {
         return 0.77;
     }
     // Ideally this would throw an error
-    return 0.0;
+    0.0
 }
 
 pub fn working_items_per_minute(speed: u8) -> u32 {
-    return production_rate_per_hour(speed) as u32 / 60;
+    production_rate_per_hour(speed) as u32 / 60
 }
