@@ -39,7 +39,6 @@ fn test_11_out_of_range() {
 }
 
 #[test]
-#[ignore]
 fn test_all_colors() {
     use ResistorColor::*;
     assert_eq!(
