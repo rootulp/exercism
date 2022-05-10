@@ -1,0 +1,9 @@
+[workspace]
+
+members = [
+  "assembly-line/",
+  "hello-world/",
+  "leap/",
+  "lucians-luscious-lasagna/",
+  "semi-structured-logs/",
+]

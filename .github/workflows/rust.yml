@@ -1,6 +1,9 @@
 # Sourced from https://github.com/actions-rs/meta/blob/master/recipes/quickstart.md#
 name: Rust
 on: [push, pull_request]
+defaults:
+  run:
+    working-directory: rust
 jobs:
   check:
     name: Check
@@ -12,7 +15,7 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-      - run: cd rust/hello-world && cargo check
+      - run: cargo check
 
   test:
     name: Test Suite
@@ -24,7 +27,7 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-      - run: cd rust/hello-world && cargo test
+      - run: cargo test
 
   fmt:
     name: Rustfmt
@@ -37,7 +40,7 @@ jobs:
           toolchain: stable
           override: true
       - run: rustup component add rustfmt
-      - run: cd rust/hello-world && cargo fmt --all -- --check
+      - run: cargo fmt --all -- --check
 
   clippy:
     name: Clippy
@@ -50,4 +53,4 @@ jobs:
           toolchain: stable
           override: true
       - run: rustup component add clippy
-      - run: cd rust/hello-world && cargo clippy -- --D warnings
+      - run: cargo clippy -- --D warnings
