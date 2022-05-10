@@ -21,7 +21,6 @@ fn production_rate_per_hour_at_speed_one() {
     process_rate_per_hour(1, 221.0);
 }
 
-#[ignore]
 #[test]
 fn production_rate_per_hour_at_speed_four() {
     process_rate_per_hour(4, 884.0);
