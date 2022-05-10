@@ -23,30 +23,21 @@ pub fn color_to_value(_color: ResistorColor) -> usize {
 }
 
 pub fn value_to_color_string(value: usize) -> String {
-    for color in ResistorColor::into_enum_iter() {
-        if value == color.int_value() {
-            return label(color)
-        }
+    match value {
+        0 => "Black".to_string(),
+        1 => "Brown".to_string(),
+        2 => "Red".to_string(),
+        3 => "Orange".to_string(),
+        4 => "Yellow".to_string(),
+        5 => "Green".to_string(),
+        6 => "Blue".to_string(),
+        7 => "Violet".to_string(),
+        8 => "Grey".to_string(),
+        9 => "White".to_string(),
+        _ => "value out of range".to_string()
     }
-
-    return "value out of range".to_string()
 }
 
 pub fn colors() -> Vec<ResistorColor> {
     unimplemented!("return a list of all the colors ordered by resistance")
-}
-
-fn label(color: ResistorColor) -> String {
-    match color {
-        ResistorColor::Black => "Black".to_string(),
-        ResistorColor::Brown => "Brown".to_string(),
-        ResistorColor::Red => "Red".to_string(),
-        ResistorColor::Orange => "Orange".to_string(),
-        ResistorColor::Yellow => "Yellow".to_string(),
-        ResistorColor::Green => "Green".to_string(),
-        ResistorColor::Blue => "Blue".to_string(),
-        ResistorColor::Violet => "Violet".to_string(),
-        ResistorColor::Grey => "Grey".to_string(),
-        ResistorColor::White => "White".to_string(),
-    }
 }
