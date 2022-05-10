@@ -2,6 +2,7 @@
 
 members = [
   "assembly-line/",
+  "health-statistics",
   "hello-world/",
   "leap/",
   "lucians-luscious-lasagna/",
