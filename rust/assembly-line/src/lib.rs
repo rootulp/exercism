@@ -2,7 +2,10 @@ pub fn production_rate_per_hour(speed: u8) -> f64 {
     const CARS_PER_HOUR: u32 = 221;
     let production = CARS_PER_HOUR * speed as u32;
     let success_rate = success_rate(speed);
-    return success_rate * production as f64;
+    let result = success_rate * production as f64;
+    println!("result {result} for speed {speed}");
+    return result
+    // 1989 * .70 = 1392.3
 }
 
 pub fn success_rate(speed: u8) -> f64 {
@@ -13,7 +16,7 @@ pub fn success_rate(speed: u8) -> f64 {
         return 0.90;
     }
     if speed >= 9 && speed <= 10 {
-        return 0.70;
+        return 0.77;
     }
     // Ideally this would throw an error
     return 0.0;
