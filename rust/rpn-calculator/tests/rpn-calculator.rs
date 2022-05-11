@@ -49,7 +49,6 @@ fn test_simple_division() {
 }
 
 #[test]
-#[ignore]
 fn test_complex_operation() {
     let input = calculator_input("4 8 + 7 5 - /");
     assert_eq!(evaluate(&input), Some(6));
