@@ -29,8 +29,8 @@ pub fn evaluate(inputs: &[CalculatorInput]) -> Option<i32> {
         if operands.len() < 2 {
             return None;
         }
-        let operand_a = operands.pop().unwrap();
         let operand_b = operands.pop().unwrap();
+        let operand_a = operands.pop().unwrap();
         let result: i32 = match operator {
             CalculatorInput::Add => operand_a + operand_b,
             CalculatorInput::Subtract => operand_a - operand_b,

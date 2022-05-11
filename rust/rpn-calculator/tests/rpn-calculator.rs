@@ -37,14 +37,12 @@ fn test_simple_subtraction() {
 }
 
 #[test]
-#[ignore]
 fn test_simple_multiplication() {
     let input = calculator_input("6 9 *");
     assert_eq!(evaluate(&input), Some(54));
 }
 
 #[test]
-#[ignore]
 fn test_simple_division() {
     let input = calculator_input("57 19 /");
     assert_eq!(evaluate(&input), Some(3));
