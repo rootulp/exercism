@@ -19,21 +19,18 @@ fn test_empty_input_returns_none() {
 }
 
 #[test]
-#[ignore]
 fn test_simple_value() {
     let input = calculator_input("10");
     assert_eq!(evaluate(&input), Some(10));
 }
 
 #[test]
-#[ignore]
 fn test_simple_addition() {
     let input = calculator_input("2 2 +");
     assert_eq!(evaluate(&input), Some(4));
 }
 
 #[test]
-#[ignore]
 fn test_simple_subtraction() {
     let input = calculator_input("7 11 -");
     assert_eq!(evaluate(&input), Some(-4));
