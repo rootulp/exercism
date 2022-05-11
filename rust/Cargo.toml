@@ -7,6 +7,7 @@ members = [
   "leap/",
   "low-power-embedded-game/",
   "lucians-luscious-lasagna/",
+  "magazine-cutout",
   "resistor-color",
   "role-playing-game",
   "semi-structured-logs/",
