@@ -24,7 +24,7 @@ pub fn evaluate(inputs: &[CalculatorInput]) -> Option<i32> {
                     CalculatorInput::Subtract => operand_a - operand_b,
                     CalculatorInput::Multiply => operand_a * operand_b,
                     CalculatorInput::Divide => operand_a / operand_b,
-                    CalculatorInput::Value(_) => panic!("operand in operator stack"),
+                    CalculatorInput::Value(_) => panic!("input did not match value"),
                 };
                 operands.push(result);
             }
