@@ -1,0 +1,18 @@
+{
+  "blurb": "Use some of `Vec`'s methods to evaluate Reverse Polish notation",
+  "authors": [
+    "cwhakes"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/rpn-calculator.rs"
+    ],
+    "exemplar": [
+      ".meta/exemplar.rs"
+    ]
+  }
+}
