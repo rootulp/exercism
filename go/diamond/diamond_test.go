@@ -220,15 +220,3 @@ func TestCharOutOfRangeShouldGiveError(t *testing.T) {
 		t.Error(err)
 	}
 }
-
-func TestExample(t *testing.T) {
-	// fmt.Println(Gen(byte('A')))
-	// fmt.Println(Gen(byte('B')))
-	// fmt.Println(Gen(byte('C')))
-	// char := rune(0x41)
-	// fmt.Println(char)
-	// fmt.Println(Gen(byte(char)))
-	result, err := Gen(byte(0x4c))
-	fmt.Printf("err %v\n", err)
-	fmt.Printf("result\n\n %v", result)
-}

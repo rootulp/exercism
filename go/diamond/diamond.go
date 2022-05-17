@@ -14,7 +14,6 @@ func Gen(char byte) (result string, err error) {
 	}
 
 	dimension := getDimension(rune(char))
-	// fmt.Printf("dimension %v\n", dimension)
 
 	rows := []string{}
 	rows = append(rows, header(dimension)...)
@@ -38,9 +37,10 @@ func row(dimension int, rowNumber int) (result string) {
 	middleSpaces := middleSpaces(dimension, rowNumber)
 
 	if rowNumber == 0 {
-		fmt.Printf("rowNumber %v and leading spaces %v\n", rowNumber, leadingSpaces)
-		return fmt.Sprintf("%s%s%s", strings.Repeat(" ", leadingSpaces), string(character), strings.Repeat(" ", leadingSpaces))
-
+		result += strings.Repeat(" ", leadingSpaces)
+		result += string(character)
+		result += strings.Repeat(" ", leadingSpaces)
+		return result
 	}
 
 	result += strings.Repeat(" ", leadingSpaces)
@@ -70,10 +70,11 @@ func middleSpaces(dimension int, rowNumber int) (numSpaces int) {
 	return rowNumber*2 - 1
 }
 
-func middle(dimension int, r rune) (row string) {
-	row += string(r)
+func middle(dimension int, character rune) (row string) {
+	row += string(character)
 	row += strings.Repeat(" ", middleSpaces(dimension, headerLength(dimension)))
-	row += string(r)
+	row += string(character)
+
 	return row
 }
 
