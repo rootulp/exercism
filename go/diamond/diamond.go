@@ -10,7 +10,7 @@ func Gen(char byte) (result string, err error) {
 		return "", fmt.Errorf("char %v is not a valid capital letter", char)
 	}
 	if char == 'A' {
-		return "A", nil
+		return "A\n", nil
 	}
 
 	dimension := getDimension(rune(char))
@@ -20,11 +20,11 @@ func Gen(char byte) (result string, err error) {
 	rows = append(rows, header(dimension)...)
 	rows = append(rows, middle(dimension, rune(char)))
 	rows = append(rows, footer(dimension)...)
-	return strings.Join(rows, "\n"), nil
+	return strings.Join(rows, "\n") + "\n", nil
 }
 
 func header(dimension int) (rows []string) {
-	headerLength := (dimension - 1) / 2
+	headerLength := headerLength(dimension)
 	for rowNumber := 0; rowNumber < headerLength; rowNumber++ {
 		row := row(dimension, rowNumber)
 		rows = append(rows, row)
@@ -38,6 +38,7 @@ func row(dimension int, rowNumber int) (result string) {
 	middleSpaces := middleSpaces(dimension, rowNumber)
 
 	if rowNumber == 0 {
+		fmt.Printf("rowNumber %v and leading spaces %v\n", rowNumber, leadingSpaces)
 		return fmt.Sprintf("%s%s%s", strings.Repeat(" ", leadingSpaces), string(character), strings.Repeat(" ", leadingSpaces))
 
 	}
@@ -50,9 +51,12 @@ func row(dimension int, rowNumber int) (result string) {
 	return result
 }
 
+func headerLength(dimension int) int {
+	return (dimension - 1) / 2
+}
+
 func leadingSpaces(dimension int, rowNumber int) (numSpaces int) {
-	headerLength := (dimension - 1) / 2
-	return headerLength - rowNumber
+	return headerLength(dimension) - rowNumber
 }
 
 func characterForRow(rowNumber int) rune {
@@ -68,7 +72,7 @@ func middleSpaces(dimension int, rowNumber int) (numSpaces int) {
 
 func middle(dimension int, r rune) (row string) {
 	row += string(r)
-	row += strings.Repeat(" ", middleSpaces(dimension, (dimension-1)/2))
+	row += strings.Repeat(" ", middleSpaces(dimension, headerLength(dimension)))
 	row += string(r)
 	return row
 }
