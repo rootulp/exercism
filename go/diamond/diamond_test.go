@@ -1,6 +1,7 @@
 package diamond
 
 import (
+	"fmt"
 	"math/rand"
 	"reflect"
 	"strings"
@@ -217,4 +218,11 @@ func TestCharOutOfRangeShouldGiveError(t *testing.T) {
 	if err := quick.Check(assertion, config); err != nil {
 		t.Error(err)
 	}
+}
+
+func TestExample(t *testing.T) {
+	// fmt.Println(Gen(byte('A')))
+	// fmt.Println(Gen(byte('B')))
+	// fmt.Println(Gen(byte('C')))
+	fmt.Println(Gen(byte('E')))
 }
