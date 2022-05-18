@@ -101,23 +101,27 @@ func isMatch(pattern string, config configuration, line line) bool {
 func format(matches []line, config configuration) (result []string) {
 	result = []string{}
 	for _, match := range matches {
-		if config.printFileNames {
-			result = append(result, match.filename)
-		} else if config.prefixFileName && config.prefixLineNumbers {
-			result = append(result, fmt.Sprintf("%s:%d:%s", match.filename, match.number, match.contents))
-		} else if config.prefixFileName {
-			result = append(result, fmt.Sprintf("%s:%s", match.filename, match.contents))
-		} else if config.prefixLineNumbers {
-			result = append(result, fmt.Sprintf("%d:%s", match.number, match.contents))
-		} else {
-			result = append(result, match.contents)
-		}
+		result = append(result, formatMatch(match, config))
 	}
 
 	if config.printFileNames {
 		return uniq(result)
 	}
 	return result
+}
+
+func formatMatch(match line, config configuration) string {
+	if config.printFileNames {
+		return match.filename
+	} else if config.prefixFileName && config.prefixLineNumbers {
+		return fmt.Sprintf("%s:%d:%s", match.filename, match.number, match.contents)
+	} else if config.prefixFileName {
+		return fmt.Sprintf("%s:%s", match.filename, match.contents)
+	} else if config.prefixLineNumbers {
+		return fmt.Sprintf("%d:%s", match.number, match.contents)
+	} else {
+		return match.contents
+	}
 }
 
 func readFiles(files []string) (lines []line) {
