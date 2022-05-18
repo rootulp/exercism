@@ -61,7 +61,9 @@ func Search(pattern string, flags, files []string) (result []string) {
 	config := NewConfiguration(flags)
 	matches := search(pattern, config, lines)
 
-	return format(matches, config)
+	temp := format(matches, config)
+	fmt.Printf("result %v\n", temp)
+	return temp
 }
 
 func search(pattern string, config configuration, lines []line) (matches []line) {
@@ -70,6 +72,10 @@ func search(pattern string, config configuration, lines []line) (matches []line)
 			lowerContents := strings.ToLower(line.contents)
 			lowerPattern := strings.ToLower(pattern)
 			if strings.Contains(lowerContents, lowerPattern) {
+				matches = append(matches, line)
+			}
+		} else if config.matchEntireLine {
+			if pattern == line.contents {
 				matches = append(matches, line)
 			}
 		} else {
@@ -82,6 +88,7 @@ func search(pattern string, config configuration, lines []line) (matches []line)
 }
 
 func format(matches []line, config configuration) (result []string) {
+	result = []string{}
 	for _, match := range matches {
 		if config.printLineNumbers {
 			result = append(result, fmt.Sprintf("%d:%s", match.number, match.contents))
