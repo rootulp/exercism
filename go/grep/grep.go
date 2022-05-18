@@ -78,6 +78,10 @@ func search(pattern string, config configuration, lines []line) (matches []line)
 			if pattern == line.contents {
 				matches = append(matches, line)
 			}
+		} else if config.invertMatch {
+			if !strings.Contains(line.contents, pattern) {
+				matches = append(matches, line)
+			}
 		} else {
 			if strings.Contains(line.contents, pattern) {
 				matches = append(matches, line)
