@@ -56,17 +56,20 @@ func NewConfiguration(flags []string) (c configuration) {
 }
 
 func Search(pattern string, flags, files []string) (result []string) {
-	matches := []line{}
 	config := NewConfiguration(flags)
-	for _, file := range files {
-		lines := readLines(file)
-		for _, line := range lines {
-			if strings.Contains(line.contents, pattern) {
-				matches = append(matches, line)
-			}
+	lines := readFiles(files)
+	matches := search(pattern, config, lines)
+
+	return format(matches, config)
+}
+
+func search(pattern string, config configuration, lines []line) (matches []line) {
+	for _, line := range lines {
+		if strings.Contains(line.contents, pattern) {
+			matches = append(matches, line)
 		}
 	}
-	return format(matches, config)
+	return matches
 }
 
 func format(matches []line, config configuration) (result []string) {
@@ -78,6 +81,13 @@ func format(matches []line, config configuration) (result []string) {
 		}
 	}
 	return result
+}
+
+func readFiles(files []string) (lines []line) {
+	for _, file := range files {
+		lines = append(lines, readLines(file)...)
+	}
+	return lines
 }
 
 func readLines(filename string) (lines []line) {
