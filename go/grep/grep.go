@@ -25,7 +25,7 @@ type configuration struct {
 	invertMatch bool
 	// -x Only match entire lines, instead of lines that contain a match.
 	matchEntireLine bool
-
+	// No flag exists for this option. Prefix each matching line with the filename it was found in.
 	prefixFileName bool
 }
 
