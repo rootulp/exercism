@@ -93,9 +93,8 @@ func isMatch(pattern string, config configuration, line line) bool {
 		return pattern == line.contents
 	} else if config.invertMatch {
 		return !strings.Contains(line.contents, pattern)
-	} else {
-		return strings.Contains(line.contents, pattern)
 	}
+	return strings.Contains(line.contents, pattern)
 }
 
 func format(matches []line, config configuration) (result []string) {
@@ -119,9 +118,8 @@ func formatMatch(match line, config configuration) string {
 		return fmt.Sprintf("%s:%s", match.filename, match.contents)
 	} else if config.prefixLineNumbers {
 		return fmt.Sprintf("%d:%s", match.number, match.contents)
-	} else {
-		return match.contents
 	}
+	return match.contents
 }
 
 func readFiles(files []string) (lines []line) {
