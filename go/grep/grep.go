@@ -117,6 +117,10 @@ func format(matches []line, config configuration) (result []string) {
 			result = append(result, match.contents)
 		}
 	}
+
+	if config.printFileNames {
+		return uniq(result)
+	}
 	return result
 }
 
@@ -149,4 +153,23 @@ func readLines(filename string) (lines []line) {
 	}
 
 	return lines
+}
+
+func uniq(items []string) (result []string) {
+	result = []string{}
+	for _, item := range items {
+		if !contains(result, item) {
+			result = append(result, item)
+		}
+	}
+	return result
+}
+
+func contains(list []string, value string) bool {
+	for _, item := range list {
+		if item == value {
+			return true
+		}
+	}
+	return false
 }
