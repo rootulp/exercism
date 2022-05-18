@@ -16,7 +16,7 @@ type line struct {
 
 type configuration struct {
 	// -n Print the line numbers of each matching line.
-	printLineNumbers bool
+	prefixLineNumbers bool
 	// -l Print only the names of files that contain at least one matching line.
 	printFileNames bool
 	// -i Match line using a case-insensitive comparison.
@@ -25,21 +25,24 @@ type configuration struct {
 	invertMatch bool
 	// -x Only match entire lines, instead of lines that contain a match.
 	matchEntireLine bool
+
+	prefixFileName bool
 }
 
-func NewConfiguration(flags []string) (c configuration) {
+func NewConfiguration(flags []string, files []string) (c configuration) {
 	c = configuration{
-		printLineNumbers:     false,
+		prefixLineNumbers:    false,
 		printFileNames:       false,
 		matchCaseInsensitive: false,
 		invertMatch:          false,
 		matchEntireLine:      false,
+		prefixFileName:       false,
 	}
 
 	for _, flag := range flags {
 		switch flag {
 		case "-n":
-			c.printLineNumbers = true
+			c.prefixLineNumbers = true
 		case "-l":
 			c.printFileNames = true
 		case "-i":
@@ -53,12 +56,16 @@ func NewConfiguration(flags []string) (c configuration) {
 		}
 	}
 
+	if len(files) > 1 {
+		c.prefixFileName = true
+	}
+
 	return c
 }
 
 func Search(pattern string, flags, files []string) (result []string) {
 	lines := readFiles(files)
-	config := NewConfiguration(flags)
+	config := NewConfiguration(flags, files)
 	matches := search(pattern, config, lines)
 
 	temp := format(matches, config)
@@ -72,6 +79,10 @@ func search(pattern string, config configuration, lines []line) (matches []line)
 			lowerContents := strings.ToLower(line.contents)
 			lowerPattern := strings.ToLower(pattern)
 			if strings.Contains(lowerContents, lowerPattern) {
+				matches = append(matches, line)
+			}
+		} else if config.matchEntireLine && config.invertMatch {
+			if pattern != line.contents {
 				matches = append(matches, line)
 			}
 		} else if config.matchEntireLine {
@@ -96,8 +107,10 @@ func format(matches []line, config configuration) (result []string) {
 	for _, match := range matches {
 		if config.printFileNames {
 			result = append(result, match.filename)
-		} else if config.printLineNumbers {
+		} else if config.prefixLineNumbers {
 			result = append(result, fmt.Sprintf("%d:%s", match.number, match.contents))
+		} else if config.prefixFileName {
+			result = append(result, fmt.Sprintf("%s:%s", match.filename, match.contents))
 		} else {
 			result = append(result, match.contents)
 		}
