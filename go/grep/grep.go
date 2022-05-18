@@ -75,31 +75,27 @@ func Search(pattern string, flags, files []string) (result []string) {
 
 func search(pattern string, config configuration, lines []line) (matches []line) {
 	for _, line := range lines {
-		if config.matchCaseInsensitive {
-			lowerContents := strings.ToLower(line.contents)
-			lowerPattern := strings.ToLower(pattern)
-			if strings.Contains(lowerContents, lowerPattern) {
-				matches = append(matches, line)
-			}
-		} else if config.matchEntireLine && config.invertMatch {
-			if pattern != line.contents {
-				matches = append(matches, line)
-			}
-		} else if config.matchEntireLine {
-			if pattern == line.contents {
-				matches = append(matches, line)
-			}
-		} else if config.invertMatch {
-			if !strings.Contains(line.contents, pattern) {
-				matches = append(matches, line)
-			}
-		} else {
-			if strings.Contains(line.contents, pattern) {
-				matches = append(matches, line)
-			}
+		if isMatch(pattern, config, line) {
+			matches = append(matches, line)
 		}
 	}
 	return matches
+}
+
+func isMatch(pattern string, config configuration, line line) bool {
+	if config.matchCaseInsensitive {
+		lowerContents := strings.ToLower(line.contents)
+		lowerPattern := strings.ToLower(pattern)
+		return strings.Contains(lowerContents, lowerPattern)
+	} else if config.matchEntireLine && config.invertMatch {
+		return pattern != line.contents
+	} else if config.matchEntireLine {
+		return pattern == line.contents
+	} else if config.invertMatch {
+		return !strings.Contains(line.contents, pattern)
+	} else {
+		return strings.Contains(line.contents, pattern)
+	}
 }
 
 func format(matches []line, config configuration) (result []string) {
