@@ -94,10 +94,10 @@ func search(pattern string, config configuration, lines []line) (matches []line)
 func format(matches []line, config configuration) (result []string) {
 	result = []string{}
 	for _, match := range matches {
-		if config.printLineNumbers {
-			result = append(result, fmt.Sprintf("%d:%s", match.number, match.contents))
-		} else if config.printFileNames {
+		if config.printFileNames {
 			result = append(result, match.filename)
+		} else if config.printLineNumbers {
+			result = append(result, fmt.Sprintf("%d:%s", match.number, match.contents))
 		} else {
 			result = append(result, match.contents)
 		}
