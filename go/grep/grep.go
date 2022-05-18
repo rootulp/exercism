@@ -11,6 +11,7 @@ import (
 type line struct {
 	number   int
 	contents string
+	filename string
 }
 
 type configuration struct {
@@ -84,6 +85,8 @@ func format(matches []line, config configuration) (result []string) {
 	for _, match := range matches {
 		if config.printLineNumbers {
 			result = append(result, fmt.Sprintf("%d:%s", match.number, match.contents))
+		} else if config.printFileNames {
+			result = append(result, match.filename)
 		} else {
 			result = append(result, match.contents)
 		}
@@ -109,7 +112,7 @@ func readLines(filename string) (lines []line) {
 	lineNumber := 1
 	for scanner.Scan() {
 		contents := scanner.Text()
-		line := line{lineNumber, contents}
+		line := line{lineNumber, contents, filename}
 
 		lines = append(lines, line)
 		lineNumber += 1
