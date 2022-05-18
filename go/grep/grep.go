@@ -107,10 +107,12 @@ func format(matches []line, config configuration) (result []string) {
 	for _, match := range matches {
 		if config.printFileNames {
 			result = append(result, match.filename)
-		} else if config.prefixLineNumbers {
-			result = append(result, fmt.Sprintf("%d:%s", match.number, match.contents))
+		} else if config.prefixFileName && config.prefixLineNumbers {
+			result = append(result, fmt.Sprintf("%s:%d:%s", match.filename, match.number, match.contents))
 		} else if config.prefixFileName {
 			result = append(result, fmt.Sprintf("%s:%s", match.filename, match.contents))
+		} else if config.prefixLineNumbers {
+			result = append(result, fmt.Sprintf("%d:%s", match.number, match.contents))
 		} else {
 			result = append(result, match.contents)
 		}
