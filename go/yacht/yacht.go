@@ -41,7 +41,7 @@ func scoreFourOfKind(dice []int) (score int) {
 	}
 	diceToOccurences := getOccurences(dice)
 	for d, occurences := range diceToOccurences {
-		if occurences == 4 {
+		if occurences >= 4 {
 			return d * 4
 		}
 	}
@@ -78,11 +78,11 @@ func isFullHouse(dice []int) bool {
 func isFourOfKind(dice []int) bool {
 	diceToOccurences := getOccurences(dice)
 	for _, occurences := range diceToOccurences {
-		if occurences != 4 && occurences != 1 {
-			return false
+		if occurences >= 4 {
+			return true
 		}
 	}
-	return true
+	return false
 }
 
 func isYacht(dice []int) bool {
