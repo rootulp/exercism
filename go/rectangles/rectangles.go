@@ -1,24 +1,24 @@
 package rectangles
 
-func Count(diagram []string) int {
-	counter := 0
+func Count(diagram []string) (rectangles int) {
 	for rowIndex, row := range diagram {
-		for columnIndex, char := range row {
-			if char == '+' {
-				validColumns, validRows := FindValidColumnsAndRows(diagram, columnIndex, rowIndex)
-				counter += CountRectanglesForTopLeft(diagram, validColumns, validRows, columnIndex, rowIndex)
+		for columnIndex, character := range row {
+			if character == '+' {
+				validColumns, validRows := findValidColumnsAndRows(diagram, columnIndex, rowIndex)
+				rectangles += countRectanglesForTopLeft(diagram, validColumns, validRows, columnIndex, rowIndex)
 			}
 		}
 	}
-	return counter
+	return rectangles
 }
 
 // Finds columns and rows that could contain the other corners
 // for a rectangle with a particular point as the top left corner
-func FindValidColumnsAndRows(diagram []string, columnIndex, rowIndex int) ([]int, []int) {
+func findValidColumnsAndRows(diagram []string, columnIndex, rowIndex int) (validColumns []int, validRows []int) {
+	validColumns = []int{}
+	validRows = []int{}
+
 	row := diagram[rowIndex]
-	validColumns := []int{}
-	validRows := []int{}
 	for i := columnIndex + 1; i < len(diagram[rowIndex]); i++ {
 		if row[i] == '+' {
 			validColumns = append(validColumns, i)
@@ -38,8 +38,7 @@ func FindValidColumnsAndRows(diagram []string, columnIndex, rowIndex int) ([]int
 
 // Counts the number of rectangles for a particular point being
 // the top left corner
-func CountRectanglesForTopLeft(diagram []string, validColumns, validRows []int, columnIndex, rowIndex int) int {
-	counter := 0
+func countRectanglesForTopLeft(diagram []string, validColumns, validRows []int, columnIndex, rowIndex int) (counter int) {
 	for _, k := range validColumns {
 		for _, l := range validRows {
 			brokenRectangle := false
