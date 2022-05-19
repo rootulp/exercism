@@ -6,8 +6,8 @@ const HORIZONTAL_EDGE rune = '-'
 
 func Count(diagram []string) (rectangles int) {
 	for rowIndex, row := range diagram {
-		for columnIndex, character := range row {
-			if isCorner(character) {
+		for columnIndex, token := range row {
+			if isCorner(token) {
 				validColumns := findValidColumns(diagram, columnIndex, rowIndex)
 				validRows := findValidRows(diagram, columnIndex, rowIndex)
 				rectangles += countRectanglesForTopLeft(diagram, validColumns, validRows, columnIndex, rowIndex)
@@ -51,7 +51,7 @@ func findValidRows(diagram []string, columnIndex int, rowIndex int) (validRows [
 func countRectanglesForTopLeft(diagram []string, validColumns []int, validRows []int, columnIndex int, rowIndex int) (rectangles int) {
 	for _, column := range validColumns {
 		for _, row := range validRows {
-			validHorziontalEdge := isValidHorizontalEdge(diagram[row][columnIndex+1 : column])
+			validHorziontalEdge := isValidHorizontalEdge(diagram[row][columnIndex:column])
 			validVerticalEdge := isValidVerticalEdge(verticalEdge(diagram, column, rowIndex, row))
 			if isCorner(rune(diagram[row][column])) && validHorziontalEdge && validVerticalEdge {
 				rectangles++
@@ -80,8 +80,8 @@ func isValidVerticalEdge(column string) bool {
 }
 
 func verticalEdge(diagram []string, column int, rowStart int, rowEnd int) (edge string) {
-	for n := rowStart + 1; n < rowEnd; n++ {
-		edge += string(diagram[n][column])
+	for i := rowStart; i < rowEnd; i++ {
+		edge += string(diagram[i][column])
 	}
 	return edge
 }
