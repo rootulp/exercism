@@ -1,6 +1,10 @@
 package yacht
 
-import "log"
+import (
+	"log"
+	"reflect"
+	"sort"
+)
 
 func Score(dice []int, category string) (score int) {
 	switch category {
@@ -20,6 +24,12 @@ func Score(dice []int, category string) (score int) {
 		return scoreFullHouse(dice)
 	case "four of a kind":
 		return scoreFourOfKind(dice)
+	case "little straight":
+		return scoreLittleStraight(dice)
+	case "big straight":
+		return scoreBigStraight(dice)
+	case "choice":
+		return sum(dice)
 	case "yacht":
 		return scoreYacht(dice)
 	default:
@@ -47,6 +57,20 @@ func scoreFourOfKind(dice []int) (score int) {
 	}
 	log.Fatalf("diceToOccurences did not contain dice with 4 occurences %v", diceToOccurences)
 	return 0
+}
+
+func scoreLittleStraight(dice []int) (score int) {
+	if !isLittleStraight(dice) {
+		return 0
+	}
+	return 30
+}
+
+func scoreBigStraight(dice []int) (score int) {
+	if !isBigStraight(dice) {
+		return 0
+	}
+	return 30
 }
 
 func scoreYacht(dice []int) (score int) {
@@ -83,6 +107,18 @@ func isFourOfKind(dice []int) bool {
 		}
 	}
 	return false
+}
+
+func isLittleStraight(dice []int) bool {
+	littleStraight := []int{1, 2, 3, 4, 5}
+	sort.Ints(dice)
+	return reflect.DeepEqual(dice, littleStraight)
+}
+
+func isBigStraight(dice []int) bool {
+	bigStraight := []int{2, 3, 4, 5, 6}
+	sort.Ints(dice)
+	return reflect.DeepEqual(dice, bigStraight)
 }
 
 func isYacht(dice []int) bool {
