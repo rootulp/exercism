@@ -1,11 +1,15 @@
 package rectangles
 
+const CORNER rune = '+'
+const VERTICAL_EDGE rune = '|'
+const HORIZONTAL_EDGE rune = '-'
+
 func Count(diagram []string) (rectangles int) {
 	for rowIndex, row := range diagram {
 		for columnIndex, character := range row {
-			if character == '+' {
-				validRows := findValidRows(diagram, columnIndex, rowIndex)
+			if isCorner(character) {
 				validColumns := findValidColumns(diagram, columnIndex, rowIndex)
+				validRows := findValidRows(diagram, columnIndex, rowIndex)
 				rectangles += countRectanglesForTopLeft(diagram, validColumns, validRows, columnIndex, rowIndex)
 			}
 		}
@@ -19,11 +23,11 @@ func findValidColumns(diagram []string, columnIndex int, rowIndex int) (validCol
 	validColumns = []int{}
 	row := diagram[rowIndex]
 
-	for i := columnIndex + 1; i < len(diagram[rowIndex]); i++ {
-		if row[i] == '+' {
+	for i := columnIndex + 1; i < len(row); i++ {
+		if isCorner(rune(row[i])) {
 			validColumns = append(validColumns, i)
-		} else if row[i] != '-' {
-			break
+		} else if !isHorizontalEdge(rune(row[i])) {
+			return validColumns
 		}
 	}
 	return validColumns
@@ -33,13 +37,12 @@ func findValidRows(diagram []string, columnIndex int, rowIndex int) (validRows [
 	validRows = []int{}
 
 	for j := rowIndex + 1; j < len(diagram); j++ {
-		if diagram[j][columnIndex] == '+' {
+		if isCorner(rune(diagram[j][columnIndex])) {
 			validRows = append(validRows, j)
-		} else if diagram[j][columnIndex] != '|' {
-			break
+		} else if !isVerticalEdge(rune(diagram[j][columnIndex])) {
+			return validRows
 		}
 	}
-
 	return validRows
 }
 
@@ -67,4 +70,16 @@ func countRectanglesForTopLeft(diagram []string, validColumns, validRows []int, 
 		}
 	}
 	return rectangles
+}
+
+func isCorner(r rune) bool {
+	return r == CORNER
+}
+
+func isHorizontalEdge(r rune) bool {
+	return r == HORIZONTAL_EDGE
+}
+
+func isVerticalEdge(r rune) bool {
+	return r == VERTICAL_EDGE
 }
