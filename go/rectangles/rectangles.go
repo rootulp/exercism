@@ -51,25 +51,39 @@ func findValidRows(diagram []string, columnIndex int, rowIndex int) (validRows [
 func countRectanglesForTopLeft(diagram []string, validColumns []int, validRows []int, columnIndex int, rowIndex int) (rectangles int) {
 	for _, column := range validColumns {
 		for _, row := range validRows {
-			brokenRectangle := false
-			for m := columnIndex + 1; m < column; m++ {
-				if !isCorner(rune(diagram[row][m])) && !isHorizontalEdge(rune(diagram[row][m])) {
-					brokenRectangle = true
-					break
-				}
-			}
-			for n := rowIndex + 1; n < row; n++ {
-				if !isCorner(rune(diagram[n][column])) && !isVerticalEdge(rune(diagram[n][column])) {
-					brokenRectangle = true
-					break
-				}
-			}
-			if isCorner(rune(diagram[row][column])) && !brokenRectangle {
+			validHorziontalEdge := isValidHorizontalEdge(diagram[row][columnIndex+1 : column])
+			validVerticalEdge := isValidVerticalEdge(verticalEdge(diagram, column, rowIndex, row))
+			if isCorner(rune(diagram[row][column])) && validHorziontalEdge && validVerticalEdge {
 				rectangles++
 			}
 		}
 	}
 	return rectangles
+}
+
+func isValidHorizontalEdge(row string) bool {
+	for _, v := range row {
+		if !isCorner(v) && !isHorizontalEdge(v) {
+			return false
+		}
+	}
+	return true
+}
+
+func isValidVerticalEdge(column string) bool {
+	for _, v := range column {
+		if !isCorner(v) && !isVerticalEdge(v) {
+			return false
+		}
+	}
+	return true
+}
+
+func verticalEdge(diagram []string, column int, rowStart int, rowEnd int) (edge string) {
+	for n := rowStart + 1; n < rowEnd; n++ {
+		edge += string(diagram[n][column])
+	}
+	return edge
 }
 
 func isCorner(r rune) bool {
