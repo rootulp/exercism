@@ -4,7 +4,8 @@ func Count(diagram []string) (rectangles int) {
 	for rowIndex, row := range diagram {
 		for columnIndex, character := range row {
 			if character == '+' {
-				validColumns, validRows := findValidColumnsAndRows(diagram, columnIndex, rowIndex)
+				validRows := findValidRows(diagram, columnIndex, rowIndex)
+				validColumns := findValidColumns(diagram, columnIndex, rowIndex)
 				rectangles += countRectanglesForTopLeft(diagram, validColumns, validRows, columnIndex, rowIndex)
 			}
 		}
@@ -14,11 +15,10 @@ func Count(diagram []string) (rectangles int) {
 
 // Finds columns and rows that could contain the other corners
 // for a rectangle with a particular point as the top left corner
-func findValidColumnsAndRows(diagram []string, columnIndex, rowIndex int) (validColumns []int, validRows []int) {
+func findValidColumns(diagram []string, columnIndex int, rowIndex int) (validColumns []int) {
 	validColumns = []int{}
-	validRows = []int{}
-
 	row := diagram[rowIndex]
+
 	for i := columnIndex + 1; i < len(diagram[rowIndex]); i++ {
 		if row[i] == '+' {
 			validColumns = append(validColumns, i)
@@ -26,6 +26,12 @@ func findValidColumnsAndRows(diagram []string, columnIndex, rowIndex int) (valid
 			break
 		}
 	}
+	return validColumns
+}
+
+func findValidRows(diagram []string, columnIndex int, rowIndex int) (validRows []int) {
+	validRows = []int{}
+
 	for j := rowIndex + 1; j < len(diagram); j++ {
 		if diagram[j][columnIndex] == '+' {
 			validRows = append(validRows, j)
@@ -33,12 +39,13 @@ func findValidColumnsAndRows(diagram []string, columnIndex, rowIndex int) (valid
 			break
 		}
 	}
-	return validColumns, validRows
+
+	return validRows
 }
 
 // Counts the number of rectangles for a particular point being
 // the top left corner
-func countRectanglesForTopLeft(diagram []string, validColumns, validRows []int, columnIndex, rowIndex int) (counter int) {
+func countRectanglesForTopLeft(diagram []string, validColumns, validRows []int, columnIndex, rowIndex int) (rectangles int) {
 	for _, k := range validColumns {
 		for _, l := range validRows {
 			brokenRectangle := false
@@ -55,9 +62,9 @@ func countRectanglesForTopLeft(diagram []string, validColumns, validRows []int, 
 				}
 			}
 			if diagram[l][k] == '+' && !brokenRectangle {
-				counter++
+				rectangles++
 			}
 		}
 	}
-	return counter
+	return rectangles
 }
