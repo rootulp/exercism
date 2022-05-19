@@ -48,23 +48,23 @@ func findValidRows(diagram []string, columnIndex int, rowIndex int) (validRows [
 
 // Counts the number of rectangles for a particular point being
 // the top left corner
-func countRectanglesForTopLeft(diagram []string, validColumns, validRows []int, columnIndex, rowIndex int) (rectangles int) {
-	for _, k := range validColumns {
-		for _, l := range validRows {
+func countRectanglesForTopLeft(diagram []string, validColumns []int, validRows []int, columnIndex int, rowIndex int) (rectangles int) {
+	for _, column := range validColumns {
+		for _, row := range validRows {
 			brokenRectangle := false
-			for m := columnIndex + 1; m < k; m++ {
-				if diagram[l][m] != '+' && diagram[l][m] != '-' {
+			for m := columnIndex + 1; m < column; m++ {
+				if !isCorner(rune(diagram[row][m])) && !isHorizontalEdge(rune(diagram[row][m])) {
 					brokenRectangle = true
 					break
 				}
 			}
-			for n := rowIndex + 1; n < l; n++ {
-				if diagram[n][k] != '+' && diagram[n][k] != '|' {
+			for n := rowIndex + 1; n < row; n++ {
+				if !isCorner(rune(diagram[n][column])) && !isVerticalEdge(rune(diagram[n][column])) {
 					brokenRectangle = true
 					break
 				}
 			}
-			if diagram[l][k] == '+' && !brokenRectangle {
+			if isCorner(rune(diagram[row][column])) && !brokenRectangle {
 				rectangles++
 			}
 		}
