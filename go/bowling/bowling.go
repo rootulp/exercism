@@ -35,13 +35,18 @@ func (g *Game) parseFrames() {
 	}
 }
 
-func (g *Game) Score() (score int, err error) {
+func (g *Game) Score() (total int, err error) {
 	g.parseFrames()
 	fmt.Printf("rolls: %v\nframes: %v\n", g.rolls, g.frames)
-	for i, frame := range g.frames[0:10] {
-		score += frame.score(g.frames[i+1:])
+	if len(g.frames) < 10 {
+		return 0, fmt.Errorf("not enough frames %v", g.frames)
 	}
-	return score, nil
+	for i, frame := range g.frames[0:10] {
+		score := frame.score(g.frames[i+1:])
+		fmt.Printf("frame: %v score %v\n", frame, score)
+		total += score
+	}
+	return total, nil
 }
 
 func (g *Game) lastFrame() *Frame {
@@ -62,9 +67,7 @@ func (f *Frame) score(nextFrames []*Frame) int {
 	if f.isOpenFrame() {
 		return f.rollOne + f.rollTwo
 	}
-	nextFrame := nextFrames[0]
-	nextRoll := nextFrame.rollOne
-	nextNextRoll := nextFrame.rollTwo
+	nextRoll, nextNextRoll := nextRolls(nextFrames)
 	if f.isSpare() {
 		return 10 + nextRoll
 	}
@@ -89,4 +92,28 @@ func (f *Frame) isOpenFrame() bool {
 
 func isStrike(roll int) bool {
 	return roll == 10
+}
+
+func nextRolls(nextFrames []*Frame) (nextRoll int, nextNextRoll int) {
+	if len(nextFrames) == 0 {
+		return 0, 0
+	}
+	rolls := []int{}
+	for _, frame := range nextFrames {
+		if frame.isStrike() {
+			rolls = append(rolls, frame.rollOne)
+		} else {
+			rolls = append(rolls, frame.rollOne)
+			rolls = append(rolls, frame.rollTwo)
+		}
+	}
+
+	if len(rolls) >= 2 {
+		return rolls[0], rolls[1]
+	} else if len(rolls) == 1 {
+		return rolls[0], 0
+	} else {
+		log.Fatalf("rolls %v is empty", rolls)
+		return 0, 0
+	}
 }
