@@ -15,6 +15,9 @@ func NewGame() *Game {
 }
 
 func (g *Game) Roll(pins int) error {
+	if pins < 0 {
+		return fmt.Errorf("negative roll is invalid")
+	}
 	g.rolls = append(g.rolls, pins)
 	return nil
 }
