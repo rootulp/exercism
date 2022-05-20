@@ -43,10 +43,6 @@ func (g *Game) parseFrames() error {
 			}
 			g.lastFrame().rollTwo = roll
 			g.lastFrame().isComplete = true
-			// } else if len(g.frames) == 10 {
-			// 	if g.lastFrame().isComplete && !g.lastFrame().isStrike() && !g.lastFrame().isSpare() {
-			// 		return fmt.Errorf("cannot roll after game is over")
-			// 	}
 		} else {
 			g.frames = append(g.frames, &Frame{roll, 0, isCompleteFrame})
 		}
@@ -56,16 +52,16 @@ func (g *Game) parseFrames() error {
 
 func (g *Game) Score() (total int, err error) {
 	g.parseFrames()
-	// fmt.Printf("rolls: %v\nframes: %v\n", g.rolls, g.frames)
+
 	if len(g.frames) < 10 {
 		return 0, fmt.Errorf("not enough frames %v", g.frames)
 	}
+
 	for i, frame := range g.frames[0:10] {
 		score, err := frame.score(g.frames[i+1:])
 		if err != nil {
 			return 0, err
 		}
-		// fmt.Printf("frame: %v score %v\n", frame, score)
 		total += score
 	}
 	return total, nil
