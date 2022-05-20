@@ -2,7 +2,6 @@ package bowling
 
 import (
 	"fmt"
-	"log"
 )
 
 type Game struct {
@@ -28,18 +27,22 @@ func (g *Game) Roll(pins int) error {
 func (g *Game) parseFrames() error {
 	g.frames = []*Frame{}
 	for _, roll := range g.rolls {
-		isComplete := roll == 10
+		isCompleteFrame := roll == 10
 
 		if len(g.frames) == 0 {
-			g.frames = append(g.frames, &Frame{roll, 0, isComplete})
+			g.frames = append(g.frames, &Frame{roll, 0, isCompleteFrame})
 		} else if !g.lastFrame().isComplete {
 			if g.lastFrame().rollOne+roll > 10 {
 				return fmt.Errorf("second roll hit more than number of pins on the lane")
 			}
 			g.lastFrame().rollTwo = roll
 			g.lastFrame().isComplete = true
+			// } else if len(g.frames) == 10 {
+			// 	if g.lastFrame().isComplete && !g.lastFrame().isStrike() && !g.lastFrame().isSpare() {
+			// 		return fmt.Errorf("cannot roll after game is over")
+			// 	}
 		} else {
-			g.frames = append(g.frames, &Frame{roll, 0, isComplete})
+			g.frames = append(g.frames, &Frame{roll, 0, isCompleteFrame})
 		}
 	}
 	return nil
@@ -47,13 +50,16 @@ func (g *Game) parseFrames() error {
 
 func (g *Game) Score() (total int, err error) {
 	g.parseFrames()
-	fmt.Printf("rolls: %v\nframes: %v\n", g.rolls, g.frames)
+	// fmt.Printf("rolls: %v\nframes: %v\n", g.rolls, g.frames)
 	if len(g.frames) < 10 {
 		return 0, fmt.Errorf("not enough frames %v", g.frames)
 	}
 	for i, frame := range g.frames[0:10] {
-		score := frame.score(g.frames[i+1:])
-		fmt.Printf("frame: %v score %v\n", frame, score)
+		score, err := frame.score(g.frames[i+1:])
+		if err != nil {
+			return 0, err
+		}
+		// fmt.Printf("frame: %v score %v\n", frame, score)
 		total += score
 	}
 	return total, nil
@@ -73,19 +79,24 @@ func (f *Frame) String() string {
 	return fmt.Sprintf("[%d, %d]", f.rollOne, f.rollTwo)
 }
 
-func (f *Frame) score(nextFrames []*Frame) int {
+func (f *Frame) score(nextFrames []*Frame) (score int, err error) {
 	if f.isOpenFrame() {
-		return f.rollOne + f.rollTwo
+		return f.rollOne + f.rollTwo, nil
 	}
-	nextRoll, nextNextRoll := nextRolls(nextFrames)
+	nextRolls := nextRolls(nextFrames)
 	if f.isSpare() {
-		return 10 + nextRoll
+		if len(nextRolls) < 1 {
+			return 0, fmt.Errorf("not enough rolls after spare")
+		}
+		return 10 + nextRolls[0], nil
 	}
 	if f.isStrike() {
-		return 10 + nextRoll + nextNextRoll
+		if len(nextRolls) < 2 {
+			return 0, fmt.Errorf("not enough rolls after strike")
+		}
+		return 10 + nextRolls[0] + nextRolls[1], nil
 	}
-	log.Fatalf("frame %v is not an open frame, spare, or strike", f)
-	return 0
+	return 0, fmt.Errorf("frame %v is not an open frame, spare, or strike", f)
 }
 
 func (f *Frame) isStrike() bool {
@@ -104,11 +115,8 @@ func isStrike(roll int) bool {
 	return roll == 10
 }
 
-func nextRolls(nextFrames []*Frame) (nextRoll int, nextNextRoll int) {
-	if len(nextFrames) == 0 {
-		return 0, 0
-	}
-	rolls := []int{}
+func nextRolls(nextFrames []*Frame) (rolls []int) {
+	rolls = []int{}
 	for _, frame := range nextFrames {
 		if frame.isStrike() {
 			rolls = append(rolls, frame.rollOne)
@@ -117,13 +125,5 @@ func nextRolls(nextFrames []*Frame) (nextRoll int, nextNextRoll int) {
 			rolls = append(rolls, frame.rollTwo)
 		}
 	}
-
-	if len(rolls) >= 2 {
-		return rolls[0], rolls[1]
-	} else if len(rolls) == 1 {
-		return rolls[0], 0
-	} else {
-		log.Fatalf("rolls %v is empty", rolls)
-		return 0, 0
-	}
+	return rolls
 }
