@@ -38,7 +38,7 @@ func (g *Game) parseFrames() {
 func (g *Game) Score() (score int, err error) {
 	g.parseFrames()
 	fmt.Printf("rolls: %v\nframes: %v\n", g.rolls, g.frames)
-	for i, frame := range g.frames {
+	for i, frame := range g.frames[0:10] {
 		score += frame.score(g.frames[i+1:])
 	}
 	return score, nil
