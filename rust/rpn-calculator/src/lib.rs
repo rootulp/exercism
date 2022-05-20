@@ -34,6 +34,5 @@ pub fn evaluate(inputs: &[CalculatorInput]) -> Option<i32> {
     if operands.len() == 1 {
         return Some(operands.pop().unwrap());
     }
-
-    return None;
+    None
 }
