@@ -31,6 +31,8 @@ func (g *Game) parseFrames() error {
 
 		if len(g.frames) >= 10 && g.frames[9].isComplete && !g.frames[9].isStrike() && !g.frames[9].isSpare() {
 			return fmt.Errorf("cannot roll after game is over")
+		} else if len(g.frames) > 10 && g.frames[9].isComplete && g.frames[9].isSpare() {
+			return fmt.Errorf("cannot roll after bonus roll for spare")
 		} else if len(g.frames) == 0 {
 			g.frames = append(g.frames, &Frame{roll, 0, isCompleteFrame})
 		} else if !g.lastFrame().isComplete {
