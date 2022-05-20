@@ -22,23 +22,27 @@ func (g *Game) Roll(pins int) error {
 		return fmt.Errorf("roll can not hit more than 10 pins")
 	}
 	g.rolls = append(g.rolls, pins)
-	return nil
+	return g.parseFrames()
 }
 
-func (g *Game) parseFrames() {
+func (g *Game) parseFrames() error {
 	g.frames = []*Frame{}
 	for _, roll := range g.rolls {
+		isComplete := roll == 10
+
 		if len(g.frames) == 0 {
-			isComplete := roll == 10
 			g.frames = append(g.frames, &Frame{roll, 0, isComplete})
 		} else if !g.lastFrame().isComplete {
+			if g.lastFrame().rollOne+roll > 10 {
+				return fmt.Errorf("second roll hit more than number of pins on the lane")
+			}
 			g.lastFrame().rollTwo = roll
 			g.lastFrame().isComplete = true
 		} else {
-			isComplete := roll == 10
 			g.frames = append(g.frames, &Frame{roll, 0, isComplete})
 		}
 	}
+	return nil
 }
 
 func (g *Game) Score() (total int, err error) {
