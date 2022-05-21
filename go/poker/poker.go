@@ -32,7 +32,17 @@ type Rank string
 const (
 	Two   Rank = "2"
 	Three Rank = "3"
-	// TODO
+	Four  Rank = "4"
+	Five  Rank = "5"
+	Six   Rank = "6"
+	Seven Rank = "7"
+	Eight Rank = "8"
+	Nine  Rank = "9"
+	Ten   Rank = "10"
+	Jack  Rank = "J"
+	Queen Rank = "Q"
+	King  Rank = "K"
+	Ace   Rank = "A"
 )
 
 type Suit string
@@ -112,7 +122,6 @@ func NewCard(rawCard string) (card Card, err error) {
 }
 
 func parseRank(rawRank string) (rank Rank, err error) {
-	fmt.Printf("parsing rawRank %v\n", rawRank)
 	switch rawRank {
 	case "2":
 		return Two, nil
