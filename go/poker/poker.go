@@ -90,7 +90,7 @@ func parseCards(rawHand string) (cards []Card, err error) {
 }
 
 func NewCard(rawCard string) (card Card, err error) {
-	regex, err := regexp.Compile(`(?P<rank>\d+)(?P<suit>♢|♡|♧|♤)`)
+	regex, err := regexp.Compile(`(?P<rank>\d+|J|Q|K)(?P<suit>♢|♡|♧|♤)`)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -127,6 +127,28 @@ func parseRank(rawRank string) (rank Rank, err error) {
 		return Two, nil
 	case "3":
 		return Three, nil
+	case "4":
+		return Four, nil
+	case "5":
+		return Five, nil
+	case "6":
+		return Six, nil
+	case "7":
+		return Seven, nil
+	case "8":
+		return Eight, nil
+	case "9":
+		return Nine, nil
+	case "10":
+		return Ten, nil
+	case "J":
+		return Jack, nil
+	case "Q":
+		return Queen, nil
+	case "K":
+		return King, nil
+	case "A":
+		return Ace, nil
 	default:
 		return Two, fmt.Errorf("invalid rawRank %v", rawRank)
 	}
