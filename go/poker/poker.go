@@ -5,10 +5,10 @@ import (
 	"sort"
 )
 
-type Points int
+type HandType int
 
 const (
-	Nothing Points = iota
+	Nothing HandType = iota
 	Pair
 	TwoPairs
 	ThreeOfKind
@@ -19,7 +19,7 @@ const (
 	StraightFlush
 )
 
-func BestHand(rawHands []string) (bestCards []string, err error) {
+func BestHand(rawHands []string) (bestHands []string, err error) {
 	hands, err := parseHands(rawHands)
 	if err != nil {
 		return []string{}, err
@@ -33,6 +33,13 @@ func BestHand(rawHands []string) (bestCards []string, err error) {
 	sort.Sort(ByScore(hands))
 	fmt.Printf("sortedHands %v\n", hands)
 	bestHand := hands[len(hands)-1]
+	bestHands = append(bestHands, bestHand.rawHand)
 
-	return []string{bestHand.rawHand}, nil
+	for _, hand := range hands {
+		if hand.handType() == bestHand.handType() {
+			bestHands = append(bestHands, hand.rawHand)
+		}
+	}
+
+	return bestHands, nil
 }

@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-type Rank string
+type Rank int
 type Suit string
 type Card struct {
 	rank Rank
@@ -15,19 +15,19 @@ type Card struct {
 }
 
 const (
-	Two   Rank = "2"
-	Three Rank = "3"
-	Four  Rank = "4"
-	Five  Rank = "5"
-	Six   Rank = "6"
-	Seven Rank = "7"
-	Eight Rank = "8"
-	Nine  Rank = "9"
-	Ten   Rank = "10"
-	Jack  Rank = "J"
-	Queen Rank = "Q"
-	King  Rank = "K"
-	Ace   Rank = "A"
+	Two   Rank = 2
+	Three Rank = 3
+	Four  Rank = 4
+	Five  Rank = 5
+	Six   Rank = 6
+	Seven Rank = 7
+	Eight Rank = 8
+	Nine  Rank = 9
+	Ten   Rank = 10
+	Jack  Rank = 11
+	Queen Rank = 12
+	King  Rank = 13
+	Ace   Rank = 14
 )
 
 const (
@@ -113,7 +113,7 @@ func parseRank(rawRank string) (rank Rank, err error) {
 	case "A":
 		return Ace, nil
 	default:
-		return Two, fmt.Errorf("invalid rawRank %v", rawRank)
+		return 0, fmt.Errorf("invalid rawRank %v", rawRank)
 	}
 
 }
@@ -132,3 +132,9 @@ func parseSuit(rawSuit string) (suit Suit, err error) {
 		return Heart, fmt.Errorf("invalid rawSuit %v", rawSuit)
 	}
 }
+
+type ByRank []Rank
+
+func (r ByRank) Len() int               { return len(r) }
+func (r ByRank) Swap(a int, b int)      { r[a], r[b] = r[b], r[a] }
+func (r ByRank) Less(a int, b int) bool { return r[a] < r[b] }
