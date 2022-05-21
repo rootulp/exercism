@@ -9,9 +9,13 @@ import (
 
 func BestHand(rawHands []string) (bestCards []string, err error) {
 	hands, err := parseHands(rawHands)
-	fmt.Printf("hands %v, err %v\n", hands, err)
 	if err != nil {
 		return []string{}, err
+	}
+
+	fmt.Printf("hands %v, err %v\n", hands, err)
+	if len(hands) == 1 {
+		return []string{hands[0].rawHand}, nil
 	}
 
 	return []string{}, nil
