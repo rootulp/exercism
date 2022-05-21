@@ -86,6 +86,9 @@ func parseCards(rawHand string) (cards []Card, err error) {
 		}
 		cards = append(cards, card)
 	}
+	if len(cards) != 5 {
+		return cards, fmt.Errorf("incorrect number of cards %v", len(cards))
+	}
 	return cards, nil
 }
 
