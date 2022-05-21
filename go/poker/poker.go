@@ -93,7 +93,7 @@ func parseCards(rawHand string) (cards []Card, err error) {
 }
 
 func NewCard(rawCard string) (card Card, err error) {
-	regex, err := regexp.Compile(`(?P<rank>\d+|J|Q|K)(?P<suit>♢|♡|♧|♤)`)
+	regex, err := regexp.Compile(`(?P<rank>\d+|J|Q|K)(?P<suit>♢|♡|♧|♤)$`)
 	if err != nil {
 		log.Fatal(err)
 	}
