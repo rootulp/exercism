@@ -69,6 +69,14 @@ func (h Hand) tiebreak(o Hand) (int, error) {
 		if comparison != 0 {
 			return comparison, nil
 		}
+
+		comparison, err = h.compareByHighestKicker(o)
+		if err != nil {
+			return 0, err
+		}
+		if comparison != 0 {
+			return comparison, nil
+		}
 		return 0, nil
 	case FullHouse:
 		comparison, err := h.compareByHighestTriplet(o)
@@ -130,6 +138,20 @@ func (h Hand) compareByHighestQuad(o Hand) (int, error) {
 	return int(quadH) - int(quadO), nil
 }
 
+func (h Hand) compareByHighestKicker(o Hand) (int, error) {
+	kickerH, err := h.kicker()
+	if err != nil {
+		return 0, err
+	}
+
+	kickerO, err := o.kicker()
+	if err != nil {
+		return 0, err
+	}
+
+	return int(kickerH) - int(kickerO), nil
+}
+
 func (h Hand) compareByHighestTriplet(o Hand) (int, error) {
 	tripletH, err := h.tripletRank()
 	if err != nil {
@@ -186,6 +208,16 @@ func (h Hand) pairRank() (rank Rank, err error) {
 		}
 	}
 	return rank, fmt.Errorf("hand %v does not have a pair", h)
+}
+
+func (h Hand) kicker() (rank Rank, err error) {
+	rankToOccurences := h.getRankToOccurences()
+	for rank, occurences := range rankToOccurences {
+		if occurences == 1 {
+			return rank, nil
+		}
+	}
+	return rank, fmt.Errorf("hand %v does not have a kicker", h)
 }
 
 func (h Hand) descendingRanks() (ranks []Rank) {
