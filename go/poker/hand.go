@@ -149,6 +149,10 @@ func (h Hand) isFlush() bool {
 }
 
 func (h Hand) isStraight() bool {
+	if h.isStraightStartingWithAce() {
+		return true
+	}
+
 	ranks := h.Ranks()
 	sort.Sort(ByRank(ranks))
 	for i, rank := range ranks {
@@ -160,6 +164,13 @@ func (h Hand) isStraight() bool {
 		}
 	}
 	return true
+}
+
+func (h Hand) isStraightStartingWithAce() bool {
+	ranks := h.Ranks()
+	sort.Sort(ByRank(ranks))
+	straightStartingWithAce := []Rank{Two, Three, Four, Five, Ace}
+	return reflect.DeepEqual(ranks, straightStartingWithAce)
 }
 
 func (h Hand) isThreeOfKind() bool {
