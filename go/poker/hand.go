@@ -50,7 +50,7 @@ func (h Hand) compare(o Hand) int {
 // compare returns a negative number if the score of h is greater than the score of o
 func (h Hand) tiebreak(o Hand) int {
 	if h.handType() != o.handType() {
-		log.Fatalf("tiebreak invoked with unequal hand types %v and %v", h.handType(), o.handType())
+		log.Fatalf("tiebreak invoked with unequal hand types %v and %v", h, o)
 	}
 
 	switch h.handType() {
@@ -126,9 +126,9 @@ func (h Hand) isFourOfKind() bool {
 func (h Hand) isFullHouse() bool {
 	rankToOccurences := h.getRankToOccurences()
 	occurences := getValues(rankToOccurences)
-	fullHouseA := []int{2, 3}
-	fullHouseB := []int{3, 2}
-	return reflect.DeepEqual(occurences, fullHouseA) || reflect.DeepEqual(occurences, fullHouseB)
+	sort.Ints(occurences)
+	fullHouse := []int{2, 3}
+	return reflect.DeepEqual(occurences, fullHouse)
 }
 
 func (h Hand) isFlush() bool {
@@ -159,7 +159,8 @@ func (h Hand) isThreeOfKind() bool {
 func (h Hand) isTwoPairs() bool {
 	rankToOccurences := h.getRankToOccurences()
 	occurences := getValues(rankToOccurences)
-	twoPairs := []int{2, 2, 1}
+	sort.Ints(occurences)
+	twoPairs := []int{1, 2, 2}
 	return reflect.DeepEqual(occurences, twoPairs)
 }
 
