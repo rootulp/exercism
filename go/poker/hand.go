@@ -35,6 +35,13 @@ func parseHands(rawHands []string) (hands []Hand, err error) {
 	return hands, nil
 }
 
+func (h Hand) Ranks() (ranks []Rank) {
+	for _, card := range h.cards {
+		ranks = append(ranks, card.rank)
+	}
+	return ranks
+}
+
 // compare returns 0 if both hands have equal score
 // compare returns a positive number if the score of h is less than the score of o
 // compare returns a negative number if the score of h is greater than the score of o
@@ -142,8 +149,17 @@ func (h Hand) isFlush() bool {
 }
 
 func (h Hand) isStraight() bool {
-	// TODO
-	return false
+	ranks := h.Ranks()
+	sort.Sort(ByRank(ranks))
+	for i, rank := range ranks {
+		if i == 0 {
+			continue
+		}
+		if int(ranks[i-1]) != int(rank)-1 {
+			return false
+		}
+	}
+	return true
 }
 
 func (h Hand) isThreeOfKind() bool {
