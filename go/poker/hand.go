@@ -82,12 +82,6 @@ func (h Hand) descendingRanks() (ranks []Rank) {
 	return ranks
 }
 
-func (h Hand) highestCard() int {
-	descendingRanks := h.descendingRanks()
-	highestRank := descendingRanks[0]
-	return int(highestRank)
-}
-
 func (h Hand) handType() HandType {
 	switch {
 	case h.isStraightFlush():
@@ -112,7 +106,7 @@ func (h Hand) handType() HandType {
 }
 
 func (h Hand) String() string {
-	return fmt.Sprintf("rawHand %v cards %v handType %v highestCard %v\n", h.rawHand, h.cards, h.handType(), h.highestCard())
+	return fmt.Sprintf("rawHand %v cards %v handType %v", h.rawHand, h.cards, h.handType())
 }
 
 func (h Hand) isStraightFlush() bool {
@@ -208,12 +202,7 @@ func (s ByScore) Swap(a int, b int) { s[a], s[b] = s[b], s[a] }
 func (s ByScore) Less(a int, b int) bool {
 	handA := s[a]
 	handB := s[b]
-
-	if handA.handType() != handB.handType() {
-		return handA.handType() < handB.handType()
-	} else {
-		return handA.highestCard() < handB.highestCard()
-	}
+	return handA.compare(handB) < 0
 }
 
 func getValues(rankToOccurences map[Rank]int) (values []int) {
