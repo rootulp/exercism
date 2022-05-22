@@ -22,18 +22,13 @@ const (
 func BestHand(rawHands []string) (bestHands []string, err error) {
 	hands, err := parseHands(rawHands)
 	if err != nil {
-		return []string{}, err
+		return bestHands, err
 	}
 
-	// fmt.Printf("hands %v, err %v\n", hands, err)
-	if len(hands) == 1 {
-		return []string{hands[0].rawHand}, nil
+	bestHand, err := getBestHand(rawHands)
+	if err != nil {
+		return bestHands, err
 	}
-
-	sort.Sort(ByScore(hands))
-	fmt.Printf("sortedHands %v\n", hands)
-	hands, bestHand := hands[:len(hands)-1], hands[len(hands)-1]
-	bestHands = append(bestHands, bestHand.rawHand)
 
 	for _, hand := range hands {
 		if bestHand.compare(hand) == 0 {
@@ -42,4 +37,17 @@ func BestHand(rawHands []string) (bestHands []string, err error) {
 	}
 
 	return bestHands, nil
+}
+
+func getBestHand(rawHands []string) (bestHand Hand, err error) {
+	hands, err := parseHands(rawHands)
+	if err != nil {
+		return Hand{}, err
+	}
+
+	sort.Sort(ByScore(hands))
+	fmt.Printf("sortedHands %v\n", hands)
+
+	bestHand = hands[len(hands)-1]
+	return bestHand, nil
 }
