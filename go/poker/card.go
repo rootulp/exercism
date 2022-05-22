@@ -38,7 +38,7 @@ const (
 )
 
 func NewCard(rawCard string) (card Card, err error) {
-	regex, err := regexp.Compile(`(?P<rank>\d+|J|Q|K)(?P<suit>♢|♡|♧|♤)$`)
+	regex, err := regexp.Compile(`(?P<rank>\d+|J|Q|K|A)(?P<suit>♢|♡|♧|♤)$`)
 	if err != nil {
 		log.Fatal(err)
 	}
