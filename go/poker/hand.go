@@ -61,6 +61,15 @@ func (h Hand) tiebreak(o Hand) (int, error) {
 	}
 
 	switch h.handType() {
+	case FourOfKind:
+		comparison, err := h.compareByHighestQuad(o)
+		if err != nil {
+			return 0, err
+		}
+		if comparison != 0 {
+			return comparison, nil
+		}
+		return 0, nil
 	case FullHouse:
 		comparison, err := h.compareByHighestTriplet(o)
 		if err != nil {
@@ -107,6 +116,20 @@ func (h Hand) compareByHighestCard(o Hand) int {
 	return 0
 }
 
+func (h Hand) compareByHighestQuad(o Hand) (int, error) {
+	quadH, err := h.quadRank()
+	if err != nil {
+		return 0, err
+	}
+
+	quadO, err := o.quadRank()
+	if err != nil {
+		return 0, err
+	}
+
+	return int(quadH) - int(quadO), nil
+}
+
 func (h Hand) compareByHighestTriplet(o Hand) (int, error) {
 	tripletH, err := h.tripletRank()
 	if err != nil {
@@ -133,6 +156,16 @@ func (h Hand) compareByHighestPair(o Hand) (int, error) {
 	}
 
 	return int(pairH) - int(pairO), nil
+}
+
+func (h Hand) quadRank() (rank Rank, err error) {
+	rankToOccurences := h.getRankToOccurences()
+	for rank, occurences := range rankToOccurences {
+		if occurences == 4 {
+			return rank, nil
+		}
+	}
+	return rank, fmt.Errorf("hand %v does not have a quad", h)
 }
 
 func (h Hand) tripletRank() (rank Rank, err error) {
