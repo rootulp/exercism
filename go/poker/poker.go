@@ -32,7 +32,11 @@ func BestHand(rawHands []string) (bestHands []string, err error) {
 	}
 
 	for _, hand := range hands {
-		if bestHand.compare(hand) == 0 {
+		comparison, err := bestHand.compare(hand)
+		if err != nil {
+			return bestHands, err
+		}
+		if comparison == 0 {
 			bestHands = append(bestHands, hand.rawHand)
 		}
 	}

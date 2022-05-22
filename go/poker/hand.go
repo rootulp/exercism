@@ -45,33 +45,51 @@ func (h Hand) Ranks() (ranks []Rank) {
 // compare returns 0 if both hands have equal score
 // compare returns a positive number if the score of h is less than the score of o
 // compare returns a negative number if the score of h is greater than the score of o
-func (h Hand) compare(o Hand) int {
+func (h Hand) compare(o Hand) (int, error) {
 	if h.handType() == o.handType() {
 		return h.tiebreak(o)
 	}
-	return int(h.handType()) - int(o.handType())
+	return int(h.handType()) - int(o.handType()), nil
 }
 
 // compare returns 0 if both hands have equal score
 // compare returns a positive number if the score of h is less than the score of o
 // compare returns a negative number if the score of h is greater than the score of o
-func (h Hand) tiebreak(o Hand) int {
+func (h Hand) tiebreak(o Hand) (int, error) {
 	if h.handType() != o.handType() {
 		log.Fatalf("tiebreak invoked with unequal hand types %v and %v", h, o)
 	}
 
 	switch h.handType() {
+	case FullHouse:
+		comparison, err := h.compareByHighestTriplet(o)
+		if err != nil {
+			return 0, err
+		}
+		if comparison != 0 {
+			return comparison, nil
+		}
+
+		comparison, err = h.compareByHighestPair(o)
+		if err != nil {
+			return 0, err
+		}
+		if comparison != 0 {
+			return comparison, nil
+		}
+
+		return 0, nil
 	case Straight:
 		if h.isStraightStartingWithAce() && o.isStraightStartingWithAce() {
-			return 0
+			return 0, nil
 		} else if h.isStraightStartingWithAce() {
-			return -1
+			return -1, nil
 		} else if o.isStraightStartingWithAce() {
-			return 1
+			return 1, nil
 		}
-		return h.compareByHighestCard(o)
+		return h.compareByHighestCard(o), nil
 	default:
-		return h.compareByHighestCard(o)
+		return h.compareByHighestCard(o), nil
 	}
 }
 
@@ -87,6 +105,54 @@ func (h Hand) compareByHighestCard(o Hand) int {
 		}
 	}
 	return 0
+}
+
+func (h Hand) compareByHighestTriplet(o Hand) (int, error) {
+	tripletH, err := h.tripletRank()
+	if err != nil {
+		return 0, err
+	}
+
+	tripletO, err := o.tripletRank()
+	if err != nil {
+		return 0, err
+	}
+
+	return int(tripletH) - int(tripletO), nil
+}
+
+func (h Hand) compareByHighestPair(o Hand) (int, error) {
+	pairH, err := h.pairRank()
+	if err != nil {
+		return 0, err
+	}
+
+	pairO, err := o.pairRank()
+	if err != nil {
+		return 0, err
+	}
+
+	return int(pairH) - int(pairO), nil
+}
+
+func (h Hand) tripletRank() (rank Rank, err error) {
+	rankToOccurences := h.getRankToOccurences()
+	for rank, occurences := range rankToOccurences {
+		if occurences == 3 {
+			return rank, nil
+		}
+	}
+	return rank, fmt.Errorf("hand %v does not have a triplet", h)
+}
+
+func (h Hand) pairRank() (rank Rank, err error) {
+	rankToOccurences := h.getRankToOccurences()
+	for rank, occurences := range rankToOccurences {
+		if occurences == 2 {
+			return rank, nil
+		}
+	}
+	return rank, fmt.Errorf("hand %v does not have a pair", h)
 }
 
 func (h Hand) descendingRanks() (ranks []Rank) {
@@ -239,7 +305,11 @@ func (s ByScore) Swap(a int, b int) { s[a], s[b] = s[b], s[a] }
 func (s ByScore) Less(a int, b int) bool {
 	handA := s[a]
 	handB := s[b]
-	return handA.compare(handB) < 0
+	comparison, err := handA.compare(handB)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return comparison < 0
 }
 
 func getValues(rankToOccurences map[Rank]int) (values []int) {
