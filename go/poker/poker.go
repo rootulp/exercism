@@ -26,6 +26,7 @@ func BestHand(rawHands []string) (bestHands []string, err error) {
 	}
 
 	bestHand, err := getBestHand(rawHands)
+	fmt.Printf("bestHand %v\n", bestHand)
 	if err != nil {
 		return bestHands, err
 	}

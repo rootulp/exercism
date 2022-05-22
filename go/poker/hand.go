@@ -61,6 +61,15 @@ func (h Hand) tiebreak(o Hand) int {
 	}
 
 	switch h.handType() {
+	case Straight:
+		if h.isStraightStartingWithAce() && o.isStraightStartingWithAce() {
+			return 0
+		} else if h.isStraightStartingWithAce() {
+			return -1
+		} else if o.isStraightStartingWithAce() {
+			return 1
+		}
+		return h.compareByHighestCard(o)
 	default:
 		return h.compareByHighestCard(o)
 	}
@@ -113,7 +122,7 @@ func (h Hand) handType() HandType {
 }
 
 func (h Hand) String() string {
-	return fmt.Sprintf("rawHand %v cards %v handType %v", h.rawHand, h.cards, h.handType())
+	return fmt.Sprintf("handType %v with cards %v", h.handType(), h.cards)
 }
 
 func (h Hand) isStraightFlush() bool {
