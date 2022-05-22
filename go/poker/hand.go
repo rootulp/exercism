@@ -2,6 +2,7 @@ package poker
 
 import (
 	"fmt"
+	"log"
 	"reflect"
 	"sort"
 )
@@ -34,16 +35,56 @@ func parseHands(rawHands []string) (hands []Hand, err error) {
 	return hands, nil
 }
 
-func (h Hand) highestCard() int {
-	ranks := []Rank{}
+// compare returns 0 if both hands have equal score
+// compare returns a positive number if the score of h is less than the score of o
+// compare returns a negative number if the score of h is greater than the score of o
+func (h Hand) compare(o Hand) int {
+	if h.handType() == o.handType() {
+		return h.tiebreak(o)
+	}
+	return int(h.handType()) - int(o.handType())
+}
+
+// compare returns 0 if both hands have equal score
+// compare returns a positive number if the score of h is less than the score of o
+// compare returns a negative number if the score of h is greater than the score of o
+func (h Hand) tiebreak(o Hand) int {
+	if h.handType() != o.handType() {
+		log.Fatalf("tiebreak invoked with unequal hand types %v and %v", h.handType(), o.handType())
+	}
+
+	switch h.handType() {
+	default:
+		return h.compareByHighestCard(o)
+	}
+}
+
+func (h Hand) compareByHighestCard(o Hand) int {
+	descendingRanksH := h.descendingRanks()
+	descendingRanksO := o.descendingRanks()
+
+	for i := range descendingRanksH {
+		rankH := descendingRanksH[i]
+		rankO := descendingRanksO[i]
+		if rankH != rankO {
+			return int(rankH) - int(rankO)
+		}
+	}
+	return 0
+}
+
+func (h Hand) descendingRanks() (ranks []Rank) {
 	for _, card := range h.cards {
 		ranks = append(ranks, card.rank)
 	}
 
-	sort.Sort(ByRank(ranks))
-	fmt.Printf("sortedRanks %v\n", ranks)
-	highestRank := ranks[len(ranks)-1]
+	sort.Sort(sort.Reverse(ByRank(ranks)))
+	return ranks
+}
 
+func (h Hand) highestCard() int {
+	descendingRanks := h.descendingRanks()
+	highestRank := descendingRanks[0]
 	return int(highestRank)
 }
 

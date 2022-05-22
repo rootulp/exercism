@@ -32,11 +32,11 @@ func BestHand(rawHands []string) (bestHands []string, err error) {
 
 	sort.Sort(ByScore(hands))
 	fmt.Printf("sortedHands %v\n", hands)
-	bestHand := hands[len(hands)-1]
+	hands, bestHand := hands[:len(hands)-1], hands[len(hands)-1]
 	bestHands = append(bestHands, bestHand.rawHand)
 
 	for _, hand := range hands {
-		if hand.handType() == bestHand.handType() {
+		if bestHand.compare(hand) == 0 {
 			bestHands = append(bestHands, hand.rawHand)
 		}
 	}
