@@ -1,6 +1,5 @@
-use std::fmt;
+use std::fmt::{self};
 
-#[derive(PartialEq)]
 pub struct Clock {
     minutes: i32,
 }
@@ -44,5 +43,15 @@ impl fmt::Display for Clock {
 impl fmt::Debug for Clock {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.minutes)
+    }
+}
+
+impl PartialEq for Clock {
+    fn ne(&self, other: &Self) -> bool {
+        return format!("{}", self) == format!("{}", other);
+    }
+
+    fn eq(&self, other: &Self) -> bool {
+        return format!("{}", self) == format!("{}", other);
     }
 }
