@@ -20,7 +20,11 @@ impl fmt::Display for Clock {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let minutes = self.minutes % 60;
         let additional_hours = self.minutes / 60;
-        let hours = (self.hours + additional_hours) % 24;
+        let mut hours = self.hours + additional_hours;
+        while hours < 0 {
+            hours += 24
+        }
+        let hours = hours % 24;
         write!(f, "{:02}:{:02}", hours, minutes)
     }
 }
