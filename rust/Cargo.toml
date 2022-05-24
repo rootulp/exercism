@@ -2,6 +2,7 @@
 
 members = [
   "assembly-line",
+  "gigasecond",
   "health-statistics",
   "hello-world",
   "leap",
