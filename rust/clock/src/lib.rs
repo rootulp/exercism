@@ -14,10 +14,6 @@ impl Clock {
     pub fn add_minutes(&self, minutes: i32) -> Self {
         return Clock::new(self.hours, self.minutes + minutes);
     }
-
-    pub fn to_string(&self) -> String {
-        return format!("{}:{}", self.hours, self.minutes);
-    }
 }
 
 impl fmt::Display for Clock {
