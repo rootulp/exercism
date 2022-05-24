@@ -1,0 +1,38 @@
+{
+  "blurb": "Reverse a string",
+  "authors": [
+    "coriolinus"
+  ],
+  "contributors": [
+    "cbzehner",
+    "ccouzens",
+    "cwhakes",
+    "efx",
+    "ErikSchierboom",
+    "hunger",
+    "lutostag",
+    "ocstl",
+    "PaulT89",
+    "petertseng",
+    "rofrol",
+    "rrredface",
+    "stringparser",
+    "TheDarkula",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/reverse-string.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "source": "Introductory challenge to reverse an input string",
+  "source_url": "https://medium.freecodecamp.org/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb"
+}

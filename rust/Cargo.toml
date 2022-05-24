@@ -9,6 +9,7 @@ members = [
   "lucians-luscious-lasagna",
   "magazine-cutout",
   "resistor-color",
+  "reverse-string",
   "rpn-calculator",
   "role-playing-game",
   "semi-structured-logs",
