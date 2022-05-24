@@ -18,7 +18,8 @@ impl Clock {
 
 impl fmt::Display for Clock {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:02}:{:02}", self.hours, self.minutes)
+        let hours = self.hours % 24;
+        write!(f, "{:02}:{:02}", hours, self.minutes)
     }
 }
 
