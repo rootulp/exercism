@@ -1,0 +1,43 @@
+{
+  "blurb": "Implement a clock that handles times without dates.",
+  "authors": [
+    "sacherjj"
+  ],
+  "contributors": [
+    "attilahorvath",
+    "coriolinus",
+    "cwhakes",
+    "danieljl",
+    "eddyp",
+    "efx",
+    "ErikSchierboom",
+    "felix91gr",
+    "kunaltyagi",
+    "lutostag",
+    "nfiles",
+    "petertseng",
+    "rofrol",
+    "shaaraddalvi",
+    "stringparser",
+    "tmccombs",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/clock.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "source": "Pairing session with Erin Drummond",
+  "source_url": "https://twitter.com/ebdrummond",
+  "custom": {
+    "allowed-to-not-compile": "Stub doesn't compile because there is no to_string() implementation. This exercise is an introduction to derived and self-implemented traits, therefore adding template for a trait would reduce student learning."
+  }
+}

@@ -2,6 +2,7 @@
 
 members = [
   "assembly-line",
+  "clock",
   "gigasecond",
   "health-statistics",
   "hello-world",
