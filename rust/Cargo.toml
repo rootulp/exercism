@@ -1,6 +1,7 @@
 [workspace]
 
 members = [
+  "anagram",
   "assembly-line",
   "clock",
   "gigasecond",
