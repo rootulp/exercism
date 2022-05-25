@@ -10,6 +10,30 @@ import (
 	"time"
 )
 
+type test struct {
+	input rune
+	want  string
+}
+
+func TestDiamond(t *testing.T) {
+	tests := []test{
+		{'A', "A\n"},
+		{'B', " A \nB B\n A \n"},
+		{'C', "  A  \n B B \nC   C\n B B \n  A  \n"},
+		{'D', "   A   \n  B B  \n C   C \nD     D\n C   C \n  B B  \n   A   \n"},
+	}
+	for _, test := range tests {
+		got, err := Gen(byte(test.input))
+
+		if err != nil {
+			t.Errorf("Gen(byte(%v)) err %v", test.input, err)
+		}
+		if got != test.want {
+			t.Errorf("Gen(byte(%v) got\n%v want\n%v", test.input, got, test.want)
+		}
+	}
+}
+
 var config = &quick.Config{Rand: rand.New(rand.NewSource(time.Now().UnixNano()))}
 
 type correctChar byte
