@@ -12,7 +12,7 @@ pub fn anagrams_for<'a>(word: &str, possible_anagrams: &'a [&str]) -> HashSet<&'
 }
 
 fn is_anagram(word: &str, possible: &str) -> bool {
-    if word == possible {
+    if word.to_lowercase() == possible.to_lowercase() {
         return false;
     }
 
