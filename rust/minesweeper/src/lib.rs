@@ -59,7 +59,6 @@ fn get_neighbors(field: &Vec<Vec<char>>, y: u32, x: u32) -> Vec<char> {
             if x + delta_x < 0 || x + delta_x >= field[0].len() as i32 {
                 continue;
             }
-            println!("{} {}", y + delta_y, x + delta_x);
             let neighbor = field[(y + delta_y) as usize][(x + delta_x) as usize];
             neighbors.push(neighbor)
         }
