@@ -1,0 +1,37 @@
+{
+  "blurb": "Write a function to determine if a list is a sublist of another list.",
+  "authors": [
+    "EduardoBautista"
+  ],
+  "contributors": [
+    "ashleygwilliams",
+    "coriolinus",
+    "cwhakes",
+    "eddyp",
+    "EduardoBautista",
+    "efx",
+    "ErikSchierboom",
+    "IanWhitney",
+    "kytrinyx",
+    "lutostag",
+    "mkantor",
+    "nfiles",
+    "petertseng",
+    "rofrol",
+    "stringparser",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/sublist.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  }
+}
