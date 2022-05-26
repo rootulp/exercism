@@ -18,5 +18,6 @@ members = [
   "role-playing-game",
   "semi-structured-logs",
   "short-fibonacci",
+  "space-age",
   "sublist",
 ]
