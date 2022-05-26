@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 pub struct Allergies {
     score: u32,
 }
@@ -16,53 +14,52 @@ pub enum Allergen {
     Cats,
 }
 
+impl Allergen {
+    pub fn value(&self) -> u32 {
+        match self {
+            Allergen::Eggs => 1,
+            Allergen::Peanuts => 2,
+            Allergen::Shellfish => 4,
+            Allergen::Strawberries => 8,
+            Allergen::Tomatoes => 16,
+            Allergen::Chocolate => 32,
+            Allergen::Pollen => 64,
+            Allergen::Cats => 128,
+        }
+    }
+}
+
 impl Allergies {
     pub fn new(score: u32) -> Self {
-        return Allergies { score };
+        let score = score % 256;
+        Self { score }
     }
 
     pub fn is_allergic_to(&self, allergen: &Allergen) -> bool {
-        for candidate in self.allergies() {
-            if candidate == allergen {
-                return true;
-            }
-        }
-        return false;
+        allergen.value() & self.score > 0
     }
 
-    pub fn allergies(&self) -> Vec<&Allergen> {
-        let score_to_allergen: HashMap<u32, &Allergen> = HashMap::from([
-            (1, &Allergen::Eggs),
-            (2, &Allergen::Peanuts),
-            (4, &Allergen::Shellfish),
-            (8, &Allergen::Strawberries),
-            (16, &Allergen::Tomatoes),
-            (32, &Allergen::Chocolate),
-            (64, &Allergen::Pollen),
-            (128, &Allergen::Cats),
-        ]);
+    pub fn allergies(&self) -> Vec<Allergen> {
+        let mut score = self.score;
+        let mut allergies: Vec<Allergen> = Vec::new();
 
-        let mut score: u32 = self.score;
-        let mut allergies: Vec<&Allergen> = vec![];
-        if score >= 256 {
-            score %= 256
-        }
-        for key in self.descending_keys(score_to_allergen) {
-            let allergen = score_to_allergen
-                .get(&key)
-                .expect("expected allergy to exist");
-
-            if score / key == 1 {
-                allergies.push(allergen);
-                score %= key;
+        let allergens = vec![
+            Allergen::Cats,
+            Allergen::Pollen,
+            Allergen::Chocolate,
+            Allergen::Tomatoes,
+            Allergen::Strawberries,
+            Allergen::Shellfish,
+            Allergen::Peanuts,
+            Allergen::Eggs,
+        ];
+        for candidate in allergens {
+            if score / candidate.value() == 1 {
+                score = score % candidate.value();
+                allergies.push(candidate);
             }
         }
+
         allergies
-    }
-
-    fn descending_keys(&self, map: HashMap<u32, &Allergen>) -> Vec<u32> {
-        let mut keys: Vec<u32> = map.into_keys().collect();
-        keys.sort();
-        keys
     }
 }
