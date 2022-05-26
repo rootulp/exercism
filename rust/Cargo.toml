@@ -1,6 +1,7 @@
 [workspace]
 
 members = [
+  "allergies",
   "anagram",
   "assembly-line",
   "clock",

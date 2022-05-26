@@ -1,0 +1,40 @@
+{
+  "blurb": "Given a person's allergy score, determine whether or not they're allergic to a given item, and their full list of allergies.",
+  "authors": [
+    "EduardoBautista"
+  ],
+  "contributors": [
+    "ashleygwilliams",
+    "coriolinus",
+    "cwhakes",
+    "EduardoBautista",
+    "efx",
+    "ErikSchierboom",
+    "IanWhitney",
+    "kytrinyx",
+    "lutostag",
+    "mkantor",
+    "navossoc",
+    "nfiles",
+    "petertseng",
+    "rofrol",
+    "stringparser",
+    "taravancil",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/allergies.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "source": "Jumpstart Lab Warm-up",
+  "source_url": "http://jumpstartlab.com"
+}
