@@ -12,6 +12,7 @@ members = [
   "low-power-embedded-game",
   "lucians-luscious-lasagna",
   "magazine-cutout",
+  "minesweeper",
   "resistor-color",
   "reverse-string",
   "rpn-calculator",
