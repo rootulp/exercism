@@ -1,20 +1,19 @@
-// The code below is a stub. Just enough to satisfy the compiler.
-// In order to pass the tests you can add-to or change any of this code.
-
 #[derive(Debug)]
-pub struct Duration;
+pub struct Duration {
+    seconds: u64,
+}
 
 impl From<u64> for Duration {
-    fn from(s: u64) -> Self {
-        unimplemented!("s, measured in seconds: {}", s)
+    fn from(seconds: u64) -> Self {
+        return Self { seconds };
     }
 }
 
 pub trait Planet {
-    fn years_during(d: &Duration) -> f64 {
+    fn years_during(duration: &Duration) -> f64 {
         unimplemented!(
             "convert a duration ({:?}) to the number of years on this planet for that duration",
-            d,
+            duration,
         );
     }
 }
@@ -30,7 +29,12 @@ pub struct Neptune;
 
 impl Planet for Mercury {}
 impl Planet for Venus {}
-impl Planet for Earth {}
+impl Planet for Earth {
+    fn years_during(duration: &Duration) -> f64 {
+        const SECONDS_IN_EARTH_YEAR: f64 = 31557600.0;
+        return duration.seconds as f64 / SECONDS_IN_EARTH_YEAR;
+    }
+}
 impl Planet for Mars {}
 impl Planet for Jupiter {}
 impl Planet for Saturn {}
