@@ -27,7 +27,12 @@ pub struct Saturn;
 pub struct Uranus;
 pub struct Neptune;
 
-impl Planet for Mercury {}
+impl Planet for Mercury {
+    fn years_during(duration: &Duration) -> f64 {
+        const MERCURY_ORBITAL_PERIOD: f64 = 0.2408467;
+        return Earth::years_during(duration) / MERCURY_ORBITAL_PERIOD;
+    }
+}
 impl Planet for Venus {}
 impl Planet for Earth {
     fn years_during(duration: &Duration) -> f64 {
