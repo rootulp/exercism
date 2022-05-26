@@ -1,10 +1,6 @@
 pub fn annotate(minefield: &[&str]) -> Vec<String> {
+    let field = split(minefield);
     let mut annotated: Vec<String> = Vec::new();
-    let mut field: Vec<Vec<char>> = Vec::new();
-
-    for row in minefield {
-        field.push(row.chars().collect());
-    }
 
     for (y, row) in field.iter().enumerate() {
         let mut annotated_row = String::new();
@@ -27,8 +23,16 @@ pub fn annotate(minefield: &[&str]) -> Vec<String> {
 
     println!("{:?}", field);
 
-    // annotated.iter().map(|row| row.iter().collect()).collect()
     annotated
+}
+
+fn split(minefield: &[&str]) -> Vec<Vec<char>> {
+    let mut field: Vec<Vec<char>> = Vec::new();
+
+    for row in minefield {
+        field.push(row.chars().collect());
+    }
+    field
 }
 
 fn num_neighbor_mines(field: &Vec<Vec<char>>, y: u32, x: u32) -> u8 {
