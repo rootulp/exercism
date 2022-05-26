@@ -28,7 +28,6 @@ fn no_rows() {
 }
 
 #[test]
-#[ignore]
 fn no_columns() {
     #[rustfmt::skip]
     run_test(&[
