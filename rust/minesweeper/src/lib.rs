@@ -8,20 +8,19 @@ pub fn annotate(minefield: &[&str]) -> Vec<String> {
             match token {
                 '*' => annotated_row.push('*'),
                 ' ' => {
-                    let num = num_neighbor_mines(&field, y as u32, x as u32);
-                    if num == 0 {
-                        annotated_row.push(' ')
+                    let neighbor_mines = num_neighbor_mines(&field, y as u32, x as u32);
+                    let annotated_location = if neighbor_mines == 0 {
+                        " ".to_string()
                     } else {
-                        annotated_row.push_str(&num.to_string())
-                    }
+                        neighbor_mines.to_string()
+                    };
+                    annotated_row.push_str(&annotated_location)
                 }
                 _ => panic!("unsupported token"),
             }
         }
         annotated.push(annotated_row)
     }
-
-    println!("{:?}", field);
 
     annotated
 }
@@ -35,16 +34,11 @@ fn split(minefield: &[&str]) -> Vec<Vec<char>> {
     field
 }
 
-fn num_neighbor_mines(field: &Vec<Vec<char>>, y: u32, x: u32) -> u8 {
-    let neighbors = get_neighbors(field, y, x);
-    let mut result = 0;
-
-    for neighbor in neighbors {
-        if neighbor == '*' {
-            result += 1
-        }
-    }
-    result
+fn num_neighbor_mines(field: &Vec<Vec<char>>, y: u32, x: u32) -> usize {
+    return get_neighbors(field, y, x)
+        .iter()
+        .filter(|neighbor| neighbor == &&'*')
+        .count();
 }
 
 fn get_neighbors(field: &Vec<Vec<char>>, y: u32, x: u32) -> Vec<char> {
