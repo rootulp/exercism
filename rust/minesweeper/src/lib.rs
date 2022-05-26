@@ -1,5 +1,5 @@
 pub fn annotate(minefield: &[&str]) -> Vec<String> {
-    let mut annotated: Vec<Vec<char>> = Vec::new();
+    let mut annotated: Vec<String> = Vec::new();
     let mut field: Vec<Vec<char>> = Vec::new();
 
     for row in minefield {
@@ -7,7 +7,7 @@ pub fn annotate(minefield: &[&str]) -> Vec<String> {
     }
 
     for (y, row) in field.iter().enumerate() {
-        let mut annotated_row = Vec::new();
+        let mut annotated_row = String::new();
         for (x, token) in row.iter().enumerate() {
             match token {
                 '*' => annotated_row.push('*'),
@@ -16,7 +16,7 @@ pub fn annotate(minefield: &[&str]) -> Vec<String> {
                     if num == 0 {
                         annotated_row.push(' ')
                     } else {
-                        annotated_row.push(std::char::from_u32(num).expect("invalid num"))
+                        annotated_row.push_str(&num.to_string())
                     }
                 }
                 _ => panic!("unsupported token"),
@@ -27,10 +27,11 @@ pub fn annotate(minefield: &[&str]) -> Vec<String> {
 
     println!("{:?}", field);
 
-    annotated.iter().map(|row| row.iter().collect()).collect()
+    // annotated.iter().map(|row| row.iter().collect()).collect()
+    annotated
 }
 
-fn num_neighbor_mines(field: &Vec<Vec<char>>, y: u32, x: u32) -> u32 {
+fn num_neighbor_mines(field: &Vec<Vec<char>>, y: u32, x: u32) -> u8 {
     let neighbors = get_neighbors(field, y, x);
     let mut result = 0;
 
@@ -60,7 +61,8 @@ fn get_neighbors(field: &Vec<Vec<char>>, y: u32, x: u32) -> Vec<char> {
             if x + delta_x < 0 || x + delta_x >= field[0].len() as i32 {
                 continue;
             }
-            let neighbor = field[(y + delta_y) as usize][(x + delta_y) as usize];
+            println!("{} {}", y + delta_y, x + delta_x);
+            let neighbor = field[(y + delta_y) as usize][(x + delta_x) as usize];
             neighbors.push(neighbor)
         }
     }
