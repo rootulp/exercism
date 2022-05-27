@@ -85,10 +85,10 @@ impl Board {
                 if delta_y == 0 && delta_x == 0 {
                     continue;
                 }
-                if y + delta_y < 0 || y + delta_y >= self.field.len() as i32 {
+                if y + delta_y < 0 || y + delta_y >= self.num_rows() as i32 {
                     continue;
                 }
-                if x + delta_x < 0 || x + delta_x >= self.field[0].len() as i32 {
+                if x + delta_x < 0 || x + delta_x >= self.num_cols() as i32 {
                     continue;
                 }
                 let neighbor = &self.field[(y + delta_y) as usize][(x + delta_x) as usize];
@@ -97,6 +97,14 @@ impl Board {
         }
 
         neighbors
+    }
+
+    fn num_rows(&self) -> usize {
+        return self.field.len();
+    }
+
+    fn num_cols(&self) -> usize {
+        return self.field[0].len();
     }
 }
 
