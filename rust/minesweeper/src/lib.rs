@@ -1,6 +1,25 @@
+enum Token {
+    Mine,
+    Empty,
+}
+
+impl Token {
+    fn from(c: char) -> Result<Token, ()> {
+        match c {
+            '*' => Ok(Token::Mine),
+            ' ' => Ok(Token::Empty),
+            _ => Err(()),
+        }
+    }
+}
+
 struct Board {
     field: Vec<Vec<char>>,
 }
+
+// Board tokens
+const MINE: char = '*';
+const EMPTY: char = ' ';
 
 impl Board {
     fn new(minefield: &[&str]) -> Self {
@@ -19,8 +38,8 @@ impl Board {
             let mut annotated_row = String::new();
             for (x, token) in row.iter().enumerate() {
                 match token {
-                    '*' => annotated_row.push('*'),
-                    ' ' => {
+                    &MINE => annotated_row.push(MINE),
+                    &EMPTY => {
                         let neighbor_mines = self.num_neighbor_mines(y as u32, x as u32);
                         let annotated_location = if neighbor_mines == 0 {
                             " ".to_string()
@@ -42,7 +61,7 @@ impl Board {
         return self
             .get_neighbors(y, x)
             .iter()
-            .filter(|neighbor| neighbor == &&&'*')
+            .filter(|neighbor| neighbor == &&&MINE)
             .count();
     }
 
