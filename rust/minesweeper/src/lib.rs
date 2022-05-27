@@ -35,12 +35,12 @@ impl Board {
     }
 
     fn annotate(&self) -> Vec<String> {
-        let mut annotated: Vec<String> = Vec::new();
-
-        for (y, _) in self.field.iter().enumerate() {
-            annotated.push(self.annotate_row(y));
-        }
-
+        let annotated: Vec<String> = self
+            .field
+            .iter()
+            .enumerate()
+            .map(|(row, _)| self.annotate_row(row))
+            .collect();
         annotated
     }
 
