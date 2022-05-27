@@ -45,23 +45,23 @@ impl Board {
     }
 
     fn annotate_row(&self, y: usize) -> String {
-        let mut annotated_row = String::new();
-
         let row = &self.field[y];
-        for (x, token) in row.iter().enumerate() {
-            match token {
-                Token::Mine => annotated_row.push(Token::Mine.into()),
+        let annotated_row = row
+            .iter()
+            .enumerate()
+            .map(|(x, token)| match token {
+                Token::Mine => Token::Mine.into(),
                 Token::Empty => {
                     let neighbor_mines = self.num_neighbor_mines(y as u32, x as u32);
-                    let annotated_location = if neighbor_mines == 0 {
-                        " ".to_string()
+                    if neighbor_mines == 0 {
+                        return ' ';
                     } else {
-                        neighbor_mines.to_string()
+                        return (b'0' + neighbor_mines as u8) as char;
                     };
-                    annotated_row.push_str(&annotated_location)
                 }
-            }
-        }
+            })
+            .collect();
+
         annotated_row
     }
 
