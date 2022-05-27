@@ -48,11 +48,11 @@ impl Board {
         return row
             .iter()
             .enumerate()
-            .map(|(x, _)| self.annotate_token(y, x))
+            .map(|(x, _)| self.annotate_location(y, x))
             .collect();
     }
 
-    fn annotate_token(&self, y: usize, x: usize) -> char {
+    fn annotate_location(&self, y: usize, x: usize) -> char {
         let token = self.field[y][x];
         match token {
             Token::Mine => Token::Mine.into(),
