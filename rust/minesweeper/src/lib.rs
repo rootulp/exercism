@@ -35,34 +35,36 @@ impl Board {
     }
 
     fn annotate(&self) -> Vec<String> {
-        let annotated: Vec<String> = self
+        return self
             .field
             .iter()
             .enumerate()
             .map(|(row, _)| self.annotate_row(row))
             .collect();
-        annotated
     }
 
     fn annotate_row(&self, y: usize) -> String {
         let row = &self.field[y];
-        let annotated_row = row
+        return row
             .iter()
             .enumerate()
-            .map(|(x, token)| match token {
-                Token::Mine => Token::Mine.into(),
-                Token::Empty => {
-                    let neighbor_mines = self.num_neighbor_mines(y as u32, x as u32);
-                    if neighbor_mines == 0 {
-                        return ' ';
-                    } else {
-                        return (b'0' + neighbor_mines as u8) as char;
-                    };
-                }
-            })
+            .map(|(x, _)| self.annotate_token(y, x))
             .collect();
+    }
 
-        annotated_row
+    fn annotate_token(&self, y: usize, x: usize) -> char {
+        let token = self.field[y][x];
+        match token {
+            Token::Mine => Token::Mine.into(),
+            Token::Empty => {
+                let neighbor_mines = self.num_neighbor_mines(y as u32, x as u32);
+                if neighbor_mines == 0 {
+                    return ' ';
+                } else {
+                    return (b'0' + neighbor_mines as u8) as char;
+                };
+            }
+        }
     }
 
     fn num_neighbor_mines(&self, y: u32, x: u32) -> usize {
