@@ -27,16 +27,10 @@ struct Board {
 
 impl Board {
     fn new(minefield: &[&str]) -> Self {
-        let mut field: Vec<Vec<Token>> = Vec::new();
-
-        for row in minefield {
-            let mut field_row: Vec<Token> = Vec::new();
-            for char in row.chars() {
-                let token = Token::from(char).unwrap();
-                field_row.push(token);
-            }
-            field.push(field_row);
-        }
+        let field = minefield
+            .iter()
+            .map(|row| row.chars().map(|char| Token::from(char).unwrap()).collect())
+            .collect();
         Board { field }
     }
 
