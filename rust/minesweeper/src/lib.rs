@@ -34,29 +34,35 @@ impl Board {
         Board { field }
     }
 
-    fn annotated(&self) -> Vec<String> {
+    fn annotate(&self) -> Vec<String> {
         let mut annotated: Vec<String> = Vec::new();
 
-        for (y, row) in self.field.iter().enumerate() {
-            let mut annotated_row = String::new();
-            for (x, token) in row.iter().enumerate() {
-                match token {
-                    Token::Mine => annotated_row.push(Token::Mine.into()),
-                    Token::Empty => {
-                        let neighbor_mines = self.num_neighbor_mines(y as u32, x as u32);
-                        let annotated_location = if neighbor_mines == 0 {
-                            " ".to_string()
-                        } else {
-                            neighbor_mines.to_string()
-                        };
-                        annotated_row.push_str(&annotated_location)
-                    }
-                }
-            }
-            annotated.push(annotated_row)
+        for (y, _) in self.field.iter().enumerate() {
+            annotated.push(self.annotate_row(y));
         }
 
         annotated
+    }
+
+    fn annotate_row(&self, y: usize) -> String {
+        let mut annotated_row = String::new();
+
+        let row = &self.field[y];
+        for (x, token) in row.iter().enumerate() {
+            match token {
+                Token::Mine => annotated_row.push(Token::Mine.into()),
+                Token::Empty => {
+                    let neighbor_mines = self.num_neighbor_mines(y as u32, x as u32);
+                    let annotated_location = if neighbor_mines == 0 {
+                        " ".to_string()
+                    } else {
+                        neighbor_mines.to_string()
+                    };
+                    annotated_row.push_str(&annotated_location)
+                }
+            }
+        }
+        annotated_row
     }
 
     fn num_neighbor_mines(&self, y: u32, x: u32) -> usize {
@@ -104,5 +110,5 @@ impl Board {
 
 pub fn annotate(minefield: &[&str]) -> Vec<String> {
     let board = Board::new(minefield);
-    return board.annotated();
+    return board.annotate();
 }
