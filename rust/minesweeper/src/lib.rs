@@ -1,6 +1,14 @@
+#[derive(Clone, Copy, PartialEq)]
+#[repr(u8)]
 enum Token {
-    Mine,
-    Empty,
+    Mine = b'*',
+    Empty = b' ',
+}
+
+impl Into<char> for Token {
+    fn into(self) -> char {
+        self as u8 as char
+    }
 }
 
 impl Token {
@@ -14,19 +22,20 @@ impl Token {
 }
 
 struct Board {
-    field: Vec<Vec<char>>,
+    field: Vec<Vec<Token>>,
 }
-
-// Board tokens
-const MINE: char = '*';
-const EMPTY: char = ' ';
 
 impl Board {
     fn new(minefield: &[&str]) -> Self {
-        let mut field: Vec<Vec<char>> = Vec::new();
+        let mut field: Vec<Vec<Token>> = Vec::new();
 
         for row in minefield {
-            field.push(row.chars().collect());
+            let mut field_row: Vec<Token> = Vec::new();
+            for char in row.chars() {
+                let token = Token::from(char).unwrap();
+                field_row.push(token);
+            }
+            field.push(field_row);
         }
         Board { field }
     }
@@ -38,8 +47,8 @@ impl Board {
             let mut annotated_row = String::new();
             for (x, token) in row.iter().enumerate() {
                 match token {
-                    &MINE => annotated_row.push(MINE),
-                    &EMPTY => {
+                    Token::Mine => annotated_row.push(Token::Mine.into()),
+                    Token::Empty => {
                         let neighbor_mines = self.num_neighbor_mines(y as u32, x as u32);
                         let annotated_location = if neighbor_mines == 0 {
                             " ".to_string()
@@ -48,7 +57,6 @@ impl Board {
                         };
                         annotated_row.push_str(&annotated_location)
                     }
-                    _ => panic!("unsupported token"),
                 }
             }
             annotated.push(annotated_row)
@@ -61,11 +69,11 @@ impl Board {
         return self
             .get_neighbors(y, x)
             .iter()
-            .filter(|neighbor| neighbor == &&&MINE)
+            .filter(|neighbor| neighbor == &&&Token::Mine)
             .count();
     }
 
-    fn get_neighbors(&self, y: u32, x: u32) -> Vec<&char> {
+    fn get_neighbors(&self, y: u32, x: u32) -> Vec<&Token> {
         let mut neighbors = Vec::new();
         let y = y as i32;
         let x = x as i32;
