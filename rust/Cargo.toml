@@ -11,6 +11,7 @@ members = [
   "leap",
   "low-power-embedded-game",
   "lucians-luscious-lasagna",
+  "luhn",
   "magazine-cutout",
   "minesweeper",
   "resistor-color",
