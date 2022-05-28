@@ -1,6 +1,8 @@
+use regex::Regex;
+
 /// Check a Luhn checksum.
-pub fn is_valid(code: &str) -> bool {
-    let luhn = Luhn::new(code);
+pub fn is_valid(input: &str) -> bool {
+    let luhn = Luhn::new(input);
 
     match luhn {
         Ok(l) => l.is_valid(),
@@ -9,17 +11,23 @@ pub fn is_valid(code: &str) -> bool {
 }
 
 struct Luhn {
-    code: String,
+    number: String,
 }
 
 impl Luhn {
-    pub fn new(code: &str) -> Result<Self, &'static str> {
-        if code.len() == 1 {
-            return Err("Invalid code");
+    pub fn new(input: &str) -> Result<Self, &'static str> {
+        let number = input.replace(" ", "");
+
+        if number.len() == 1 {
+            return Err("Invalid input");
         }
-        Ok(Luhn {
-            code: code.to_string(),
-        })
+
+        let only_digits = Regex::new(r"^\d+$").unwrap();
+        if !only_digits.is_match(number.as_str()) {
+            return Err("Invalid input");
+        }
+
+        Ok(Luhn { number })
     }
 
     pub fn is_valid(&self) -> bool {

@@ -51,25 +51,21 @@ fn test_valid_number_with_an_even_number_of_digits() {
 }
 
 #[test]
-#[ignore]
 fn strings_that_contain_non_digits_are_invalid() {
     process_valid_case("055a 444 285", false);
 }
 
 #[test]
-#[ignore]
 fn test_valid_strings_with_punctuation_included_become_invalid() {
     process_valid_case("055-444-285", false);
 }
 
 #[test]
-#[ignore]
 fn symbols_are_invalid() {
     process_valid_case("055£ 444$ 285", false);
 }
 
 #[test]
-#[ignore]
 fn test_single_zero_with_space_is_invalid() {
     process_valid_case(" 0", false);
 }
@@ -87,7 +83,6 @@ fn test_input_digit_9_is_correctly_converted_to_output_digit_9() {
 }
 
 #[test]
-#[ignore]
 /// using ASCII value for doubled non-digit isn't allowed
 /// Convert non-digits to their ASCII values and then offset them by 48 sometimes accidentally declare an invalid string to be valid.
 /// This test is designed to avoid that solution.
@@ -96,21 +91,18 @@ fn test_using_ascii_value_for_doubled_nondigit_isnt_allowed() {
 }
 
 #[test]
-#[ignore]
 /// valid strings with a non-digit added at the end become invalid
 fn test_valid_strings_with_a_nondigit_added_at_the_end_become_invalid() {
     process_valid_case("059a", false);
 }
 
 #[test]
-#[ignore]
 /// valid strings with symbols included become invalid
 fn test_valid_strings_with_symbols_included_become_invalid() {
     process_valid_case("055# 444$ 285", false);
 }
 
 #[test]
-#[ignore]
 /// using ASCII value for non-doubled non-digit isn't allowed
 /// Convert non-digits to their ASCII values and then offset them by 48 sometimes accidentally declare an invalid string to be valid.
 /// This test is designed to avoid that solution.
@@ -126,14 +118,12 @@ fn test_valid_number_with_an_odd_number_of_spaces() {
 }
 
 #[test]
-#[ignore]
 /// non-numeric, non-space char in the middle with a sum that's divisible by 10 isn't allowed
 fn test_invalid_char_in_middle_with_sum_divisible_by_10_isnt_allowed() {
     process_valid_case("59%59", false);
 }
 
 #[test]
-#[ignore]
 /// unicode numeric characters are not allowed in a otherwise valid number
 fn test_valid_strings_with_numeric_unicode_characters_become_invalid() {
     process_valid_case("1249①", false);
