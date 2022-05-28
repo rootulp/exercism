@@ -31,6 +31,27 @@ impl Luhn {
     }
 
     pub fn is_valid(&self) -> bool {
-        unimplemented!()
+        let check_sum = self.check_sum();
+        println!("number: {}, check_sum: {}", self.number, check_sum);
+        return self.check_sum() % 10 == 0;
+    }
+
+    fn check_sum(&self) -> u32 {
+        let mut sum = 0;
+        let digits = self.number.chars().rev();
+
+        digits.enumerate().into_iter().for_each(|(i, digit)| {
+            let mut digit = digit.to_digit(10).unwrap();
+            if i % 2 == 1 {
+                digit = if digit * 2 > 9 {
+                    digit * 2 - 9
+                } else {
+                    digit * 2
+                };
+            }
+            sum += digit;
+        });
+
+        sum
     }
 }
