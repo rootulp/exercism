@@ -2,6 +2,3 @@
 edition = "2021"
 name = "luhn"
 version = "1.6.1"
-
-[dependencies]
-regex = "1.0.0"

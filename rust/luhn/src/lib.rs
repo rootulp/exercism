@@ -1,5 +1,3 @@
-use regex::Regex;
-
 /// Check a Luhn checksum.
 pub fn is_valid(input: &str) -> bool {
     let luhn = Luhn::new(input);
@@ -17,13 +15,11 @@ struct Luhn {
 impl Luhn {
     pub fn new(input: &str) -> Result<Self, &'static str> {
         let number = input.replace(" ", "");
-
-        if number.len() == 1 {
+        let only_contains_digits = number.chars().all(|c| c.is_ascii_digit());
+        if !only_contains_digits {
             return Err("Invalid input");
         }
-
-        let only_digits = Regex::new(r"^\d+$").unwrap();
-        if !only_digits.is_match(number.as_str()) {
+        if number.len() == 1 {
             return Err("Invalid input");
         }
 
