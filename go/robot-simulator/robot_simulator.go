@@ -83,20 +83,80 @@ func (d Dir) String() string {
 // Step 2
 type Command byte // valid values are 'R', 'L', 'A'
 type RU int
-type Pos struct{ Easting, Northing RU }
+type Pos struct{ X, Y RU }
 type Rect struct{ Min, Max Pos }
+type Action uint
 type Step2Robot struct {
 	Dir
 	Pos
 }
-type Action struct{}
 
-func StartRobot(command chan Command, action chan Action) {
-	panic("Please implement the StartRobot function")
+func (s *Step2Robot) Initialize(X, Y RU) {
+	log.Printf("Initializing robot at %d,%d facing %s", s.Pos.X, s.Pos.Y, s.Dir)
+	s.Pos.X = X
+	s.Pos.Y = Y
 }
 
-func Room(extent Rect, robot Step2Robot, action chan Action, report chan Step2Robot) {
-	panic("Please implement the Room function")
+func (s *Step2Robot) RotateRight() {
+	switch s.Dir {
+	case N:
+		s.Dir = E
+	case E:
+		s.Dir = S
+	case S:
+		s.Dir = W
+	case W:
+		s.Dir = N
+	default:
+		log.Fatalf("unrecognized direction %d", s.Dir)
+	}
+}
+
+func (s *Step2Robot) RotateLeft() {
+	switch s.Dir {
+	case N:
+		s.Dir = W
+	case E:
+		s.Dir = N
+	case S:
+		s.Dir = E
+	case W:
+		s.Dir = S
+	default:
+		log.Fatalf("unrecognized direction %d", s.Dir)
+	}
+}
+
+func StartRobot(commands chan Command, actions chan Action) {
+	for cmd := range commands {
+		actions <- Action(cmd)
+	}
+	close(actions)
+}
+
+func Room(extent Rect, robot Step2Robot, actions chan Action, report chan Step2Robot) {
+	for action := range actions {
+		switch action {
+		case 'R':
+			robot.RotateRight()
+		case 'L':
+			robot.RotateLeft()
+		case 'A':
+			if robot.Dir == N && robot.Pos.Y < extent.Max.Y {
+				robot.Pos.Y++
+			} else if robot.Dir == E && robot.Pos.X < extent.Max.X {
+				robot.Pos.X++
+			} else if robot.Dir == S && robot.Pos.Y > extent.Min.Y {
+				robot.Pos.Y--
+			} else if robot.Dir == W && robot.Pos.X > extent.Min.X {
+				robot.Pos.X--
+			}
+		default:
+			log.Fatalf("unrecognized action %d", action)
+		}
+	}
+	report <- robot
+	close(report)
 }
 
 // Step 3
