@@ -5,16 +5,20 @@ import (
 	"log"
 )
 
-// See defs.go for other definitions
-
 // Step 1
-// Define Dir type here.
+type Dir int
 
-// Define N, E, S, W here.
 const N Dir = 0
 const E Dir = 1
 const S Dir = 2
 const W Dir = 3
+
+var Step1Robot struct {
+	X, Y int
+	Dir
+}
+
+var _ fmt.Stringer = Dir(1729)
 
 func Right() {
 	switch Step1Robot.Dir {
@@ -77,7 +81,14 @@ func (d Dir) String() string {
 }
 
 // Step 2
-// Define Action type here.
+type Command byte // valid values are 'R', 'L', 'A'
+type RU int
+type Pos struct{ Easting, Northing RU }
+type Rect struct{ Min, Max Pos }
+type Step2Robot struct {
+	Dir
+	Pos
+}
 type Action struct{}
 
 func StartRobot(command chan Command, action chan Action) {
@@ -89,7 +100,10 @@ func Room(extent Rect, robot Step2Robot, action chan Action, report chan Step2Ro
 }
 
 // Step 3
-// Define Action3 type here.
+type Step3Robot struct {
+	Name string
+	Step2Robot
+}
 type Action3 struct{}
 
 func StartRobot3(name, script string, action chan Action3, log chan string) {
