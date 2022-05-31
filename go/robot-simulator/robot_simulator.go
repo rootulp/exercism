@@ -127,14 +127,14 @@ func (s *Step2Robot) RotateLeft() {
 	}
 }
 
-func StartRobot(commands chan Command, actions chan Action) {
-	for cmd := range commands {
-		actions <- Action(cmd)
+func StartRobot(commands <-chan Command, actions chan<- Action) {
+	for command := range commands {
+		actions <- Action(command)
 	}
 	close(actions)
 }
 
-func Room(extent Rect, robot Step2Robot, actions chan Action, report chan Step2Robot) {
+func Room(extent Rect, robot Step2Robot, actions <-chan Action, report chan<- Step2Robot) {
 	for action := range actions {
 		switch action {
 		case 'R':
@@ -164,12 +164,125 @@ type Step3Robot struct {
 	Name string
 	Step2Robot
 }
-type Action3 struct{}
-
-func StartRobot3(name, script string, action chan Action3, log chan string) {
-	panic("Please implement the StartRobot3 function")
+type Action3 struct {
+	name   string
+	script string
 }
 
-func Room3(extent Rect, robots []Step3Robot, action chan Action3, rep chan []Step3Robot, log chan string) {
-	panic("Please implement the Room3 function")
+func isCommand(cmd rune) bool {
+	return cmd == 'A' || cmd == 'R' || cmd == 'L'
+}
+
+func StartRobot3(name, script string, actions chan<- Action3, logs chan<- string) {
+	for _, command := range script {
+		if !isCommand(command) {
+			logs <- "invalid script"
+			actions <- Action3{name: name, script: ""}
+			return
+		}
+	}
+	actions <- Action3{name, script}
+}
+
+func Room3(extent Rect, robots []Step3Robot, actions chan Action3, rep chan []Step3Robot, log chan string) {
+	for index, robot := range robots {
+		if robot.Name == "" {
+			log <- "robot has no name"
+		}
+		if robot.Y < extent.Min.Y || robot.Y > extent.Max.Y || robot.X < extent.Min.X || robot.X > extent.Max.X {
+			log <- "robot placed outside room"
+		}
+		for i := index + 1; i < len(robots); i++ {
+			if robot.Name == robots[i].Name {
+				log <- fmt.Sprintf("duplicate name: %s", robot.Name)
+			}
+			if robot.Pos == robots[i].Pos {
+				log <- "robots placed in same position"
+			}
+		}
+	}
+
+	var action Action3
+	for range robots {
+		action = <-actions
+		isRobot := false
+		for robotIndex, robot := range robots {
+			if robot.Name == action.name {
+				isRobot = true
+				for _, command := range action.script {
+					if command == 'R' {
+						robot.Dir = (robot.Dir + 1) % 4
+					} else if command == 'L' {
+						robot.Dir = (robot.Dir + 3) % 4
+					} else if command == 'A' {
+						if IsBlockedByRobot(robot.Pos, robot.Dir, robots) {
+							log <- "running into robot"
+							continue
+						}
+						var moved bool
+						robot, moved = HitWallOrMove(robot, extent)
+						if !moved {
+							log <- "running into wall"
+						}
+					}
+					robots[robotIndex] = robot
+				}
+			}
+		}
+		if !isRobot {
+			log <- fmt.Sprintf("no robot with name %s exists", action.name)
+		}
+	}
+	rep <- robots
+	close(rep)
+}
+
+func IsBlockedByRobot(position Pos, direction Dir, robots []Step3Robot) bool {
+	newPos := position
+	switch direction {
+	case N:
+		newPos.Y++
+	case E:
+		newPos.X++
+	case S:
+		newPos.Y--
+	case W:
+		newPos.X--
+	}
+	for _, robot := range robots {
+		if robot.Pos == newPos {
+			return true
+		}
+	}
+	return false
+}
+
+func HitWallOrMove(robot Step3Robot, extent Rect) (Step3Robot, bool) {
+	switch robot.Dir {
+	case N:
+		if robot.Pos.Y >= extent.Max.Y {
+			return robot, false
+		} else {
+			robot.Pos.Y++
+		}
+	case E:
+		if robot.Pos.X >= extent.Max.X {
+			return robot, false
+		} else {
+			robot.Pos.X++
+		}
+	case S:
+		if robot.Pos.Y <= extent.Min.Y {
+			return robot, false
+		} else {
+			robot.Pos.Y--
+		}
+	case W:
+		if robot.Pos.X <= extent.Min.X {
+			return robot, false
+		} else {
+			robot.Pos.X--
+		}
+	}
+	return robot, true
 }
