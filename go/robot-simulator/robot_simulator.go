@@ -6,17 +6,10 @@ import (
 )
 
 // Step 1
-type Dir int
-
 const N Dir = 0
 const E Dir = 1
 const S Dir = 2
 const W Dir = 3
-
-var Step1Robot struct {
-	X, Y int
-	Dir
-}
 
 var _ fmt.Stringer = Dir(1729)
 
@@ -81,20 +74,12 @@ func (d Dir) String() string {
 }
 
 // Step 2
-type Command byte // valid values are 'R', 'L', 'A'
-type RU int
-type Pos struct{ X, Y RU }
-type Rect struct{ Min, Max Pos }
 type Action uint
-type Step2Robot struct {
-	Dir
-	Pos
-}
 
 func (s *Step2Robot) Initialize(X, Y RU) {
-	log.Printf("Initializing robot at %d,%d facing %s", s.Pos.X, s.Pos.Y, s.Dir)
-	s.Pos.X = X
-	s.Pos.Y = Y
+	log.Printf("Initializing robot at %d,%d facing %s", s.Pos.Easting, s.Pos.Northing, s.Dir)
+	s.Pos.Easting = X
+	s.Pos.Northing = Y
 }
 
 func (s *Step2Robot) RotateRight() {
@@ -142,14 +127,14 @@ func Room(extent Rect, robot Step2Robot, actions <-chan Action, report chan<- St
 		case 'L':
 			robot.RotateLeft()
 		case 'A':
-			if robot.Dir == N && robot.Pos.Y < extent.Max.Y {
-				robot.Pos.Y++
-			} else if robot.Dir == E && robot.Pos.X < extent.Max.X {
-				robot.Pos.X++
-			} else if robot.Dir == S && robot.Pos.Y > extent.Min.Y {
-				robot.Pos.Y--
-			} else if robot.Dir == W && robot.Pos.X > extent.Min.X {
-				robot.Pos.X--
+			if robot.Dir == N && robot.Pos.Northing < extent.Max.Northing {
+				robot.Pos.Northing++
+			} else if robot.Dir == E && robot.Pos.Easting < extent.Max.Easting {
+				robot.Pos.Easting++
+			} else if robot.Dir == S && robot.Pos.Northing > extent.Min.Northing {
+				robot.Pos.Northing--
+			} else if robot.Dir == W && robot.Pos.Easting > extent.Min.Easting {
+				robot.Pos.Easting--
 			}
 		default:
 			log.Fatalf("unrecognized action %d", action)
@@ -160,10 +145,6 @@ func Room(extent Rect, robot Step2Robot, actions <-chan Action, report chan<- St
 }
 
 // Step 3
-type Step3Robot struct {
-	Name string
-	Step2Robot
-}
 type Action3 struct {
 	name   string
 	script string
@@ -189,7 +170,7 @@ func Room3(extent Rect, robots []Step3Robot, actions chan Action3, rep chan []St
 		if robot.Name == "" {
 			log <- "robot has no name"
 		}
-		if robot.Y < extent.Min.Y || robot.Y > extent.Max.Y || robot.X < extent.Min.X || robot.X > extent.Max.X {
+		if robot.Northing < extent.Min.Northing || robot.Northing > extent.Max.Northing || robot.Easting < extent.Min.Easting || robot.Easting > extent.Max.Easting {
 			log <- "robot placed outside room"
 		}
 		for i := index + 1; i < len(robots); i++ {
@@ -241,13 +222,13 @@ func IsBlockedByRobot(position Pos, direction Dir, robots []Step3Robot) bool {
 	newPos := position
 	switch direction {
 	case N:
-		newPos.Y++
+		newPos.Northing++
 	case E:
-		newPos.X++
+		newPos.Easting++
 	case S:
-		newPos.Y--
+		newPos.Northing--
 	case W:
-		newPos.X--
+		newPos.Easting--
 	}
 	for _, robot := range robots {
 		if robot.Pos == newPos {
@@ -260,28 +241,28 @@ func IsBlockedByRobot(position Pos, direction Dir, robots []Step3Robot) bool {
 func HitWallOrMove(robot Step3Robot, extent Rect) (Step3Robot, bool) {
 	switch robot.Dir {
 	case N:
-		if robot.Pos.Y >= extent.Max.Y {
+		if robot.Pos.Northing >= extent.Max.Northing {
 			return robot, false
 		} else {
-			robot.Pos.Y++
+			robot.Pos.Northing++
 		}
 	case E:
-		if robot.Pos.X >= extent.Max.X {
+		if robot.Pos.Easting >= extent.Max.Easting {
 			return robot, false
 		} else {
-			robot.Pos.X++
+			robot.Pos.Easting++
 		}
 	case S:
-		if robot.Pos.Y <= extent.Min.Y {
+		if robot.Pos.Northing <= extent.Min.Northing {
 			return robot, false
 		} else {
-			robot.Pos.Y--
+			robot.Pos.Northing--
 		}
 	case W:
-		if robot.Pos.X <= extent.Min.X {
+		if robot.Pos.Easting <= extent.Min.Easting {
 			return robot, false
 		} else {
-			robot.Pos.X--
+			robot.Pos.Easting--
 		}
 	}
 	return robot, true
