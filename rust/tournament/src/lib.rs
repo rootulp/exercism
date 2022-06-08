@@ -17,6 +17,7 @@ struct MatchResult {
     result: Outcome,
 }
 
+#[derive(Debug, Eq, Ord, PartialEq)]
 struct Team {
     name: String,
     matches_won: u32,
@@ -55,6 +56,16 @@ impl fmt::Display for Team {
             self.matches_lost,
             self.points()
         )
+    }
+}
+
+impl PartialOrd for Team {
+    fn partial_cmp(&self, other: &Team) -> Option<std::cmp::Ordering> {
+        if self.points() != other.points() {
+            Some(other.points().cmp(&self.points()))
+        } else {
+            Some(self.name.cmp(&other.name))
+        }
     }
 }
 
@@ -129,9 +140,10 @@ impl Tournament {
         }
     }
 
-    fn results_table(&self) -> String {
+    fn results_table(&mut self) -> String {
         let mut results: Vec<String> = vec![self.header()];
 
+        self.teams.sort();
         for team in self.teams.iter() {
             results.push(team.to_string());
         }
@@ -145,6 +157,6 @@ impl Tournament {
 }
 
 pub fn tally(match_results: &str) -> String {
-    let tournament = Tournament::new(match_results);
+    let mut tournament = Tournament::new(match_results);
     tournament.results_table()
 }
