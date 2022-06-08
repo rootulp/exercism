@@ -7,7 +7,6 @@ fn just_the_header_if_no_input() {
 }
 
 #[test]
-#[ignore]
 fn a_win_is_three_points_a_loss_is_zero_points() {
     let input = "Allegoric Alaskans;Blithering Badgers;win";
     let expected = "".to_string()
