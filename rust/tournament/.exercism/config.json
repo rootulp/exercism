@@ -1,0 +1,41 @@
+{
+  "blurb": "Tally the results of a small football competition.",
+  "authors": [
+    "EduardoBautista"
+  ],
+  "contributors": [
+    "andrewclarkson",
+    "ashleygwilliams",
+    "ClashTheBunny",
+    "coriolinus",
+    "cwhakes",
+    "EduardoBautista",
+    "efx",
+    "ErikSchierboom",
+    "etrepum",
+    "IanWhitney",
+    "kytrinyx",
+    "lutostag",
+    "mkantor",
+    "navossoc",
+    "nfiles",
+    "petertseng",
+    "rofrol",
+    "samcday",
+    "stringparser",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/tournament.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  }
+}

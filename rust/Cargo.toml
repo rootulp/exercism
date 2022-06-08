@@ -22,4 +22,5 @@ members = [
   "short-fibonacci",
   "space-age",
   "sublist",
+  "tournament",
 ]
