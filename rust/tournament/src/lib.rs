@@ -61,7 +61,8 @@ impl fmt::Display for Team {
 
 impl PartialOrd for Team {
     fn partial_cmp(&self, other: &Team) -> Option<std::cmp::Ordering> {
-        if self.points() != other.points() {
+        // Sort by points descending then alphabetically
+        if other.points() != self.points() {
             Some(other.points().cmp(&self.points()))
         } else {
             Some(self.name.cmp(&other.name))

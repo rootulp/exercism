@@ -29,7 +29,6 @@ fn a_win_can_also_be_expressed_as_a_loss() {
 }
 
 #[test]
-#[ignore]
 fn a_different_team_can_win() {
     let input = "Blithering Badgers;Allegoric Alaskans;win";
     let expected = "".to_string()
@@ -41,7 +40,6 @@ fn a_different_team_can_win() {
 }
 
 #[test]
-#[ignore]
 fn there_can_be_more_than_one_match() {
     let input = "Allegoric Alaskans;Blithering Badgers;win\n".to_string()
         + "Allegoric Alaskans;Blithering Badgers;win";
@@ -54,7 +52,6 @@ fn there_can_be_more_than_one_match() {
 }
 
 #[test]
-#[ignore]
 fn a_draw_is_one_point_each() {
     let input = "Allegoric Alaskans;Blithering Badgers;draw\n".to_string()
         + "Allegoric Alaskans;Blithering Badgers;win";
@@ -67,7 +64,6 @@ fn a_draw_is_one_point_each() {
 }
 
 #[test]
-#[ignore]
 fn there_can_be_more_than_one_winner() {
     let input = "Allegoric Alaskans;Blithering Badgers;loss\n".to_string()
         + "Allegoric Alaskans;Blithering Badgers;win";
@@ -80,7 +76,6 @@ fn there_can_be_more_than_one_winner() {
 }
 
 #[test]
-#[ignore]
 fn there_can_be_more_than_two_teams() {
     let input = "Allegoric Alaskans;Blithering Badgers;win\n".to_string()
         + "Blithering Badgers;Courageous Californians;win\n"
@@ -95,7 +90,6 @@ fn there_can_be_more_than_two_teams() {
 }
 
 #[test]
-#[ignore]
 fn typical_input() {
     let input = "Allegoric Alaskans;Blithering Badgers;win\n".to_string()
         + "Devastating Donkeys;Courageous Californians;draw\n"
@@ -114,7 +108,6 @@ fn typical_input() {
 }
 
 #[test]
-#[ignore]
 fn incomplete_competition_not_all_pairs_have_played() {
     let input = "Allegoric Alaskans;Blithering Badgers;loss\n".to_string()
         + "Devastating Donkeys;Allegoric Alaskans;loss\n"
@@ -131,7 +124,6 @@ fn incomplete_competition_not_all_pairs_have_played() {
 }
 
 #[test]
-#[ignore]
 fn ties_broken_alphabetically() {
     let input = "Courageous Californians;Devastating Donkeys;win\n".to_string()
         + "Allegoric Alaskans;Blithering Badgers;win\n"
