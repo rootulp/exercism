@@ -1,0 +1,50 @@
+{
+  "blurb": "Given a year, report if it is a leap year.",
+  "authors": [
+    "EduardoBautista"
+  ],
+  "contributors": [
+    "andrewclarkson",
+    "andy5995",
+    "ashleygwilliams",
+    "ClashTheBunny",
+    "coriolinus",
+    "cwhakes",
+    "darnuria",
+    "EduardoBautista",
+    "efx",
+    "Emerentius",
+    "ErikSchierboom",
+    "hunger",
+    "IanWhitney",
+    "JIghtuse",
+    "jonasbn",
+    "kytrinyx",
+    "leoyvens",
+    "lutostag",
+    "mkantor",
+    "navossoc",
+    "nfiles",
+    "petertseng",
+    "pminten",
+    "rofrol",
+    "sshine",
+    "stringparser",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/leap.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "source": "JavaRanch Cattle Drive, exercise 3",
+  "source_url": "http://www.javaranch.com/leap.jsp"
+}
