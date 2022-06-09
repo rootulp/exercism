@@ -6,13 +6,13 @@ pub struct Clock {
 
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
-        return Clock {
+        Clock {
             minutes: (hours * 60) + minutes,
-        };
+        }
     }
 
     pub fn add_minutes(&self, minutes: i32) -> Self {
-        return Clock::new(0, self.minutes + minutes);
+        Clock::new(0, self.minutes + minutes)
     }
 }
 
@@ -47,10 +47,6 @@ impl fmt::Debug for Clock {
 }
 
 impl PartialEq for Clock {
-    fn ne(&self, other: &Self) -> bool {
-        return format!("{}", self) == format!("{}", other);
-    }
-
     fn eq(&self, other: &Self) -> bool {
         return format!("{}", self) == format!("{}", other);
     }

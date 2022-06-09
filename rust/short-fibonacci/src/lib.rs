@@ -1,6 +1,6 @@
 /// Create an empty vector
 pub fn create_empty() -> Vec<u8> {
-    return Vec::new();
+    Vec::new()
 }
 
 /// Create a buffer of `count` zeroes.
@@ -12,7 +12,7 @@ pub fn create_buffer(count: usize) -> Vec<u8> {
         buffer.push(0)
     }
     println!("buffer {:?}", buffer);
-    return buffer;
+    buffer
 }
 
 /// Create a vector containing the first five elements of the Fibonacci sequence.
@@ -29,5 +29,5 @@ pub fn fibonacci() -> Vec<u8> {
             result.push(result.last().unwrap() + second_to_last);
         }
     }
-    return result;
+    result
 }

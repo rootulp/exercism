@@ -16,12 +16,11 @@ fn is_anagram(word: &str, possible: &str) -> bool {
         return false;
     }
 
-    return sorted_lowercase_chars(word) == sorted_lowercase_chars(possible);
+    sorted_lowercase_chars(word) == sorted_lowercase_chars(possible)
 }
 
 fn sorted_lowercase_chars(word: &str) -> Vec<char> {
     let mut word_chars = word.to_lowercase().chars().collect::<Vec<char>>();
     word_chars.sort_unstable();
-
-    return word_chars;
+    word_chars
 }

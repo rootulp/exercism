@@ -55,7 +55,7 @@ impl Allergies {
         ];
         for candidate in allergens {
             if score / candidate.value() == 1 {
-                score = score % candidate.value();
+                score %= candidate.value();
                 allergies.push(candidate);
             }
         }

@@ -17,7 +17,7 @@ pub enum ResistorColor {
 }
 
 pub fn color_to_value(_color: ResistorColor) -> usize {
-    return _color.int_value();
+    _color.int_value()
 }
 
 pub fn value_to_color_string(value: usize) -> String {
@@ -41,5 +41,5 @@ pub fn colors() -> Vec<ResistorColor> {
     for color in ResistorColor::into_enum_iter() {
         result.push(color)
     }
-    return result;
+    result
 }

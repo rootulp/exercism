@@ -16,11 +16,11 @@ pub fn sublist<T: PartialEq>(a: &[T], b: &[T]) -> Comparison {
     if is_sublist(b, a) {
         return Comparison::Superlist;
     }
-    return Comparison::Unequal;
+    Comparison::Unequal
 }
 
 fn is_sublist<T: PartialEq>(a: &[T], b: &[T]) -> bool {
-    if a.len() == 0 {
+    if a.is_empty() {
         return true;
     }
     for list in b.windows(a.len()) {
@@ -28,5 +28,5 @@ fn is_sublist<T: PartialEq>(a: &[T], b: &[T]) -> bool {
             return true;
         }
     }
-    return false;
+    false
 }

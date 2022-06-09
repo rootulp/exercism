@@ -17,7 +17,7 @@ struct MatchResult {
     result: Outcome,
 }
 
-#[derive(Debug, Eq, Ord, PartialEq)]
+#[derive(Debug, Eq, PartialEq)]
 struct Team {
     name: String,
     matches_won: u32,
@@ -59,6 +59,17 @@ impl fmt::Display for Team {
     }
 }
 
+impl Ord for Team {
+    fn cmp(&self, other: &Team) -> std::cmp::Ordering {
+        // Sort by points descending then alphabetically
+        if other.points() != self.points() {
+            other.points().cmp(&self.points())
+        } else {
+            self.name.cmp(&other.name)
+        }
+    }
+}
+
 impl PartialOrd for Team {
     fn partial_cmp(&self, other: &Team) -> Option<std::cmp::Ordering> {
         // Sort by points descending then alphabetically
@@ -84,7 +95,7 @@ impl Tournament {
         tournament
     }
 
-    fn tally(&mut self, match_result: MatchResult) -> () {
+    fn tally(&mut self, match_result: MatchResult) {
         self.init_team(match_result.team_a.as_str());
         self.init_team(match_result.team_b.as_str());
 
@@ -95,8 +106,8 @@ impl Tournament {
         }
     }
 
-    fn init_team(&mut self, team_name: &str) -> () {
-        if self.teams.iter().find(|t| t.name == team_name).is_none() {
+    fn init_team(&mut self, team_name: &str) {
+        if !self.teams.iter().any(|t| t.name == team_name) {
             self.teams.push(Team::new(team_name.to_string()));
         }
     }
@@ -105,7 +116,7 @@ impl Tournament {
         self.teams.iter_mut().find(|t| t.name == team_name).unwrap()
     }
 
-    fn win(&mut self, team_a: String, team_b: String) -> () {
+    fn win(&mut self, team_a: String, team_b: String) {
         let mut team_a = self.find_team(team_a);
         team_a.matches_won += 1;
 
@@ -113,7 +124,7 @@ impl Tournament {
         team_b.matches_lost += 1;
     }
 
-    fn draw(&mut self, team_a: String, team_b: String) -> () {
+    fn draw(&mut self, team_a: String, team_b: String) {
         let mut team_a = self.find_team(team_a);
         team_a.matches_drawn += 1;
 

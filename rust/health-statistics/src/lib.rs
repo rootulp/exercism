@@ -6,19 +6,19 @@ pub struct User {
 
 impl User {
     pub fn new(name: String, age: u32, weight: f32) -> Self {
-        return User { name, age, weight };
+        User { name, age, weight }
     }
 
     pub fn name(&self) -> &str {
-        return &self.name;
+        &self.name
     }
 
     pub fn age(&self) -> u32 {
-        return self.age;
+        self.age
     }
 
     pub fn weight(&self) -> f32 {
-        return self.weight;
+        self.weight
     }
 
     pub fn set_age(&mut self, new_age: u32) {

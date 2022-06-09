@@ -5,9 +5,9 @@ enum Token {
     Empty = b' ',
 }
 
-impl Into<char> for Token {
-    fn into(self) -> char {
-        self as u8 as char
+impl From<Token> for char {
+    fn from(t: Token) -> Self {
+        t as u8 as char
     }
 }
 
@@ -59,10 +59,10 @@ impl Board {
             Token::Empty => {
                 let neighbor_mines = self.num_neighbor_mines(y as u32, x as u32);
                 if neighbor_mines == 0 {
-                    return ' ';
+                    ' '
                 } else {
-                    return (b'0' + neighbor_mines as u8) as char;
-                };
+                    (b'0' + neighbor_mines as u8) as char
+                }
             }
         }
     }
@@ -102,15 +102,15 @@ impl Board {
     }
 
     fn num_rows(&self) -> usize {
-        return self.field.len();
+        self.field.len()
     }
 
     fn num_cols(&self) -> usize {
-        return self.field[0].len();
+        self.field[0].len()
     }
 }
 
 pub fn annotate(minefield: &[&str]) -> Vec<String> {
     let board = Board::new(minefield);
-    return board.annotate();
+    board.annotate()
 }

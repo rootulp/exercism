@@ -14,7 +14,7 @@ struct Luhn {
 
 impl Luhn {
     pub fn new(input: &str) -> Result<Self, &'static str> {
-        let number = input.replace(" ", "");
+        let number = input.replace(' ', "");
         let only_contains_digits = number.chars().all(|c| c.is_ascii_digit());
         if !only_contains_digits {
             return Err("Invalid input");
@@ -29,7 +29,7 @@ impl Luhn {
     pub fn is_valid(&self) -> bool {
         let check_sum = self.check_sum();
         println!("number: {}, check_sum: {}", self.number, check_sum);
-        return self.check_sum() % 10 == 0;
+        self.check_sum() % 10 == 0
     }
 
     fn check_sum(&self) -> u32 {
