@@ -3,10 +3,20 @@ package beer
 import "fmt"
 
 func Song() string {
-	panic("Please implement the Song function")
+	result, err := Verses(99, 0)
+	if err != nil {
+		panic(err)
+	}
+	return result
 }
 
 func Verses(start, stop int) (output string, err error) {
+	if stop < 0 {
+		return "", fmt.Errorf("invalid: stop verse number %d can not be negative", stop)
+	}
+	if start < stop {
+		return "", fmt.Errorf("invalid: start %v less than stop %v", start, stop)
+	}
 	for i := start; i >= stop; i-- {
 		verse, err := Verse(i)
 		if err != nil {
