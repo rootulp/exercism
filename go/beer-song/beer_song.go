@@ -6,11 +6,22 @@ func Song() string {
 	panic("Please implement the Song function")
 }
 
-func Verses(start, stop int) (string, error) {
-	panic("Please implement the Verses function")
+func Verses(start, stop int) (output string, err error) {
+	for i := start; i >= stop; i-- {
+		verse, err := Verse(i)
+		if err != nil {
+			return "", err
+		}
+		output += verse
+		output += "\n"
+	}
+	return output, nil
 }
 
 func Verse(n int) (string, error) {
+	if n > 99 {
+		return "", fmt.Errorf("invalid verse number: %d", n)
+	}
 	switch n {
 	case 0:
 		return "No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n", nil
