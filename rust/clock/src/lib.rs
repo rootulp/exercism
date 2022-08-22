@@ -48,6 +48,6 @@ impl fmt::Debug for Clock {
 
 impl PartialEq for Clock {
     fn eq(&self, other: &Self) -> bool {
-        return format!("{}", self) == format!("{}", other);
+        format!("{}", self) == format!("{}", other)
     }
 }
