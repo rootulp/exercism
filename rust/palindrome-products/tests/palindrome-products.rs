@@ -30,7 +30,6 @@ fn test_palindrome_new_return_some() {
 }
 
 #[test]
-#[ignore]
 /// test `Palindrome::new` with invalid input
 fn test_palindrome_new_return_none() {
     for v in [12, 2322, 23443, 1233211, 8932343] {
