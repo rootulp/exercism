@@ -11,8 +11,8 @@ pub fn evens<T>(iter: impl Iterator<Item = T>) -> impl Iterator<Item = T> {
 pub struct Position(pub i16, pub i16);
 impl Position {
     pub fn manhattan(&self) -> i16 {
-        let delta_x = (&self.0).abs();
-        let delta_y = (&self.1).abs();
+        let delta_x = (self.0).abs();
+        let delta_y = (self.1).abs();
         delta_x + delta_y
     }
 }
