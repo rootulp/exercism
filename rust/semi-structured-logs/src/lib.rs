@@ -1,5 +1,5 @@
 /// various log levels
-#[derive(Clone, PartialEq, Debug)]
+#[derive(Clone, PartialEq, Eq, Debug)]
 pub enum LogLevel {
     Info,
     Warning,
@@ -10,7 +10,7 @@ pub enum LogLevel {
 /// primary function for emitting logs
 pub fn log(level: LogLevel, message: &str) -> String {
     let label = label(level);
-    return format!("[{label}]: {message}");
+    format!("[{label}]: {message}")
 }
 pub fn info(message: &str) -> String {
     log(LogLevel::Info, message)
