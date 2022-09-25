@@ -2,7 +2,7 @@ use enum_iterator::IntoEnumIterator;
 use int_enum::IntEnum;
 
 #[repr(usize)]
-#[derive(Clone, Copy, Debug, IntoEnumIterator, IntEnum, PartialEq)]
+#[derive(Clone, Copy, Debug, IntoEnumIterator, IntEnum, PartialEq, Eq)]
 pub enum ResistorColor {
     Black = 0,
     Brown = 1,
