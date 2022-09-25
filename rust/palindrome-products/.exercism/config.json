@@ -1,0 +1,37 @@
+{
+  "blurb": "Detect palindrome products in a given range.",
+  "authors": [
+    "Menkir"
+  ],
+  "contributors": [
+    "coriolinus",
+    "cwhakes",
+    "DmitrySamoylov",
+    "efx",
+    "ErikSchierboom",
+    "FelixGibson",
+    "lutostag",
+    "petertseng",
+    "rofrol",
+    "stringparser",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/palindrome-products.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "source": "Problem 4 at Project Euler",
+  "source_url": "http://projecteuler.net/problem=4",
+  "custom": {
+    "test-in-release-mode": true
+  }
+}
