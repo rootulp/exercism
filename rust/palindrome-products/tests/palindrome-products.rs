@@ -38,14 +38,12 @@ fn test_palindrome_new_return_none() {
 }
 
 #[test]
-#[ignore]
 /// finds the smallest palindrome from single digit factors
 fn test_finds_the_smallest_palindrome_from_single_digit_factors() {
     process_smallest_case((1, 9), Some(1));
 }
 
 #[test]
-#[ignore]
 /// finds the largest palindrome from single digit factors
 fn test_finds_the_largest_palindrome_from_single_digit_factors() {
     process_largest_case((1, 9), Some(9));
@@ -59,14 +57,12 @@ fn test_find_the_smallest_palindrome_from_double_digit_factors() {
 }
 
 #[test]
-#[ignore]
 /// find the largest palindrome from double digit factors
 fn test_find_the_largest_palindrome_from_double_digit_factors() {
     process_largest_case((10, 99), Some(9009));
 }
 
 #[test]
-#[ignore]
 /// find smallest palindrome from triple digit factors
 fn test_find_smallest_palindrome_from_triple_digit_factors() {
     process_smallest_case((100, 999), Some(10201));

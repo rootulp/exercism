@@ -57,8 +57,17 @@ impl Palindrome {
 }
 
 pub fn palindrome_products(min: u64, max: u64) -> Option<(Palindrome, Palindrome)> {
-    unimplemented!(
-        "returns the minimum and maximum number of palindromes of the products of two factors in the range {} to {}",
-        min, max
-    );
+    let mut products = vec![];
+    for a in min..=max {
+        for b in min..=max {
+            let product = a * b;
+            if let Some(palindrome) = Palindrome::new(product) {
+                products.push(palindrome);
+            }
+        }
+    }
+    if products.is_empty() {
+        return None;
+    }
+    Some((products[0], products[products.len() - 1]))
 }
