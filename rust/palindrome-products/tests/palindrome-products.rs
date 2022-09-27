@@ -50,7 +50,6 @@ fn test_finds_the_largest_palindrome_from_single_digit_factors() {
 }
 
 #[test]
-#[ignore]
 /// find the smallest palindrome from double digit factors
 fn test_find_the_smallest_palindrome_from_double_digit_factors() {
     process_smallest_case((10, 99), Some(121));
@@ -69,14 +68,12 @@ fn test_find_smallest_palindrome_from_triple_digit_factors() {
 }
 
 #[test]
-#[ignore]
 /// find the largest palindrome from triple digit factors
 fn test_find_the_largest_palindrome_from_triple_digit_factors() {
     process_largest_case((100, 999), Some(906609));
 }
 
 #[test]
-#[ignore]
 /// find smallest palindrome from four digit factors
 fn test_find_smallest_palindrome_from_four_digit_factors() {
     process_smallest_case((1000, 9999), Some(1002001));

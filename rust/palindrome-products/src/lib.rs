@@ -2,7 +2,7 @@
 ///
 /// A struct with a single field which is used to constrain behavior like this is called a "newtype", and its use is
 /// often referred to as the "newtype pattern". This is a fairly common pattern in Rust.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Palindrome(u64);
 
 impl Palindrome {
@@ -57,17 +57,36 @@ impl Palindrome {
 }
 
 pub fn palindrome_products(min: u64, max: u64) -> Option<(Palindrome, Palindrome)> {
-    let mut products = vec![];
+    let min_palindrome = min_palindrome_product(min, max);
+    let max_palindrome = max_palindrome_product(min, max);
+    if let Some(min_palindrome) = &min_palindrome {
+        if let Some(max_palindrome) = &max_palindrome {
+            return Some((*min_palindrome, *max_palindrome));
+        }
+    }
+    None
+}
+
+pub fn min_palindrome_product(min: u64, max: u64) -> Option<Palindrome> {
     for a in min..=max {
         for b in min..=max {
             let product = a * b;
             if let Some(palindrome) = Palindrome::new(product) {
-                products.push(palindrome);
+                return Some(palindrome);
             }
         }
     }
-    if products.is_empty() {
-        return None;
+    None
+}
+
+pub fn max_palindrome_product(min: u64, max: u64) -> Option<Palindrome> {
+    for a in (min..=max).rev() {
+        for b in (min..=max).rev() {
+            let product = a * b;
+            if let Some(palindrome) = Palindrome::new(product) {
+                return Some(palindrome);
+            }
+        }
     }
-    Some((products[0], products[products.len() - 1]))
+    None
 }
