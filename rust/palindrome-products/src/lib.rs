@@ -8,7 +8,7 @@ pub struct Palindrome(u64);
 impl Palindrome {
     /// Create a `Palindrome` only if `value` is in fact a palindrome when represented in base ten. Otherwise, `None`.
     pub fn new(value: u64) -> Option<Palindrome> {
-        let digits = Palindrome::num_digits(value);
+        let digits = Palindrome::digits(value);
         if Self::is_palindrome(&digits) {
             Some(Palindrome(value))
         } else {
@@ -16,7 +16,7 @@ impl Palindrome {
         }
     }
 
-    fn num_digits(num: u64) -> Vec<u64> {
+    fn digits(num: u64) -> Vec<u64> {
         /*
          * Zero is a special case because
          * it is the terminating value of the unfold below,
@@ -57,35 +57,21 @@ impl Palindrome {
 }
 
 pub fn palindrome_products(min: u64, max: u64) -> Option<(Palindrome, Palindrome)> {
-    let min_palindrome = min_palindrome_product(min, max);
-    let max_palindrome = max_palindrome_product(min, max);
-    if let Some(min_palindrome) = &min_palindrome {
-        if let Some(max_palindrome) = &max_palindrome {
-            return Some((*min_palindrome, *max_palindrome));
-        }
-    }
-    None
-}
-
-pub fn min_palindrome_product(min: u64, max: u64) -> Option<Palindrome> {
+    let mut products: Vec<Palindrome> = vec![];
     for a in min..=max {
         for b in min..=max {
             let product = a * b;
             if let Some(palindrome) = Palindrome::new(product) {
-                return Some(palindrome);
+                products.push(palindrome);
             }
         }
     }
-    None
-}
 
-pub fn max_palindrome_product(min: u64, max: u64) -> Option<Palindrome> {
-    for a in (min..=max).rev() {
-        for b in (min..=max).rev() {
-            let product = a * b;
-            if let Some(palindrome) = Palindrome::new(product) {
-                return Some(palindrome);
-            }
+    let min_palindrome = products.iter().min();
+    let max_palindrome = products.iter().max();
+    if let Some(min_palindrome) = &min_palindrome {
+        if let Some(max_palindrome) = &max_palindrome {
+            return Some((**min_palindrome, **max_palindrome));
         }
     }
     None
