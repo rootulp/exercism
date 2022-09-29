@@ -6,7 +6,6 @@ fn test_valid_dna_input() {
 }
 
 #[test]
-#[ignore]
 fn test_valid_rna_input() {
     assert!(dna::Rna::new("CGAU").is_ok());
 }
