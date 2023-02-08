@@ -66,7 +66,6 @@ SetUpAnalytics(stats)
 // works because Stats implements Counter
 ```
 
-
 Because interfaces are implemented implicitly, a type can easily implement multiple interfaces.
 It only needs to have all the necessary methods defined.
 
