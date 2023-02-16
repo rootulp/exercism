@@ -2,12 +2,14 @@ package paasio
 
 import (
 	"io"
+	"sync"
 )
 
 type readCounter struct {
 	reader         io.Reader
 	totalBytesRead int
 	numReads       int
+	mutex          *sync.RWMutex
 }
 
 // type writeCounter struct {
@@ -26,6 +28,7 @@ type readCounter struct {
 func NewReadCounter(reader io.Reader) ReadCounter {
 	return &readCounter{
 		reader: reader,
+		mutex:  new(sync.RWMutex),
 	}
 }
 
@@ -37,6 +40,8 @@ func NewReadCounter(reader io.Reader) ReadCounter {
 // }
 
 func (rc *readCounter) Read(p []byte) (int, error) {
+	rc.mutex.Lock()
+	defer rc.mutex.Unlock()
 	bytesRead, err := rc.reader.Read(p)
 	if err != nil {
 		return 0, err

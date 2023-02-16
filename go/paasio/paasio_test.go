@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"crypto/rand"
 	"io"
+	"sync"
 	"testing"
+	"time"
 )
 
 // func TestMultiThreaded(t *testing.T) {
@@ -104,39 +106,39 @@ func TestReadReader(t *testing.T) {
 // 	})
 // }
 
-// func testReadTotal(t *testing.T, rc ReadCounter) {
-// 	numGo := 8000
-// 	numBytes := 50
-// 	totalBytes := int64(numGo) * int64(numBytes)
-// 	p := make([]byte, numBytes)
+func testReadTotal(t *testing.T, rc ReadCounter) {
+	numGo := 8000
+	numBytes := 50
+	totalBytes := int64(numGo) * int64(numBytes)
+	p := make([]byte, numBytes)
 
-// 	t.Logf("Calling Read() for %d*%d=%d bytes", numGo, numBytes, totalBytes)
-// 	wg := new(sync.WaitGroup)
-// 	wg.Add(numGo)
-// 	start := make(chan struct{})
-// 	for i := 0; i < numGo; i++ {
-// 		go func() {
-// 			<-start
-// 			rc.Read(p)
-// 			wg.Done()
-// 		}()
-// 	}
-// 	close(start)
+	t.Logf("Calling Read() for %d*%d=%d bytes", numGo, numBytes, totalBytes)
+	wg := new(sync.WaitGroup)
+	wg.Add(numGo)
+	start := make(chan struct{})
+	for i := 0; i < numGo; i++ {
+		go func() {
+			<-start
+			rc.Read(p)
+			wg.Done()
+		}()
+	}
+	close(start)
 
-// 	wg.Wait()
-// 	n, nops := rc.ReadCount()
-// 	if n != totalBytes {
-// 		t.Errorf("expected %d bytes read; %d bytes reported", totalBytes, n)
-// 	}
-// 	if nops != numGo {
-// 		t.Errorf("expected %d read operations; %d operations reported", numGo, nops)
-// 	}
-// }
+	wg.Wait()
+	n, nops := rc.ReadCount()
+	if n != totalBytes {
+		t.Errorf("expected %d bytes read; %d bytes reported", totalBytes, n)
+	}
+	if nops != numGo {
+		t.Errorf("expected %d read operations; %d operations reported", numGo, nops)
+	}
+}
 
-// func TestReadTotalReader(t *testing.T) {
-// 	var r nopReader
-// 	testReadTotal(t, NewReadCounter(r))
-// }
+func TestReadTotalReader(t *testing.T) {
+	var r nopReader
+	testReadTotal(t, NewReadCounter(r))
+}
 
 // func TestReadTotalReadWriter(t *testing.T) {
 // 	var rw nopReadWriter
@@ -268,15 +270,15 @@ func TestReadReader(t *testing.T) {
 // 	return len(p), nil
 // }
 
-// type nopReader struct{ error }
+type nopReader struct{ error }
 
-// func (r nopReader) Read(p []byte) (int, error) {
-// 	time.Sleep(time.Nanosecond)
-// 	if r.error != nil {
-// 		return 0, r.error
-// 	}
-// 	return len(p), nil
-// }
+func (r nopReader) Read(p []byte) (int, error) {
+	time.Sleep(time.Nanosecond)
+	if r.error != nil {
+		return 0, r.error
+	}
+	return len(p), nil
+}
 
 // type nopReadWriter struct {
 // 	nopReader
