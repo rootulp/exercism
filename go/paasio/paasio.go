@@ -54,6 +54,8 @@ func (rc *readCounter) Read(p []byte) (int, error) {
 }
 
 func (rc *readCounter) ReadCount() (int64, int) {
+	rc.mutex.Lock()
+	defer rc.mutex.Unlock()
 	return int64(rc.totalBytesRead), rc.numReads
 }
 
