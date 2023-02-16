@@ -38,6 +38,7 @@ func (rc *readCounter) Read(p []byte) (int, error) {
 func (rc *readCounter) ReadCount() (int64, int) {
 	rc.mutex.RLock()
 	defer rc.mutex.RUnlock()
+
 	return int64(rc.totalBytesRead), rc.numReads
 }
 
@@ -47,15 +48,20 @@ type writeCounter struct {
 	writer            io.Writer
 	totalBytesWritten int
 	numWrites         int
+	mutex             *sync.RWMutex
 }
 
 func NewWriteCounter(writer io.Writer) WriteCounter {
 	return &writeCounter{
 		writer: writer,
+		mutex:  new(sync.RWMutex),
 	}
 }
 
 func (wc *writeCounter) Write(p []byte) (int, error) {
+	wc.mutex.Lock()
+	defer wc.mutex.Unlock()
+
 	written, err := wc.writer.Write(p)
 	if err != nil {
 		return 0, err
@@ -68,7 +74,10 @@ func (wc *writeCounter) Write(p []byte) (int, error) {
 }
 
 func (wc *writeCounter) WriteCount() (int64, int) {
-	panic("Please implement the WriteCount function")
+	wc.mutex.RLock()
+	defer wc.mutex.RUnlock()
+
+	return int64(wc.totalBytesWritten), wc.numWrites
 }
 
 // === ReadWriteCounter ===

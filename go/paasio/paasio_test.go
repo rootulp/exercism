@@ -146,39 +146,39 @@ func TestReadTotalReader(t *testing.T) {
 // 	testReadTotal(t, NewReadWriteCounter(rw))
 // }
 
-// func testWriteTotal(t *testing.T, wt WriteCounter) {
-// 	numGo := 8000
-// 	numBytes := 50
-// 	totalBytes := int64(numGo) * int64(numBytes)
-// 	p := make([]byte, numBytes)
+func testWriteTotal(t *testing.T, wt WriteCounter) {
+	numGo := 8000
+	numBytes := 50
+	totalBytes := int64(numGo) * int64(numBytes)
+	p := make([]byte, numBytes)
 
-// 	t.Logf("Calling Write() with %d*%d=%d bytes", numGo, numBytes, totalBytes)
-// 	wg := new(sync.WaitGroup)
-// 	wg.Add(numGo)
-// 	start := make(chan struct{})
-// 	for i := 0; i < numGo; i++ {
-// 		go func() {
-// 			<-start
-// 			wt.Write(p)
-// 			wg.Done()
-// 		}()
-// 	}
-// 	close(start)
+	t.Logf("Calling Write() with %d*%d=%d bytes", numGo, numBytes, totalBytes)
+	wg := new(sync.WaitGroup)
+	wg.Add(numGo)
+	start := make(chan struct{})
+	for i := 0; i < numGo; i++ {
+		go func() {
+			<-start
+			wt.Write(p)
+			wg.Done()
+		}()
+	}
+	close(start)
 
-// 	wg.Wait()
-// 	n, nops := wt.WriteCount()
-// 	if n != totalBytes {
-// 		t.Errorf("expected %d bytes written; %d bytes reported", totalBytes, n)
-// 	}
-// 	if nops != numGo {
-// 		t.Errorf("expected %d write operations; %d operations reported", numGo, nops)
-// 	}
-// }
+	wg.Wait()
+	n, nops := wt.WriteCount()
+	if n != totalBytes {
+		t.Errorf("expected %d bytes written; %d bytes reported", totalBytes, n)
+	}
+	if nops != numGo {
+		t.Errorf("expected %d write operations; %d operations reported", numGo, nops)
+	}
+}
 
-// func TestWriteTotalWriter(t *testing.T) {
-// 	var w nopWriter
-// 	testWriteTotal(t, NewWriteCounter(w))
-// }
+func TestWriteTotalWriter(t *testing.T) {
+	var w nopWriter
+	testWriteTotal(t, NewWriteCounter(w))
+}
 
 // func TestWriteTotalReadWriter(t *testing.T) {
 // 	var rw nopReadWriter
@@ -261,15 +261,15 @@ func testReadCountConsistency(t *testing.T, rc ReadCounter) {
 // 	wg.Wait()
 // }
 
-// type nopWriter struct{ error }
+type nopWriter struct{ error }
 
-// func (w nopWriter) Write(p []byte) (int, error) {
-// 	time.Sleep(time.Nanosecond)
-// 	if w.error != nil {
-// 		return 0, w.error
-// 	}
-// 	return len(p), nil
-// }
+func (w nopWriter) Write(p []byte) (int, error) {
+	time.Sleep(time.Nanosecond)
+	if w.error != nil {
+		return 0, w.error
+	}
+	return len(p), nil
+}
 
 type nopReader struct{ error }
 
