@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/rand"
 	"io"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -25,37 +26,37 @@ import (
 // }
 
 // this test could be improved to test that error conditions are preserved.
-// func testWrite(t *testing.T, writer func(io.Writer) WriteCounter) {
-// 	for i, test := range []struct {
-// 		writes []string
-// 	}{
-// 		{nil},
-// 		{[]string{""}},
-// 		{[]string{"I", " ", "never met ", "", "a gohper"}},
-// 	} {
-// 		var buf bytes.Buffer
-// 		buft := writer(&buf)
-// 		for _, s := range test.writes {
-// 			n, err := buft.Write([]byte(s))
-// 			if err != nil {
-// 				t.Errorf("test %d: Write(%q) unexpected error: %v", i, s, err)
-// 				continue
-// 			}
-// 			if n != len(s) {
-// 				t.Errorf("test %d: Write(%q) unexpected number of bytes written: %v", i, s, n)
-// 				continue
-// 			}
-// 		}
-// 		out := buf.String()
-// 		if out != strings.Join(test.writes, "") {
-// 			t.Errorf("test %d: unexpected content in underlying writer: %q", i, out)
-// 		}
-// 	}
-// }
+func testWrite(t *testing.T, writer func(io.Writer) WriteCounter) {
+	for i, test := range []struct {
+		writes []string
+	}{
+		{nil},
+		{[]string{""}},
+		{[]string{"I", " ", "never met ", "", "a gohper"}},
+	} {
+		var buf bytes.Buffer
+		buft := writer(&buf)
+		for _, s := range test.writes {
+			n, err := buft.Write([]byte(s))
+			if err != nil {
+				t.Errorf("test %d: Write(%q) unexpected error: %v", i, s, err)
+				continue
+			}
+			if n != len(s) {
+				t.Errorf("test %d: Write(%q) unexpected number of bytes written: %v", i, s, n)
+				continue
+			}
+		}
+		out := buf.String()
+		if out != strings.Join(test.writes, "") {
+			t.Errorf("test %d: unexpected content in underlying writer: %q", i, out)
+		}
+	}
+}
 
-// func TestWriteWriter(t *testing.T) {
-// 	testWrite(t, NewWriteCounter)
-// }
+func TestWriteWriter(t *testing.T) {
+	testWrite(t, NewWriteCounter)
+}
 
 // func TestWriteReadWriter(t *testing.T) {
 // 	testWrite(t, func(w io.Writer) WriteCounter {
