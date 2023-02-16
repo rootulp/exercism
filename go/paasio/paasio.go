@@ -5,21 +5,23 @@ import (
 )
 
 type readCounter struct {
-	reader io.Reader
+	reader         io.Reader
+	totalBytesRead int
+	numReads       int
 }
 
-type writeCounter struct {
-	writer io.Writer
-}
+// type writeCounter struct {
+// 	writer io.Writer
+// }
 
-type readWriteCounter struct {
-	ReadCounter
-	WriteCounter
-}
+// type readWriteCounter struct {
+// 	ReadCounter
+// 	WriteCounter
+// }
 
-func NewWriteCounter(writer io.Writer) WriteCounter {
-	panic("Please implement the NewWriterCounter function")
-}
+// func NewWriteCounter(writer io.Writer) WriteCounter {
+// 	panic("Please implement the NewWriterCounter function")
+// }
 
 func NewReadCounter(reader io.Reader) ReadCounter {
 	return &readCounter{
@@ -27,25 +29,33 @@ func NewReadCounter(reader io.Reader) ReadCounter {
 	}
 }
 
-func NewReadWriteCounter(readwriter io.ReadWriter) ReadWriteCounter {
-	return &readWriteCounter{
-		NewReadCounter(readwriter),
-		NewWriteCounter(readwriter),
-	}
-}
+// func NewReadWriteCounter(readwriter io.ReadWriter) ReadWriteCounter {
+// 	return &readWriteCounter{
+// 		NewReadCounter(readwriter),
+// 		NewWriteCounter(readwriter),
+// 	}
+// }
 
 func (rc *readCounter) Read(p []byte) (int, error) {
-	return rc.reader.Read(p)
+	bytesRead, err := rc.reader.Read(p)
+	if err != nil {
+		return 0, err
+	}
+
+	rc.totalBytesRead += bytesRead
+	rc.numReads++
+
+	return bytesRead, err
 }
 
 func (rc *readCounter) ReadCount() (int64, int) {
-	panic("Please implement the ReadCount function")
+	return int64(rc.totalBytesRead), rc.numReads
 }
 
-func (wc *writeCounter) Write(p []byte) (int, error) {
-	panic("Please implement the Write function")
-}
+// func (wc *writeCounter) Write(p []byte) (int, error) {
+// 	panic("Please implement the Write function")
+// }
 
-func (wc *writeCounter) WriteCount() (int64, int) {
-	panic("Please implement the WriteCount function")
-}
+// func (wc *writeCounter) WriteCount() (int64, int) {
+// 	panic("Please implement the WriteCount function")
+// }

@@ -42,4 +42,4 @@ statistics. The wrapper must report:
 
 ### Based on
 
-Brian Matsuo - https://github.com/bmatsuo
+Brian Matsuo - <https://github.com/bmatsuo>
