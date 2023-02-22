@@ -1,6 +1,17 @@
 package wordsearch
 
-import "fmt"
+import (
+	"fmt"
+)
+
+const NORTH = "NORTH"
+const EAST = "EAST"
+const SOUTH = "SOUTH"
+const WEST = "WEST"
+
+var DIRECTIONS = []string{NORTH, EAST, SOUTH, WEST}
+var NOT_FOUND_POINT = [2]int{-1, -1}
+var NOT_FOUND_LINE = [2][2]int{NOT_FOUND_POINT, NOT_FOUND_POINT}
 
 func Solve(words []string, puzzle []string) (result map[string][2][2]int, err error) {
 	grid := NewGrid(puzzle)
@@ -8,13 +19,13 @@ func Solve(words []string, puzzle []string) (result map[string][2][2]int, err er
 	result = make(map[string][2][2]int)
 	fmt.Printf("grid %v\n", grid)
 	for _, word := range words {
-		result[word] = grid.Search(word)
-	}
-	for k, v := range result {
-		if v == [2][2]int{{-1, -1}, {-1, -1}} {
-			err = fmt.Errorf("word %s not found", k)
+		loc, found := grid.Search(word)
+		result[word] = loc
+		if !found {
+			err = fmt.Errorf("word %s not found", word)
 		}
 	}
+
 	return result, err
 }
 
@@ -34,54 +45,69 @@ func (g Grid) String() string {
 	return fmt.Sprintf("%v", g.grid)
 }
 
-func (g Grid) Search(word string) (result [2][2]int) {
-	for i, row := range g.grid {
-		for j, v := range row {
-			if v == rune(word[0]) {
-				loc := dfs(g, i, j, word)
-				if loc != [2][2]int{{-1, -1}, {-1, -1}} {
-					return result
+func (g Grid) Search(word string) (result [2][2]int, found bool) {
+	for row_i, row := range g.grid {
+		for col_i := range row {
+			for _, direction := range DIRECTIONS {
+				if isMatch(g, word, row_i, col_i, direction) {
+					startLoc := [2]int{col_i, row_i}
+					endLoc := endLoc(startLoc, direction, word)
+					fmt.Printf("startLoc %v, endLoc %v, direction %v\n", startLoc, endLoc, direction)
+					return [2][2]int{startLoc, endLoc}, true
 				}
 			}
 		}
 	}
-	return [2][2]int{{-1, -1}, {-1, -1}}
+	return NOT_FOUND_LINE, false
 }
 
-func dfs(grid Grid, row int, col int, word string) (result [2][2]int) {
-	if len(word) == 0 {
-		fmt.Printf("found %v at %v %v", word, row, col)
-		return [2][2]int{{row, col}, {row, col}}
+func (g Grid) SafeGet(row int, col int) (rune, bool) {
+	if row < 0 || row >= len(g.grid) {
+		return ' ', false
 	}
-	if row < 0 || col < 0 || row >= len(grid.grid) || col >= len(grid.grid[0]) || grid.grid[row][col] != rune(word[0]) {
-		return [2][2]int{{-1, -1}, {-1, -1}}
+	if col < 0 || col >= len(g.grid[row]) {
+		return ' ', false
 	}
-	temp := grid.grid[row][col]
-	grid.grid[row][col] = ' '
-	result = dfs(grid, row+1, col, word[1:])
-	if result != [2][2]int{{-1, -1}, {-1, -1}} {
-		return result
-	}
-	result = dfs(grid, row-1, col, word[1:])
-	if result != [2][2]int{{-1, -1}, {-1, -1}} {
-		return result
-	}
-	result = dfs(grid, row, col+1, word[1:])
-	if result != [2][2]int{{-1, -1}, {-1, -1}} {
-		return result
-	}
-	result = dfs(grid, row, col-1, word[1:])
-	if result != [2][2]int{{-1, -1}, {-1, -1}} {
-		return result
-	}
-	grid.grid[row][col] = temp
-	return [2][2]int{{-1, -1}, {-1, -1}}
+	return g.grid[row][col], true
 }
 
-// type Point struct {
-// 	x, y int
-// }
+func isMatch(grid Grid, word string, row int, col int, direction string) bool {
+	gridWord := []rune{}
+	for i := 0; i < len(word); i++ {
+		switch direction {
+		case NORTH:
+			if char, ok := grid.SafeGet(row-i, col); ok {
+				gridWord = append(gridWord, char)
+			}
+		case EAST:
+			if char, ok := grid.SafeGet(row, col+i); ok {
+				gridWord = append(gridWord, char)
+			}
+		case SOUTH:
+			if char, ok := grid.SafeGet(row+i, col); ok {
+				gridWord = append(gridWord, char)
+			}
+		case WEST:
+			if char, ok := grid.SafeGet(row, col-i); ok {
+				gridWord = append(gridWord, char)
+			}
+		}
+	}
+	fmt.Printf("gridWord %v\n", string(gridWord))
+	return string(gridWord) == word
+}
 
-// func (p Point) ToSlice() [2]int {
-// 	return [2]int{p.x, p.y}
-// }
+func endLoc(startLoc [2]int, direction string, word string) (endLoc [2]int) {
+	switch direction {
+	case NORTH:
+		return [2]int{startLoc[0], startLoc[1] - (len(word) - 1)}
+	case EAST:
+		return [2]int{startLoc[0] + (len(word) - 1), startLoc[1]}
+	case SOUTH:
+		return [2]int{startLoc[0], startLoc[1] + (len(word) - 1)}
+	case WEST:
+		return [2]int{startLoc[0] - (len(word) - 1), startLoc[1]}
+	default:
+		panic(fmt.Sprintf("invalid direction %v", direction))
+	}
+}
