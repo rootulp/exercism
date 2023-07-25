@@ -17,7 +17,6 @@ func Solve(words []string, puzzle []string) (result map[string][2][2]int, err er
 	grid := NewGrid(puzzle)
 
 	result = make(map[string][2][2]int)
-	fmt.Printf("grid %v\n", grid)
 	for _, word := range words {
 		loc, found := grid.Search(word)
 		result[word] = loc
