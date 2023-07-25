@@ -8,14 +8,17 @@ const NORTH = "NORTH"
 const EAST = "EAST"
 const SOUTH = "SOUTH"
 const WEST = "WEST"
+const NORTH_EAST = "NORTH_EAST"
+const NORTH_WEST = "NORTH_WEST"
+const SOUTH_EAST = "SOUTH_EAST"
+const SOUTH_WEST = "SOUTH_WEST"
 
-var DIRECTIONS = []string{NORTH, EAST, SOUTH, WEST}
+var DIRECTIONS = []string{NORTH, EAST, SOUTH, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST}
 var NOT_FOUND_POINT = [2]int{-1, -1}
 var NOT_FOUND_LINE = [2][2]int{NOT_FOUND_POINT, NOT_FOUND_POINT}
 
 func Solve(words []string, puzzle []string) (result map[string][2][2]int, err error) {
 	grid := NewGrid(puzzle)
-
 	result = make(map[string][2][2]int)
 	for _, word := range words {
 		loc, found := grid.Search(word)
@@ -90,6 +93,22 @@ func isMatch(grid Grid, word string, row int, col int, direction string) bool {
 			if char, ok := grid.SafeGet(row, col-i); ok {
 				gridWord = append(gridWord, char)
 			}
+		case NORTH_EAST:
+			if char, ok := grid.SafeGet(row-i, col+i); ok {
+				gridWord = append(gridWord, char)
+			}
+		case NORTH_WEST:
+			if char, ok := grid.SafeGet(row-i, col-i); ok {
+				gridWord = append(gridWord, char)
+			}
+		case SOUTH_EAST:
+			if char, ok := grid.SafeGet(row+i, col+i); ok {
+				gridWord = append(gridWord, char)
+			}
+		case SOUTH_WEST:
+			if char, ok := grid.SafeGet(row+i, col-i); ok {
+				gridWord = append(gridWord, char)
+			}
 		}
 	}
 	fmt.Printf("gridWord %v\n", string(gridWord))
@@ -106,6 +125,14 @@ func endLoc(startLoc [2]int, direction string, word string) (endLoc [2]int) {
 		return [2]int{startLoc[0], startLoc[1] + (len(word) - 1)}
 	case WEST:
 		return [2]int{startLoc[0] - (len(word) - 1), startLoc[1]}
+	case NORTH_EAST:
+		return [2]int{startLoc[0] - (len(word) - 1), startLoc[1] + (len(word) - 1)}
+	case NORTH_WEST:
+		return [2]int{startLoc[0] - (len(word) - 1), startLoc[1] - (len(word) - 1)}
+	case SOUTH_EAST:
+		return [2]int{startLoc[0] + (len(word) - 1), startLoc[1] + (len(word) - 1)}
+	case SOUTH_WEST:
+		return [2]int{startLoc[0] + (len(word) - 1), startLoc[1] - (len(word) - 1)}
 	default:
 		panic(fmt.Sprintf("invalid direction %v", direction))
 	}

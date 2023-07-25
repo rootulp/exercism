@@ -117,13 +117,13 @@ var testCases = []struct {
 		expectError: false,
 		expected:    map[string][2][2]int{"clojure": {{0, 9}, {6, 9}}, "ecmascript": {{9, 0}, {9, 9}}, "elixir": {{5, 4}, {0, 4}}, "rust": {{8, 4}, {8, 1}}},
 	},
-	// {
-	// 	description: "Should locate words written top left to bottom right",
-	// 	puzzle:      []string{"jefblpepre", "camdcimgtc", "oivokprjsm", "pbwasqroua", "rixilelhrs", "wolcqlirpc", "screeaumgr", "alxhpburyi", "jalaycalmp", "clojurermt"},
-	// 	words:       []string{"clojure", "elixir", "ecmascript", "rust", "java"},
-	// 	expectError: false,
-	// 	expected:    map[string][2][2]int{"clojure": {{0, 9}, {6, 9}}, "ecmascript": {{9, 0}, {9, 9}}, "elixir": {{5, 4}, {0, 4}}, "java": {{0, 0}, {3, 3}}, "rust": {{8, 4}, {8, 1}}},
-	// },
+	{
+		description: "Should locate words written top left to bottom right",
+		puzzle:      []string{"jefblpepre", "camdcimgtc", "oivokprjsm", "pbwasqroua", "rixilelhrs", "wolcqlirpc", "screeaumgr", "alxhpburyi", "jalaycalmp", "clojurermt"},
+		words:       []string{"clojure", "elixir", "ecmascript", "rust", "java"},
+		expectError: false,
+		expected:    map[string][2][2]int{"clojure": {{0, 9}, {6, 9}}, "ecmascript": {{9, 0}, {9, 9}}, "elixir": {{5, 4}, {0, 4}}, "java": {{0, 0}, {3, 3}}, "rust": {{8, 4}, {8, 1}}},
+	},
 	// {
 	// 	description: "Should locate words written bottom right to top left",
 	// 	puzzle:      []string{"jefblpepre", "camdcimgtc", "oivokprjsm", "pbwasqroua", "rixilelhrs", "wolcqlirpc", "screeaumgr", "alxhpburyi", "jalaycalmp", "clojurermt"},
