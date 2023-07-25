@@ -52,10 +52,9 @@ func (g Grid) Search(word string) (result [2][2]int, found bool) {
 		for col_i := range row {
 			for _, direction := range DIRECTIONS {
 				if isMatch(g, word, row_i, col_i, direction) {
-					startLoc := [2]int{col_i, row_i}
-					endLoc := endLoc(startLoc, direction, word)
-					fmt.Printf("word %v startLoc %v, endLoc %v, direction %v\n", word, startLoc, endLoc, direction)
-					return [2][2]int{startLoc, endLoc}, true
+					startLocation := [2]int{col_i, row_i}
+					endLocation := endLocation(startLocation, direction, word)
+					return [2][2]int{startLocation, endLocation}, true
 				}
 			}
 		}
@@ -111,11 +110,10 @@ func isMatch(grid Grid, word string, row int, col int, direction string) bool {
 			}
 		}
 	}
-	fmt.Printf("gridWord %v\n", string(gridWord))
 	return string(gridWord) == word
 }
 
-func endLoc(startLoc [2]int, direction string, word string) (endLoc [2]int) {
+func endLocation(startLoc [2]int, direction string, word string) (endLoc [2]int) {
 	col, row := startLoc[0], startLoc[1]
 	delta := len(word) - 1
 	switch direction {
