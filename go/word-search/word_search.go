@@ -54,7 +54,7 @@ func (g Grid) Search(word string) (result [2][2]int, found bool) {
 				if isMatch(g, word, row_i, col_i, direction) {
 					startLoc := [2]int{col_i, row_i}
 					endLoc := endLoc(startLoc, direction, word)
-					fmt.Printf("startLoc %v, endLoc %v, direction %v\n", startLoc, endLoc, direction)
+					fmt.Printf("word %v startLoc %v, endLoc %v, direction %v\n", word, startLoc, endLoc, direction)
 					return [2][2]int{startLoc, endLoc}, true
 				}
 			}
@@ -116,23 +116,25 @@ func isMatch(grid Grid, word string, row int, col int, direction string) bool {
 }
 
 func endLoc(startLoc [2]int, direction string, word string) (endLoc [2]int) {
+	col, row := startLoc[0], startLoc[1]
+	delta := len(word) - 1
 	switch direction {
 	case NORTH:
-		return [2]int{startLoc[0], startLoc[1] - (len(word) - 1)}
+		return [2]int{col, row - delta}
 	case EAST:
-		return [2]int{startLoc[0] + (len(word) - 1), startLoc[1]}
+		return [2]int{col + delta, row}
 	case SOUTH:
-		return [2]int{startLoc[0], startLoc[1] + (len(word) - 1)}
+		return [2]int{col, row + delta}
 	case WEST:
-		return [2]int{startLoc[0] - (len(word) - 1), startLoc[1]}
+		return [2]int{col - delta, row}
 	case NORTH_EAST:
-		return [2]int{startLoc[0] - (len(word) - 1), startLoc[1] + (len(word) - 1)}
+		return [2]int{col + delta, row - delta}
 	case NORTH_WEST:
-		return [2]int{startLoc[0] - (len(word) - 1), startLoc[1] - (len(word) - 1)}
+		return [2]int{col - delta, row - delta}
 	case SOUTH_EAST:
-		return [2]int{startLoc[0] + (len(word) - 1), startLoc[1] + (len(word) - 1)}
+		return [2]int{col + delta, row + delta}
 	case SOUTH_WEST:
-		return [2]int{startLoc[0] + (len(word) - 1), startLoc[1] - (len(word) - 1)}
+		return [2]int{col - delta, row + delta}
 	default:
 		panic(fmt.Sprintf("invalid direction %v", direction))
 	}
