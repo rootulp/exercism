@@ -11,7 +11,6 @@ fn test_valid_rna_input() {
 }
 
 #[test]
-#[ignore]
 fn test_invalid_dna_input() {
     // Invalid character
     assert_eq!(dna::Dna::new("X").err(), Some(0));
@@ -22,7 +21,6 @@ fn test_invalid_dna_input() {
 }
 
 #[test]
-#[ignore]
 fn test_invalid_rna_input() {
     // Invalid character
     assert_eq!(dna::Rna::new("X").unwrap_err(), 0);
@@ -33,7 +31,6 @@ fn test_invalid_rna_input() {
 }
 
 #[test]
-#[ignore]
 fn test_acid_equals_acid() {
     assert_eq!(dna::Dna::new("CGA").unwrap(), dna::Dna::new("CGA").unwrap());
     assert_ne!(dna::Dna::new("CGA").unwrap(), dna::Dna::new("AGC").unwrap());
