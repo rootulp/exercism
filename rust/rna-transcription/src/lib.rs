@@ -25,14 +25,13 @@ impl<'a> Dna<'a> {
     pub fn into_rna(self) -> Rna<'a> {
         let complements = HashMap::from([('G', 'C'), ('C', 'G'), ('T', 'A'), ('A', 'U')]);
 
-        let mut rna_contents = String::new();
-        for (_, c) in self.contents.chars().enumerate() {
-            rna_contents.push(*complements.get(&c).unwrap());
+        let mut rna = self.contents.chars().collect::<Vec<_>>();
+        for (i, c) in self.contents.chars().enumerate() {
+            rna[i] = *complements.get(&c).unwrap();
         }
 
-        let rna = Rna::new(rna_contents.as_str()).expect("dna could not be converted to rna");
-        // can't return the following rna b/c Rust borrow checker
-        rna
+        let result: Rna<'_> = Rna::new(self.contents).expect("dna could not be converted to rna");
+        result
     }
 }
 
