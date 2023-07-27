@@ -3,6 +3,7 @@
 members = [
   "allergies",
   "anagram",
+  "armstrong-numbers",
   "assembly-line",
   "clock",
   "gigasecond",
