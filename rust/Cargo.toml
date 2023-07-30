@@ -6,6 +6,7 @@ members = [
   "armstrong-numbers",
   "assembly-line",
   "clock",
+  "difference-of-squares",
   "gigasecond",
   "health-statistics",
   "hello-world",
