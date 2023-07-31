@@ -8,6 +8,7 @@ members = [
   "clock",
   "difference-of-squares",
   "gigasecond",
+  "grains",
   "health-statistics",
   "hello-world",
   "leap",
