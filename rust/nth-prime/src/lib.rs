@@ -1,14 +1,19 @@
 pub fn nth(n: u32) -> u32 {
-    let n_usize: usize = n as usize;
+    let primes = get_primes(n as usize);
+    primes[n as usize]
+}
+
+// get_primes returns the first n prime numbers.
+fn get_primes(n: usize) -> Vec<u32> {
     let mut primes = Vec::new();
     let mut candidate = 2;
-    while primes.len() != n_usize + 1 {
+    while primes.len() <= n {
         if is_prime(candidate) {
             primes.push(candidate);
         }
         candidate += 1;
     }
-    primes[n_usize]
+    primes
 }
 
 fn is_prime(n: u32) -> bool {
