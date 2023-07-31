@@ -17,6 +17,7 @@ members = [
   "luhn",
   "magazine-cutout",
   "minesweeper",
+  "nth-prime",
   "palindrome-products",
   "resistor-color",
   "reverse-string",
