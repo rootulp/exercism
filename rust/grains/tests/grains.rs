@@ -64,7 +64,6 @@ fn test_square_greater_than_64_raises_an_exception() {
 }
 
 #[test]
-#[ignore]
 fn test_returns_the_total_number_of_grains_on_the_board() {
     assert_eq!(grains::total(), 18_446_744_073_709_551_615);
 }
