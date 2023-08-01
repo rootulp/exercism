@@ -5,6 +5,7 @@ members = [
   "anagram",
   "armstrong-numbers",
   "assembly-line",
+  "beer-song",
   "clock",
   "difference-of-squares",
   "gigasecond",
