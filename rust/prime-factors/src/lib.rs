@@ -5,7 +5,7 @@ pub fn factors(n: u64) -> Vec<u64> {
     let mut factors = vec![];
     let mut current = n;
     while !is_prime(current) {
-        for candidate in 2..=n {
+        for candidate in 2..current {
             if current % candidate == 0 {
                 factors.push(candidate);
                 current /= candidate;
