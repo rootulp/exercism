@@ -1,5 +1,5 @@
 pub fn square_of_sum(n: u32) -> u32 {
-    let sum: u32 = (1..=n).into_iter().sum();
+    let sum: u32 = (1..=n).sum();
     sum.pow(2)
 }
 

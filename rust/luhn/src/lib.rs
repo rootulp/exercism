@@ -36,7 +36,7 @@ impl Luhn {
         let mut sum = 0;
         let digits = self.number.chars().rev();
 
-        digits.enumerate().into_iter().for_each(|(i, digit)| {
+        digits.enumerate().for_each(|(i, digit)| {
             let mut digit = digit.to_digit(10).unwrap();
             if i % 2 == 1 {
                 digit = if digit * 2 > 9 {

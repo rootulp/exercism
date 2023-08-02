@@ -117,18 +117,18 @@ impl Tournament {
     }
 
     fn win(&mut self, team_a: String, team_b: String) {
-        let mut team_a = self.find_team(team_a);
+        let team_a = self.find_team(team_a);
         team_a.matches_won += 1;
 
-        let mut team_b = self.find_team(team_b);
+        let team_b = self.find_team(team_b);
         team_b.matches_lost += 1;
     }
 
     fn draw(&mut self, team_a: String, team_b: String) {
-        let mut team_a = self.find_team(team_a);
+        let team_a = self.find_team(team_a);
         team_a.matches_drawn += 1;
 
-        let mut team_b = self.find_team(team_b);
+        let team_b = self.find_team(team_b);
         team_b.matches_drawn += 1;
     }
 

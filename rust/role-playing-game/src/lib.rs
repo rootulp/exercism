@@ -17,7 +17,7 @@ impl Player {
     }
 
     pub fn cast_spell(&mut self, mana_cost: u32) -> u32 {
-        if self.mana == None {
+        if Option::is_none(&self.mana) {
             self.health = self.health.checked_sub(mana_cost).unwrap_or_default();
             0
         } else if self.mana.is_some() && self.mana.unwrap() < mana_cost {
