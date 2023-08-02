@@ -20,6 +20,7 @@ members = [
   "minesweeper",
   "nth-prime",
   "palindrome-products",
+  "prime-factors",
   "resistor-color",
   "reverse-string",
   "rna-transcription",
