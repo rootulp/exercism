@@ -21,6 +21,7 @@ members = [
   "nth-prime",
   "palindrome-products",
   "prime-factors",
+  "proverb",
   "resistor-color",
   "reverse-string",
   "rna-transcription",
