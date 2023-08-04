@@ -1,14 +1,16 @@
 pub fn raindrops(n: u32) -> String {
-    if is_factor(n, 3) {
-        return "Pling".to_string();
-    } else if is_factor(n, 5) {
-        return "Plang".to_string();
-    } else if is_factor(n, 7) {
-        return "Plong".to_string();
+    let mut words = String::new();
+    if n % 3 == 0 {
+        words.push_str("Pling")
     }
-    n.to_string()
-}
-
-fn is_factor(n: u32, factor: u32) -> bool {
-    n % factor == 0
+    if n % 5 == 0 {
+        words.push_str("Plang")
+    }
+    if n % 7 == 0 {
+        words.push_str("Plong")
+    }
+    if words.is_empty() {
+        return n.to_string();
+    }
+    words
 }
