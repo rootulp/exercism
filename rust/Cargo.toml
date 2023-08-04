@@ -22,6 +22,7 @@ members = [
   "palindrome-products",
   "prime-factors",
   "proverb",
+  "raindrops",
   "resistor-color",
   "reverse-string",
   "rna-transcription",
