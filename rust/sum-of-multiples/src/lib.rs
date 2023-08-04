@@ -13,5 +13,8 @@ pub fn sum_of_multiples(limit: u32, factors: &[u32]) -> u32 {
 }
 
 fn multiples(limit: u32, factor: u32) -> Vec<u32> {
+    if factor == 0 {
+        return vec![];
+    }
     (1..limit).filter(|x| x % factor == 0).collect()
 }
