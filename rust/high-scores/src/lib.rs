@@ -21,11 +21,10 @@ impl<'a> HighScores<'a> {
     }
 
     pub fn personal_top_three(&self) -> Vec<u32> {
-        let mut result = Vec::new();
-        self.scores.iter().for_each(|&x| result.push(x));
-        result.sort();
-        result.reverse();
-        result.truncate(3);
-        result
+        let mut x = self.scores.to_vec();
+        x.sort();
+        x.reverse();
+        x.truncate(3);
+        x
     }
 }
