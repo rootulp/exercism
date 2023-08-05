@@ -13,6 +13,7 @@ members = [
   "grains",
   "health-statistics",
   "hello-world",
+  "high-scores",
   "leap",
   "low-power-embedded-game",
   "lucians-luscious-lasagna",

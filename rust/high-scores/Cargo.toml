@@ -1,0 +1,6 @@
+[dependencies]
+
+[package]
+edition = "2021"
+name = "high-scores"
+version = "4.0.0"
