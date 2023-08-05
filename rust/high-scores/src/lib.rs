@@ -13,14 +13,19 @@ impl<'a> HighScores<'a> {
     }
 
     pub fn latest(&self) -> Option<u32> {
-        unimplemented!("Return the latest (last) score")
+        return self.scores.last().copied();
     }
 
     pub fn personal_best(&self) -> Option<u32> {
-        unimplemented!("Return the highest score")
+        return self.scores.iter().max().copied();
     }
 
     pub fn personal_top_three(&self) -> Vec<u32> {
-        unimplemented!("Return 3 highest scores")
+        let mut result = Vec::new();
+        self.scores.iter().for_each(|&x| result.push(x));
+        result.sort();
+        result.reverse();
+        result.truncate(3);
+        result
     }
 }
