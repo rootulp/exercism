@@ -3,12 +3,12 @@ pub fn brackets_are_balanced(input: &str) -> bool {
     let brackets = input.chars().filter_map(Bracket::from_char);
     for bracket in brackets {
         match bracket {
-            Bracket::Opening(c) => seen.push(c),
-            Bracket::Closing(c) => {
-                let wanted_bracket = get_opening_bracket(c);
+            Bracket::Opening(_) => seen.push(bracket),
+            Bracket::Closing(_) => {
+                let wanted = bracket.pair();
                 match seen.pop() {
                     Some(last_bracket) => {
-                        if last_bracket != wanted_bracket {
+                        if last_bracket != wanted {
                             return false;
                         }
                     }
@@ -20,6 +20,7 @@ pub fn brackets_are_balanced(input: &str) -> bool {
     seen.is_empty()
 }
 
+#[derive(Debug, PartialEq)]
 enum Bracket {
     Opening(char),
     Closing(char),
@@ -33,13 +34,29 @@ impl Bracket {
             _ => None,
         }
     }
+
+    fn pair(&self) -> Bracket {
+        match *self {
+            Bracket::Opening(c) => Bracket::Closing(get_closing_bracket_char(c)),
+            Bracket::Closing(c) => Bracket::Opening(get_opening_bracket_char(c)),
+        }
+    }
 }
 
-fn get_opening_bracket(c: char) -> char {
+fn get_closing_bracket_char(c: char) -> char {
+    match c {
+        '[' => ']',
+        '{' => '}',
+        '(' => ')',
+        _ => panic!("Invalid opening bracket: {}", c),
+    }
+}
+
+fn get_opening_bracket_char(c: char) -> char {
     match c {
         ']' => '[',
         '}' => '{',
         ')' => '(',
-        _ => panic!("Invalid closing bracket"),
+        _ => panic!("Invalid closing bracket: {}", c),
     }
 }
