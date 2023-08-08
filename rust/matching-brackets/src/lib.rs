@@ -1,17 +1,14 @@
 pub fn brackets_are_balanced(input: &str) -> bool {
-    if input.is_empty() {
-        return true;
-    }
-    let mut stack = Vec::new();
+    let mut seen = Vec::new();
     for c in input.chars() {
         if is_opening_bracket(c) {
-            stack.push(c);
+            seen.push(c);
         }
         if is_closing_bracket(c) {
-            let opening_bracket = get_opening_bracket(c);
-            match stack.pop() {
-                Some(opening) => {
-                    if opening != opening_bracket {
+            let wanted_bracket = get_opening_bracket(c);
+            match seen.pop() {
+                Some(last_bracket) => {
+                    if last_bracket != wanted_bracket {
                         return false;
                     }
                 }
@@ -19,7 +16,7 @@ pub fn brackets_are_balanced(input: &str) -> bool {
             }
         }
     }
-    stack.is_empty()
+    seen.is_empty()
 }
 
 fn is_opening_bracket(c: char) -> bool {
