@@ -1,20 +1,16 @@
 pub fn brackets_are_balanced(input: &str) -> bool {
     let mut seen = Vec::new();
-    let brackets = input.chars().filter_map(Bracket::from_char);
-    for bracket in brackets {
-        match bracket {
-            Bracket::Opening(_) => seen.push(bracket),
-            Bracket::Closing(_) => {
-                let wanted = bracket.pair();
-                match seen.pop() {
-                    Some(last_bracket) => {
-                        if last_bracket != wanted {
-                            return false;
-                        }
+    for b in input.chars().filter_map(Bracket::from_char) {
+        match b {
+            Bracket::Opening(_) => seen.push(b),
+            Bracket::Closing(_) => match seen.pop() {
+                Some(last) => {
+                    if last != b.pair() {
+                        return false;
                     }
-                    None => return false,
                 }
-            }
+                None => return false,
+            },
         }
     }
     seen.is_empty()
@@ -36,9 +32,9 @@ impl Bracket {
     }
 
     fn pair(&self) -> Bracket {
-        match *self {
-            Bracket::Opening(c) => Bracket::Closing(get_pair(c)),
-            Bracket::Closing(c) => Bracket::Opening(get_pair(c)),
+        match self {
+            Self::Opening(c) => Bracket::Closing(get_pair(*c)),
+            Self::Closing(c) => Bracket::Opening(get_pair(*c)),
         }
     }
 }
