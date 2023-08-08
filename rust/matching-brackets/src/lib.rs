@@ -37,26 +37,20 @@ impl Bracket {
 
     fn pair(&self) -> Bracket {
         match *self {
-            Bracket::Opening(c) => Bracket::Closing(get_closing_bracket_char(c)),
-            Bracket::Closing(c) => Bracket::Opening(get_opening_bracket_char(c)),
+            Bracket::Opening(c) => Bracket::Closing(get_pair(c)),
+            Bracket::Closing(c) => Bracket::Opening(get_pair(c)),
         }
     }
 }
 
-fn get_closing_bracket_char(c: char) -> char {
+fn get_pair(c: char) -> char {
     match c {
         '[' => ']',
         '{' => '}',
         '(' => ')',
-        _ => panic!("Invalid opening bracket: {}", c),
-    }
-}
-
-fn get_opening_bracket_char(c: char) -> char {
-    match c {
         ']' => '[',
         '}' => '{',
         ')' => '(',
-        _ => panic!("Invalid closing bracket: {}", c),
+        _ => panic!("Invalid bracket: {}", c),
     }
 }
