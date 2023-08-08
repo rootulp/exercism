@@ -19,6 +19,7 @@ members = [
   "lucians-luscious-lasagna",
   "luhn",
   "magazine-cutout",
+  "matching-brackets",
   "minesweeper",
   "nth-prime",
   "palindrome-products",

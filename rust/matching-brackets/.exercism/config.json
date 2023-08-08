@@ -1,0 +1,38 @@
+{
+  "authors": [
+    "petertseng"
+  ],
+  "contributors": [
+    "ashleygwilliams",
+    "coriolinus",
+    "cwhakes",
+    "efx",
+    "Emerentius",
+    "ErikSchierboom",
+    "IanWhitney",
+    "ironhaven",
+    "lutostag",
+    "mkantor",
+    "nfiles",
+    "omer-g",
+    "petertseng",
+    "rofrol",
+    "stringparser",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/matching-brackets.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "blurb": "Make sure the brackets and braces all match.",
+  "source": "Ginna Baker"
+}
