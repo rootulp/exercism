@@ -3,13 +3,18 @@ pub fn abbreviate(phrase: &str) -> String {
         return String::new();
     }
     phrase
-        .split([' ', '-'])
+        .split_whitespace()
+        .flat_map(|word| word.split('-'))
+        .filter(|word| word.contains(|c: char| c.is_alphabetic()))
         .map(|word| {
             word.chars()
                 .find(|c| c.is_alphabetic())
-                .unwrap_or(' ')
+                .unwrap()
                 .to_ascii_uppercase()
         })
-        .filter(|c| c.is_alphabetic())
         .collect()
 }
+
+// fn is_camelcase(word: &str) -> bool {
+//     word.chars().any(|c| c.is_uppercase())
+// }
