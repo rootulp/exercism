@@ -3,7 +3,7 @@ pub fn abbreviate(phrase: &str) -> String {
         return String::new();
     }
     phrase
-        .split(' ')
+        .split([' ', '-'])
         .map(|word| {
             word.chars()
                 .find(|c| c.is_alphabetic())
