@@ -25,7 +25,6 @@ fn punctuation() {
 }
 
 #[test]
-#[ignore]
 fn all_caps_word() {
     assert_eq!(
         acronym::abbreviate("GNU Image Manipulation Program"),
