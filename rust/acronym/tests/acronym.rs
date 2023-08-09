@@ -58,7 +58,6 @@ fn very_long_abbreviation() {
 }
 
 #[test]
-#[ignore]
 fn consecutive_delimiters() {
     assert_eq!(
         acronym::abbreviate("Something - I made up from thin air"),

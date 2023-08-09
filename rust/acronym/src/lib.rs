@@ -7,8 +7,9 @@ pub fn abbreviate(phrase: &str) -> String {
         .map(|word| {
             word.chars()
                 .find(|c| c.is_alphabetic())
-                .unwrap()
+                .unwrap_or(' ')
                 .to_ascii_uppercase()
         })
+        .filter(|c| c.is_alphabetic())
         .collect()
 }
