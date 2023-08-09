@@ -14,7 +14,6 @@ fn lowercase_words() {
 }
 
 #[test]
-#[ignore]
 fn camelcase() {
     assert_eq!(acronym::abbreviate("HyperText Markup Language"), "HTML");
 }
