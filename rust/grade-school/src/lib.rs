@@ -1,12 +1,5 @@
 use std::collections::HashMap;
 
-// This annotation prevents Clippy from warning us that `School` has a
-// `fn new()` with no arguments, but doesn't implement the `Default` trait.
-//
-// Normally, it's good practice to just do what Clippy tells you, but in this
-// case, we want to keep things relatively simple. The `Default` trait is not the point
-// of this exercise.
-#[allow(clippy::new_without_default)]
 pub struct School {
     grade_to_names: HashMap<u32, Vec<String>>,
 }
@@ -39,5 +32,11 @@ impl School {
     // must be copied each time `grade` is called.
     pub fn grade(&self, grade: u32) -> Vec<String> {
         self.grade_to_names.get(&grade).cloned().unwrap_or_default()
+    }
+}
+
+impl Default for School {
+    fn default() -> Self {
+        Self::new()
     }
 }
