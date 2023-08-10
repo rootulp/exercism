@@ -36,6 +36,6 @@ impl School {
     // the internal structure can be completely arbitrary. The tradeoff is that some data
     // must be copied each time `grade` is called.
     pub fn grade(&self, grade: u32) -> Vec<String> {
-        unimplemented!("Return the list of students in {grade}")
+        self.students.get(&grade).cloned().unwrap_or_default()
     }
 }
