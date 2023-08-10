@@ -11,6 +11,7 @@ members = [
   "clock",
   "difference-of-squares",
   "gigasecond",
+  "grade-school",
   "grains",
   "health-statistics",
   "hello-world",

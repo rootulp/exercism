@@ -1,0 +1,42 @@
+{
+  "authors": [
+    "EduardoBautista"
+  ],
+  "contributors": [
+    "andrewclarkson",
+    "ashleygwilliams",
+    "coriolinus",
+    "cwhakes",
+    "EduardoBautista",
+    "efx",
+    "ErikSchierboom",
+    "ffflorian",
+    "IanWhitney",
+    "kytrinyx",
+    "lpil",
+    "lutostag",
+    "navossoc",
+    "nfiles",
+    "petertseng",
+    "pminten",
+    "rofrol",
+    "stevejb71",
+    "stringparser",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/grade-school.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "blurb": "Given students' names along with the grade that they are in, create a roster for the school.",
+  "source": "A pairing session with Phil Battos at gSchool"
+}
