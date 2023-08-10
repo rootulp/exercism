@@ -56,7 +56,6 @@ fn test_grade_for_one_student() {
 }
 
 #[test]
-#[ignore]
 fn test_grade_returns_students_sorted_by_name() {
     let mut s = school::School::new();
     s.add(2, "James");
@@ -66,7 +65,6 @@ fn test_grade_returns_students_sorted_by_name() {
 }
 
 #[test]
-#[ignore]
 fn test_add_students_to_different_grades() {
     let mut s = school::School::new();
     s.add(3, "Chelsea");

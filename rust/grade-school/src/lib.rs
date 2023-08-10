@@ -27,7 +27,7 @@ impl School {
 
     pub fn grades(&self) -> Vec<u32> {
         let mut keys: Vec<u32> = self.students.keys().cloned().collect();
-        keys.sort(); // Sort the keys
+        keys.sort();
         keys
     }
 
@@ -36,6 +36,8 @@ impl School {
     // the internal structure can be completely arbitrary. The tradeoff is that some data
     // must be copied each time `grade` is called.
     pub fn grade(&self, grade: u32) -> Vec<String> {
-        self.students.get(&grade).cloned().unwrap_or_default()
+        let mut names = self.students.get(&grade).cloned().unwrap_or_default();
+        names.sort();
+        names
     }
 }
