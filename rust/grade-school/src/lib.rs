@@ -1,22 +1,22 @@
 use std::collections::HashMap;
 
-pub struct School {
-    grade_to_names: HashMap<u32, Vec<String>>,
+pub struct School<'a> {
+    grade_to_names: HashMap<u32, Vec<&'a str>>,
 }
 
-impl School {
-    pub fn new() -> School {
+impl<'a> School<'a> {
+    pub fn new() -> School<'a> {
         School {
             grade_to_names: HashMap::new(),
         }
     }
 
-    pub fn add(&mut self, grade: u32, student: &str) {
+    pub fn add(&mut self, grade: u32, student: &'a str) {
         if let Some(existing) = self.grade_to_names.get_mut(&grade) {
-            existing.push(student.to_string());
+            existing.push(student);
             existing.sort()
         } else {
-            self.grade_to_names.insert(grade, vec![student.to_string()]);
+            self.grade_to_names.insert(grade, vec![student]);
         }
     }
 
@@ -26,16 +26,18 @@ impl School {
         keys
     }
 
-    // If `grade` returned a reference, `School` would be forced to keep a `Vec<String>`
-    // internally to lend out. By returning an owned vector of owned `String`s instead,
-    // the internal structure can be completely arbitrary. The tradeoff is that some data
-    // must be copied each time `grade` is called.
     pub fn grade(&self, grade: u32) -> Vec<String> {
-        self.grade_to_names.get(&grade).cloned().unwrap_or_default()
+        self.grade_to_names
+            .get(&grade)
+            .cloned()
+            .unwrap_or_default()
+            .into_iter()
+            .map(|s| s.to_string())
+            .collect()
     }
 }
 
-impl Default for School {
+impl<'a> Default for School<'a> {
     fn default() -> Self {
         Self::new()
     }
