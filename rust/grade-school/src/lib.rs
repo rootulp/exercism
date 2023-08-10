@@ -8,25 +8,27 @@ use std::collections::HashMap;
 // of this exercise.
 #[allow(clippy::new_without_default)]
 pub struct School {
-    students: HashMap<u32, Vec<String>>,
+    grade_to_names: HashMap<u32, Vec<String>>,
 }
 
 impl School {
     pub fn new() -> School {
-        let students = HashMap::new();
-        School { students }
+        School {
+            grade_to_names: HashMap::new(),
+        }
     }
 
     pub fn add(&mut self, grade: u32, student: &str) {
-        if let Some(existing) = self.students.get_mut(&grade) {
+        if let Some(existing) = self.grade_to_names.get_mut(&grade) {
             existing.push(student.to_string());
+            existing.sort()
         } else {
-            self.students.insert(grade, vec![student.to_string()]);
+            self.grade_to_names.insert(grade, vec![student.to_string()]);
         }
     }
 
     pub fn grades(&self) -> Vec<u32> {
-        let mut keys: Vec<u32> = self.students.keys().cloned().collect();
+        let mut keys: Vec<u32> = self.grade_to_names.keys().cloned().collect();
         keys.sort();
         keys
     }
@@ -36,8 +38,6 @@ impl School {
     // the internal structure can be completely arbitrary. The tradeoff is that some data
     // must be copied each time `grade` is called.
     pub fn grade(&self, grade: u32) -> Vec<String> {
-        let mut names = self.students.get(&grade).cloned().unwrap_or_default();
-        names.sort();
-        names
+        self.grade_to_names.get(&grade).cloned().unwrap_or_default()
     }
 }
