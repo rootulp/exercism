@@ -13,6 +13,7 @@ members = [
   "gigasecond",
   "grade-school",
   "grains",
+  "hamming",
   "health-statistics",
   "hello-world",
   "high-scores",
