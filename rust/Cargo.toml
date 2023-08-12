@@ -17,6 +17,7 @@ members = [
   "health-statistics",
   "hello-world",
   "high-scores",
+  "isbn-verifier",
   "leap",
   "low-power-embedded-game",
   "lucians-luscious-lasagna",

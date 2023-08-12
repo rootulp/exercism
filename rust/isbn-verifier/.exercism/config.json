@@ -1,0 +1,36 @@
+{
+  "authors": [
+    "ktomsic"
+  ],
+  "contributors": [
+    "Baelyk",
+    "coriolinus",
+    "cwhakes",
+    "efx",
+    "ErikSchierboom",
+    "lutostag",
+    "nathanielknight",
+    "petertseng",
+    "rofrol",
+    "rpottsoh",
+    "stringparser",
+    "Teo-ShaoWei",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/isbn-verifier.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "blurb": "Check if a given string is a valid ISBN-10 number.",
+  "source": "Converting a string into a number and some basic processing utilizing a relatable real world example.",
+  "source_url": "https://en.wikipedia.org/wiki/International_Standard_Book_Number#ISBN-10_check_digit_calculation"
+}
