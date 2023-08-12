@@ -16,13 +16,11 @@ fn test_valid_check_digit_of_10() {
 }
 
 #[test]
-#[ignore]
 fn test_invalid_character_as_check_digit() {
     assert!(!is_valid_isbn("3-598-21507-A"));
 }
 
 #[test]
-#[ignore]
 fn test_invalid_character_in_isbn() {
     assert!(!is_valid_isbn("3-598-P1581-X"));
 }

@@ -1,9 +1,9 @@
 /// Determines whether the supplied string is a valid ISBN number
-pub fn is_valid_isbn(isbn: &str) -> bool {
-    let filtered: Vec<char> = isbn.chars().filter(|c| *c != '-').collect();
-    if filtered.len() != 10 {
+pub fn is_valid_isbn(input: &str) -> bool {
+    if !is_valid_input(input) {
         return false;
     }
+    let filtered: Vec<char> = input.chars().filter(|c| *c != '-').collect();
     let digits = filtered
         .iter()
         .enumerate()
@@ -30,4 +30,26 @@ fn is_valid(isbn: Vec<i32>) -> bool {
         + isbn[8] * 2
         + isbn[9];
     sum % 11 == 0
+}
+
+fn is_valid_input(input: &str) -> bool {
+    let filtered: Vec<char> = input.chars().filter(|c| *c != '-').collect();
+    if filtered.len() != 10 {
+        return false;
+    }
+    if !is_valid_check_character(filtered.last().unwrap()) {
+        return false;
+    }
+    if !is_valid_digits(filtered[0..9].to_vec()) {
+        return false;
+    }
+    true
+}
+
+fn is_valid_digits(digits: Vec<char>) -> bool {
+    digits.iter().all(|c| c.is_ascii_digit())
+}
+
+fn is_valid_check_character(c: &char) -> bool {
+    c == &'X' || c.is_ascii_digit()
 }
