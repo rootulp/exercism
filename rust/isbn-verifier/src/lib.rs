@@ -3,19 +3,19 @@ pub fn is_valid_isbn(input: &str) -> bool {
     if !is_valid_input(input) {
         return false;
     }
-    let filtered: Vec<char> = input.chars().filter(|c| *c != '-').collect();
-    let digits = filtered
-        .iter()
+    let isbn = input
+        .chars()
+        .filter(|c| *c != '-')
         .enumerate()
         .map(|(i, c)| {
-            if i == 9 && c == &'X' {
+            if i == 9 && c == 'X' {
                 10
             } else {
                 c.to_digit(10).unwrap() as i32
             }
         })
         .collect::<Vec<i32>>();
-    is_valid(digits)
+    is_valid(isbn)
 }
 
 fn is_valid(isbn: Vec<i32>) -> bool {
@@ -37,10 +37,10 @@ fn is_valid_input(input: &str) -> bool {
     if filtered.len() != 10 {
         return false;
     }
-    if !is_valid_check_character(filtered.last().unwrap()) {
+    if !is_valid_digits(filtered[0..9].to_vec()) {
         return false;
     }
-    if !is_valid_digits(filtered[0..9].to_vec()) {
+    if !is_valid_check_character(filtered[9]) {
         return false;
     }
     true
@@ -50,6 +50,6 @@ fn is_valid_digits(digits: Vec<char>) -> bool {
     digits.iter().all(|c| c.is_ascii_digit())
 }
 
-fn is_valid_check_character(c: &char) -> bool {
-    c == &'X' || c.is_ascii_digit()
+fn is_valid_check_character(c: char) -> bool {
+    c == 'X' || c.is_ascii_digit()
 }
