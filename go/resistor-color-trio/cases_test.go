@@ -22,11 +22,11 @@ var labelTestCases = []labelTestCase{
 		input:       []string{"blue", "grey", "brown"},
 		expected:    "680 ohms",
 	},
-	// {
-	// 	description: "Red and black and red",
-	// 	input:       []string{"red", "black", "red"},
-	// 	expected:    "2 kiloohms",
-	// },
+	{
+		description: "Red and black and red",
+		input:       []string{"red", "black", "red"},
+		expected:    "2 kiloohms",
+	},
 	// {
 	// 	description: "Green and brown and orange",
 	// 	input:       []string{"green", "brown", "orange"},
