@@ -27,16 +27,16 @@ var labelTestCases = []labelTestCase{
 		input:       []string{"red", "black", "red"},
 		expected:    "2 kiloohms",
 	},
-	// {
-	// 	description: "Green and brown and orange",
-	// 	input:       []string{"green", "brown", "orange"},
-	// 	expected:    "51 kiloohms",
-	// },
-	// {
-	// 	description: "Yellow and violet and yellow",
-	// 	input:       []string{"yellow", "violet", "yellow"},
-	// 	expected:    "470 kiloohms",
-	// },
+	{
+		description: "Green and brown and orange",
+		input:       []string{"green", "brown", "orange"},
+		expected:    "51 kiloohms",
+	},
+	{
+		description: "Yellow and violet and yellow",
+		input:       []string{"yellow", "violet", "yellow"},
+		expected:    "470 kiloohms",
+	},
 	// {
 	// 	description: "Blue and violet and blue",
 	// 	input:       []string{"blue", "violet", "blue"},
