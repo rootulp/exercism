@@ -18,6 +18,12 @@ var colorToResistance = map[string]int{
 	"white":  9,
 }
 
+const (
+	kilo = 1_000
+	mega = 1_000_000
+	giga = 1_000_000_000
+)
+
 // Label describes the resistance value given the colors of a resistor.
 // The label is a string with a resistance value with an unit appended
 // (e.g. "33 ohms", "470 kiloohms").
@@ -25,16 +31,16 @@ func Label(colors []string) string {
 	colors = trimExtraColors(colors)
 	decoded := decodeColors(colors)
 	ohms := getValue(decoded)
-	if ohms > 1_000_000_000 {
-		gigaohms := ohms / 1_000_000_000
+	if ohms > giga {
+		gigaohms := ohms / giga
 		return fmt.Sprintf("%v gigaohms", gigaohms)
 	}
-	if ohms > 1_000_000 {
-		megaohms := ohms / 1_000_000
+	if ohms > mega {
+		megaohms := ohms / mega
 		return fmt.Sprintf("%v megaohms", megaohms)
 	}
-	if ohms > 1000 {
-		kiloohms := ohms / 1000
+	if ohms > kilo {
+		kiloohms := ohms / kilo
 		return fmt.Sprintf("%v kiloohms", kiloohms)
 	}
 	return fmt.Sprintf("%v ohms", ohms)
