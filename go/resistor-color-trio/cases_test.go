@@ -47,11 +47,11 @@ var labelTestCases = []labelTestCase{
 		input:       []string{"black", "black", "black"},
 		expected:    "0 ohms",
 	},
-	// {
-	// 	description: "Maximum possible value",
-	// 	input:       []string{"white", "white", "white"},
-	// 	expected:    "99 gigaohms",
-	// },
+	{
+		description: "Maximum possible value",
+		input:       []string{"white", "white", "white"},
+		expected:    "99 gigaohms",
+	},
 	// {
 	// 	description: "First two colors make an invalid octal number",
 	// 	input:       []string{"black", "grey", "black"},

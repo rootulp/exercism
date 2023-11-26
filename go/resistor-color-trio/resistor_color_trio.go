@@ -24,8 +24,12 @@ var colorToResistance = map[string]int{
 func Label(colors []string) string {
 	decoded := decodeColors(colors)
 	ohms := getValue(decoded)
-	if ohms > 1000000 {
-		megaohms := ohms / 1000000
+	if ohms > 1_000_000_000 {
+		gigaohms := ohms / 1_000_000_000
+		return fmt.Sprintf("%v gigaohms", gigaohms)
+	}
+	if ohms > 1_000_000 {
+		megaohms := ohms / 1_000_000
 		return fmt.Sprintf("%v megaohms", megaohms)
 	}
 	if ohms > 1000 {
