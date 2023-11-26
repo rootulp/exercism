@@ -42,11 +42,11 @@ var labelTestCases = []labelTestCase{
 		input:       []string{"blue", "violet", "blue"},
 		expected:    "67 megaohms",
 	},
-	// {
-	// 	description: "Minimum possible value",
-	// 	input:       []string{"black", "black", "black"},
-	// 	expected:    "0 ohms",
-	// },
+	{
+		description: "Minimum possible value",
+		input:       []string{"black", "black", "black"},
+		expected:    "0 ohms",
+	},
 	// {
 	// 	description: "Maximum possible value",
 	// 	input:       []string{"white", "white", "white"},
