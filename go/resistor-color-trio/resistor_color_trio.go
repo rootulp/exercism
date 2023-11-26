@@ -31,17 +31,18 @@ func Label(colors []string) string {
 	colors = trimExtraColors(colors)
 	decoded := decodeColors(colors)
 	ohms := getValue(decoded)
+	return format(ohms)
+}
+
+func format(ohms int) string {
 	if ohms > giga {
-		gigaohms := ohms / giga
-		return fmt.Sprintf("%v gigaohms", gigaohms)
+		return fmt.Sprintf("%v gigaohms", ohms/giga)
 	}
 	if ohms > mega {
-		megaohms := ohms / mega
-		return fmt.Sprintf("%v megaohms", megaohms)
+		return fmt.Sprintf("%v megaohms", ohms/mega)
 	}
 	if ohms > kilo {
-		kiloohms := ohms / kilo
-		return fmt.Sprintf("%v kiloohms", kiloohms)
+		return fmt.Sprintf("%v kiloohms", ohms/kilo)
 	}
 	return fmt.Sprintf("%v ohms", ohms)
 }
