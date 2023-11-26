@@ -24,6 +24,8 @@ func ColorCode(color string) int {
 		return 9
 	case "orange":
 		return 3
+	// the remaining colors aren't tested by the existing test cases.
+	// https://github.com/exercism/go/issues/2731
 	default:
 		panic("color not supported")
 	}
