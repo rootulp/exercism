@@ -22,6 +22,7 @@ var colorToResistance = map[string]int{
 // The label is a string with a resistance value with an unit appended
 // (e.g. "33 ohms", "470 kiloohms").
 func Label(colors []string) string {
+	colors = trimExtraColors(colors)
 	decoded := decodeColors(colors)
 	ohms := getValue(decoded)
 	if ohms > 1_000_000_000 {
@@ -37,6 +38,11 @@ func Label(colors []string) string {
 		return fmt.Sprintf("%v kiloohms", kiloohms)
 	}
 	return fmt.Sprintf("%v ohms", ohms)
+}
+
+func trimExtraColors(colors []string) (trimmed []string) {
+	// only the first 3 colors are supported
+	return colors[:3]
 }
 
 func getValue(resistances []int) (value int) {

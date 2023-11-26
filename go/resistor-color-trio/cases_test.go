@@ -52,14 +52,14 @@ var labelTestCases = []labelTestCase{
 		input:       []string{"white", "white", "white"},
 		expected:    "99 gigaohms",
 	},
-	// {
-	// 	description: "First two colors make an invalid octal number",
-	// 	input:       []string{"black", "grey", "black"},
-	// 	expected:    "8 ohms",
-	// },
-	// {
-	// 	description: "Ignore extra colors",
-	// 	input:       []string{"blue", "green", "yellow", "orange"},
-	// 	expected:    "650 kiloohms",
-	// },
+	{
+		description: "First two colors make an invalid octal number",
+		input:       []string{"black", "grey", "black"},
+		expected:    "8 ohms",
+	},
+	{
+		description: "Ignore extra colors",
+		input:       []string{"blue", "green", "yellow", "orange"},
+		expected:    "650 kiloohms",
+	},
 }
