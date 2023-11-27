@@ -10,6 +10,8 @@ var numberToCardinal = map[int]string{
 	9:  "nine",
 	3:  "three",
 	2:  "two",
+	1:  "one",
+	// 0:  "no",
 }
 
 func Recite(startBottles, takeDown int) []string {
@@ -20,7 +22,7 @@ func Recite(startBottles, takeDown int) []string {
 		fmt.Sprintf("%v green bottles hanging on the wall,", capitalize(startCardinal)),
 		fmt.Sprintf("%v green bottles hanging on the wall,", capitalize(startCardinal)),
 		"And if one green bottle should accidentally fall,",
-		fmt.Sprintf("There'll be %v green bottles hanging on the wall.", endCardinal),
+		fmt.Sprintf("There'll be %v green %v hanging on the wall.", endCardinal, maybePluralize(startBottles-1, "bottle", "bottles")),
 	}
 }
 
@@ -34,4 +36,13 @@ func capitalize(str string) string {
 		return ""
 	}
 	return strings.ToUpper(string(str[0])) + str[1:]
+}
+
+// maybePluralize returns the plural version of word if number is > 1. Returns
+// the singular version of word if number == 1.
+func maybePluralize(number int, singularWord string, pluralWord string) string {
+	if number == 1 {
+		return singularWord
+	}
+	return pluralWord
 }
