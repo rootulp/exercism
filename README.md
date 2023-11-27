@@ -11,9 +11,9 @@ If you are new to exercism, you can get started with this [intro](http://exercis
 ## Tests
 
 ![Go](https://github.com/rootulp/exercism/workflows/Go/badge.svg)
-![Ruby](https://github.com/rootulp/exercism/workflows/Ruby/badge.svg?branch=master)
-![Python](https://github.com/rootulp/exercism/workflows/Python/badge.svg?branch=master)
-![Rust](https://github.com/rootulp/exercism/workflows/Rust/badge.svg?branch=master)
+![Ruby](https://github.com/rootulp/exercism/workflows/Ruby/badge.svg)
+![Python](https://github.com/rootulp/exercism/workflows/Python/badge.svg)
+![Rust](https://github.com/rootulp/exercism/workflows/Rust/badge.svg)
 
 ## Code Style
 
