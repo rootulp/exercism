@@ -11,7 +11,7 @@ pub struct Rna {
 }
 
 impl Dna {
-    const VALID_NUCLEOTIDES: &str = "ACGT";
+    const VALID_NUCLEOTIDES: &'static str = "ACGT";
 
     pub fn new(input: &str) -> Result<Dna, usize> {
         for (i, c) in input.chars().enumerate() {
@@ -39,7 +39,7 @@ impl Dna {
 }
 
 impl Rna {
-    const VALID_NUCLEOTIDES: &str = "ACGU";
+    const VALID_NUCLEOTIDES: &'static str = "ACGU";
     pub fn new(input: &str) -> Result<Rna, usize> {
         for (i, c) in input.chars().enumerate() {
             if !Self::VALID_NUCLEOTIDES.contains(c) {
