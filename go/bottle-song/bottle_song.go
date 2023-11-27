@@ -11,7 +11,7 @@ var numberToCardinal = map[int]string{
 	3:  "three",
 	2:  "two",
 	1:  "one",
-	// 0:  "no",
+	0:  "no",
 }
 
 func Recite(startBottles, takeDown int) []string {
@@ -19,8 +19,8 @@ func Recite(startBottles, takeDown int) []string {
 	endCardinal := cardinal(startBottles - 1)
 
 	return []string{
-		fmt.Sprintf("%v green bottles hanging on the wall,", capitalize(startCardinal)),
-		fmt.Sprintf("%v green bottles hanging on the wall,", capitalize(startCardinal)),
+		fmt.Sprintf("%v green %v hanging on the wall,", capitalize(startCardinal), maybePluralize(startBottles, "bottle", "bottles")),
+		fmt.Sprintf("%v green %v hanging on the wall,", capitalize(startCardinal), maybePluralize(startBottles, "bottle", "bottles")),
 		"And if one green bottle should accidentally fall,",
 		fmt.Sprintf("There'll be %v green %v hanging on the wall.", endCardinal, maybePluralize(startBottles-1, "bottle", "bottles")),
 	}

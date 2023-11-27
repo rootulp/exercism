@@ -40,14 +40,14 @@ var testCases = []struct {
 		},
 		expected: []string{"Two green bottles hanging on the wall,", "Two green bottles hanging on the wall,", "And if one green bottle should accidentally fall,", "There'll be one green bottle hanging on the wall."},
 	},
-	// {
-	// 	description: "verse with 1 bottle",
-	// 	input: bottleSongInput{
-	// 		startBottles: 1,
-	// 		takeDown:     1,
-	// 	},
-	// 	expected: []string{"One green bottle hanging on the wall,", "One green bottle hanging on the wall,", "And if one green bottle should accidentally fall,", "There'll be no green bottles hanging on the wall."},
-	// },
+	{
+		description: "verse with 1 bottle",
+		input: bottleSongInput{
+			startBottles: 1,
+			takeDown:     1,
+		},
+		expected: []string{"One green bottle hanging on the wall,", "One green bottle hanging on the wall,", "And if one green bottle should accidentally fall,", "There'll be no green bottles hanging on the wall."},
+	},
 	// {
 	// 	description: "first two verses",
 	// 	input: bottleSongInput{
