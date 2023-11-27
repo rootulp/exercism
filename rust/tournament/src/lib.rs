@@ -71,13 +71,8 @@ impl Ord for Team {
 }
 
 impl PartialOrd for Team {
-    fn partial_cmp(&self, other: &Team) -> Option<std::cmp::Ordering> {
-        // Sort by points descending then alphabetically
-        if other.points() != self.points() {
-            Some(other.points().cmp(&self.points()))
-        } else {
-            Some(self.name.cmp(&other.name))
-        }
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
     }
 }
 
