@@ -74,19 +74,19 @@ func TestNumber_Multiply(t *testing.T) {
 	}
 }
 
-// func TestNumber_Times(t *testing.T) {
-// 	for _, tt := range multiplyTestCases {
-// 		t.Run(tt.description, func(t *testing.T) {
-// 			if tt.n2 != nil {
-// 				t.Skip("skipping tests with complex multiplier used withNumber.Multiply()")
-// 			}
-// 			n := Number{tt.n1.a, tt.n1.b}
-// 			if got := n.Times(tt.factor); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
-// 				t.Errorf("Number%+v.Times(%v)\n got: %+v\nwant: %+v", tt.n1, tt.factor, got, tt.want)
-// 			}
-// 		})
-// 	}
-// }
+func TestNumber_Times(t *testing.T) {
+	for _, tt := range multiplyTestCases {
+		t.Run(tt.description, func(t *testing.T) {
+			if tt.n2 != nil {
+				t.Skip("skipping tests with complex multiplier used withNumber.Multiply()")
+			}
+			n := Number{tt.n1.a, tt.n1.b}
+			if got := n.Times(tt.factor); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
+				t.Errorf("Number%+v.Times(%v)\n got: %+v\nwant: %+v", tt.n1, tt.factor, got, tt.want)
+			}
+		})
+	}
+}
 
 // func TestNumber_Divide(t *testing.T) {
 // 	for _, tt := range divideTestCases {

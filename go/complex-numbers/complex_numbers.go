@@ -36,7 +36,10 @@ func (n1 Number) Multiply(n2 Number) Number {
 }
 
 func (n Number) Times(factor float64) Number {
-	panic("Please implement the Times method")
+	return Number{
+		a: n.a * factor,
+		b: n.b * factor,
+	}
 }
 
 func (n1 Number) Divide(n2 Number) Number {
