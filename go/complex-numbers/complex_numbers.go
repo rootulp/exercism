@@ -52,7 +52,10 @@ func (n1 Number) Divide(n2 Number) Number {
 }
 
 func (n Number) Conjugate() Number {
-	panic("Please implement the Conjugate method")
+	return Number{
+		a: n.a,
+		b: -n.b,
+	}
 }
 
 func (n Number) Abs() float64 {
