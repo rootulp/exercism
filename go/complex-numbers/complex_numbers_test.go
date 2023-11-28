@@ -88,17 +88,17 @@ func TestNumber_Times(t *testing.T) {
 	}
 }
 
-// func TestNumber_Divide(t *testing.T) {
-// 	for _, tt := range divideTestCases {
-// 		t.Run(tt.description, func(t *testing.T) {
-// 			n1 := Number{tt.n1.a, tt.n1.b}
-// 			n2 := Number{tt.n2.a, tt.n2.b}
-// 			if got := n1.Divide(n2); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
-// 				t.Errorf("Number%+v.Divide%+v\n got: %+v\nwant: %+v", tt.n1, tt.n2, got, tt.want)
-// 			}
-// 		})
-// 	}
-// }
+func TestNumber_Divide(t *testing.T) {
+	for _, tt := range divideTestCases {
+		t.Run(tt.description, func(t *testing.T) {
+			n1 := Number{tt.n1.a, tt.n1.b}
+			n2 := Number{tt.n2.a, tt.n2.b}
+			if got := n1.Divide(n2); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
+				t.Errorf("Number%+v.Divide%+v\n got: %+v\nwant: %+v", tt.n1, tt.n2, got, tt.want)
+			}
+		})
+	}
+}
 
 // func TestNumber_Abs(t *testing.T) {
 // 	for _, tt := range absTestCases {

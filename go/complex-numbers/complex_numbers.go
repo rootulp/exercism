@@ -1,5 +1,7 @@
 package complexnumbers
 
+import "math"
+
 // Define the Number type here.
 type Number struct {
 	a float64
@@ -43,7 +45,10 @@ func (n Number) Times(factor float64) Number {
 }
 
 func (n1 Number) Divide(n2 Number) Number {
-	panic("Please implement the Divide method")
+	return Number{
+		a: ((n1.a * n2.a) + (n1.b * n2.b)) / (math.Pow(n2.a, 2) + math.Pow(n2.b, 2)),
+		b: ((n1.b * n2.a) - (n1.a * n2.b)) / (math.Pow(n2.a, 2) + math.Pow(n2.b, 2)),
+	}
 }
 
 func (n Number) Conjugate() Number {
