@@ -122,13 +122,13 @@ func TestNumber_Conjugate(t *testing.T) {
 	}
 }
 
-// func TestNumber_Exp(t *testing.T) {
-// 	for _, tt := range expTestCases {
-// 		t.Run(tt.description, func(t *testing.T) {
-// 			n := Number{tt.in.a, tt.in.b}
-// 			if got := n.Exp(); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
-// 				t.Errorf("Number%+v.Exp()\n got: %+v\nwant: %+v", tt.in, got, tt.want)
-// 			}
-// 		})
-// 	}
-// }
+func TestNumber_Exp(t *testing.T) {
+	for _, tt := range expTestCases {
+		t.Run(tt.description, func(t *testing.T) {
+			n := Number{tt.in.a, tt.in.b}
+			if got := n.Exp(); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
+				t.Errorf("Number%+v.Exp()\n got: %+v\nwant: %+v", tt.in, got, tt.want)
+			}
+		})
+	}
+}
