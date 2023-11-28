@@ -1,9 +1,13 @@
 package complexnumbers
 
 // Define the Number type here.
+type Number struct {
+	a float64
+	b float64
+}
 
 func (n Number) Real() float64 {
-	panic("Please implement the Real method")
+	return n.a
 }
 
 func (n Number) Imaginary() float64 {
