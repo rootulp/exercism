@@ -35,17 +35,17 @@ func TestNumber_Imaginary(t *testing.T) {
 	}
 }
 
-// func TestNumber_Add(t *testing.T) {
-// 	for _, tt := range addTestCases {
-// 		t.Run(tt.description, func(t *testing.T) {
-// 			n1 := Number{tt.n1.a, tt.n1.b}
-// 			n2 := Number{tt.n2.a, tt.n2.b}
-// 			if got := n1.Add(n2); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
-// 				t.Errorf("Number%+v.Add%+v\n got: %+v\nwant: %+v", tt.n1, tt.n2, got, tt.want)
-// 			}
-// 		})
-// 	}
-// }
+func TestNumber_Add(t *testing.T) {
+	for _, tt := range addTestCases {
+		t.Run(tt.description, func(t *testing.T) {
+			n1 := Number{tt.n1.a, tt.n1.b}
+			n2 := Number{tt.n2.a, tt.n2.b}
+			if got := n1.Add(n2); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
+				t.Errorf("Number%+v.Add%+v\n got: %+v\nwant: %+v", tt.n1, tt.n2, got, tt.want)
+			}
+		})
+	}
+}
 
 // func TestNumber_Subtract(t *testing.T) {
 // 	for _, tt := range subtractTestCases {
