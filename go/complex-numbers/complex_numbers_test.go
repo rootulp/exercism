@@ -24,16 +24,16 @@ func TestNumber_Real(t *testing.T) {
 	}
 }
 
-// func TestNumber_Imaginary(t *testing.T) {
-// 	for _, tt := range imaginaryTestCases {
-// 		t.Run(tt.description, func(t *testing.T) {
-// 			n := Number{tt.in.a, tt.in.b}
-// 			if got := n.Imaginary(); !floatingPointEquals(got, tt.want) {
-// 				t.Errorf("Number%+v.Imaginary() = %v, want %v", tt.in, got, tt.want)
-// 			}
-// 		})
-// 	}
-// }
+func TestNumber_Imaginary(t *testing.T) {
+	for _, tt := range imaginaryTestCases {
+		t.Run(tt.description, func(t *testing.T) {
+			n := Number{tt.in.a, tt.in.b}
+			if got := n.Imaginary(); !floatingPointEquals(got, tt.want) {
+				t.Errorf("Number%+v.Imaginary() = %v, want %v", tt.in, got, tt.want)
+			}
+		})
+	}
+}
 
 // func TestNumber_Add(t *testing.T) {
 // 	for _, tt := range addTestCases {
