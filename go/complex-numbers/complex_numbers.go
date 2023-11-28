@@ -29,7 +29,10 @@ func (n1 Number) Subtract(n2 Number) Number {
 }
 
 func (n1 Number) Multiply(n2 Number) Number {
-	panic("Please implement the Multiply method")
+	return Number{
+		a: (n1.a * n2.a) - (n1.b * n2.b),
+		b: (n1.b * n2.a) + (n1.a * n2.b),
+	}
 }
 
 func (n Number) Times(factor float64) Number {

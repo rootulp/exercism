@@ -59,20 +59,20 @@ func TestNumber_Subtract(t *testing.T) {
 	}
 }
 
-// func TestNumber_Multiply(t *testing.T) {
-// 	for _, tt := range multiplyTestCases {
-// 		t.Run(tt.description, func(t *testing.T) {
-// 			if tt.n2 == nil {
-// 				t.Skip("skipping tests with factor used withNumber.Times()")
-// 			}
-// 			n1 := Number{tt.n1.a, tt.n1.b}
-// 			n2 := Number{tt.n2.a, tt.n2.b}
-// 			if got := n1.Multiply(n2); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
-// 				t.Errorf("Number%+v.Multiply%+v\n got: %+v\nwant: %+v", tt.n1, tt.n2, got, tt.want)
-// 			}
-// 		})
-// 	}
-// }
+func TestNumber_Multiply(t *testing.T) {
+	for _, tt := range multiplyTestCases {
+		t.Run(tt.description, func(t *testing.T) {
+			if tt.n2 == nil {
+				t.Skip("skipping tests with factor used withNumber.Times()")
+			}
+			n1 := Number{tt.n1.a, tt.n1.b}
+			n2 := Number{tt.n2.a, tt.n2.b}
+			if got := n1.Multiply(n2); !floatingPointEquals(got.Real(), tt.want.a) || !floatingPointEquals(got.Imaginary(), tt.want.b) {
+				t.Errorf("Number%+v.Multiply%+v\n got: %+v\nwant: %+v", tt.n1, tt.n2, got, tt.want)
+			}
+		})
+	}
+}
 
 // func TestNumber_Times(t *testing.T) {
 // 	for _, tt := range multiplyTestCases {
