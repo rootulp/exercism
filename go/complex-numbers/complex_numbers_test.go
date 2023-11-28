@@ -100,16 +100,16 @@ func TestNumber_Divide(t *testing.T) {
 	}
 }
 
-// func TestNumber_Abs(t *testing.T) {
-// 	for _, tt := range absTestCases {
-// 		t.Run(tt.description, func(t *testing.T) {
-// 			n := Number{tt.in.a, tt.in.b}
-// 			if got := n.Abs(); !floatingPointEquals(got, tt.want) {
-// 				t.Errorf("Number.Abs%+v = %v, want %v", tt.in, got, tt.want)
-// 			}
-// 		})
-// 	}
-// }
+func TestNumber_Abs(t *testing.T) {
+	for _, tt := range absTestCases {
+		t.Run(tt.description, func(t *testing.T) {
+			n := Number{tt.in.a, tt.in.b}
+			if got := n.Abs(); !floatingPointEquals(got, tt.want) {
+				t.Errorf("Number.Abs%+v = %v, want %v", tt.in, got, tt.want)
+			}
+		})
+	}
+}
 
 // func TestNumber_Conjugate(t *testing.T) {
 // 	for _, tt := range conjugateTestCases {

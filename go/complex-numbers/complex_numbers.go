@@ -56,7 +56,7 @@ func (n Number) Conjugate() Number {
 }
 
 func (n Number) Abs() float64 {
-	panic("Please implement the Abs method")
+	return math.Sqrt(math.Pow(n.a, 2) + math.Pow(n.b, 2))
 }
 
 func (n Number) Exp() Number {
