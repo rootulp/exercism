@@ -5,6 +5,17 @@ import (
 	"strings"
 )
 
+var verseNumberToStartingAnimal = map[int]string{
+	1: "fly",
+	2: "spider",
+	3: "bird",
+	4: "cat",
+	5: "dog",
+	6: "goat",
+	7: "cow",
+	8: "horse",
+}
+
 func Verse(verseNumber int) string {
 	lines := []string{firstLine(startingAnimal(verseNumber))}
 	lines = append(lines, middleLines(verseNumber)...)
@@ -37,22 +48,20 @@ func middleLines(verseNumber int) []string {
 			"She swallowed the spider to catch the fly.",
 		}
 	}
+	if verseNumber == 5 {
+		return []string{
+			"What a hog, to swallow a dog!",
+			"She swallowed the dog to catch the cat.",
+			"She swallowed the cat to catch the bird.",
+			"She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.",
+			"She swallowed the spider to catch the fly.",
+		}
+	}
 	panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
 }
 
 func startingAnimal(verseNumber int) string {
-	switch verseNumber {
-	case 1:
-		return "fly"
-	case 2:
-		return "spider"
-	case 3:
-		return "bird"
-	case 4:
-		return "cat"
-	default:
-		panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
-	}
+	return verseNumberToStartingAnimal[verseNumber]
 }
 
 func firstLine(animal string) string {
