@@ -19,7 +19,7 @@ var verseNumberToStartingAnimal = map[int]string{
 func Verse(verseNumber int) string {
 	lines := []string{firstLine(startingAnimal(verseNumber))}
 	lines = append(lines, middleLines(verseNumber)...)
-	lines = append(lines, lastLine())
+	lines = append(lines, lastLine(verseNumber))
 	return strings.Join(lines, "\n")
 }
 
@@ -68,6 +68,9 @@ func middleLines(verseNumber int) []string {
 		}
 		return append(lines, middleLines(verseNumber - 1)[1:]...)
 	}
+	if verseNumber == 8 {
+		return []string{}
+	}
 	panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
 }
 
@@ -79,7 +82,10 @@ func firstLine(animal string) string {
 	return fmt.Sprintf("I know an old lady who swallowed a %v.", animal)
 }
 
-func lastLine() string {
+func lastLine(verseNumber int) string {
+	if verseNumber == 8 {
+		return "She's dead, of course!"
+	}
 	return "I don't know why she swallowed the fly. Perhaps she'll die."
 }
 
