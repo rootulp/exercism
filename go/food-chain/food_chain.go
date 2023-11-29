@@ -5,17 +5,6 @@ import (
 	"strings"
 )
 
-func startingAnimal(verseNumber int) string {
-	switch verseNumber {
-	case 1:
-		return "fly"
-	case 2:
-		return "spider"
-	default:
-		panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
-	}
-}
-
 func Verse(verseNumber int) string {
 	lines := []string{firstLine(startingAnimal(verseNumber))}
 	lines = append(lines, middleLines(verseNumber)...)
@@ -23,14 +12,30 @@ func Verse(verseNumber int) string {
 	return strings.Join(lines, "\n")
 }
 
-func middleLines(v int) []string {
-	if v == 0 || v == 1 {
+func middleLines(verseNumber int) []string {
+	if verseNumber <= 1 {
 		return []string{}
 	}
-	if v == 2 {
+	if verseNumber == 2 {
 		return []string{"It wriggled and jiggled and tickled inside her.", "She swallowed the spider to catch the fly."}
 	}
-	return []string{}
+	if verseNumber == 3 {
+		return []string{"How absurd to swallow a bird!", "She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.", "She swallowed the spider to catch the fly."}
+	}
+	panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
+}
+
+func startingAnimal(verseNumber int) string {
+	switch verseNumber {
+	case 1:
+		return "fly"
+	case 2:
+		return "spider"
+	case 3:
+		return "bird"
+	default:
+		panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
+	}
 }
 
 func firstLine(animal string) string {
