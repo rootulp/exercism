@@ -98,5 +98,5 @@ func Verses(start, end int) string {
 }
 
 func Song() string {
-	panic("Please implement the Song function")
+	return Verses(1, 8)
 }
