@@ -34,28 +34,25 @@ func middleLines(verseNumber int) []string {
 		}
 	}
 	if verseNumber == 3 {
-		return []string{
+		lines := []string{
 			"How absurd to swallow a bird!",
 			"She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.",
-			"She swallowed the spider to catch the fly.",
 		}
+		return append(lines, middleLines(verseNumber - 1)[1:]...)
 	}
 	if verseNumber == 4 {
-		return []string{
+		lines := []string{
 			"Imagine that, to swallow a cat!",
 			"She swallowed the cat to catch the bird.",
-			"She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.",
-			"She swallowed the spider to catch the fly.",
 		}
+		return append(lines, middleLines(verseNumber - 1)[1:]...)
 	}
 	if verseNumber == 5 {
-		return []string{
+		lines := []string{
 			"What a hog, to swallow a dog!",
 			"She swallowed the dog to catch the cat.",
-			"She swallowed the cat to catch the bird.",
-			"She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.",
-			"She swallowed the spider to catch the fly.",
 		}
+		return append(lines, middleLines(verseNumber - 1)[1:]...)
 	}
 	panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
 }
