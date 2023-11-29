@@ -63,17 +63,6 @@ func Song() string {
 	return Verses(1, 8)
 }
 
-func middleLines(verseNumber int) []string {
-	if verseNumber <= 1 || verseNumber == 8 {
-		return []string{}
-	}
-	if verseNumber == 2 {
-		return verseNumberToMiddleLines[verseNumber]
-	}
-	lines := verseNumberToMiddleLines[verseNumber]
-	return append(lines, middleLines(verseNumber - 1)[1:]...)
-}
-
 func firstLine(verseNumber int) string {
 	animal := startingAnimal(verseNumber)
 	return fmt.Sprintf("I know an old lady who swallowed a %v.", animal)
@@ -81,6 +70,23 @@ func firstLine(verseNumber int) string {
 
 func startingAnimal(verseNumber int) string {
 	return verseNumberToStartingAnimal[verseNumber]
+}
+
+func middleLines(verseNumber int) []string {
+	if verseNumber <= 1 {
+		return []string{}
+	}
+	if verseNumber == 2 {
+		return verseNumberToMiddleLines[verseNumber]
+	}
+	if verseNumber >= 3 && verseNumber <= 7 {
+		lines := verseNumberToMiddleLines[verseNumber]
+		return append(lines, middleLines(verseNumber - 1)[1:]...)
+	}
+	if verseNumber == 8 {
+		return []string{}
+	}
+	panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
 }
 
 func lastLine(verseNumber int) string {
