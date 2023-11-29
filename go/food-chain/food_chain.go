@@ -90,7 +90,11 @@ func lastLine(verseNumber int) string {
 }
 
 func Verses(start, end int) string {
-	panic("Please implement the Verses function")
+	verses := []string{}
+	for i := start; i <= end; i++ {
+		verses = append(verses, Verse(i))
+	}
+	return strings.Join(verses, "\n\n")
 }
 
 func Song() string {
