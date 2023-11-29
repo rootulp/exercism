@@ -17,10 +17,25 @@ func middleLines(verseNumber int) []string {
 		return []string{}
 	}
 	if verseNumber == 2 {
-		return []string{"It wriggled and jiggled and tickled inside her.", "She swallowed the spider to catch the fly."}
+		return []string{
+			"It wriggled and jiggled and tickled inside her.",
+			"She swallowed the spider to catch the fly.",
+		}
 	}
 	if verseNumber == 3 {
-		return []string{"How absurd to swallow a bird!", "She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.", "She swallowed the spider to catch the fly."}
+		return []string{
+			"How absurd to swallow a bird!",
+			"She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.",
+			"She swallowed the spider to catch the fly.",
+		}
+	}
+	if verseNumber == 4 {
+		return []string{
+			"Imagine that, to swallow a cat!",
+			"She swallowed the cat to catch the bird.",
+			"She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.",
+			"She swallowed the spider to catch the fly.",
+		}
 	}
 	panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
 }
@@ -33,6 +48,8 @@ func startingAnimal(verseNumber int) string {
 		return "spider"
 	case 3:
 		return "bird"
+	case 4:
+		return "cat"
 	default:
 		panic(fmt.Sprintf("unsupported verseNumber %v", verseNumber))
 	}
