@@ -34,125 +34,125 @@ var minesweeperTestCases = []minesweeperTestCase{
 			"   ",
 		},
 	},
-	// {
-	// 	description: "minefield with only mines",
-	// 	minefield: []string{
-	// 		"***",
-	// 		"***",
-	// 		"***",
-	// 	},
-	// 	expected: []string{
-	// 		"***",
-	// 		"***",
-	// 		"***",
-	// 	},
-	// },
-	// {
-	// 	description: "mine surrounded by spaces",
-	// 	minefield: []string{
-	// 		"   ",
-	// 		" * ",
-	// 		"   ",
-	// 	},
-	// 	expected: []string{
-	// 		"111",
-	// 		"1*1",
-	// 		"111",
-	// 	},
-	// },
-	// {
-	// 	description: "space surrounded by mines",
-	// 	minefield: []string{
-	// 		"***",
-	// 		"* *",
-	// 		"***",
-	// 	},
-	// 	expected: []string{
-	// 		"***",
-	// 		"*8*",
-	// 		"***",
-	// 	},
-	// },
-	// {
-	// 	description: "horizontal line",
-	// 	minefield:   []string{" * * "},
-	// 	expected:    []string{"1*2*1"},
-	// },
-	// {
-	// 	description: "horizontal line, mines at edges",
-	// 	minefield:   []string{"*   *"},
-	// 	expected:    []string{"*1 1*"},
-	// },
-	// {
-	// 	description: "vertical line",
-	// 	minefield: []string{
-	// 		" ",
-	// 		"*",
-	// 		" ",
-	// 		"*",
-	// 		" ",
-	// 	},
-	// 	expected: []string{
-	// 		"1",
-	// 		"*",
-	// 		"2",
-	// 		"*",
-	// 		"1",
-	// 	},
-	// },
-	// {
-	// 	description: "vertical line, mines at edges",
-	// 	minefield: []string{
-	// 		"*",
-	// 		" ",
-	// 		" ",
-	// 		" ",
-	// 		"*",
-	// 	},
-	// 	expected: []string{
-	// 		"*",
-	// 		"1",
-	// 		" ",
-	// 		"1",
-	// 		"*",
-	// 	},
-	// },
-	// {
-	// 	description: "cross",
-	// 	minefield: []string{
-	// 		"  *  ",
-	// 		"  *  ",
-	// 		"*****",
-	// 		"  *  ",
-	// 		"  *  ",
-	// 	},
-	// 	expected: []string{
-	// 		" 2*2 ",
-	// 		"25*52",
-	// 		"*****",
-	// 		"25*52",
-	// 		" 2*2 ",
-	// 	},
-	// },
-	// {
-	// 	description: "large minefield",
-	// 	minefield: []string{
-	// 		" *  * ",
-	// 		"  *   ",
-	// 		"    * ",
-	// 		"   * *",
-	// 		" *  * ",
-	// 		"      ",
-	// 	},
-	// 	expected: []string{
-	// 		"1*22*1",
-	// 		"12*322",
-	// 		" 123*2",
-	// 		"112*4*",
-	// 		"1*22*2",
-	// 		"111111",
-	// 	},
-	// },
+	{
+		description: "minefield with only mines",
+		minefield: []string{
+			"***",
+			"***",
+			"***",
+		},
+		expected: []string{
+			"***",
+			"***",
+			"***",
+		},
+	},
+	{
+		description: "mine surrounded by spaces",
+		minefield: []string{
+			"   ",
+			" * ",
+			"   ",
+		},
+		expected: []string{
+			"111",
+			"1*1",
+			"111",
+		},
+	},
+	{
+		description: "space surrounded by mines",
+		minefield: []string{
+			"***",
+			"* *",
+			"***",
+		},
+		expected: []string{
+			"***",
+			"*8*",
+			"***",
+		},
+	},
+	{
+		description: "horizontal line",
+		minefield:   []string{" * * "},
+		expected:    []string{"1*2*1"},
+	},
+	{
+		description: "horizontal line, mines at edges",
+		minefield:   []string{"*   *"},
+		expected:    []string{"*1 1*"},
+	},
+	{
+		description: "vertical line",
+		minefield: []string{
+			" ",
+			"*",
+			" ",
+			"*",
+			" ",
+		},
+		expected: []string{
+			"1",
+			"*",
+			"2",
+			"*",
+			"1",
+		},
+	},
+	{
+		description: "vertical line, mines at edges",
+		minefield: []string{
+			"*",
+			" ",
+			" ",
+			" ",
+			"*",
+		},
+		expected: []string{
+			"*",
+			"1",
+			" ",
+			"1",
+			"*",
+		},
+	},
+	{
+		description: "cross",
+		minefield: []string{
+			"  *  ",
+			"  *  ",
+			"*****",
+			"  *  ",
+			"  *  ",
+		},
+		expected: []string{
+			" 2*2 ",
+			"25*52",
+			"*****",
+			"25*52",
+			" 2*2 ",
+		},
+	},
+	{
+		description: "large minefield",
+		minefield: []string{
+			" *  * ",
+			"  *   ",
+			"    * ",
+			"   * *",
+			" *  * ",
+			"      ",
+		},
+		expected: []string{
+			"1*22*1",
+			"12*322",
+			" 123*2",
+			"112*4*",
+			"1*22*2",
+			"111111",
+		},
+	},
 }
 
 func slicesEqual(a, b []string) bool {
