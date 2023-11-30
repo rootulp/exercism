@@ -1,10 +1,13 @@
 package house
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func Verse(v int) string {
 	if v == 1 {
-		return "This is the house that Jack built."
+		return `This is the house that Jack built.`
 	}
 	if v == 2 {
 		return `This is the malt
@@ -109,5 +112,10 @@ that lay in the house that Jack built.`
 }
 
 func Song() string {
-	panic("Please implement the Song function")
+	verses := []string{}
+	for i := 1; i <= 12; i++ {
+		verse := Verse(i)
+		verses = append(verses, verse)
+	}
+	return strings.Join(verses, "\n\n")
 }
