@@ -12,7 +12,7 @@ func Annotate(board []string) []string {
 	}
 
 	game := NewGame(board)
-	game.solve()
+	game.Annotate()
 	return game.AnnotatedBoard()
 }
 
@@ -51,7 +51,7 @@ func (g Game) AnnotatedBoard() (board []string) {
 	return board
 }
 
-func (g Game) solve() {
+func (g Game) Annotate() {
 	for row_i, row := range g.grid {
 		for col_i, cell := range row {
 			if isMine(cell) {
