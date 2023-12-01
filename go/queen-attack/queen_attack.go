@@ -2,7 +2,6 @@ package queenattack
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 )
 
@@ -23,9 +22,24 @@ func CanQueenAttack(whitePosition, blackPosition string) (bool, error) {
 	if white == black {
 		return false, errors.New("same square")
 	}
-	fmt.Printf("white: %v, black: %v\n", white, black)
-	return false, nil
+	return white.canAttack(black), nil
 }
+
+func (l location) canAttack(other location) bool {
+	return l.isSameRow(other) || l.isSameColumn(other)
+}
+
+func (l location) isSameRow(other location) bool {
+	return l.row == other.row
+}
+
+func (l location) isSameColumn(other location) bool {
+	return l.column == other.column
+}
+
+// func (l location) isDiagonal(other location) bool {
+// 	return abs(l.row-other.row) == abs(int(l.column[0])-int(other.column[0]))
+// }
 
 func parse(position string) (location, error) {
 	if len(position) != 2 {
