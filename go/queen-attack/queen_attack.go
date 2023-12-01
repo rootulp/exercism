@@ -28,9 +28,6 @@ func CanQueenAttack(whitePosition, blackPosition string) (bool, error) {
 }
 
 func parse(position string) (location, error) {
-	if position == "" {
-		return location{}, errors.New("empty position")
-	}
 	if len(position) != 2 {
 		return location{}, errors.New("invalid position")
 	}
@@ -38,16 +35,8 @@ func parse(position string) (location, error) {
 	column := string(position[0])
 	row, err := strconv.Atoi(position[1:])
 
-	if err != nil {
+	if err != nil || !isValidRow(row) || !isValidColumn(column) {
 		return location{}, errors.New("invalid position")
-	}
-
-	if !isValidRow(row) {
-		return location{}, errors.New("invalid row")
-	}
-
-	if !isValidColumn(column) {
-		return location{}, errors.New("invalid column")
 	}
 
 	return location{row: row, column: column}, nil
