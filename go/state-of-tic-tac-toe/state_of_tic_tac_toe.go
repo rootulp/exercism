@@ -87,7 +87,11 @@ func allCellsOccupied(player string, cells ...string) bool {
 
 func (g game) isDraw() bool {
 	isWin := g.isWin("X") || g.isWin("O")
-	return g.getCount("X")+g.getCount("O") == 9 && !isWin
+	return g.isOver() && !isWin
+}
+
+func (g game) isOver() bool {
+	return g.getCount("X")+g.getCount("O") == 9
 }
 
 func (g game) isInvalidBoard() error {
