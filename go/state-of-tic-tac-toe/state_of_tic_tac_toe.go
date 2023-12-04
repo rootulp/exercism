@@ -39,7 +39,7 @@ func (g game) getState() (State, error) {
 	if err := g.isInvalidBoard(); err != nil {
 		return "", err
 	}
-	if isWin := g.isWin(); isWin {
+	if isWin := g.isWin("X") || g.isWin("O"); isWin {
 		return Win, nil
 	}
 	if isDraw := g.isDraw(); isDraw {
@@ -48,40 +48,41 @@ func (g game) getState() (State, error) {
 	return Ongoing, nil
 }
 
-func (g game) isWin() bool {
-	return g.isWinByRow() || g.isWinByColumn() || g.isWinByDiagonal()
+func (g game) isWin(player string) bool {
+	return g.isWinByRow(player) || g.isWinByColumn(player) || g.isWinByDiagonal(player)
 }
 
-func (g game) isWinByRow() bool {
+func (g game) isWinByRow(player string) bool {
 	for _, row := range g.grid {
-		if row[0] == row[1] && row[1] == row[2] && row[0] != " " {
+		if row[0] == row[1] && row[1] == row[2] && row[0] == player {
 			return true
 		}
 	}
 	return false
 }
 
-func (g game) isWinByColumn() bool {
+func (g game) isWinByColumn(player string) bool {
 	for i := 0; i < 3; i++ {
-		if g.grid[0][i] == g.grid[1][i] && g.grid[1][i] == g.grid[2][i] && g.grid[0][i] != " " {
+		if g.grid[0][i] == g.grid[1][i] && g.grid[1][i] == g.grid[2][i] && g.grid[0][i] == player {
 			return true
 		}
 	}
 	return false
 }
 
-func (g game) isWinByDiagonal() bool {
-	if g.grid[0][0] == g.grid[1][1] && g.grid[1][1] == g.grid[2][2] && g.grid[0][0] != " " {
+func (g game) isWinByDiagonal(player string) bool {
+	if g.grid[0][0] == g.grid[1][1] && g.grid[1][1] == g.grid[2][2] && g.grid[0][0] == player {
 		return true
 	}
-	if g.grid[0][2] == g.grid[1][1] && g.grid[1][1] == g.grid[2][0] && g.grid[0][2] != " " {
+	if g.grid[0][2] == g.grid[1][1] && g.grid[1][1] == g.grid[2][0] && g.grid[0][2] == player {
 		return true
 	}
 	return false
 }
 
 func (g game) isDraw() bool {
-	return g.getCount("X")+g.getCount("O") == 9 && !g.isWin()
+	isWin := g.isWin("X") || g.isWin("O")
+	return g.getCount("X")+g.getCount("O") == 9 && !isWin
 }
 
 func (g game) isInvalidBoard() error {
@@ -91,6 +92,9 @@ func (g game) isInvalidBoard() error {
 		return errors.New("invalid board")
 	}
 	if movesO > movesX {
+		return errors.New("invalid board")
+	}
+	if g.isWin("X") && g.isWin("O") {
 		return errors.New("invalid board")
 	}
 	return nil
