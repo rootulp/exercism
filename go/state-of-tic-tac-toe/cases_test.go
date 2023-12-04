@@ -155,12 +155,12 @@ var testCases = []struct {
 		expected:    "",
 		wantErr:     true,
 	},
-	// {
-	// 	description: "Invalid board: O started",
-	// 	board:       []string{"OOX", "   ", "   "},
-	// 	expected:    "",
-	// 	wantErr:     true,
-	// },
+	{
+		description: "Invalid board: O started",
+		board:       []string{"OOX", "   ", "   "},
+		expected:    "",
+		wantErr:     true,
+	},
 	// {
 	// 	description: "Invalid board: X won and O kept playing",
 	// 	board:       []string{"XXX", "OOO", "   "},

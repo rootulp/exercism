@@ -41,6 +41,9 @@ func (g game) getState() (State, error) {
 	if movesX > movesO+1 {
 		return "", errors.New("invalid board")
 	}
+	if movesO > movesX {
+		return "", errors.New("invalid board")
+	}
 	return Ongoing, nil
 }
 
