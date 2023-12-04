@@ -2,7 +2,6 @@ package stateoftictactoe
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 )
 
@@ -15,10 +14,7 @@ const (
 )
 
 func StateOfTicTacToe(board []string) (State, error) {
-	game, err := parse(board)
-	if err != nil {
-		return "", err
-	}
+	game := NewGame(board)
 	return game.getState()
 }
 
@@ -26,13 +22,12 @@ type game struct {
 	grid [][]string
 }
 
-func parse(board []string) (*game, error) {
+func NewGame(board []string) *game {
 	grid := [][]string{}
 	for _, row := range board {
 		grid = append(grid, strings.Split(row, ""))
 	}
-	fmt.Printf("%#v\n", grid)
-	return &game{grid: grid}, nil
+	return &game{grid: grid}
 }
 
 func (g game) getState() (State, error) {
