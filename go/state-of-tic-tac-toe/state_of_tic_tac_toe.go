@@ -49,7 +49,7 @@ func (g game) isWin(player string) bool {
 
 func (g game) isWinByRow(player string) bool {
 	for _, row := range g.grid {
-		if row[0] == row[1] && row[1] == row[2] && row[0] == player {
+		if allCellsOccupied(player, row...) {
 			return true
 		}
 	}
@@ -58,7 +58,7 @@ func (g game) isWinByRow(player string) bool {
 
 func (g game) isWinByColumn(player string) bool {
 	for i := 0; i < 3; i++ {
-		if g.grid[0][i] == g.grid[1][i] && g.grid[1][i] == g.grid[2][i] && g.grid[0][i] == player {
+		if allCellsOccupied(player, g.grid[0][i], g.grid[1][i], g.grid[2][i]) {
 			return true
 		}
 	}
@@ -66,13 +66,23 @@ func (g game) isWinByColumn(player string) bool {
 }
 
 func (g game) isWinByDiagonal(player string) bool {
-	if g.grid[0][0] == g.grid[1][1] && g.grid[1][1] == g.grid[2][2] && g.grid[0][0] == player {
+	if allCellsOccupied(player, g.grid[0][0], g.grid[1][1], g.grid[2][2]) {
 		return true
 	}
-	if g.grid[0][2] == g.grid[1][1] && g.grid[1][1] == g.grid[2][0] && g.grid[0][2] == player {
+	if allCellsOccupied(player, g.grid[0][2], g.grid[1][1], g.grid[2][0]) {
 		return true
 	}
 	return false
+}
+
+// allCellsOccupied returns true if all cells are occupied by player.
+func allCellsOccupied(player string, cells ...string) bool {
+	for _, cell := range cells {
+		if cell != player {
+			return false
+		}
+	}
+	return true
 }
 
 func (g game) isDraw() bool {
