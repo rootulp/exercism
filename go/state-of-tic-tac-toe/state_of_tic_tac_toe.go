@@ -36,15 +36,22 @@ func parse(board []string) (*game, error) {
 }
 
 func (g game) getState() (State, error) {
+	if err := g.isInvalidBoard(); err != nil {
+		return "", err
+	}
+	return Ongoing, nil
+}
+
+func (g game) isInvalidBoard() error {
 	movesX := g.getCount("X")
 	movesO := g.getCount("O")
 	if movesX > movesO+1 {
-		return "", errors.New("invalid board")
+		return errors.New("invalid board")
 	}
 	if movesO > movesX {
-		return "", errors.New("invalid board")
+		return errors.New("invalid board")
 	}
-	return Ongoing, nil
+	return nil
 }
 
 func (g game) getCount(player string) (count int) {
