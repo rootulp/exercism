@@ -13,8 +13,11 @@ func Solve(input string) (map[string]int, error) {
 	if err != nil {
 		return nil, err
 	}
-	if equation.nonUniqueValues() {
+	if equation.onlyTwoUniqueLetters() {
 		return nil, fmt.Errorf("solution must have unique value for each letter")
+	}
+	if equation.addendIsLongerThanSum() {
+		return nil, fmt.Errorf("leading zero solution is invalid")
 	}
 
 	letters := equation.uniqueLetters()
@@ -80,8 +83,17 @@ func (e equation) isLeadingZero(letterToNumber map[string]int) bool {
 	return false
 }
 
-func (e equation) nonUniqueValues() bool {
+func (e equation) onlyTwoUniqueLetters() bool {
 	return len(e.uniqueLetters()) == 2
+}
+
+func (e equation) addendIsLongerThanSum() bool {
+	for _, addend := range e.addends {
+		if len(addend) > len(e.sum) {
+			return true
+		}
+	}
+	return false
 }
 
 func translate(letterToNumber map[string]int, word string) int {

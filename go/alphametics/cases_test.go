@@ -21,11 +21,11 @@ var testCases = []struct {
 		input:         "A == B",
 		errorExpected: true,
 	},
-	// {
-	// 	description:   "leading zero solution is invalid",
-	// 	input:         "ACA + DD == BD",
-	// 	errorExpected: true,
-	// },
+	{
+		description:   "leading zero solution is invalid",
+		input:         "ACA + DD == BD",
+		errorExpected: true,
+	},
 	{
 		description: "puzzle with two digits final carry",
 		input:       "A + A + A + A + A + A + A + A + A + A + A + B == BCC",
