@@ -13,6 +13,9 @@ func Solve(input string) (map[string]int, error) {
 	if err != nil {
 		return nil, err
 	}
+	if equation.nonUniqueValues() {
+		return nil, fmt.Errorf("solution must have unique value for each letter")
+	}
 
 	letters := equation.uniqueLetters()
 	for {
@@ -75,6 +78,10 @@ func (e equation) isLeadingZero(letterToNumber map[string]int) bool {
 		}
 	}
 	return false
+}
+
+func (e equation) nonUniqueValues() bool {
+	return len(e.uniqueLetters()) == 2
 }
 
 func translate(letterToNumber map[string]int, word string) int {
