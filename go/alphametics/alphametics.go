@@ -36,16 +36,24 @@ func (e equation) words() []string {
 }
 
 func parse(input string) (equation, error) {
-	parts := strings.Split(input, "==")
+	parts := trim(strings.Split(input, "=="))
 	if len(parts) != 2 {
 		return equation{}, errors.New("invalid input")
 	}
-	parts = trim(parts)
-	left := parts[0]
-	sum := parts[1]
-	addends := strings.Split(left, "+")
-	addends = trim(addends)
+	left, sum := parts[0], parts[1]
+
+	addends := trim(strings.Split(left, "+"))
 	return equation{addends, sum}, nil
+}
+
+func (e equation) uniqueLetters() map[string]bool {
+	result := map[string]bool{}
+	for _, word := range e.words() {
+		for _, letter := range word {
+			result[string(letter)] = true
+		}
+	}
+	return result
 }
 
 func evaluate(sum string, addends []string, letterToNumber map[string]int) (bool, error) {
@@ -93,16 +101,6 @@ func popRandomElement(x []int) (int, []int) {
 	result := x[index]
 	x = append(x[:index], x[index+1:]...)
 	return result, x
-}
-
-func (e equation) uniqueLetters() map[string]bool {
-	result := map[string]bool{}
-	for _, word := range e.words() {
-		for _, letter := range word {
-			result[string(letter)] = true
-		}
-	}
-	return result
 }
 
 // trim removes leading and trailing spaces from each string in x
