@@ -2,7 +2,6 @@ package alphametics
 
 import (
 	"errors"
-	"fmt"
 	"math/rand"
 	"strconv"
 	"strings"
@@ -14,13 +13,9 @@ func Solve(input string) (map[string]int, error) {
 		return nil, err
 	}
 
-	letters := getUniqueLetters(equation.words())
-	fmt.Printf("letters %v\n", letters)
-
+	letters := equation.uniqueLetters()
 	for {
 		letterToNumber := assignRandomValues(letters)
-		fmt.Printf("letterToNumber %v\n", letterToNumber)
-
 		evaluated, err := evaluate(equation.sum, equation.addends, letterToNumber)
 		if err != nil {
 			return nil, err
@@ -100,9 +95,9 @@ func popRandomElement(x []int) (int, []int) {
 	return result, x
 }
 
-func getUniqueLetters(words []string) map[string]bool {
+func (e equation) uniqueLetters() map[string]bool {
 	result := map[string]bool{}
-	for _, word := range words {
+	for _, word := range e.words() {
 		for _, letter := range word {
 			result[string(letter)] = true
 		}
