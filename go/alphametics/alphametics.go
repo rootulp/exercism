@@ -9,29 +9,19 @@ import (
 )
 
 func Solve(input string) (map[string]int, error) {
-	parts := strings.Split(input, "==")
-	if len(parts) != 2 {
-		return nil, errors.New("invalid input")
+	equation, err := parse(input)
+	if err != nil {
+		return nil, err
 	}
-	parts = trim(parts)
-	left := parts[0]
-	sum := parts[1]
-	addends := strings.Split(left, "+")
-	addends = trim(addends)
 
-	fmt.Printf("left: %s\n", left)
-	fmt.Printf("addends: %s\n", addends)
-	fmt.Printf("sum: %s\n", sum)
-	words := append([]string{sum}, addends...)
-
-	letters := getUniqueLetters(words)
+	letters := getUniqueLetters(equation.words())
 	fmt.Printf("letters %v\n", letters)
 
 	for {
 		letterToNumber := assignRandomValues(letters)
 		fmt.Printf("letterToNumber %v\n", letterToNumber)
 
-		evaluated, err := evaluate(sum, addends, letterToNumber)
+		evaluated, err := evaluate(equation.sum, equation.addends, letterToNumber)
 		if err != nil {
 			return nil, err
 		}
@@ -39,6 +29,28 @@ func Solve(input string) (map[string]int, error) {
 			return letterToNumber, nil
 		}
 	}
+}
+
+type equation struct {
+	addends []string
+	sum     string
+}
+
+func (e equation) words() []string {
+	return append([]string{e.sum}, e.addends...)
+}
+
+func parse(input string) (equation, error) {
+	parts := strings.Split(input, "==")
+	if len(parts) != 2 {
+		return equation{}, errors.New("invalid input")
+	}
+	parts = trim(parts)
+	left := parts[0]
+	sum := parts[1]
+	addends := strings.Split(left, "+")
+	addends = trim(addends)
+	return equation{addends, sum}, nil
 }
 
 func evaluate(sum string, addends []string, letterToNumber map[string]int) (bool, error) {
