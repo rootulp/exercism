@@ -36,11 +36,11 @@ var testCases = []struct {
 		input:       "AS + A == MOM",
 		expected:    map[string]int{"A": 9, "M": 1, "O": 0, "S": 2},
 	},
-	// {
-	// 	description: "puzzle with six letters",
-	// 	input:       "NO + NO + TOO == LATE",
-	// 	expected:    map[string]int{"A": 0, "E": 2, "L": 1, "N": 7, "O": 4, "T": 9},
-	// },
+	{
+		description: "puzzle with six letters",
+		input:       "NO + NO + TOO == LATE",
+		expected:    map[string]int{"A": 0, "E": 2, "L": 1, "N": 7, "O": 4, "T": 9},
+	},
 	// {
 	// 	description: "puzzle with seven letters",
 	// 	input:       "HE + SEES + THE == LIGHT",
