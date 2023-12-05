@@ -31,11 +31,11 @@ var testCases = []struct {
 		input:       "A + A + A + A + A + A + A + A + A + A + A + B == BCC",
 		expected:    map[string]int{"A": 9, "B": 1, "C": 0},
 	},
-	// {
-	// 	description: "puzzle with four letters",
-	// 	input:       "AS + A == MOM",
-	// 	expected:    map[string]int{"A": 9, "M": 1, "O": 0, "S": 2},
-	// },
+	{
+		description: "puzzle with four letters",
+		input:       "AS + A == MOM",
+		expected:    map[string]int{"A": 9, "M": 1, "O": 0, "S": 2},
+	},
 	// {
 	// 	description: "puzzle with six letters",
 	// 	input:       "NO + NO + TOO == LATE",

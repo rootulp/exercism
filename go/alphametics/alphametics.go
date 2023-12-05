@@ -17,6 +17,9 @@ func Solve(input string) (map[string]int, error) {
 	letters := equation.uniqueLetters()
 	for {
 		letterToNumber := assignRandomValues(letters)
+		if equation.isLeadingZero(letterToNumber) {
+			continue
+		}
 		if equation.evaluate(letterToNumber) {
 			return letterToNumber, nil
 		}
@@ -65,41 +68,50 @@ func (e equation) evaluateExpression(letterToNumber map[string]int) (result int)
 	return result
 }
 
+func (e equation) isLeadingZero(letterToNumber map[string]int) bool {
+	for _, word := range e.words() {
+		if len(word) > 1 && letterToNumber[string(word[0])] == 0 {
+			return true
+		}
+	}
+	return false
+}
+
 func translate(letterToNumber map[string]int, word string) int {
-	translated := ""
+	numbers := ""
 	for _, letter := range word {
 		value := letterToNumber[string(letter)]
-		translated += strconv.Itoa(value)
+		numbers += strconv.Itoa(value)
 	}
-	result, err := strconv.Atoi(translated)
+	value, err := strconv.Atoi(numbers)
 	if err != nil {
-		panic(fmt.Sprintf("cannot convert %s to int", translated))
+		panic(fmt.Sprintf("cannot convert %s to int", numbers))
 	}
-	return result
+	return value
 }
 
 func assignRandomValues(letters map[string]bool) map[string]int {
 	values := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 	result := map[string]int{}
 	for letter := range letters {
-		value, remainingElements := popRandomElement(values)
+		value, remainingElements := popRandom(values)
 		values = remainingElements
 		result[letter] = value
 	}
 	return result
 }
 
-func popRandomElement(x []int) (int, []int) {
+func popRandom(x []int) (int, []int) {
 	index := rand.Intn(len(x))
-	result := x[index]
-	x = append(x[:index], x[index+1:]...)
-	return result, x
+	element := x[index]
+	remaining := append(x[:index], x[index+1:]...)
+	return element, remaining
 }
 
-// trim removes leading and trailing spaces from each string in x
-func trim(x []string) []string {
-	for i, addend := range x {
-		x[i] = strings.Trim(addend, " ")
+// trim removes leading and trailing spaces from each word in words
+func trim(words []string) []string {
+	for i, word := range words {
+		words[i] = strings.Trim(word, " ")
 	}
-	return x
+	return words
 }
