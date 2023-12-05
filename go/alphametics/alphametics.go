@@ -2,6 +2,7 @@ package alphametics
 
 import (
 	"errors"
+	"fmt"
 	"math/rand"
 	"strconv"
 	"strings"
@@ -16,11 +17,7 @@ func Solve(input string) (map[string]int, error) {
 	letters := equation.uniqueLetters()
 	for {
 		letterToNumber := assignRandomValues(letters)
-		evaluated, err := evaluate(equation.sum, equation.addends, letterToNumber)
-		if err != nil {
-			return nil, err
-		}
-		if evaluated {
+		if equation.evaluate(letterToNumber) {
 			return letterToNumber, nil
 		}
 	}
@@ -29,10 +26,6 @@ func Solve(input string) (map[string]int, error) {
 type equation struct {
 	addends []string
 	sum     string
-}
-
-func (e equation) words() []string {
-	return append([]string{e.sum}, e.addends...)
 }
 
 func parse(input string) (equation, error) {
@@ -46,6 +39,10 @@ func parse(input string) (equation, error) {
 	return equation{addends, sum}, nil
 }
 
+func (e equation) words() []string {
+	return append([]string{e.sum}, e.addends...)
+}
+
 func (e equation) uniqueLetters() map[string]bool {
 	result := map[string]bool{}
 	for _, word := range e.words() {
@@ -56,23 +53,19 @@ func (e equation) uniqueLetters() map[string]bool {
 	return result
 }
 
-func evaluate(sum string, addends []string, letterToNumber map[string]int) (bool, error) {
-	result := 0
-	for _, addend := range addends {
-		translated, err := translate(letterToNumber, addend)
-		if err != nil {
-			return false, err
-		}
-		result += translated
-	}
-	realSum, err := translate(letterToNumber, sum)
-	if err != nil {
-		return false, err
-	}
-	return result == realSum, nil
+func (e equation) evaluate(letterToNumber map[string]int) bool {
+	return e.evaluateExpression(letterToNumber) == translate(letterToNumber, e.sum)
 }
 
-func translate(letterToNumber map[string]int, word string) (int, error) {
+func (e equation) evaluateExpression(letterToNumber map[string]int) (result int) {
+	for _, addend := range e.addends {
+		translated := translate(letterToNumber, addend)
+		result += translated
+	}
+	return result
+}
+
+func translate(letterToNumber map[string]int, word string) int {
 	translated := ""
 	for _, letter := range word {
 		value := letterToNumber[string(letter)]
@@ -80,9 +73,9 @@ func translate(letterToNumber map[string]int, word string) (int, error) {
 	}
 	result, err := strconv.Atoi(translated)
 	if err != nil {
-		return 0, err
+		panic(fmt.Sprintf("cannot convert %s to int", translated))
 	}
-	return result, nil
+	return result
 }
 
 func assignRandomValues(letters map[string]bool) map[string]int {
