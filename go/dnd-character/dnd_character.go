@@ -22,12 +22,27 @@ func Modifier(score int) int {
 
 // Ability uses randomness to generate the score for an ability
 func Ability() int {
-	a := rollDice()
-	b := rollDice()
-	c := rollDice()
-	d := rollDice()
+	roll1 := rollDice()
+	roll2 := rollDice()
+	roll3 := rollDice()
+	roll4 := rollDice()
 
-	return getSum(a, b, c, d) - getMin(a, b, c, d)
+	return getSum(roll1, roll2, roll3, roll4) - getMin(roll1, roll2, roll3, roll4)
+}
+
+// GenerateCharacter creates a new Character with random scores for abilities
+func GenerateCharacter() Character {
+	constituion := Ability()
+
+	return Character{
+		Strength:     Ability(),
+		Dexterity:    Ability(),
+		Constitution: constituion,
+		Intelligence: Ability(),
+		Wisdom:       Ability(),
+		Charisma:     Ability(),
+		Hitpoints:    10 + Modifier(constituion),
+	}
 }
 
 // rollDice returns a random number between 1 and 6.
@@ -50,9 +65,4 @@ func getMin(slice ...int) (minimum int) {
 		}
 	}
 	return minimum
-}
-
-// GenerateCharacter creates a new Character with random scores for abilities
-func GenerateCharacter() Character {
-	panic("Please implement the GenerateCharacter() function")
 }
