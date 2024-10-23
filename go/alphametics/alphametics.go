@@ -3,7 +3,6 @@ package alphametics
 import (
 	"errors"
 	"fmt"
-	"math/rand"
 	"strconv"
 	"strings"
 )
@@ -21,15 +20,38 @@ func Solve(input string) (map[string]int, error) {
 	}
 
 	letters := equation.uniqueLetters()
-	for {
-		letterToNumber := assignRandomValues(letters)
-		if equation.isLeadingZero(letterToNumber) {
-			continue
-		}
-		if equation.evaluate(letterToNumber) {
-			return letterToNumber, nil
+	usedNumbers := make([]bool, 10)
+	letterToNumber := make(map[string]int)
+
+	if solveBacktrack(&equation, letters, letterToNumber, usedNumbers, 0) {
+		return letterToNumber, nil
+	}
+	return nil, errors.New("no solution found")
+}
+
+func solveBacktrack(equation *equation, letters []string, letterToNumber map[string]int, usedNumbers []bool, index int) bool {
+	fmt.Printf("letters %v letterToNumber %v usedNumbers %v index %v\n", letters, letterToNumber, usedNumbers, index) // Debug statement
+	if index == len(letters) {
+		return equation.evaluate(letterToNumber)
+	}
+
+	for num := 0; num <= 9; num++ {
+		if !usedNumbers[num] {
+			letterToNumber[letters[index]] = num
+			usedNumbers[num] = true
+
+			fmt.Printf("Trying %s = %d\n", letters[index], num) // Debug statement
+			fmt.Printf("Current map: %v\n", letterToNumber)     // Debug statement
+
+			if !equation.isLeadingZero(letterToNumber) && solveBacktrack(equation, letters, letterToNumber, usedNumbers, index+1) {
+				return true
+			}
+
+			usedNumbers[num] = false
+			delete(letterToNumber, letters[index])
 		}
 	}
+	return false
 }
 
 type equation struct {
@@ -52,14 +74,18 @@ func (e equation) words() []string {
 	return append([]string{e.sum}, e.addends...)
 }
 
-func (e equation) uniqueLetters() map[string]bool {
+func (e equation) uniqueLetters() []string {
 	result := map[string]bool{}
 	for _, word := range e.words() {
 		for _, letter := range word {
 			result[string(letter)] = true
 		}
 	}
-	return result
+	letters := make([]string, 0, len(result))
+	for letter := range result {
+		letters = append(letters, letter)
+	}
+	return letters
 }
 
 func (e equation) evaluate(letterToNumber map[string]int) bool {
@@ -76,8 +102,12 @@ func (e equation) evaluateExpression(letterToNumber map[string]int) (result int)
 
 func (e equation) isLeadingZero(letterToNumber map[string]int) bool {
 	for _, word := range e.words() {
-		if len(word) > 1 && letterToNumber[string(word[0])] == 0 {
-			return true
+		if len(word) > 1 {
+			firstLetter := string(word[0])
+			if value, exists := letterToNumber[firstLetter]; exists && value == 0 {
+				fmt.Printf("returning true b/c %s is leading zero\n", word) // Debug statement
+				return true
+			}
 		}
 	}
 	return false
@@ -107,24 +137,6 @@ func translate(letterToNumber map[string]int, word string) int {
 		panic(fmt.Sprintf("cannot convert %s to int", numbers))
 	}
 	return value
-}
-
-func assignRandomValues(letters map[string]bool) map[string]int {
-	values := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-	result := map[string]int{}
-	for letter := range letters {
-		value, remainingElements := popRandom(values)
-		values = remainingElements
-		result[letter] = value
-	}
-	return result
-}
-
-func popRandom(x []int) (int, []int) {
-	index := rand.Intn(len(x))
-	element := x[index]
-	remaining := append(x[:index], x[index+1:]...)
-	return element, remaining
 }
 
 // trim removes leading and trailing spaces from each word in words
