@@ -23,14 +23,13 @@ func Solve(input string) (map[string]int, error) {
 	usedNumbers := make([]bool, 10)
 	letterToNumber := make(map[string]int)
 
-	if solveBacktrack(&equation, letters, letterToNumber, usedNumbers, 0) {
+	if solveBacktrack(equation, letters, letterToNumber, usedNumbers, 0) {
 		return letterToNumber, nil
 	}
 	return nil, errors.New("no solution found")
 }
 
-func solveBacktrack(equation *equation, letters []string, letterToNumber map[string]int, usedNumbers []bool, index int) bool {
-	fmt.Printf("letters %v letterToNumber %v usedNumbers %v index %v\n", letters, letterToNumber, usedNumbers, index) // Debug statement
+func solveBacktrack(equation equation, letters []string, letterToNumber map[string]int, usedNumbers []bool, index int) bool {
 	if index == len(letters) {
 		return equation.evaluate(letterToNumber)
 	}
@@ -39,10 +38,6 @@ func solveBacktrack(equation *equation, letters []string, letterToNumber map[str
 		if !usedNumbers[num] {
 			letterToNumber[letters[index]] = num
 			usedNumbers[num] = true
-
-			fmt.Printf("Trying %s = %d\n", letters[index], num) // Debug statement
-			fmt.Printf("Current map: %v\n", letterToNumber)     // Debug statement
-
 			if !equation.isLeadingZero(letterToNumber) && solveBacktrack(equation, letters, letterToNumber, usedNumbers, index+1) {
 				return true
 			}
@@ -59,6 +54,7 @@ type equation struct {
 	sum     string
 }
 
+// parse returns an equation based on input
 func parse(input string) (equation, error) {
 	parts := trim(strings.Split(input, "=="))
 	if len(parts) != 2 {
@@ -70,28 +66,37 @@ func parse(input string) (equation, error) {
 	return equation{addends, sum}, nil
 }
 
+// words returns all words in the equation
 func (e equation) words() []string {
 	return append([]string{e.sum}, e.addends...)
 }
 
+// uniqueLeters returns the unique letters in the equation.
 func (e equation) uniqueLetters() []string {
-	result := map[string]bool{}
+	letters := map[string]bool{}
 	for _, word := range e.words() {
 		for _, letter := range word {
-			result[string(letter)] = true
+			letters[string(letter)] = true
 		}
 	}
-	letters := make([]string, 0, len(result))
-	for letter := range result {
-		letters = append(letters, letter)
-	}
-	return letters
+	return getKeys(letters)
 }
 
+// getKeys returns all keys in a map
+func getKeys(m map[string]bool) []string {
+	keys := make([]string, 0, len(m))
+	for key := range m {
+		keys = append(keys, key)
+	}
+	return keys
+}
+
+// evaluate returns true if the equation is satisfied based on letterToNumber
 func (e equation) evaluate(letterToNumber map[string]int) bool {
 	return e.evaluateExpression(letterToNumber) == translate(letterToNumber, e.sum)
 }
 
+// evaluateExpression returns the result of the sum of all addends based on letterToNumber
 func (e equation) evaluateExpression(letterToNumber map[string]int) (result int) {
 	for _, addend := range e.addends {
 		translated := translate(letterToNumber, addend)
@@ -100,12 +105,12 @@ func (e equation) evaluateExpression(letterToNumber map[string]int) (result int)
 	return result
 }
 
+// isLeadingZero returns true if any word has a leading zero based on letterToNumber.
 func (e equation) isLeadingZero(letterToNumber map[string]int) bool {
 	for _, word := range e.words() {
 		if len(word) > 1 {
 			firstLetter := string(word[0])
 			if value, exists := letterToNumber[firstLetter]; exists && value == 0 {
-				fmt.Printf("returning true b/c %s is leading zero\n", word) // Debug statement
 				return true
 			}
 		}
@@ -113,10 +118,12 @@ func (e equation) isLeadingZero(letterToNumber map[string]int) bool {
 	return false
 }
 
+// onlyTwoUniqueLetters returns true if there are only two unique letters in the equation.
 func (e equation) onlyTwoUniqueLetters() bool {
 	return len(e.uniqueLetters()) == 2
 }
 
+// addendIsLongerThanSum returns true if any addend is longer than sum
 func (e equation) addendIsLongerThanSum() bool {
 	for _, addend := range e.addends {
 		if len(addend) > len(e.sum) {
@@ -126,6 +133,7 @@ func (e equation) addendIsLongerThanSum() bool {
 	return false
 }
 
+// translate converts word to a number based on letterToNumber
 func translate(letterToNumber map[string]int, word string) int {
 	numbers := ""
 	for _, letter := range word {
