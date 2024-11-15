@@ -1,156 +1,197 @@
+// Package alphametics provides functionality for solving alphametics puzzles.
 package alphametics
 
 import (
 	"errors"
-	"fmt"
-	"strconv"
+	"math"
+	"sort"
 	"strings"
 )
 
-func Solve(input string) (map[string]int, error) {
-	equation, err := parse(input)
-	if err != nil {
-		return nil, err
-	}
-	if equation.onlyTwoUniqueLetters() {
-		return nil, fmt.Errorf("solution must have unique value for each letter")
-	}
-	if equation.addendIsLongerThanSum() {
-		return nil, fmt.Errorf("leading zero solution is invalid")
-	}
-
-	letters := equation.uniqueLetters()
-	usedNumbers := make([]bool, 10)
-	letterToNumber := make(map[string]int)
-
-	if solveBacktrack(equation, letters, letterToNumber, usedNumbers, 0) {
-		return letterToNumber, nil
-	}
-	return nil, errors.New("no solution found")
-}
-
-func solveBacktrack(equation equation, letters []string, letterToNumber map[string]int, usedNumbers []bool, index int) bool {
-	if index == len(letters) {
-		return equation.evaluate(letterToNumber)
-	}
-
-	for num := 0; num <= 9; num++ {
-		if !usedNumbers[num] {
-			letterToNumber[letters[index]] = num
-			usedNumbers[num] = true
-			if !equation.isLeadingZero(letterToNumber) && solveBacktrack(equation, letters, letterToNumber, usedNumbers, index+1) {
-				return true
-			}
-
-			usedNumbers[num] = false
-			delete(letterToNumber, letters[index])
-		}
-	}
-	return false
+type addend struct {
+	letters []rune
+	number  int
 }
 
 type equation struct {
-	addends []string
-	sum     string
+	usedLetters []rune
+	lhs         []addend
+	rhs         addend
 }
 
-// parse returns an equation based on input
-func parse(input string) (equation, error) {
-	parts := trim(strings.Split(input, "=="))
-	if len(parts) != 2 {
-		return equation{}, errors.New("invalid input")
+// Solve solves the given input puzzle.
+func Solve(puzzle string) (map[string]int, error) {
+	eq := parsePuzzle(puzzle)
+	result := solvePuzzle(eq)
+
+	if result == nil {
+		return nil, errors.New("no possible solution")
 	}
-	left, sum := parts[0], parts[1]
 
-	addends := trim(strings.Split(left, "+"))
-	return equation{addends, sum}, nil
+	return result, nil
 }
 
-// words returns all words in the equation
-func (e equation) words() []string {
-	return append([]string{e.sum}, e.addends...)
-}
+func parsePuzzle(puzzle string) equation {
+	lhs := make([]addend, 0)
+	var rhs addend
+	usedLetters := make([]rune, 0, 10)
+	isRHS := false
 
-// uniqueLeters returns the unique letters in the equation.
-func (e equation) uniqueLetters() []string {
-	letters := map[string]bool{}
-	for _, word := range e.words() {
-		for _, letter := range word {
-			letters[string(letter)] = true
+	for _, item := range strings.Fields(puzzle) {
+		if item == "==" {
+			isRHS = true
+			continue
+		} else if item == "+" {
+			continue
+		} else if isRHS {
+			rhs = addend{letters: []rune(item)}
+		} else {
+			lhs = append(lhs, addend{letters: []rune(item)})
 		}
-	}
-	return getKeys(letters)
-}
 
-// getKeys returns all keys in a map
-func getKeys(m map[string]bool) []string {
-	keys := make([]string, 0, len(m))
-	for key := range m {
-		keys = append(keys, key)
-	}
-	return keys
-}
-
-// evaluate returns true if the equation is satisfied based on letterToNumber
-func (e equation) evaluate(letterToNumber map[string]int) bool {
-	return e.evaluateExpression(letterToNumber) == translate(letterToNumber, e.sum)
-}
-
-// evaluateExpression returns the result of the sum of all addends based on letterToNumber
-func (e equation) evaluateExpression(letterToNumber map[string]int) (result int) {
-	for _, addend := range e.addends {
-		translated := translate(letterToNumber, addend)
-		result += translated
-	}
-	return result
-}
-
-// isLeadingZero returns true if any word has a leading zero based on letterToNumber.
-func (e equation) isLeadingZero(letterToNumber map[string]int) bool {
-	for _, word := range e.words() {
-		if len(word) > 1 {
-			firstLetter := string(word[0])
-			if value, exists := letterToNumber[firstLetter]; exists && value == 0 {
-				return true
+		for _, v := range item {
+			if !isLetterUsed(usedLetters, v) {
+				usedLetters = append(usedLetters, v)
 			}
 		}
 	}
-	return false
+
+	sort.Slice(usedLetters, func(i, j int) bool { return usedLetters[i] < usedLetters[j] })
+	return equation{usedLetters: usedLetters, lhs: lhs, rhs: rhs}
 }
 
-// onlyTwoUniqueLetters returns true if there are only two unique letters in the equation.
-func (e equation) onlyTwoUniqueLetters() bool {
-	return len(e.uniqueLetters()) == 2
+func solvePuzzle(eq equation) map[string]int {
+	result := map[string]int{}
+	usedNumbers := make([]int, 0, 10)
+	isSolved := false
+
+outer:
+	for isSolved == false {
+		isSolved, usedNumbers = solveEquation(eq, usedNumbers)
+
+		if !isSolved {
+			for usedNumbers[len(usedNumbers)-1] == getMaxNumberCanBeUsed(usedNumbers) {
+				if len(usedNumbers) == 1 {
+					break outer // no more possible solution
+				}
+
+				usedNumbers = usedNumbers[:len(usedNumbers)-1]
+			}
+
+			for i := usedNumbers[len(usedNumbers)-1] + 1; i < 10; i++ {
+				if isNumberUsed(usedNumbers, i) {
+					continue
+				} else {
+					usedNumbers[len(usedNumbers)-1] = i
+					break
+				}
+			}
+		}
+	}
+
+	if isSolved {
+		for i := 0; i < len(usedNumbers); i++ {
+			result[string(eq.usedLetters[i])] = usedNumbers[i]
+		}
+
+		return result
+	}
+
+	return nil
 }
 
-// addendIsLongerThanSum returns true if any addend is longer than sum
-func (e equation) addendIsLongerThanSum() bool {
-	for _, addend := range e.addends {
-		if len(addend) > len(e.sum) {
+func solveEquation(eq equation, usedNumbers []int) (bool, []int) {
+	for i := 0; i < 10; i++ {
+		if isNumberUsed(usedNumbers, i) {
+			continue
+		}
+
+		usedNumbers = append(usedNumbers, i)
+
+		if len(usedNumbers) == len(eq.usedLetters) {
+			if isEquationTrue(eq, usedNumbers) {
+				return true, usedNumbers
+			}
+
+			usedNumbers = usedNumbers[:len(usedNumbers)-1]
+		}
+	}
+
+	return false, usedNumbers
+}
+
+func isEquationTrue(eq equation, usedNumbers []int) bool {
+	var result bool
+	var lhs, lhsSum, rhs int
+
+	for i := 0; i < len(eq.lhs); i++ {
+		if result, lhs = getSum(eq.lhs[i], eq.usedLetters, usedNumbers); result == false {
+			return result
+		}
+
+		lhsSum += lhs
+	}
+
+	if result, rhs = getSum(eq.rhs, eq.usedLetters, usedNumbers); result == false {
+		return result
+	}
+
+	return lhsSum == rhs
+}
+
+func isNumberUsed(usedNumbers []int, number int) bool {
+	for i := 0; i < len(usedNumbers); i++ {
+		if usedNumbers[i] == number {
 			return true
 		}
 	}
+
 	return false
 }
 
-// translate converts word to a number based on letterToNumber
-func translate(letterToNumber map[string]int, word string) int {
-	numbers := ""
-	for _, letter := range word {
-		value := letterToNumber[string(letter)]
-		numbers += strconv.Itoa(value)
+func isLetterUsed(usedLetters []rune, letter rune) bool {
+	for i := 0; i < len(usedLetters); i++ {
+		if usedLetters[i] == letter {
+			return true
+		}
 	}
-	value, err := strconv.Atoi(numbers)
-	if err != nil {
-		panic(fmt.Sprintf("cannot convert %s to int", numbers))
-	}
-	return value
+
+	return false
 }
 
-// trim removes leading and trailing spaces from each word in words
-func trim(words []string) []string {
-	for i, word := range words {
-		words[i] = strings.Trim(word, " ")
+func getMaxNumberCanBeUsed(usedNumbers []int) int {
+	for i := 9; i >= 0; i-- {
+		if !isNumberUsed(usedNumbers[:len(usedNumbers)-1], i) {
+			return i
+		}
 	}
-	return words
+
+	return 0
+}
+
+func getSum(ad addend, usedLetters []rune, usedNumbers []int) (bool, int) {
+	var sum int
+	numOfDigits := len(ad.letters)
+
+	for i := 0; i < numOfDigits; i++ {
+		num := getNumberFromUsedNumbers(ad.letters[i], usedLetters, usedNumbers)
+
+		if num == 0 && i == 0 && numOfDigits > 1 {
+			return false, -1 // leading zero in multi-digit number
+		}
+
+		sum += num * int(math.Pow(10, float64(numOfDigits-1-i)))
+	}
+
+	return true, sum
+}
+
+func getNumberFromUsedNumbers(letter rune, usedLetters []rune, usedNumbers []int) int {
+	for i := 0; i < len(usedLetters); i++ {
+		if letter == usedLetters[i] {
+			return usedNumbers[i]
+		}
+	}
+
+	return -1
 }
