@@ -13,14 +13,14 @@ type addend struct {
 }
 
 type equation struct {
-	usedLetters []rune
-	lhs         []addend
-	rhs         addend
+	usedLetters   []rune
+	leftHandSide  []addend
+	rightHandSide addend
 }
 
 // Solve solves the given input puzzle.
 func Solve(puzzle string) (map[string]int, error) {
-	eq := parsePuzzle(puzzle)
+	eq := parse(puzzle)
 	result := solvePuzzle(eq)
 
 	if result == nil {
@@ -30,33 +30,33 @@ func Solve(puzzle string) (map[string]int, error) {
 	return result, nil
 }
 
-func parsePuzzle(puzzle string) equation {
-	lhs := make([]addend, 0)
-	var rhs addend
+func parse(puzzle string) equation {
+	leftHandSide := make([]addend, 0)
+	var rightHandSide addend
 	usedLetters := make([]rune, 0, 10)
-	isRHS := false
+	isRightHandSide := false
 
 	for _, item := range strings.Fields(puzzle) {
 		if item == "==" {
-			isRHS = true
+			isRightHandSide = true
 			continue
 		} else if item == "+" {
 			continue
-		} else if isRHS {
-			rhs = addend{letters: []rune(item)}
+		} else if isRightHandSide {
+			rightHandSide = addend{letters: []rune(item)}
 		} else {
-			lhs = append(lhs, addend{letters: []rune(item)})
+			leftHandSide = append(leftHandSide, addend{letters: []rune(item)})
 		}
 
-		for _, v := range item {
-			if !isLetterUsed(usedLetters, v) {
-				usedLetters = append(usedLetters, v)
+		for _, letter := range item {
+			if !isLetterUsed(usedLetters, letter) {
+				usedLetters = append(usedLetters, letter)
 			}
 		}
 	}
 
 	sort.Slice(usedLetters, func(i, j int) bool { return usedLetters[i] < usedLetters[j] })
-	return equation{usedLetters: usedLetters, lhs: lhs, rhs: rhs}
+	return equation{usedLetters: usedLetters, leftHandSide: leftHandSide, rightHandSide: rightHandSide}
 }
 
 func solvePuzzle(eq equation) map[string]int {
@@ -123,15 +123,15 @@ func isEquationTrue(eq equation, usedNumbers []int) bool {
 	var result bool
 	var lhs, lhsSum, rhs int
 
-	for i := 0; i < len(eq.lhs); i++ {
-		if result, lhs = getSum(eq.lhs[i], eq.usedLetters, usedNumbers); !result {
+	for i := 0; i < len(eq.leftHandSide); i++ {
+		if result, lhs = getSum(eq.leftHandSide[i], eq.usedLetters, usedNumbers); !result {
 			return result
 		}
 
 		lhsSum += lhs
 	}
 
-	if result, rhs = getSum(eq.rhs, eq.usedLetters, usedNumbers); !result {
+	if result, rhs = getSum(eq.rightHandSide, eq.usedLetters, usedNumbers); !result {
 		return result
 	}
 
