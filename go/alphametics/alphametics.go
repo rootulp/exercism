@@ -10,7 +10,6 @@ import (
 
 type addend struct {
 	letters []rune
-	number  int
 }
 
 type equation struct {
@@ -66,7 +65,7 @@ func solvePuzzle(eq equation) map[string]int {
 	isSolved := false
 
 outer:
-	for isSolved == false {
+	for !isSolved {
 		isSolved, usedNumbers = solveEquation(eq, usedNumbers)
 
 		if !isSolved {
@@ -125,14 +124,14 @@ func isEquationTrue(eq equation, usedNumbers []int) bool {
 	var lhs, lhsSum, rhs int
 
 	for i := 0; i < len(eq.lhs); i++ {
-		if result, lhs = getSum(eq.lhs[i], eq.usedLetters, usedNumbers); result == false {
+		if result, lhs = getSum(eq.lhs[i], eq.usedLetters, usedNumbers); !result {
 			return result
 		}
 
 		lhsSum += lhs
 	}
 
-	if result, rhs = getSum(eq.rhs, eq.usedLetters, usedNumbers); result == false {
+	if result, rhs = getSum(eq.rhs, eq.usedLetters, usedNumbers); !result {
 		return result
 	}
 
