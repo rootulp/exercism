@@ -24,7 +24,6 @@ fn public_key_correct() {
 }
 
 #[test]
-#[ignore]
 fn secret_key_correct() {
     let p: u64 = 11;
 
