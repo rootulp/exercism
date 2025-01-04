@@ -5,3 +5,6 @@ version = "0.1.0"
 
 [features]
 big-primes = []
+
+[dependencies]
+rand = "0.8.5"
