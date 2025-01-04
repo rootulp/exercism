@@ -9,6 +9,7 @@ members = [
   "beer-song",
   "bob",
   "clock",
+  "collatz-conjecture",
   "difference-of-squares",
   "gigasecond",
   "grade-school",
