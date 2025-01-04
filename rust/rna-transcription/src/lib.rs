@@ -29,7 +29,7 @@ impl Dna {
 
         let mut converted = String::new();
 
-        for (_, c) in self.contents.chars().enumerate() {
+        for c in self.contents.chars() {
             converted.push(*complements.get(&c).unwrap())
         }
 

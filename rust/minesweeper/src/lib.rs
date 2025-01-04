@@ -35,21 +35,21 @@ impl Board {
     }
 
     fn annotate(&self) -> Vec<String> {
-        return self
+        self
             .field
             .iter()
             .enumerate()
             .map(|(row, _)| self.annotate_row(row))
-            .collect();
+            .collect()
     }
 
     fn annotate_row(&self, y: usize) -> String {
         let row = &self.field[y];
-        return row
+        row
             .iter()
             .enumerate()
             .map(|(x, _)| self.annotate_location(y, x))
-            .collect();
+            .collect()
     }
 
     fn annotate_location(&self, y: usize, x: usize) -> char {
@@ -68,11 +68,11 @@ impl Board {
     }
 
     fn num_neighbor_mines(&self, y: u32, x: u32) -> usize {
-        return self
+        self
             .get_neighbors(y, x)
             .iter()
             .filter(|neighbor| neighbor == &&&Token::Mine)
-            .count();
+            .count()
     }
 
     fn get_neighbors(&self, y: u32, x: u32) -> Vec<&Token> {

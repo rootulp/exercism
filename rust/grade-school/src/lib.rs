@@ -37,7 +37,7 @@ impl<'a> School<'a> {
     }
 }
 
-impl<'a> Default for School<'a> {
+impl Default for School<'_> {
     fn default() -> Self {
         Self::new()
     }
