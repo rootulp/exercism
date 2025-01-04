@@ -12,5 +12,5 @@ pub fn public_key(p: u64, g: u64, a: u64) -> u64 {
 }
 
 pub fn secret(p: u64, b_pub: u64, a: u64) -> u64 {
-    return b_pub.pow(a.try_into().unwrap()) % p
+    b_pub.to_biguint().unwrap().modpow(&a.to_biguint().unwrap(), &p.to_biguint().unwrap()).try_into().unwrap()
 }
