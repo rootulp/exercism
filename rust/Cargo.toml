@@ -10,6 +10,7 @@ members = [
   "bob",
   "clock",
   "collatz-conjecture",
+  "diffie-hellman",
   "difference-of-squares",
   "gigasecond",
   "grade-school",
