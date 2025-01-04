@@ -36,7 +36,6 @@ fn secret_key_correct() {
 }
 
 #[test]
-#[ignore]
 fn public_key_correct_big_numbers() {
     let p: u64 = 4_294_967_299;
 

@@ -1,3 +1,4 @@
+use num_bigint::ToBigUint;
 use rand::Rng;
 
 pub fn private_key(p: u64) -> u64 {
@@ -7,7 +8,11 @@ pub fn private_key(p: u64) -> u64 {
 }
 
 pub fn public_key(p: u64, g: u64, a: u64) -> u64 {
-    return g.pow(a.try_into().unwrap()) % p
+    let pbig = p.to_biguint().unwrap();
+    let gbig = g.to_biguint().unwrap();
+    let abig = a.to_biguint().unwrap();
+    let result = gbig.modpow(&abig, &pbig);
+    return result.try_into().unwrap();
 }
 
 pub fn secret(p: u64, b_pub: u64, a: u64) -> u64 {

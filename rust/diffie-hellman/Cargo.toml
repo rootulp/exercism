@@ -7,4 +7,5 @@ version = "0.1.0"
 big-primes = []
 
 [dependencies]
+num-bigint = "0.4.6"
 rand = "0.8.5"
