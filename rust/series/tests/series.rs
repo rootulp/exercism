@@ -75,7 +75,6 @@ fn slice_length_is_way_too_large() {
 }
 
 #[test]
-#[ignore]
 fn empty_series_is_invalid() {
     let input = "";
     let length = 1;
