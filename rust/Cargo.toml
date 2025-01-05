@@ -37,6 +37,7 @@ members = [
   "role-playing-game",
   "rpn-calculator",
   "semi-structured-logs",
+  "series",
   "short-fibonacci",
   "space-age",
   "sublist",
