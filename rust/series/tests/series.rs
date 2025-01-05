@@ -66,7 +66,6 @@ fn slice_length_is_too_large() {
 }
 
 #[test]
-#[ignore]
 fn slice_length_is_way_too_large() {
     let input = "12345";
     let length = 42;
