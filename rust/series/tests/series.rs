@@ -57,7 +57,6 @@ fn slices_of_a_long_series() {
 }
 
 #[test]
-#[ignore]
 fn slice_length_is_too_large() {
     let input = "12345";
     let length = 6;
