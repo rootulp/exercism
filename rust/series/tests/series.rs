@@ -10,7 +10,6 @@ fn slices_of_one_from_one() {
 }
 
 #[test]
-#[ignore]
 fn slices_of_one_from_two() {
     let input = "12";
     let length = 1;
