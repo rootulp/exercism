@@ -20,6 +20,7 @@ members = [
   "hello-world",
   "high-scores",
   "isbn-verifier",
+  "kindergarten-garden",
   "leap",
   "low-power-embedded-game",
   "lucians-luscious-lasagna",
