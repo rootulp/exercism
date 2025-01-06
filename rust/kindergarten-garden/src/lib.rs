@@ -1,8 +1,8 @@
 pub fn plants(diagram: &str, name: &str) -> Vec<&'static str> {
-    let student = parse_student(name);
     let mut result = vec![];
-    let lines = diagram.split("\n");
-    for line in lines {
+    let student = parse_student(name);
+
+    for line in diagram.split("\n") {
         for index in student.indices() {
             let encoding = line.chars().nth(index).unwrap();
             let plant = get_plant(encoding);
@@ -15,8 +15,8 @@ pub fn plants(diagram: &str, name: &str) -> Vec<&'static str> {
 enum Plant {
     Grass,
     Clover,
-    Radish,
-    Violet
+    Radishes,
+    Violets
 }
 
 impl Plant {
@@ -24,8 +24,8 @@ impl Plant {
         match self {
             Plant::Grass => "grass",
             Plant::Clover => "clover",
-            Plant::Radish => "radishes",
-            Plant::Violet => "violets",
+            Plant::Radishes => "radishes",
+            Plant::Violets => "violets",
         }
     }
 }
@@ -34,9 +34,9 @@ fn get_plant(encoding: char) -> Plant {
     return match encoding {
         'G' => Plant::Grass,
         'C' => Plant::Clover,
-        'R' => Plant::Radish,
-        'V' => Plant::Violet,
-        _ => Plant::Grass // TODO: replace this with an error
+        'R' => Plant::Radishes,
+        'V' => Plant::Violets,
+        _ => panic!("Invalid plant encoding")
     }
 }
 
