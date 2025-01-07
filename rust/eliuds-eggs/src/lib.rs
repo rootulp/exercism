@@ -8,7 +8,7 @@ fn decimal_to_binary(decimal: u32) -> String {
     let mut n = decimal;
     while n != 0 {
         let remainder = n % 2;
-        n = n / 2;
+        n /= 2;
         result.insert(0, char::from_digit(remainder, 10).unwrap());
     }
     result

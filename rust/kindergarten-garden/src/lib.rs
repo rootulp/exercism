@@ -8,7 +8,7 @@ pub fn plants(diagram: &str, name: &str) -> Vec<&'static str> {
             let plant = get_plant(encoding);
             result.push(plant.string());
         }
-    };
+    }
     result
 }
 
@@ -16,7 +16,7 @@ enum Plant {
     Grass,
     Clover,
     Radishes,
-    Violets
+    Violets,
 }
 
 impl Plant {
@@ -36,10 +36,9 @@ fn get_plant(encoding: char) -> Plant {
         'C' => Plant::Clover,
         'R' => Plant::Radishes,
         'V' => Plant::Violets,
-        _ => panic!("Invalid plant encoding")
-    }
+        _ => panic!("Invalid plant encoding"),
+    };
 }
-
 
 enum Student {
     Alice,
@@ -53,7 +52,7 @@ enum Student {
     Ileana,
     Joseph,
     Kincaid,
-    Larry
+    Larry,
 }
 
 fn parse_student(name: &str) -> Student {
@@ -70,8 +69,8 @@ fn parse_student(name: &str) -> Student {
         "Joseph" => Student::Joseph,
         "Kincaid" => Student::Kincaid,
         "Larry" => Student::Larry,
-        _ => panic!("Invalid student name")
-    }
+        _ => panic!("Invalid student name"),
+    };
 }
 
 impl Student {
@@ -89,6 +88,6 @@ impl Student {
             Student::Joseph => vec![18, 19],
             Student::Kincaid => vec![20, 21],
             Student::Larry => vec![22, 23],
-        }
+        };
     }
 }
