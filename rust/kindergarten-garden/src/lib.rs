@@ -31,13 +31,13 @@ impl Plant {
 }
 
 fn get_plant(encoding: char) -> Plant {
-    return match encoding {
+    match encoding {
         'G' => Plant::Grass,
         'C' => Plant::Clover,
         'R' => Plant::Radishes,
         'V' => Plant::Violets,
         _ => panic!("Invalid plant encoding"),
-    };
+    }
 }
 
 enum Student {
@@ -56,7 +56,7 @@ enum Student {
 }
 
 fn parse_student(name: &str) -> Student {
-    return match name {
+    match name {
         "Alice" => Student::Alice,
         "Bob" => Student::Bob,
         "Charlie" => Student::Charlie,
@@ -70,12 +70,12 @@ fn parse_student(name: &str) -> Student {
         "Kincaid" => Student::Kincaid,
         "Larry" => Student::Larry,
         _ => panic!("Invalid student name"),
-    };
+    }
 }
 
 impl Student {
     fn indices(&self) -> Vec<usize> {
-        return match self {
+        match self {
             Student::Alice => vec![0, 1],
             Student::Bob => vec![2, 3],
             Student::Charlie => vec![4, 5],
@@ -88,6 +88,6 @@ impl Student {
             Student::Joseph => vec![18, 19],
             Student::Kincaid => vec![20, 21],
             Student::Larry => vec![22, 23],
-        };
+        }
     }
 }
