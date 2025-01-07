@@ -12,6 +12,7 @@ members = [
   "collatz-conjecture",
   "diffie-hellman",
   "difference-of-squares",
+  "eliuds-eggs",
   "gigasecond",
   "grade-school",
   "grains",
