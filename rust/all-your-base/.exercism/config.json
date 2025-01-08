@@ -1,0 +1,36 @@
+{
+  "authors": [
+    "jonasbb"
+  ],
+  "contributors": [
+    "CGMossa",
+    "coriolinus",
+    "cwhakes",
+    "efx",
+    "ErikSchierboom",
+    "IanWhitney",
+    "lutostag",
+    "mkantor",
+    "navossoc",
+    "nfiles",
+    "pedantic79",
+    "petertseng",
+    "rofrol",
+    "stringparser",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/all-your-base.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "blurb": "Convert a number, represented as a sequence of digits in one base, to any other base."
+}
