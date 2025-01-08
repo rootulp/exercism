@@ -36,13 +36,14 @@ pub enum Error {
 ///    However, your function must be able to process input with leading 0 digits.
 ///
 pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>, Error> {
-    validate_digit(number, from_base)?;
     if !is_valid_base(from_base) {
         return Err(Error::InvalidInputBase)
     }
     if !is_valid_base(to_base) {
         return Err(Error::InvalidOutputBase)
     }
+    validate_digit(number, from_base)?;
+
     todo!("Convert {number:?} from base {from_base} to base {to_base}")
 }
 
