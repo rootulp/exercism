@@ -53,7 +53,7 @@ pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>,
 
     let decimal = convert_from(number, from_base);
     let converted = convert_to(decimal, to_base);
-    return Ok(converted);
+    Ok(converted)
 }
 
 // convert_to converts decimal to to_base
@@ -62,10 +62,10 @@ fn convert_to(decimal: u32, to_base: u32) -> Vec<u32> {
     let mut n = decimal;
     while n != 0 {
         let remainder = n % to_base;
-        n = n / to_base;
+        n /= to_base;
         result.insert(0, remainder);
     }
-    return result;
+    result
 }
 
 // convert_from converts number from_base to decimal
@@ -83,7 +83,7 @@ fn is_valid_base(base: u32) -> bool {
     if base == 0 || base == 1 {
         return false;
     }
-    return true;
+    true
 }
 
 fn validate_digit(number: &[u32], from_base: u32) -> Result<u32, Error> {

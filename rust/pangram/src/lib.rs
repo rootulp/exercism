@@ -5,5 +5,5 @@ pub fn is_pangram(sentence: &str) -> bool {
             return false;
         }
     }
-    return true;
+    true
 }
