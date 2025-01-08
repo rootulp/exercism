@@ -44,6 +44,13 @@ pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>,
     }
     validate_digit(number, from_base)?;
 
+    if number.is_empty() {
+        return Ok(vec!(0))
+    }
+    if number.iter().all(|digit| *digit == 0) {
+        return Ok(vec!(0))
+    }
+
     todo!("Convert {number:?} from base {from_base} to base {to_base}")
 }
 

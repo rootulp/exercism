@@ -118,7 +118,6 @@ fn empty_list() {
 }
 
 #[test]
-#[ignore]
 fn single_zero() {
     let input_base = 10;
     let input_digits = &[0];
@@ -131,7 +130,6 @@ fn single_zero() {
 }
 
 #[test]
-#[ignore]
 fn multiple_zeros() {
     let input_base = 10;
     let input_digits = &[0, 0, 0];
