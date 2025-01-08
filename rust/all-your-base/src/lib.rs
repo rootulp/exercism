@@ -51,14 +51,13 @@ pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>,
         return Ok(vec!(0))
     }
 
-    let decimal = convert_to_decimal(number, from_base);
-    print!("decimal {}", decimal);
-
-    let result = convert_decimal_to(decimal, to_base);
-    return Ok(result)
+    let decimal = convert_from(number, from_base);
+    let converted = convert_to(decimal, to_base);
+    return Ok(converted)
 }
 
-fn convert_decimal_to(decimal: u32, to_base: u32) -> Vec<u32> {
+// convert_to converts decimal to to_base
+fn convert_to(decimal: u32, to_base: u32) -> Vec<u32> {
     let mut result = vec!();
     let mut n = decimal;
     while n != 0 {
@@ -69,7 +68,8 @@ fn convert_decimal_to(decimal: u32, to_base: u32) -> Vec<u32> {
     return result
 }
 
-fn convert_to_decimal(number: &[u32], from_base: u32) -> u32 {
+// convert_from converts number from_base to decimal
+fn convert_from(number: &[u32], from_base: u32) -> u32 {
     let mut decimal = 0;
     let mut cloned = number.to_vec();
     cloned.reverse();
