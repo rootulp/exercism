@@ -51,7 +51,32 @@ pub fn convert(number: &[u32], from_base: u32, to_base: u32) -> Result<Vec<u32>,
         return Ok(vec!(0))
     }
 
-    todo!("Convert {number:?} from base {from_base} to base {to_base}")
+    let decimal = convert_to_decimal(number, from_base);
+    print!("decimal {}", decimal);
+
+    let result = convert_decimal_to(decimal, to_base);
+    return Ok(result)
+}
+
+fn convert_decimal_to(decimal: u32, to_base: u32) -> Vec<u32> {
+    let mut result = vec!();
+    let mut n = decimal;
+    while n != 0 {
+        let remainder = n % to_base;
+        n = n / to_base;
+        result.insert(0, remainder);
+    }
+    return result
+}
+
+fn convert_to_decimal(number: &[u32], from_base: u32) -> u32 {
+    let mut decimal = 0;
+    let mut cloned = number.to_vec();
+    cloned.reverse();
+    for (i, digit) in cloned.iter().enumerate() {
+        decimal += digit * from_base.pow(i.try_into().unwrap());
+    }
+    decimal
 }
 
 fn is_valid_base(base :u32) -> bool {
