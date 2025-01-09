@@ -23,6 +23,7 @@ members = [
   "hello-world",
   "high-scores",
   "isbn-verifier",
+  "isogram",
   "kindergarten-garden",
   "leap",
   "low-power-embedded-game",
