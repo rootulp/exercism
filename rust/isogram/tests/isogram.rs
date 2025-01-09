@@ -46,31 +46,26 @@ fn hypothetical_word_with_duplicated_character_following_hyphen() {
 }
 
 #[test]
-#[ignore]
 fn isogram_with_duplicated_hyphen() {
     assert!(check("six-year-old"));
 }
 
 #[test]
-#[ignore]
 fn made_up_name_that_is_an_isogram() {
     assert!(check("Emily Jung Schwartzkopf"));
 }
 
 #[test]
-#[ignore]
 fn duplicated_character_in_the_middle() {
     assert!(!check("accentor"));
 }
 
 #[test]
-#[ignore]
 fn same_first_and_last_characters() {
     assert!(!check("angola"));
 }
 
 #[test]
-#[ignore]
 fn word_with_duplicated_character_and_with_two_hyphens() {
     assert!(!check("up-to-date"));
 }
