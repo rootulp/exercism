@@ -6,25 +6,21 @@ fn empty_string() {
 }
 
 #[test]
-#[ignore]
 fn isogram_with_only_lower_case_characters() {
     assert!(check("isogram"));
 }
 
 #[test]
-#[ignore]
 fn word_with_one_duplicated_character() {
     assert!(!check("eleven"));
 }
 
 #[test]
-#[ignore]
 fn word_with_one_duplicated_character_from_the_end_of_the_alphabet() {
     assert!(!check("zzyzx"));
 }
 
 #[test]
-#[ignore]
 fn longest_reported_english_isogram() {
     assert!(check("subdermatoglyphic"));
 }
