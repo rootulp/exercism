@@ -1,13 +1,17 @@
 use std::collections::HashSet;
 
 pub fn check(candidate: &str) -> bool {
-    let mut seen: HashSet<char> = HashSet ::new();
+    let mut seen: HashSet<char> = HashSet::new();
 
-    for char in candidate.to_lowercase().chars().filter(|c| c.is_alphabetic()) {
-        let is_new = seen.insert(char);
+    for c in candidate
+        .to_lowercase()
+        .chars()
+        .filter(|c| c.is_alphabetic())
+    {
+        let is_new = seen.insert(c);
         if !is_new {
-            return false
+            return false;
         }
     }
-    return true
+    true
 }
