@@ -1,9 +1,6 @@
 use std::collections::HashSet;
 
 pub fn check(candidate: &str) -> bool {
-    if candidate.is_empty() {
-        return true
-    }
     let mut seen: HashSet<char> = HashSet ::new();
     for char in candidate.to_lowercase().chars() {
         if !char.is_alphabetic() {
