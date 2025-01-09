@@ -5,7 +5,7 @@ pub fn check(candidate: &str) -> bool {
         return true
     }
     let mut seen: HashSet<char> = HashSet ::new();
-    for char in candidate.chars() {
+    for char in candidate.to_lowercase().chars() {
         if seen.contains(&char) {
             return false
         }

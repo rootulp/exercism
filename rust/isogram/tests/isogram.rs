@@ -26,25 +26,21 @@ fn longest_reported_english_isogram() {
 }
 
 #[test]
-#[ignore]
 fn word_with_duplicated_character_in_mixed_case() {
     assert!(!check("Alphabet"));
 }
 
 #[test]
-#[ignore]
 fn word_with_duplicated_character_in_mixed_case_lowercase_first() {
     assert!(!check("alphAbet"));
 }
 
 #[test]
-#[ignore]
 fn hypothetical_isogrammic_word_with_hyphen() {
     assert!(check("thumbscrew-japingly"));
 }
 
 #[test]
-#[ignore]
 fn hypothetical_word_with_duplicated_character_following_hyphen() {
     assert!(!check("thumbscrew-jappingly"));
 }
