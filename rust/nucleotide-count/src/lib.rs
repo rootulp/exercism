@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 pub fn count(nucleotide: char, dna: &str) -> Result<usize, char> {
     if !valid_nucleotide(nucleotide) {
@@ -28,6 +28,5 @@ fn default_map() -> HashMap<char, usize> {
 }
 
 fn valid_nucleotide(c: char) -> bool {
-    let nucleotides = HashSet::from(['A', 'C', 'G', 'T']);
-    nucleotides.contains(&c)
+    matches!(c, 'A' | 'C' | 'G' | 'T')
 }
