@@ -11,12 +11,10 @@ pub fn classify(num: u64) -> Option<Classification> {
     }
 
     let sum = aliquot_sum(num);
-    return if sum == num {
-        Some(Classification::Perfect)
-    } else if sum > num {
-        Some(Classification::Abundant)
-    } else {
-        Some(Classification::Deficient)
+    match sum.cmp(&num) {
+        std::cmp::Ordering::Equal => Some(Classification::Perfect),
+        std::cmp::Ordering::Greater => Some(Classification::Abundant),
+        std::cmp::Ordering::Less => Some(Classification::Deficient),
     }
 }
 
@@ -25,8 +23,8 @@ fn aliquot_sum(num: u64) -> u64 {
 }
 
 fn get_factors(num: u64) -> Vec<u64> {
-    let mut factors = vec!();
-    for x in 1..=num/2 {
+    let mut factors = vec![];
+    for x in 1..=num / 2 {
         if num % x == 0 {
             factors.push(x);
         }
