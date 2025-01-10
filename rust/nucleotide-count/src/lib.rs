@@ -1,8 +1,8 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 pub fn count(nucleotide: char, dna: &str) -> Result<usize, char> {
     if !valid_nucleotide(nucleotide) {
-        return Err(nucleotide)
+        return Err(nucleotide);
     }
     let counts = nucleotide_counts(dna)?;
     Ok(*counts.get(&nucleotide).unwrap())
@@ -11,7 +11,7 @@ pub fn count(nucleotide: char, dna: &str) -> Result<usize, char> {
 pub fn nucleotide_counts(dna: &str) -> Result<HashMap<char, usize>, char> {
     for c in dna.chars() {
         if !valid_nucleotide(c) {
-            return Err(c)
+            return Err(c);
         }
     }
     let mut counts: HashMap<char, usize> = default_map();
@@ -24,21 +24,10 @@ pub fn nucleotide_counts(dna: &str) -> Result<HashMap<char, usize>, char> {
 }
 
 fn default_map() -> HashMap<char, usize> {
-    let result = HashMap::from([
-        ('A', 0),
-        ('C', 0),
-        ('G', 0),
-        ('T', 0),
-    ]);
-    result
+    HashMap::from([('A', 0), ('C', 0), ('G', 0), ('T', 0)])
 }
 
-fn valid_nucleotide(nucleotide: char) -> bool {
-    return match nucleotide {
-        'A' => true,
-        'C' => true,
-        'G' => true,
-        'T' => true,
-        _ => false,
-    }
+fn valid_nucleotide(c: char) -> bool {
+    let nucleotides = HashSet::from(['A', 'C', 'G', 'T']);
+    nucleotides.contains(&c)
 }
