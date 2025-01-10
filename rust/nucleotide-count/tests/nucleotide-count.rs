@@ -13,7 +13,6 @@ fn count_invalid_nucleotide() {
 }
 
 #[test]
-#[ignore]
 fn count_invalid_dna() {
     assert_eq!(count('A', "AX"), Err('X'));
 }

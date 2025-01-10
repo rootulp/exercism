@@ -4,6 +4,11 @@ pub fn count(nucleotide: char, dna: &str) -> Result<usize, char> {
     if !valid_nucleotide(nucleotide) {
         return Err(nucleotide)
     }
+    for c in dna.chars() {
+        if !valid_nucleotide(c) {
+            return Err(c)
+        }
+    }
     Ok(0)
 }
 
