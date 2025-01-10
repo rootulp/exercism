@@ -23,13 +23,11 @@ fn count_repetitive_cytosine() {
 }
 
 #[test]
-#[ignore]
 fn count_only_thymine() {
     assert_eq!(count('T', "GGGGGTAACCCGG"), Ok(1));
 }
 
 #[test]
-#[ignore]
 fn empty_strand() {
     let output = nucleotide_counts("");
     let mut expected = HashMap::new();

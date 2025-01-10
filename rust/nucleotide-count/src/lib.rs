@@ -4,21 +4,32 @@ pub fn count(nucleotide: char, dna: &str) -> Result<usize, char> {
     if !valid_nucleotide(nucleotide) {
         return Err(nucleotide)
     }
-    let mut occurences: HashMap<char, usize> = HashMap::new();
+    let counts = nucleotide_counts(dna)?;
+    let result = counts.get(&nucleotide).unwrap_or(&0);
+    return Ok(*result)
+}
+
+pub fn nucleotide_counts(dna: &str) -> Result<HashMap<char, usize>, char> {
+    let mut counts: HashMap<char, usize> = default_map();
     for c in dna.chars() {
         if !valid_nucleotide(c) {
             return Err(c)
         }
         let default: usize = 0;
-        let v = occurences.get(&c).unwrap_or(&default);
-        occurences.insert(c, v + 1);
+        let v = counts.get(&c).unwrap_or(&default);
+        counts.insert(c, v + 1);
     }
-    let result = occurences.get(&nucleotide).unwrap_or(&0);
-    return Ok(*result)
+    return Ok(counts)
 }
 
-pub fn nucleotide_counts(dna: &str) -> Result<HashMap<char, usize>, char> {
-    todo!("How much of every nucleotide type is contained inside DNA string '{dna}'?");
+fn default_map() -> HashMap<char, usize> {
+    let result = HashMap::from([
+        ('A', 0),
+        ('C', 0),
+        ('G', 0),
+        ('T', 0),
+    ]);
+    result
 }
 
 fn valid_nucleotide(nucleotide: char) -> bool {
