@@ -39,7 +39,6 @@ fn empty_strand() {
 }
 
 #[test]
-#[ignore]
 fn can_count_one_nucleotide_in_single_character_input() {
     let output = nucleotide_counts("G");
     let mut expected = HashMap::new();
@@ -51,7 +50,6 @@ fn can_count_one_nucleotide_in_single_character_input() {
 }
 
 #[test]
-#[ignore]
 fn strand_with_repeated_nucleotide() {
     let output = nucleotide_counts("GGGGGGG");
     let mut expected = HashMap::new();
@@ -63,7 +61,6 @@ fn strand_with_repeated_nucleotide() {
 }
 
 #[test]
-#[ignore]
 fn strand_with_multiple_nucleotides() {
     let output =
         nucleotide_counts("AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC");
@@ -76,7 +73,6 @@ fn strand_with_multiple_nucleotides() {
 }
 
 #[test]
-#[ignore]
 fn strand_with_invalid_nucleotides() {
     let output = nucleotide_counts("AGXXACT");
     assert!(output.is_err());
