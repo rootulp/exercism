@@ -33,6 +33,7 @@ members = [
   "matching-brackets",
   "minesweeper",
   "nth-prime",
+  "nucleotide-count",
   "pangram",
   "palindrome-products",
   "prime-factors",

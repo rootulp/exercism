@@ -1,0 +1,42 @@
+{
+  "authors": [
+    "EduardoBautista"
+  ],
+  "contributors": [
+    "andrewclarkson",
+    "ashleygwilliams",
+    "cmcaine",
+    "coriolinus",
+    "cwhakes",
+    "Dysp",
+    "EduardoBautista",
+    "efx",
+    "ErikSchierboom",
+    "IanWhitney",
+    "kytrinyx",
+    "lutostag",
+    "mkantor",
+    "nfiles",
+    "petertseng",
+    "pminten",
+    "rofrol",
+    "stringparser",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/nucleotide-count.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "blurb": "Given a DNA string, compute how many times each nucleotide occurs in the string.",
+  "source": "The Calculating DNA Nucleotides_problem at Rosalind",
+  "source_url": "https://rosalind.info/problems/dna/"
+}
