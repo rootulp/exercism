@@ -8,7 +8,6 @@ fn count_empty() {
 }
 
 #[test]
-#[ignore]
 fn count_invalid_nucleotide() {
     assert_eq!(count('X', "A"), Err('X'));
 }
