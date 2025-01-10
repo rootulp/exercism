@@ -4,12 +4,17 @@ pub fn count(nucleotide: char, dna: &str) -> Result<usize, char> {
     if !valid_nucleotide(nucleotide) {
         return Err(nucleotide)
     }
+    let mut occurences: HashMap<char, usize> = HashMap::new();
     for c in dna.chars() {
         if !valid_nucleotide(c) {
             return Err(c)
         }
+        let default: usize = 0;
+        let v = occurences.get(&c).unwrap_or(&default);
+        occurences.insert(c, v + 1);
     }
-    Ok(0)
+    let result = occurences.get(&nucleotide).unwrap_or(&0);
+    return Ok(*result)
 }
 
 pub fn nucleotide_counts(dna: &str) -> Result<HashMap<char, usize>, char> {

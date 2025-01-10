@@ -18,7 +18,6 @@ fn count_invalid_dna() {
 }
 
 #[test]
-#[ignore]
 fn count_repetitive_cytosine() {
     assert_eq!(count('C', "CCCCC"), Ok(5));
 }
