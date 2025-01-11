@@ -30,15 +30,17 @@ impl BowlingGame {
         }
 
         // Handle fill balls
-        if self.frames.last().is_some_and(|x| x.is_spare()) {
+        if self.frames.len() == 10 && self.frames.last().is_some_and(|x| x.is_spare()) {
             self.fill_ball1 = Some(pins);
+            return Ok(())
         }
-        if self.frames.last().is_some_and(|x| x.is_strike()) {
+        if self.frames.len() == 10 && self.frames.last().is_some_and(|x| x.is_strike()) {
             if self.fill_ball1.is_none() {
                 self.fill_ball1 = Some(pins);
             } else {
                 self.fill_ball2 = Some(pins);
             }
+            return Ok(())
         }
 
         // Handle normal rolls
@@ -52,10 +54,11 @@ impl BowlingGame {
             let frame = Frame::new(roll1, pins);
             self.frames.push(frame);
             self.previous_roll = None;
+            return Ok(())
         } else {
             self.previous_roll = Some(pins);
+            return Ok(())
         }
-        Ok(())
     }
 
     pub fn score(&self) -> Option<u16> {
