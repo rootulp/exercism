@@ -43,12 +43,12 @@ impl BowlingGame {
 
         // Handle normal rolls
         if pins == 10 {
-            let frame = Frame::new(pins, None);
+            let frame = Frame::new(pins, 0);
             self.frames.push(frame);
         }
         if self.previous_roll.is_some() {
             let roll1 = self.previous_roll.unwrap();
-            let frame = Frame::new(roll1, Some(pins));
+            let frame = Frame::new(roll1, pins);
             self.frames.push(frame);
             self.previous_roll = None;
         } else {
@@ -68,7 +68,7 @@ impl BowlingGame {
                 total += frame.score(self.fill_ball1.unwrap_or(0), self.fill_ball2.unwrap_or(0));
             } else {
                 let next_roll1 = next_frame.unwrap().roll1;
-                let next_roll2 = next_frame.unwrap().roll2.unwrap();
+                let next_roll2 = next_frame.unwrap().roll2;
                 total += frame.score(next_roll1, next_roll2);
             }
         }
@@ -91,11 +91,11 @@ impl BowlingGame {
 
 pub struct Frame {
     pub roll1: u16,
-    roll2: Option<u16>
+    pub roll2: u16
 }
 
 impl Frame {
-    pub fn new(roll1:u16, roll2: Option<u16>) -> Self {
+    pub fn new(roll1:u16, roll2: u16) -> Self {
         return Frame{
             roll1: roll1,
             roll2: roll2
@@ -119,6 +119,6 @@ impl Frame {
         return self.roll1 != 10 && self.open_frame_score() == 10
     }
     fn open_frame_score(&self) -> u16 {
-        self.roll1 + self.roll2.unwrap_or(0)
+        self.roll1 + self.roll2
     }
 }
