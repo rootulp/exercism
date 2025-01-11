@@ -44,8 +44,16 @@ impl BowlingGame {
             return None
         }
         let mut total = 0;
-        for frame in &self.frames {
-            total += frame.score();
+        for (i, frame) in self.frames.iter().enumerate() {
+            let next_frame = self.frames.get(i+1);
+            if next_frame.is_none() {
+                // TODO: implement fill balls
+                total += frame.score(0, 0);
+            } else {
+                let next_roll1 = next_frame.unwrap().roll1;
+                let next_roll2 = next_frame.unwrap().roll2.unwrap();
+                total += frame.score(next_roll1, next_roll2);
+            }
         }
         return Some(total)
     }
@@ -56,7 +64,7 @@ impl BowlingGame {
 }
 
 pub struct Frame {
-    roll1: u16,
+    pub roll1: u16,
     roll2: Option<u16>
 }
 
@@ -68,12 +76,12 @@ impl Frame {
         }
     }
 
-    pub fn score(&self) -> u16 {
+    pub fn score(&self, next_roll1: u16, next_roll2: u16) -> u16 {
         if self.is_strike() {
-            todo!("not implemented")
+            return 10 + next_roll1 + next_roll2;
         }
         if self.is_spare() {
-            todo!("not implemented")
+            return 10 + next_roll1;
         }
         self.open_frame_score()
     }

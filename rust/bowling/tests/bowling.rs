@@ -80,7 +80,6 @@ fn ten_frames_without_a_strike_or_spare() {
 }
 
 #[test]
-#[ignore]
 fn spare_in_the_first_frame_followed_by_zeros() {
     let mut game = BowlingGame::new();
 
