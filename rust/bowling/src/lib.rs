@@ -18,6 +18,9 @@ impl BowlingGame {
     }
 
     pub fn roll(&mut self, pins: u16) -> Result<(), Error> {
+        if self.is_game_over() {
+            return Err(Error::GameComplete)
+        }
         if pins > 10 {
             return Err(Error::NotEnoughPinsLeft)
         }
