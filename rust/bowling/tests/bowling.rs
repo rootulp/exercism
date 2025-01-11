@@ -141,7 +141,6 @@ fn if_the_last_frame_is_a_spare_you_get_one_extra_roll_that_is_scored_once() {
 }
 
 #[test]
-#[ignore]
 fn a_strike_earns_ten_points_in_a_frame_with_a_single_roll() {
     let mut game = BowlingGame::new();
 

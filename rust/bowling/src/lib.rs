@@ -45,6 +45,7 @@ impl BowlingGame {
         if pins == 10 {
             let frame = Frame::new(pins, 0);
             self.frames.push(frame);
+            return Ok(())
         }
         if self.previous_roll.is_some() {
             let roll1 = self.previous_roll.unwrap();
@@ -61,15 +62,24 @@ impl BowlingGame {
         if !self.is_game_over() {
             return None
         }
+        println!("frames {:?}", self.frames);
         let mut total = 0;
         for (i, frame) in self.frames.iter().enumerate() {
+            // let next_frame = self.frames.get(i+1);
             let next_frame = self.frames.get(i+1);
+            println!("frame {:?} next_frame {:?}", frame, next_frame);
+
             if next_frame.is_none() {
-                total += frame.score(self.fill_ball1.unwrap_or(0), self.fill_ball2.unwrap_or(0));
+                let frame_score = frame.score(self.fill_ball1.unwrap_or(0), self.fill_ball2.unwrap_or(0));
+                println!("frame {} score {}", i, frame_score);
+                total += frame_score
             } else {
                 let next_roll1 = next_frame.unwrap().roll1;
                 let next_roll2 = next_frame.unwrap().roll2;
-                total += frame.score(next_roll1, next_roll2);
+                println!("frame {} next_roll1 {} next_roll2 {}", i, next_roll1, next_roll2);
+                let frame_score =  frame.score(next_roll1, next_roll2);
+                println!("frame {} score {}", i, frame_score);
+                total += frame_score
             }
         }
         return Some(total)
@@ -89,6 +99,7 @@ impl BowlingGame {
     }
 }
 
+#[derive(Debug, PartialEq, Eq)]
 pub struct Frame {
     pub roll1: u16,
     pub roll2: u16
