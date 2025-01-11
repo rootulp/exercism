@@ -4,15 +4,16 @@ pub enum Error {
     GameComplete,
 }
 
-pub struct BowlingGame {}
+pub struct BowlingGame {
+}
 
 impl BowlingGame {
     pub fn new() -> Self {
-        todo!();
+        return BowlingGame{}
     }
 
     pub fn roll(&mut self, pins: u16) -> Result<(), Error> {
-        todo!("Record that {pins} pins have been scored");
+        Ok(())
     }
 
     pub fn score(&self) -> Option<u16> {
