@@ -6,19 +6,24 @@ pub enum Error {
 
 pub struct BowlingGame {
     frames: Vec<Frame>,
-    last_roll: Option<u16>
+    previous_roll: Option<u16>,
+    fill_ball1: Option<u16>
 }
 
 impl BowlingGame {
     pub fn new() -> Self {
         return BowlingGame{
             frames: vec!(),
-            last_roll: None
+            previous_roll: None,
+            fill_ball1: None,
         }
     }
 
     pub fn roll(&mut self, pins: u16) -> Result<(), Error> {
-        if self.is_game_over() {
+        // allower the user to roll again if they scored a strike or spare in the last frame.
+        if self.frames.last().is_some_and(|x| x.is_spare()) {
+            self.fill_ball1 = Some(pins);
+        } else if self.is_game_over() {
             return Err(Error::GameComplete)
         }
         if pins > 10 {
@@ -28,13 +33,13 @@ impl BowlingGame {
             let frame = Frame::new(pins, None);
             self.frames.push(frame);
         }
-        if self.last_roll.is_some() {
-            let roll1 = self.last_roll.unwrap();
+        if self.previous_roll.is_some() {
+            let roll1 = self.previous_roll.unwrap();
             let frame = Frame::new(roll1, Some(pins));
             self.frames.push(frame);
-            self.last_roll = None;
+            self.previous_roll = None;
         } else {
-            self.last_roll = Some(pins);
+            self.previous_roll = Some(pins);
         }
         Ok(())
     }
@@ -48,7 +53,7 @@ impl BowlingGame {
             let next_frame = self.frames.get(i+1);
             if next_frame.is_none() {
                 // TODO: implement fill balls
-                total += frame.score(0, 0);
+                total += frame.score(self.fill_ball1.unwrap_or(0), 0);
             } else {
                 let next_roll1 = next_frame.unwrap().roll1;
                 let next_roll2 = next_frame.unwrap().roll2.unwrap();
@@ -59,7 +64,13 @@ impl BowlingGame {
     }
 
     fn is_game_over(&self) -> bool {
-        self.frames.len() == 10
+        if self.frames.len() != 10 {
+            return false
+        }
+        if self.frames.last().is_some_and(|x| x.is_spare()) && self.fill_ball1.is_none() {
+            return false
+        }
+        return true
     }
 }
 
