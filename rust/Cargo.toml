@@ -10,6 +10,7 @@ members = [
   "assembly-line",
   "beer-song",
   "bob",
+  "bowling",
   "clock",
   "collatz-conjecture",
   "diffie-hellman",

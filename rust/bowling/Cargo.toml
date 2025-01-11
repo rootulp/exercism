@@ -1,0 +1,7 @@
+[package]
+edition = "2021"
+name = "bowling"
+version = "1.2.0"
+
+[lints.clippy]
+new_without_default = "allow"

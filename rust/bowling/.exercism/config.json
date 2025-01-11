@@ -1,0 +1,37 @@
+{
+  "authors": [
+    "IanWhitney"
+  ],
+  "contributors": [
+    "britto",
+    "cmccandless",
+    "coriolinus",
+    "cwhakes",
+    "efx",
+    "ErikSchierboom",
+    "isgj",
+    "lutostag",
+    "mkantor",
+    "nfiles",
+    "petertseng",
+    "rofrol",
+    "stringparser",
+    "xakon",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/bowling.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "blurb": "Score a bowling game.",
+  "source": "The Bowling Game Kata from UncleBob",
+  "source_url": "https://web.archive.org/web/20221001111000/http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata"
+}
