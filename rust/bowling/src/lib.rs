@@ -5,14 +5,20 @@ pub enum Error {
 }
 
 pub struct BowlingGame {
+    rolls: Vec<u16>
 }
 
 impl BowlingGame {
     pub fn new() -> Self {
-        return BowlingGame{}
+        return BowlingGame{
+            rolls: vec!()
+        }
     }
 
     pub fn roll(&mut self, pins: u16) -> Result<(), Error> {
+        if pins > 10 {
+            return Err(Error::NotEnoughPinsLeft)
+        }
         Ok(())
     }
 
