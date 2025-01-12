@@ -1,11 +1,15 @@
-pub struct PascalsTriangle;
+pub struct PascalsTriangle{
+    rows: Vec<Vec<u32>>,
+}
 
 impl PascalsTriangle {
     pub fn new(row_count: u32) -> Self {
-        todo!("create Pascal's triangle with {row_count} rows");
+        PascalsTriangle{
+            rows: vec!()
+        }
     }
 
     pub fn rows(&self) -> Vec<Vec<u32>> {
-        todo!();
+        return self.rows.clone()
     }
 }
