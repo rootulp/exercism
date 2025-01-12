@@ -246,7 +246,6 @@ fn a_strike_with_the_one_roll_bonus_after_a_spare_in_the_last_frame_does_not_get
 }
 
 #[test]
-#[ignore]
 fn all_strikes_is_a_perfect_score_of_300() {
     let mut game = BowlingGame::new();
 

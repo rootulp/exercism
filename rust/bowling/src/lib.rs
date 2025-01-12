@@ -103,8 +103,9 @@ impl BowlingGame {
             let next_next_frame = self.frames.get(frame_index+2);
             if next_next_frame.is_some() {
                 return (Some(next_frame.unwrap().roll1), Some(next_next_frame.unwrap().roll1))
+            } else {
+                return (Some(next_frame.unwrap().roll1), self.fill_ball1)
             }
-            return (Some(next_frame.unwrap().roll1), Some(0))
         }
         return (Some(next_frame.unwrap().roll1), Some(next_frame.unwrap().roll2))
     }
