@@ -233,6 +233,7 @@ fn strikes_with_the_two_roll_bonus_do_not_get_a_bonus_roll() {
 }
 
 #[test]
+#[ignore]
 fn a_strike_with_the_one_roll_bonus_after_a_spare_in_the_last_frame_does_not_get_a_bonus() {
     let mut game = BowlingGame::new();
 

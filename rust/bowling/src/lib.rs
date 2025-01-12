@@ -68,22 +68,11 @@ impl BowlingGame {
         println!("frames {:?}", self.frames);
         let mut total = 0;
         for (i, frame) in self.frames.iter().enumerate() {
-            // let next_frame = self.frames.get(i+1);
-            let next_frame = self.frames.get(i+1);
-            println!("frame {:?} next_frame {:?}", frame, next_frame);
-
-            if next_frame.is_none() {
-                let frame_score = frame.score(self.fill_ball1.unwrap_or(0), self.fill_ball2.unwrap_or(0));
-                println!("frame {} score {}", i, frame_score);
-                total += frame_score
-            } else {
-                let next_roll1 = next_frame.unwrap().roll1;
-                let next_roll2 = next_frame.unwrap().roll2;
-                println!("frame {} next_roll1 {} next_roll2 {}", i, next_roll1, next_roll2);
-                let frame_score =  frame.score(next_roll1, next_roll2);
-                println!("frame {} score {}", i, frame_score);
-                total += frame_score
-            }
+            let (next_roll1, next_roll2) = self.get_next_two_rolls(i);
+            println!("frame {} next_roll1 {:?} next_roll2 {:?}", i, next_roll1, next_roll2);
+            let frame_score = frame.score(next_roll1, next_roll2);
+            println!("frame {} score {}", i, frame_score);
+            total += frame_score
         }
         return Some(total)
     }
@@ -99,6 +88,18 @@ impl BowlingGame {
             return false
         }
         return true
+    }
+
+    fn get_next_two_rolls(&self, frame_index: usize) -> (Option<u16>, Option<u16>) {
+        if frame_index == 9 {
+            return (self.fill_ball1, self.fill_ball2)
+        }
+        let next_frame = self.frames.get(frame_index+1);
+        if next_frame.unwrap().is_strike() {
+            let next_next_frame = self.frames.get(frame_index+1);
+            return (Some(next_frame.unwrap().roll1), Some(next_next_frame.unwrap().roll1))
+        }
+        return (Some(next_frame.unwrap().roll1), Some(next_frame.unwrap().roll2))
     }
 }
 
@@ -116,12 +117,12 @@ impl Frame {
         }
     }
 
-    pub fn score(&self, next_roll1: u16, next_roll2: u16) -> u16 {
+    pub fn score(&self, next_roll1: Option<u16>, next_roll2: Option<u16>) -> u16 {
         if self.is_strike() {
-            return 10 + next_roll1 + next_roll2;
+            return 10 + next_roll1.unwrap_or(0) + next_roll2.unwrap_or(0);
         }
         if self.is_spare() {
-            return 10 + next_roll1;
+            return 10 + next_roll1.unwrap_or(0);
         }
         self.open_frame_score()
     }
