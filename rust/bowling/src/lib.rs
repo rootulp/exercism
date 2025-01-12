@@ -96,8 +96,11 @@ impl BowlingGame {
         }
         let next_frame = self.frames.get(frame_index+1);
         if next_frame.unwrap().is_strike() {
-            let next_next_frame = self.frames.get(frame_index+1);
-            return (Some(next_frame.unwrap().roll1), Some(next_next_frame.unwrap().roll1))
+            let next_next_frame = self.frames.get(frame_index+2);
+            if next_next_frame.is_some() {
+                return (Some(next_frame.unwrap().roll1), Some(next_next_frame.unwrap().roll1))
+            }
+            return (Some(next_frame.unwrap().roll1), Some(0))
         }
         return (Some(next_frame.unwrap().roll1), Some(next_frame.unwrap().roll2))
     }
