@@ -37,6 +37,7 @@ members = [
   "nucleotide-count",
   "pangram",
   "palindrome-products",
+  "pascals-triangle",
   "perfect-numbers",
   "prime-factors",
   "proverb",
