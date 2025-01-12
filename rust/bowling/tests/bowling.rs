@@ -258,7 +258,6 @@ fn all_strikes_is_a_perfect_score_of_300() {
 }
 
 #[test]
-#[ignore]
 fn you_cannot_roll_more_than_ten_pins_in_a_single_frame() {
     let mut game = BowlingGame::new();
 

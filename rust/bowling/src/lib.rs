@@ -25,7 +25,7 @@ impl BowlingGame {
         if self.is_game_over() {
             return Err(Error::GameComplete)
         }
-        if pins > 10 {
+        if pins > 10 || self.previous_roll.is_some_and(|prev| prev + pins > 10){
             return Err(Error::NotEnoughPinsLeft)
         }
 
