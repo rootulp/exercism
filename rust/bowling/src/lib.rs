@@ -94,11 +94,9 @@ impl BowlingGame {
             self.frames.push(frame);
             return Ok(())
         }
-        if self.pending_roll.is_some() {
-            let roll1 = self.pending_roll.unwrap();
-            let frame = Frame::new(roll1, pins);
+        if let Some(prev) = self.pending_roll.take() {
+            let frame = Frame::new(prev, pins);
             self.frames.push(frame);
-            self.pending_roll = None;
             return Ok(())
         } else {
             self.pending_roll = Some(pins);
