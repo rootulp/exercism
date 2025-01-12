@@ -306,7 +306,6 @@ fn the_two_balls_after_a_final_strike_can_be_a_strike_and_non_strike() {
 }
 
 #[test]
-#[ignore]
 fn the_two_balls_after_a_final_strike_cannot_be_a_non_strike_followed_by_a_strike() {
     let mut game = BowlingGame::new();
 
