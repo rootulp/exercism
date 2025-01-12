@@ -8,7 +8,6 @@ fn zero_rows() {
 }
 
 #[test]
-#[ignore]
 fn single_row() {
     let pt = PascalsTriangle::new(1);
     let expected: Vec<Vec<u32>> = vec![vec![1]];
