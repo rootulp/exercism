@@ -38,6 +38,9 @@ impl BowlingGame {
             if self.fill_ball1.is_none() {
                 self.fill_ball1 = Some(pins);
             } else {
+                if self.fill_ball1.unwrap() != 10 && self.fill_ball1.unwrap() + pins > 10 {
+                    return Err(Error::NotEnoughPinsLeft)
+                }
                 self.fill_ball2 = Some(pins);
             }
             return Ok(())
@@ -45,6 +48,7 @@ impl BowlingGame {
 
         // Handle normal rolls
         if pins == 10 {
+            // Handle strike
             let frame = Frame::new(pins, 0);
             self.frames.push(frame);
             return Ok(())
@@ -63,6 +67,7 @@ impl BowlingGame {
 
     pub fn score(&self) -> Option<u16> {
         if !self.is_game_over() {
+            println!("game is not over");
             return None
         }
         println!("frames {:?}", self.frames);
