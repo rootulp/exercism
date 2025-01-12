@@ -4,9 +4,43 @@ pub enum Error {
     GameComplete,
 }
 
+#[derive(Debug, PartialEq, Eq)]
+pub struct Frame {
+    pub roll1: u16,
+    pub roll2: u16
+}
+
+impl Frame {
+    pub fn new(roll1: u16, roll2: u16) -> Self {
+        Self { roll1, roll2 }
+    }
+
+    pub fn score(&self, next_roll1: Option<u16>, next_roll2: Option<u16>) -> u16 {
+        if self.is_strike() {
+            10 + next_roll1.unwrap_or(0) + next_roll2.unwrap_or(0)
+        } else if self.is_spare() {
+            10 + next_roll1.unwrap_or(0)
+        } else {
+            self.open_frame_score()
+        }
+    }
+
+    fn is_strike(&self) -> bool {
+        return self.roll1 == 10
+    }
+    fn is_spare(&self) -> bool {
+        return self.roll1 != 10 && (self.roll1 + self.roll2) == 10
+    }
+    fn open_frame_score(&self) -> u16 {
+        self.roll1 + self.roll2
+    }
+}
+
 pub struct BowlingGame {
     frames: Vec<Frame>,
-    previous_roll: Option<u16>,
+    /// This holds a single roll that hasn't yet formed a complete Frame (roll1 but not roll2).
+    pending_roll: Option<u16>,
+    /// Extra fill balls in the 10th frame scenario
     fill_ball1: Option<u16>,
     fill_ball2: Option<u16>
 }
@@ -15,7 +49,7 @@ impl BowlingGame {
     pub fn new() -> Self {
         return BowlingGame{
             frames: vec!(),
-            previous_roll: None,
+            pending_roll: None,
             fill_ball1: None,
             fill_ball2: None,
         }
@@ -25,23 +59,30 @@ impl BowlingGame {
         if self.is_game_over() {
             return Err(Error::GameComplete)
         }
-        if pins > 10 || self.previous_roll.is_some_and(|prev| prev + pins > 10){
-            return Err(Error::NotEnoughPinsLeft)
+        if pins > 10 {
+            return Err(Error::NotEnoughPinsLeft);
+        }
+        if let Some(prev) = self.pending_roll {
+            if prev + pins > 10 {
+                return Err(Error::NotEnoughPinsLeft);
+            }
         }
 
         // Handle fill balls
-        if self.frames.len() == 10 && self.frames.last().is_some_and(|x| x.is_spare()) {
-            self.fill_ball1 = Some(pins);
-            return Ok(())
-        }
-        if self.frames.len() == 10 && self.frames.last().is_some_and(|x| x.is_strike()) {
-            if self.fill_ball1.is_none() {
-                self.fill_ball1 = Some(pins);
-            } else {
-                if self.fill_ball1.unwrap() != 10 && self.fill_ball1.unwrap() + pins > 10 {
-                    return Err(Error::NotEnoughPinsLeft)
+        if self.frames.len() == 10 {
+            if let Some(last) = self.frames.last() {
+                if last.is_spare() {
+                    self.fill_ball1 = Some(pins);
+                } else if last.is_strike() {
+                    if self.fill_ball1.is_none() {
+                        self.fill_ball1 = Some(pins);
+                    } else {
+                        if self.fill_ball1.unwrap() != 10 && self.fill_ball1.unwrap() + pins > 10 {
+                            return Err(Error::NotEnoughPinsLeft)
+                        }
+                        self.fill_ball2 = Some(pins);
+                    }
                 }
-                self.fill_ball2 = Some(pins);
             }
             return Ok(())
         }
@@ -53,14 +94,14 @@ impl BowlingGame {
             self.frames.push(frame);
             return Ok(())
         }
-        if self.previous_roll.is_some() {
-            let roll1 = self.previous_roll.unwrap();
+        if self.pending_roll.is_some() {
+            let roll1 = self.pending_roll.unwrap();
             let frame = Frame::new(roll1, pins);
             self.frames.push(frame);
-            self.previous_roll = None;
+            self.pending_roll = None;
             return Ok(())
         } else {
-            self.previous_roll = Some(pins);
+            self.pending_roll = Some(pins);
             return Ok(())
         }
     }
@@ -108,40 +149,5 @@ impl BowlingGame {
             }
         }
         return (Some(next_frame.unwrap().roll1), Some(next_frame.unwrap().roll2))
-    }
-}
-
-#[derive(Debug, PartialEq, Eq)]
-pub struct Frame {
-    pub roll1: u16,
-    pub roll2: u16
-}
-
-impl Frame {
-    pub fn new(roll1:u16, roll2: u16) -> Self {
-        return Frame{
-            roll1: roll1,
-            roll2: roll2
-        }
-    }
-
-    pub fn score(&self, next_roll1: Option<u16>, next_roll2: Option<u16>) -> u16 {
-        if self.is_strike() {
-            return 10 + next_roll1.unwrap_or(0) + next_roll2.unwrap_or(0);
-        }
-        if self.is_spare() {
-            return 10 + next_roll1.unwrap_or(0);
-        }
-        self.open_frame_score()
-    }
-
-    fn is_strike(&self) -> bool {
-        return self.roll1 == 10
-    }
-    fn is_spare(&self) -> bool {
-        return self.roll1 != 10 && self.open_frame_score() == 10
-    }
-    fn open_frame_score(&self) -> u16 {
-        self.roll1 + self.roll2
     }
 }
