@@ -67,7 +67,6 @@ impl BowlingGame {
 
     pub fn score(&self) -> Option<u16> {
         if !self.is_game_over() {
-            println!("game is not over");
             return None
         }
         println!("frames {:?}", self.frames);

@@ -406,7 +406,6 @@ fn cannot_roll_after_bonus_roll_for_strike() {
 }
 
 #[test]
-#[ignore]
 fn last_two_strikes_followed_by_only_last_bonus_with_non_strike_points() {
     let mut game = BowlingGame::new();
     for _ in 0..16 {
