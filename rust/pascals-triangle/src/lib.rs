@@ -28,5 +28,13 @@ fn generate_row(row_index: u32) -> Vec<u32> {
     if row_index == 1 {
         return vec!(1)
     }
-    vec!()
+    let prev_row = generate_row(row_index - 1);
+    let mut result = vec!(1);
+    for window in prev_row.windows(2) {
+        let first = window.first().unwrap();
+        let last = window.last().unwrap();
+        result.push(first + last)
+    }
+    result.push(1);
+    result
 }
