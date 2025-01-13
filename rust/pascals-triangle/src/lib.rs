@@ -4,7 +4,7 @@ pub struct PascalsTriangle {
 
 impl PascalsTriangle {
     pub fn new(row_count: u32) -> Self {
-        let rows = (1..=row_count).map(|i| generate_row(i)).collect();
+        let rows = (1..=row_count).map(generate_row).collect();
         PascalsTriangle { rows }
     }
 
@@ -18,7 +18,10 @@ fn generate_row(row_index: u32) -> Vec<u32> {
         return vec![1];
     }
     let prev_row = generate_row(row_index - 1);
-    let mut row: Vec<u32> = prev_row.windows(2).map(|window| window[0] + window[1]).collect();
+    let mut row: Vec<u32> = prev_row
+        .windows(2)
+        .map(|window| window[0] + window[1])
+        .collect();
     row.insert(0, 1);
     row.push(1);
     row
