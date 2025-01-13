@@ -17,11 +17,9 @@ fn generate_row(row_index: u32) -> Vec<u32> {
     if row_index == 1 {
         return vec![1];
     }
-    let mut row = vec![1];
     let prev_row = generate_row(row_index - 1);
-    for window in prev_row.windows(2) {
-        row.push(window[0] + window[1])
-    }
+    let mut row: Vec<u32> = prev_row.windows(2).map(|window| window[0] + window[1]).collect();
+    row.insert(0, 1);
     row.push(1);
     row
 }
