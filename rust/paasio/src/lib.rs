@@ -67,7 +67,10 @@ impl<W: Write> WriteStats<W> {
 
 impl<W: Write> Write for WriteStats<W> {
     fn write(&mut self, buf: &[u8]) -> Result<usize> {
-        todo!("Collect statistics about this call writing {buf:?}")
+        self.writes += 1;
+        let bytes_written = self.wrapped.write(buf).unwrap();
+        self.bytes_through += bytes_written;
+        Ok(bytes_written)
     }
 
     fn flush(&mut self) -> Result<()> {

@@ -84,7 +84,6 @@ mod write_string {
     static INPUT: &[u8] = b"Beware the Jabberwock, my son!/The jaws that bite, the claws that catch!/Beware the Jubjub bird, and shun/The frumious Bandersnatch!";
 
     #[test]
-    #[ignore]
     fn write_passthrough() {
         let data = INPUT;
         let size = data.len();
@@ -98,7 +97,6 @@ mod write_string {
     }
 
     #[test]
-    #[ignore]
     fn sink_oneshot() {
         let data = INPUT;
         let size = data.len();
@@ -111,7 +109,6 @@ mod write_string {
     }
 
     #[test]
-    #[ignore]
     fn sink_windowed() {
         let data = INPUT;
         let size = data.len();
