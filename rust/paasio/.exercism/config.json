@@ -1,0 +1,33 @@
+{
+  "authors": [
+    "coriolinus"
+  ],
+  "contributors": [
+    "ccouzens",
+    "ClashTheBunny",
+    "cwhakes",
+    "efx",
+    "ErikSchierboom",
+    "petertseng",
+    "rofrol",
+    "shenek",
+    "stringparser",
+    "TheDarkula",
+    "ZapAnton"
+  ],
+  "files": {
+    "solution": [
+      "src/lib.rs",
+      "Cargo.toml"
+    ],
+    "test": [
+      "tests/paasio.rs"
+    ],
+    "example": [
+      ".meta/example.rs"
+    ]
+  },
+  "blurb": "Report network IO statistics.",
+  "source": "Brian Matsuo",
+  "source_url": "https://github.com/bmatsuo"
+}

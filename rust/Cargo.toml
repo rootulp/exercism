@@ -35,6 +35,7 @@ members = [
   "minesweeper",
   "nth-prime",
   "nucleotide-count",
+  "paasio",
   "pangram",
   "palindrome-products",
   "pascals-triangle",
