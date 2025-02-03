@@ -35,7 +35,6 @@ mod read_string {
     }
 
     #[test]
-    #[ignore]
     fn read_chunks() {
         let data = INPUT;
         let size = data.len();
@@ -55,7 +54,6 @@ mod read_string {
     }
 
     #[test]
-    #[ignore]
     fn read_buffered_chunks() {
         let data = INPUT;
         let size = data.len();
