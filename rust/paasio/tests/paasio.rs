@@ -126,7 +126,6 @@ mod write_string {
     }
 
     #[test]
-    #[ignore]
     fn sink_buffered_windowed() {
         let data = INPUT;
         let size = data.len();
@@ -158,7 +157,6 @@ mod read_byte_literal {
     static INPUT: &[u8] = &[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
 
     #[test]
-    #[ignore]
     fn read_passthrough() {
         let data = INPUT;
         let size = data.len();
@@ -178,7 +176,6 @@ mod read_byte_literal {
     }
 
     #[test]
-    #[ignore]
     fn read_chunks() {
         let data = INPUT;
         let size = data.len();
@@ -198,7 +195,6 @@ mod read_byte_literal {
     }
 
     #[test]
-    #[ignore]
     fn read_buffered_chunks() {
         let data = INPUT;
         let size = data.len();
@@ -231,7 +227,6 @@ mod write_byte_literal {
     ];
 
     #[test]
-    #[ignore]
     fn write_passthrough() {
         let data = INPUT;
         let size = data.len();
@@ -245,7 +240,6 @@ mod write_byte_literal {
     }
 
     #[test]
-    #[ignore]
     fn sink_oneshot() {
         let data = INPUT;
         let size = data.len();
@@ -258,7 +252,6 @@ mod write_byte_literal {
     }
 
     #[test]
-    #[ignore]
     fn sink_windowed() {
         let data = INPUT;
         let size = data.len();
@@ -276,7 +269,6 @@ mod write_byte_literal {
     }
 
     #[test]
-    #[ignore]
     fn sink_buffered_windowed() {
         let data = INPUT;
         let size = data.len();
@@ -306,7 +298,6 @@ mod read_file {
     const CHUNK_SIZE: usize = 2;
 
     #[test]
-    #[ignore]
     fn read_passthrough() {
         let data = std::fs::File::open("Cargo.toml").expect("Cargo.toml must be present");
         let size = data.metadata().expect("metadata must be present").len() as usize;
@@ -326,7 +317,6 @@ mod read_file {
     }
 
     #[test]
-    #[ignore]
     fn read_chunks() {
         let data = std::fs::File::open("Cargo.toml").expect("Cargo.toml must be present");
         let size = data.metadata().expect("metadata must be present").len() as usize;
@@ -346,7 +336,6 @@ mod read_file {
     }
 
     #[test]
-    #[ignore]
     fn read_buffered_chunks() {
         let data = std::fs::File::open("Cargo.toml").expect("Cargo.toml must be present");
         let size = data.metadata().expect("metadata must be present").len() as usize;
@@ -369,7 +358,6 @@ mod read_file {
 }
 
 #[test]
-#[ignore]
 fn read_stats_by_ref_returns_wrapped_reader() {
     use paasio::ReadStats;
 
