@@ -398,7 +398,6 @@ impl Write for WriteFails {
 }
 
 #[test]
-#[ignore]
 fn read_propagates_errors() {
     use paasio::ReadStats;
 
@@ -415,7 +414,6 @@ fn read_propagates_errors() {
 }
 
 #[test]
-#[ignore]
 fn write_propagates_errors() {
     use paasio::WriteStats;
 

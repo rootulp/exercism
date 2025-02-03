@@ -30,7 +30,7 @@ impl<R: Read> ReadStats<R> {
 
 impl<R: Read> Read for ReadStats<R> {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
-        let bytes_read = self.wrapped.read(buf).unwrap();
+        let bytes_read = self.wrapped.read(buf)?;
         self.bytes_through += bytes_read;
         self.reads += 1;
         Ok(bytes_read)
@@ -68,7 +68,7 @@ impl<W: Write> WriteStats<W> {
 impl<W: Write> Write for WriteStats<W> {
     fn write(&mut self, buf: &[u8]) -> Result<usize> {
         self.writes += 1;
-        let bytes_written = self.wrapped.write(buf).unwrap();
+        let bytes_written = self.wrapped.write(buf)?;
         self.bytes_through += bytes_written;
         Ok(bytes_written)
     }
