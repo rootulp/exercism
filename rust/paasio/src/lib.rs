@@ -30,7 +30,10 @@ impl<R: Read> ReadStats<R> {
 
 impl<R: Read> Read for ReadStats<R> {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize> {
-        todo!("Collect statistics about this call reading {buf:?}")
+        let bytes_read = self.wrapped.read(buf).unwrap();
+        self.bytes_through += bytes_read;
+        self.reads += 1;
+        Ok(bytes_read)
     }
 }
 

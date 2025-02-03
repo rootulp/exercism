@@ -16,7 +16,6 @@ mod read_string {
     static INPUT: &[u8] = b"Twas brillig, and the slithy toves/Did gyre and gimble in the wabe:/All mimsy were the borogoves,/And the mome raths outgrabe.";
 
     #[test]
-    #[ignore]
     fn read_passthrough() {
         let data = INPUT;
         let size = data.len();
