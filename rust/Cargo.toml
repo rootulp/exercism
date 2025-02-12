@@ -9,6 +9,7 @@ members = [
   "armstrong-numbers",
   "assembly-line",
   "beer-song",
+  "binary-search",
   "bob",
   "bowling",
   "clock",
