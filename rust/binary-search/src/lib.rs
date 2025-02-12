@@ -5,6 +5,7 @@ pub fn find(array: &[i32], key: i32) -> Option<usize> {
     println!("left: {}, right: {}, middle: {}", left, right, middle);
 
     while left <= right {
+        middle = get_middle(left, right);
         if out_of_bounds(left, right, middle, array) {
             return None
         }
@@ -13,10 +14,8 @@ pub fn find(array: &[i32], key: i32) -> Option<usize> {
             return Some(middle)
         } else if array[middle] < key {
             left = middle + 1;
-            middle = get_middle(left, right);
         } else {
             right = middle - 1;
-            middle = get_middle(left, right);
         }
     }
     None
