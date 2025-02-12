@@ -6,10 +6,22 @@ pub fn find(array: &[i32], key: i32) -> Option<usize> {
 
     while left <= right {
         middle = get_middle(left, right);
+        println!("left: {}, right: {}, middle: {}", left, right, middle);
+
         if out_of_bounds(left, right, middle, array) {
             return None
         }
-        println!("left: {}, right: {}, middle: {}", left, right, middle);
+
+        // Special case
+        if middle == 0 {
+            if array[middle] == key {
+                return Some(middle)
+            } else {
+                return None
+            }
+        }
+
+
         if array[middle] == key {
             return Some(middle)
         } else if array[middle] < key {
