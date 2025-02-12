@@ -6,7 +6,6 @@ fn finds_a_value_in_an_array_with_one_element() {
 }
 
 #[test]
-#[ignore]
 fn finds_a_value_in_the_middle_of_an_array() {
     assert_eq!(find(&[1, 3, 4, 6, 8, 9, 11], 6), Some(3));
 }
