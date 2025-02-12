@@ -57,7 +57,6 @@ fn nothing_is_found_in_an_empty_array() {
 }
 
 #[test]
-#[ignore]
 fn nothing_is_found_when_the_left_and_right_bounds_cross() {
     assert_eq!(find(&[1, 2], 0), None);
 }
