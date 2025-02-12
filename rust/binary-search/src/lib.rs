@@ -12,7 +12,7 @@ pub fn find(array: &[i32], key: i32) -> Option<usize> {
             left = middle + 1;
             middle = get_middle(left, right);
         } else {
-            right = left - 1;
+            right = middle - 1;
             middle = get_middle(left, right);
         }
     }
