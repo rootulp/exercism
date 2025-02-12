@@ -9,9 +9,7 @@ pub fn find(array: &[i32], key: i32) -> Option<usize> {
 
     while left <= right {
         middle = get_middle(left, right);
-        println!("left: {}, right: {}, middle: {}", left, right, middle);
-
-        // Special case
+        // Special case so that this function doesn't try to search below the index 0.
         if middle == 0 {
             if array[middle] == key {
                 return Some(middle)
@@ -19,7 +17,6 @@ pub fn find(array: &[i32], key: i32) -> Option<usize> {
                 return None
             }
         }
-
 
         if array[middle] == key {
             return Some(middle)
