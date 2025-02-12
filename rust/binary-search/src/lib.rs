@@ -1,4 +1,7 @@
 pub fn find(array: &[i32], key: i32) -> Option<usize> {
+    if array.is_empty() {
+        return None
+    }
     let mut left = 0;
     let mut right = array.len() - 1;
     let mut middle = get_middle(left, right);

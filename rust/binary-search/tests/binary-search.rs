@@ -47,13 +47,11 @@ fn a_value_smaller_than_the_array_s_smallest_value_is_not_found() {
 }
 
 #[test]
-#[ignore]
 fn a_value_larger_than_the_array_s_largest_value_is_not_found() {
     assert_eq!(find(&[1, 3, 4, 6, 8, 9, 11], 13), None);
 }
 
 #[test]
-#[ignore]
 fn nothing_is_found_in_an_empty_array() {
     assert_eq!(find(&[], 1), None);
 }
